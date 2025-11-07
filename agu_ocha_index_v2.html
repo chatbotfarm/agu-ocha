@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Agu Ocha — The Stage Is Ready</title>
+  <meta name="description" content="Book Agu Ocha for concerts, festivals, private events, and collaborations. Watch live sets, stream releases, and buy tickets & merch." />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Montserrat','ui-sans-serif','system-ui'],
+            body: ['Inter','ui-sans-serif','system-ui'],
+            mono: ['IBM Plex Mono','ui-monospace']
+          },
+          colors: {
+            jet:'#0B0B0C',leopard:'#F7F7F8',graphite:'#2B2B2E',
+            glove:'#D41414',steel:'#8A8F98'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html{scroll-behavior:smooth}
+    a,button{transition:all .2s ease-in-out}
+    a:hover{color:#D41414}
+    button:hover,a.btn:hover{background-color:#D41414;color:#F7F7F8}
+    .btn{background-color:transparent;border:1px solid rgba(255,255,255,0.15);color:#F7F7F8}
+    .btn-primary{background-color:#D41414;color:#F7F7F8}
+    .btn-primary:hover{background-color:#F7F7F8;color:#0B0B0C}
+  </style>
+</head>
+
+<body class="bg-jet text-leopard font-body">
+
+  <!-- Top bar -->
+  <div class="w-full bg-graphite/80 text-sm">
+    <div class="mx-auto max-w-7xl px-4 py-2 flex items-center justify-between">
+      <p>Tickets & Merch → <a class="underline underline-offset-4 hover:text-[#D41414]" href="https://store.aguocha.com" rel="noopener">store.aguocha.com</a></p>
+      <div class="hidden sm:flex items-center gap-3">
+        <a class="hover:text-[#D41414]" href="tel:+17622486242"><span class="font-mono">+1 (762) 248-6242</span></a>
+        <span class="inline-block w-2 h-2 rounded-full bg-[#D41414]" aria-hidden="true"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 bg-jet/80 backdrop-blur border-b border-white/5">
+    <div class="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-leopard text-jet font-extrabold">AO</span>
+        <span class="sr-only">Agu Ocha</span>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-6 font-medium">
+        <a href="#music" class="hover:text-[#D41414]">Music</a>
+        <a href="#book" class="hover:text-[#D41414]">Book</a>
+        <a href="#collab" class="hover:text-[#D41414]">Collab</a>
+        <a href="#media" class="hover:text-[#D41414]">Media</a>
+        <a href="#tour" class="hover:text-[#D41414]">Tour</a>
+        <a href="https://store.aguocha.com" class="hover:text-[#D41414]" rel="noopener">Store</a>
+      </nav>
+
+      <!-- Right actions -->
+      <div class="hidden md:flex items-center gap-2">
+        <a href="#book" class="btn-primary px-4 py-2 rounded-xl font-semibold">Book</a>
+        <a href="tel:+17622486242" class="btn px-4 py-2 rounded-xl font-semibold" aria-label="Call now">Call</a>
+        <a href="sms:+17622486242" class="btn px-4 py-2 rounded-xl font-semibold" aria-label="Text now">Text</a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button class="md:hidden inline-flex p-2 rounded-lg border border-white/10" aria-label="Open menu" onclick="document.getElementById('mnav').classList.toggle('hidden')">
+        <span class="font-mono">≡</span>
+      </button>
+    </div>
+
+    <!-- Mobile nav panel -->
+    <div id="mnav" class="md:hidden hidden border-t border-white/5 bg-jet">
+      <div class="mx-auto max-w-7xl px-4 py-4 grid gap-3 text-lg">
+        <a href="#music" class="hover:text-[#D41414]" onclick="document.getElementById('mnav').classList.add('hidden')">Music</a>
+        <a href="#book" class="hover:text-[#D41414]" onclick="document.getElementById('mnav').classList.add('hidden')">Book</a>
+        <a href="#collab" class="hover:text-[#D41414]" onclick="document.getElementById('mnav').classList.add('hidden')">Collab</a>
+        <a href="#media" class="hover:text-[#D41414]" onclick="document.getElementById('mnav').classList.add('hidden')">Media</a>
+        <a href="#tour" class="hover:text-[#D41414]" onclick="document.getElementById('mnav').classList.add('hidden')">Tour</a>
+        <a href="https://store.aguocha.com" class="hover:text-[#D41414]" rel="noopener" onclick="document.getElementById('mnav').classList.add('hidden')">Store</a>
+        <div class="flex gap-2 pt-2">
+          <a href="tel:+17622486242" class="btn px-4 py-2 rounded-xl font-semibold w-full text-center">Call</a>
+          <a href="sms:+17622486242" class="btn px-4 py-2 rounded-xl font-semibold w-full text-center">Text</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE sticky CTA bar -->
+  <div class="fixed bottom-4 left-0 right-0 z-40 px-4 md:hidden">
+    <div class="mx-auto max-w-7xl flex gap-3">
+      <a href="tel:+17622486242" class="flex-1 btn px-4 py-3 rounded-xl font-semibold text-center">Call Now</a>
+      <a href="sms:+17622486242" class="flex-1 btn px-4 py-3 rounded-xl font-semibold text-center">Text Now</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="relative overflow-hidden">
+    <div class="mx-auto max-w-7xl px-4 py-16 lg:py-24 grid lg:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="font-display text-4xl md:text-6xl font-extrabold leading-tight">The Stage Is Ready.</h1>
+        <p class="mt-5 text-lg text-leopard/80 max-w-xl">
+          Live performances and collaborations across genres—from underground clubs to main stages.
+          Available for festivals, private shows, and studio projects worldwide.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#book" class="btn-primary px-5 py-3 rounded-xl font-semibold">Book Agu Ocha</a>
+          <a href="https://www.youtube.com/@blockblackprojects" class="btn px-5 py-3 rounded-xl font-semibold" rel="noopener">Watch Live</a>
+          <a href="#music" class="btn px-5 py-3 rounded-xl font-semibold">Listen Now</a>
+        </div>
+      </div>
+      <div>
+        <img src="/img/agu-mask-portrait.jpg" alt="Agu Ocha in white leopard mask, leather jacket, red gloves" class="w-full rounded-3xl border border-white/10 object-cover" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="mx-auto max-w-7xl px-4 py-16 border-t border-white/5">
+    <h2 class="font-display text-3xl md:text-4xl font-extrabold">Behind the Mask.</h2>
+    <p class="mt-3 text-leopard/80 max-w-3xl">
+      Every set is custom—built for the crowd, not the category.
+      Agu Ocha merges technology and performance to shape the sound for each stage and collaboration.
+      From soft rock to industrial house, from disco to shanson—the boundary isn’t the genre, it’s the energy.
+    </p>
+    <!-- Removed duplicate "Send Collaboration Request" here per request -->
+  </section>
+
+  <!-- MUSIC -->
+  <section id="music" class="mx-auto max-w-7xl px-4 py-16 border-t border-white/5">
+    <div class="flex items-end justify-between">
+      <h2 class="font-display text-3xl md:text-4xl font-extrabold">Recent Releases.</h2>
+      <div class="flex gap-2 text-sm">
+        <a class="btn px-3 py-1.5 rounded-lg" href="<!-- SPOTIFY_PROFILE_LINK -->">Listen on Spotify</a>
+        <a class="btn px-3 py-1.5 rounded-lg" href="https://www.youtube.com/@blockblackprojects" rel="noopener">Watch on YouTube</a>
+      </div>
+    </div>
+    <div class="mt-8 grid lg:grid-cols-3 gap-6">
+      <iframe class="w-full aspect-video rounded-2xl border border-white/10" src="https://www.youtube.com/embed/VIDEO_ID_1?rel=0" title="Agu Ocha — Live 1" frameborder="0" allowfullscreen></iframe>
+      <iframe class="w-full aspect-video rounded-2xl border border-white/10" src="https://www.youtube.com/embed/VIDEO_ID_2?rel=0" title="Agu Ocha — Live 2" frameborder="0" allowfullscreen></iframe>
+      <iframe class="w-full aspect-video rounded-2xl border border-white/10" src="https://open.spotify.com/embed/playlist/PLAYLIST_ID" title="Agu Ocha Playlist" frameborder="0" loading="lazy"></iframe>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section id="book" class="mx-auto max-w-7xl px-4 py-16 border-t border-white/5">
+    <h2 class="font-display text-3xl md:text-4xl font-extrabold">Book Agu Ocha</h2>
+    <p class="mt-2 text-leopard/80 max-w-2xl">From intimate venues to festival stages—let’s design your event.</p>
+    <div class="mt-8 grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+      <article class="p-5 rounded-2xl border border-white/10 bg-jet">
+        <h3 class="font-semibold text-lg">Private & Corporate Events</h3>
+        <p class="text-sm text-steel mt-1">Immersive sound for exclusive gatherings.</p>
+        <a href="<!-- GHL_PRIVATE_FORM_LINK -->" class="btn-primary mt-4 inline-flex px-4 py-2 rounded-xl font-semibold">Start Booking</a>
+      </article>
+      <article class="p-5 rounded-2xl border border-white/10 bg-jet">
+        <h3 class="font-semibold text-lg">Festivals & Tours</h3>
+        <p class="text-sm text-steel mt-1">Headline or collaborative sets.</p>
+        <a href="<!-- GHL_FESTIVAL_FORM_LINK -->" class="btn mt-4 inline-flex px-4 py-2 rounded-xl font-semibold">Start Booking</a>
+      </article>
+      <article class="p-5 rounded-2xl border border-white/10 bg-jet">
+        <h3 class="font-semibold text-lg">Club Residencies</h3>
+        <p class="text-sm text-steel mt-1">Long-term energy partnerships.</p>
+        <a href="<!-- GHL_RESIDENCY_FORM_LINK -->" class="btn mt-4 inline-flex px-4 py-2 rounded-xl font-semibold">Start Booking</a>
+      </article>
+      <article class="p-5 rounded-2xl border border-white/10 bg-jet">
+        <h3 class="font-semibold text-lg">Brand Activations</h3>
+        <p class="text-sm text-steel mt-1">When music becomes the marketing.</p>
+        <a href="<!-- GHL_BRAND_FORM_LINK -->" class="btn mt-4 inline-flex px-4 py-2 rounded-xl font-semibold">Start Booking</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- COLLAB -->
+  <section id="collab" class="mx-auto max-w-7xl px-4 py-16 border-t border-white/5">
+    <h2 class="font-display text-3xl md:text-4xl font-extrabold">Collaboration Is a Language.</h2>
+    <p class="mt-2 text-leopard/80 max-w-3xl">
+      Agu Ocha works with artists across continents and styles—producing bilingual tracks, remixes, and cross-genre experiments.
+      Each project starts with an idea. The rest is timing, balance, and sound design.
+    </p>
+    <a href="<!-- GHL_COLLAB_FORM_LINK -->" class="btn-primary mt-6 inline-flex px-5 py-3 rounded-xl font-semibold">Submit Collab Request</a>
+  </section>
+
+  <!-- MEDIA -->
+  <section id="media" class="mx-auto max-w-7xl px-4 py-16 border-t border-white/5">
+    <h2 class="font-display text-3xl md:text-4xl font-extrabold">Press & Media</h2>
+    <p class="mt-2 text-leopard/80">Interview requests, feature stories, or press coverage.</p>
+    <a href="<!-- GHL_MEDIA_FORM_LINK -->" class="btn mt-6 inline-flex px-5 py-3 rounded-xl font-semibold">Request Interview</a>
+  </section>
+
+  <!-- TOUR -->
+  <section id="tour" class="mx-auto max-w-7xl px-4 py-16 border-t border-white/5">
+    <div class="flex items-end justify-between">
+      <h2 class="font-display text-3xl md:text-4xl font-extrabold">Upcoming Shows.</h2>
+      <a href="https://store.aguocha.com" class="text-sm underline underline-offset-4 hover:text-[#D41414]" rel="noopener">Buy Tickets →</a>
+    </div>
+    <div class="mt-6 grid md:grid-cols-3 gap-6">
+      <article class="p-5 rounded-2xl border border-white/10 bg-jet">
+        <div class="text-steel font-mono text-sm">Jan 24 • Providence, RI</div>
+        <h3 class="mt-1 font-semibold">Metro Club — Late Set</h3>
+        <a href="https://store.aguocha.com" class="btn-primary mt-3 inline-flex px-4 py-2 rounded-xl font-semibold" rel="noopener">Buy Tickets</a>
+      </article>
+      <article class="p-5 rounded-2xl border border-white/10 bg-jet">
+        <div class="text-steel font-mono text-sm">Feb 08 • Boston, MA</div>
+        <h3 class="mt-1 font-semibold">Warehouse 19 — Headline</h3>
+        <a href="https://store.aguocha.com" class="btn mt-3 inline-flex px-4 py-2 rounded-xl font-semibold" rel="noopener">More Info</a>
+      </article>
+      <article class="p-5 rounded-2xl border border-white/10 bg-jet">
+        <div class="text-steel font-mono text-sm">Feb 22 • NYC, NY</div>
+        <h3 class="mt-1 font-semibold">After Hours — Special</h3>
+        <a href="https://store.aguocha.com" class="btn mt-3 inline-flex px-4 py-2 rounded-xl font-semibold" rel="noopener">More Info</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- SOCIAL -->
+  <section id="connect" class="mx-auto max-w-7xl px-4 py-16 border-t border-white/5">
+    <h2 class="font-display text-3xl md:text-4xl font-extrabold">Stay Connected.</h2>
+    <p class="mt-2 text-leopard/80">Join the feed for new sets, visuals, and behind-the-mask moments.</p>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <a href="https://www.tiktok.com/@agu_ocha" target="_blank" rel="noopener" class="btn px-4 py-2 rounded-xl font-semibold">TikTok</a>
+      <a href="https://www.youtube.com/@blockblackprojects" target="_blank" rel="noopener" class="btn px-4 py-2 rounded-xl font-semibold">YouTube</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/5">
+    <div class="mx-auto max-w-7xl px-4 py-12 grid md:grid-cols-3 gap-8">
+      <div>
+        <div class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-leopard text-jet font-extrabold">AO</div>
+        <p class="mt-3 text-sm text-steel max-w-xs">Concerts, festivals, private events, and collaborations worldwide.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold">Navigate</h4>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a href="#music">Music</a></li>
+          <li><a href="#book">Book</a></li>
+          <li><a href="#collab">Collab</a></li>
+          <li><a href="#media">Media</a></li>
+          <li><a href="#tour">Tour</a></li>
+          <li><a href="https://store.aguocha.com" rel="noopener">Store</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold">Contact</h4>
+        <p class="mt-3 text-sm">
+          +1 (762) AGU-OCHA ;<br>
+          DM <a class="underline hover:text-[#D41414]" href="https://www.tiktok.com/@agu_ocha" target="_blank" rel="noopener">@agu_ocha</a>
+        </p>
+      </div>
+    </div>
+    <div class="mx-auto max-w-7xl px-4 pb-10 text-xs text-steel">© <span id="yr"></span> all rights reserved Agu Ocha • powered by chatbotfarm.ai • Connecting Business to the Grid™</div>
+  </footer>
+
+  <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
+</body>
+</html>
