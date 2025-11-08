@@ -3,51 +3,38 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Press &amp; Media | Agu Ocha</title>
-  <meta name="description" content="Access Agu Ocha press information, fast facts, and interview requests for features and media coverage.">
-  <link rel="icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" href="/img/agu-logo.png">
-  <meta property="og:title" content="Press &amp; Media | Agu Ocha">
-  <meta property="og:description" content="Request interviews, gather fast facts, and coordinate coverage with Agu Ocha's media team.">
+  <title>Media — Agu Ocha</title>
+  <meta name="description" content="Media requests and fast facts for Agu Ocha.">
+  <link rel="icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="img/agu-logo.png">
+  <meta property="og:title" content="Media — Agu Ocha">
+  <meta property="og:description" content="Media requests and fast facts for Agu Ocha.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aguocha.com/media.html">
   <meta property="og:image" content="https://aguocha.com/img/agu-mask-portrait.jpg">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            display: ['Montserrat','ui-sans-serif','system-ui'],
-            body: ['Inter','ui-sans-serif','system-ui'],
-            mono: ['IBM Plex Mono','ui-monospace']
-          },
-          colors: {
-            jet:'#0B0B0C', leopard:'#F7F7F8', graphite:'#2B2B2E',
-            glove:'#D41414', steel:'#8A8F98', iris:'#1F8FFF', ember:'#FF5A3A'
-          }
-        }
-      }
-    }
-  </script>
   <style>
-    html{scroll-behavior:smooth}
-    a,button{transition:all .2s ease-in-out}
-    a:hover{color:#D41414}
-    button:hover,a.btn:hover{background-color:#D41414;color:#F7F7F8}
-    .btn{background-color:transparent;border:1px solid rgba(255,255,255,0.15);color:#F7F7F8}
-    .btn-primary{background-color:#D41414;color:#F7F7F8}
-    .btn-primary:hover{background-color:#F7F7F8;color:#0B0B0C}
+    :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
+    html{font-size:17px}
+    @media(min-width:1024px){html{font-size:18px}}
+    body{background:var(--jet);color:var(--leopard);line-height:1.65}
+    .btn{border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--leopard);transition:all .2s ease}
+    .btn:hover{background:var(--leopard);color:var(--jet)}
+    .btn-primary{background:var(--brand);color:var(--leopard);border-color:transparent}
+    .btn-primary:hover{background:var(--leopard);color:var(--jet)}
+    .card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)}
+    .section{padding-top:4rem;padding-bottom:4rem}
+    .container{max-width:72rem}
   </style>
 </head>
-<body class="bg-jet text-leopard font-body">
-  <header class="sticky top-0 z-50 border-b border-white/5 bg-jet/80 backdrop-blur">
+
+<body>
+  <!-- Header -->
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-black/40 backdrop-blur">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
-      <a href="/" class="flex items-center gap-3">
-        <img src="/img/agu-logo.png" alt="Agu Ocha circular mark" class="h-10 w-10 rounded-full border border-white/10 object-cover">
-        <span class="sr-only">Agu Ocha</span>
+      <a href="index.html" class="flex items-center gap-3" aria-label="Home">
+        <img src="img/agu-logo.png" alt="Agu Ocha logo" class="h-10 w-10 rounded-full border border-white/10 object-cover">
+        <span class="font-bold tracking-wide">Agu Ocha</span>
       </a>
       <nav class="hidden items-center gap-6 font-medium md:flex">
         <a href="music.html">Music</a>
@@ -58,15 +45,17 @@
         <a href="https://store.aguocha.com" rel="noopener">Store</a>
       </nav>
       <div class="hidden items-center gap-2 md:flex">
-        <a href="#book" class="btn-primary rounded-xl px-4 py-2 font-semibold">Book</a>
-        <a href="tel:+17622486242" class="btn rounded-xl px-4 py-2 font-semibold" aria-label="Call Agu Ocha">Call</a>
-        <a href="sms:+17622486242" class="btn rounded-xl px-4 py-2 font-semibold" aria-label="Text Agu Ocha">Text</a>
+        <a href="tel:+17622486242" class="btn rounded-xl px-4 py-2 font-semibold">Call</a>
+        <a href="sms:+17622486242" class="btn rounded-xl px-4 py-2 font-semibold">Text</a>
       </div>
-      <button class="inline-flex rounded-lg border border-white/10 p-2 md:hidden" aria-label="Toggle navigation" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
+      <a href="index.html" class="hidden md:block" aria-label="Home">
+        <img src="img/agu-logo.png" alt="Agu Ocha logo" class="h-10 w-10 rounded-full border border-white/10 object-cover">
+      </a>
+      <button class="inline-flex rounded-lg border border-white/15 px-3 py-2 md:hidden" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
         <span class="font-mono text-lg">≡</span>
       </button>
     </div>
-    <div id="mobile-nav" class="hidden border-t border-white/5 bg-jet md:hidden">
+    <div id="mobile-nav" class="hidden border-t border-white/10 bg-black/60 md:hidden">
       <div class="mx-auto grid max-w-7xl gap-3 px-4 py-4 text-lg">
         <a href="music.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Music</a>
         <a href="book.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Book</a>
@@ -81,100 +70,81 @@
       </div>
     </div>
   </header>
-  <div class="fixed bottom-4 left-0 right-0 z-40 px-4 md:hidden">
-    <div class="mx-auto flex max-w-7xl gap-3">
-      <a href="tel:+17622486242" class="btn flex-1 rounded-xl px-4 py-3 text-center font-semibold">Call Now</a>
-      <a href="sms:+17622486242" class="btn flex-1 rounded-xl px-4 py-3 text-center font-semibold">Text Now</a>
-    </div>
-  </div>
+
   <main>
-    <section class="border-b border-white/5 bg-graphite/40">
-      <div class="mx-auto max-w-7xl px-4 py-16">
-        <p class="font-mono text-sm uppercase tracking-[0.3em] text-steel">Media</p>
-        <h1 class="mt-4 font-display text-4xl font-extrabold md:text-5xl">Press &amp; Media</h1>
-        <p class="mt-4 max-w-3xl text-leopard/80">All media inquiries route to a dedicated press desk for rapid response. Share your segment details and deadline—we align on the narrative quickly.</p>
-        <a href="<!-- GHL_MEDIA_FORM_LINK -->" class="btn-primary mt-6 inline-flex rounded-xl px-5 py-3 font-semibold">Request Interview</a>
-      </div>
-    </section>
-    <section class="border-b border-white/5">
-      <div class="mx-auto grid max-w-7xl gap-10 px-4 py-16 md:grid-cols-[1.1fr_0.9fr] md:items-start">
-        <div>
-          <h2 class="font-display text-2xl font-extrabold">Fast Facts</h2>
-          <dl class="mt-6 space-y-4 text-leopard/80">
-            <div>
-              <dt class="text-sm uppercase tracking-[0.3em] text-steel">Region</dt>
-              <dd class="text-lg">Based between New England and the Caribbean corridor.</dd>
+    <!-- Fast Facts only -->
+    <section class="section">
+      <div class="mx-auto container px-4">
+        <h1 class="font-extrabold text-3xl md:text-4xl">Media</h1>
+
+        <div class="mt-8 grid gap-6 md:grid-cols-2">
+          <div class="card rounded-2xl p-6">
+            <h2 class="font-bold text-2xl">Fast Facts</h2>
+            <dl class="mt-4 space-y-4">
+              <div>
+                <dt class="text-sm uppercase tracking-wide text-white/60">Region</dt>
+                <dd class="mt-1 text-white/90">Based between New England and the Caribbean corridor.</dd>
+              </div>
+              <div>
+                <dt class="text-sm uppercase tracking-wide text-white/60">Availability</dt>
+                <dd class="mt-1 text-white/90">Tour-ready year-round with select blackout weeks for studio intensives.</dd>
+              </div>
+              <div>
+                <dt class="text-sm uppercase tracking-wide text-white/60">Styles</dt>
+                <dd class="mt-1 text-white/90">Cinematic electronics blending ancestral percussion, future bass, and vocal-driven storytelling.</dd>
+              </div>
+            </dl>
+
+            <div class="mt-6 flex flex-wrap gap-3">
+              <a href="https://app.aguocha.com/media-request-form" class="btn-primary rounded-xl px-4 py-2 font-semibold" target="_blank" rel="noopener">Media Request Form</a>
+              <a href="tel:+17622486242" class="btn rounded-xl px-4 py-2 font-semibold">Call +1 (762) AGU-OCHA</a>
             </div>
-            <div>
-              <dt class="text-sm uppercase tracking-[0.3em] text-steel">Availability</dt>
-              <dd class="text-lg">Tour-ready year-round with select blackout weeks for studio intensives.</dd>
-            </div>
-            <div>
-              <dt class="text-sm uppercase tracking-[0.3em] text-steel">Styles</dt>
-              <dd class="text-lg">Cinematic electronics blending ancestral percussion, future bass, and vocal-driven storytelling.</dd>
-            </div>
-            <div>
-              <dt class="text-sm uppercase tracking-[0.3em] text-steel">Contact</dt>
-              <dd class="text-lg">+1 (762) AGU-OCHA • DM <a class="underline" href="https://www.tiktok.com/@agu_ocha" target="_blank" rel="noopener">@agu_ocha</a></dd>
-            </div>
-          </dl>
-        </div>
-        <div class="space-y-6">
-          <div class="rounded-3xl border border-white/10 bg-jet/60 p-6">
-            <h3 class="font-display text-xl font-semibold">Media Assets</h3>
-            <p class="mt-3 text-sm text-leopard/80">High-resolution portraits, logo files, and stage shots are available upon request.</p>
-            <ul class="mt-4 space-y-2 text-sm">
-              <li><!-- <a href="press/press-kit.zip" class="underline">Download Press Kit</a> --></li>
-              <li><!-- <a href="press/agu-ocha-stage.jpg" class="underline">Stage Photography</a> --></li>
-            </ul>
-          </div>
-          <div class="rounded-3xl border border-white/10 bg-jet/60 p-6">
-            <h3 class="font-display text-xl font-semibold">Broadcast Ready</h3>
-            <p class="mt-3 text-sm text-leopard/80">Audio IDs, pronunciation guides, and talking points prepared for radio, television, and podcast formats.</p>
-            <a href="collab.html" class="btn mt-4 inline-flex rounded-xl px-4 py-2 font-semibold">Submit Collab Request</a>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section id="book" class="border-b border-white/5">
-      <div class="mx-auto max-w-7xl px-4 py-16">
-        <div class="rounded-3xl border border-white/10 bg-jet/60 p-8 text-center">
-          <h2 class="font-display text-3xl font-extrabold">Booking &amp; Touring</h2>
-          <p class="mt-4 text-leopard/80">Coordinate interviews alongside show coverage with direct booking access.</p>
-          <div class="mt-6 flex flex-wrap justify-center gap-3">
-            <a href="book.html" class="btn-primary rounded-xl px-5 py-3 font-semibold">Start Booking</a>
-            <a href="tour.html" class="btn rounded-xl px-5 py-3 font-semibold">Buy Tickets</a>
           </div>
         </div>
       </div>
     </section>
   </main>
-  <footer class="border-t border-white/5">
-    <div class="mx-auto grid max-w-7xl gap-8 px-4 py-12 md:grid-cols-3">
+
+  <!-- Footer with Navigate block (unchanged) -->
+  <footer class="border-t border-white/10">
+    <div class="mx-auto max-w-7xl px-4 py-10 grid gap-8 md:grid-cols-4">
       <div>
-        <img src="/img/agu-logo.png" alt="Agu Ocha brand mark" class="h-10 w-10 rounded-full border border-white/10 object-cover">
-        <p class="mt-3 max-w-xs text-sm text-steel">Media-ready assets and statements for international outlets and partners.</p>
+        <div class="flex items-center gap-3">
+          <img src="img/agu-logo.png" alt="Agu Ocha logo" class="h-10 w-10 rounded-full border border-white/10 object-cover">
+          <div class="font-bold">Agu Ocha</div>
+        </div>
+        <p class="mt-3 text-sm text-white/70">Afrohouse | New England • Worldwide</p>
       </div>
       <div>
-        <h4 class="font-semibold">Navigate</h4>
-        <ul class="mt-3 space-y-2 text-sm">
-          <li><a href="music.html">Music</a></li>
-          <li><a href="book.html">Book</a></li>
-          <li><a href="collab.html">Collab</a></li>
-          <li><a href="media.html">Media</a></li>
-          <li><a href="tour.html">Tour</a></li>
-          <li><a href="https://store.aguocha.com" rel="noopener">Store</a></li>
+        <div class="font-semibold mb-3">Navigate</div>
+        <ul class="space-y-2 text-sm">
+          <li><a class="underline-offset-4 hover:underline" href="music.html">Music</a></li>
+          <li><a class="underline-offset-4 hover:underline" href="book.html">Book</a> <span class="text-white/60">— private and corporate — festivals and tours — residencies — brand activations</span></li>
+          <li><a class="underline-offset-4 hover:underline" href="collab.html">Collab</a></li>
+          <li><a class="underline-offset-4 hover:underline" href="media.html">Media</a></li>
+          <li><a class="underline-offset-4 hover:underline" href="tour.html">Tour</a></li>
+          <li><a class="underline-offset-4 hover:underline" href="https://store.aguocha.com" rel="noopener">Store</a></li>
         </ul>
       </div>
       <div>
-        <h4 class="font-semibold">Contact</h4>
-        <p class="mt-3 text-sm">+1 (762) AGU-OCHA ;<br>DM <a class="underline" href="https://www.tiktok.com/@agu_ocha" target="_blank" rel="noopener">@agu_ocha</a></p>
+        <div class="font-semibold mb-3">Contact</div>
+        <ul class="space-y-2 text-sm">
+          <li><a class="underline-offset-4 hover:underline" href="tel:+17622486242">+1 (762) 248-6242</a></li>
+          <li><a class="underline-offset-4 hover:underline" href="sms:+17622486242">Text Agu Ocha</a></li>
+          <li><a class="underline-offset-4 hover:underline" href="mailto:bookings@aguocha.com">bookings@aguocha.com</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="font-semibold mb-3">Booking Calendar</div>
+        <a href="book.html" class="btn-primary inline-block rounded-xl px-4 py-2 font-semibold">Open Booking</a>
       </div>
     </div>
-    <div class="mx-auto max-w-7xl px-4 pb-10 text-xs text-steel">© <span id="yr"></span> all rights reserved Agu Ocha • powered by chatbotfarm.ai • Connecting Business to the Grid™</div>
+    <div class="mx-auto max-w-7xl px-4 pb-10">
+      <div class="text-center text-sm leading-relaxed">
+        © 2025 all rights reserved Agu Ocha<br>
+        powered by <a href="https://chatbotfarm.ai" target="_blank" rel="noopener" class="underline">chatbotfarm.ai</a> • Connecting Business to the Grid™
+      </div>
+    </div>
   </footer>
-  <script>document.getElementById('yr').textContent=new Date().getFullYear();</script>
-  <!-- GHL chat/voice widget -->
-  <!-- Analytics (GA4/Meta) -->
 </body>
 </html>
