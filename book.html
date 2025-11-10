@@ -33,150 +33,126 @@
 </head>
 
 <body>
-  <!-- Header -->
-  <header class="sticky top-0 z-50 border-b border-white/10 bg-black/40 backdrop-blur">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
-      <a href="index.html" class="flex items-center gap-3" aria-label="Home">
-        <img src="img/agu-logo.png" alt="Agu Ocha logo" class="h-10 w-10 rounded-full border border-white/10 object-cover">
-        <span class="font-bold tracking-wide">Agu Ocha</span>
-      </a>
-      <nav class="hidden items-center gap-6 font-medium md:flex">
-        <a href="music.html">Music</a>
-        <a href="book.html">Book</a>
-        <a href="collab.html">Collab</a>
-        <a href="media.html">Media</a>
-        <a href="tour.html">Tour</a>
-        <a href="https://store.aguocha.com" rel="noopener">Store</a>
-      </nav>
-      <div class="hidden items-center gap-2 md:flex">
-        <a href="tel:+17622486242" class="btn rounded-xl px-4 py-2 font-semibold">Call</a>
-        <a href="sms:+17622486242" class="btn rounded-xl px-4 py-2 font-semibold">Text</a>
-      </div>
-      <a href="index.html" class="hidden md:block" aria-label="Home">
-        <img src="img/agu-logo.png" alt="Agu Ocha logo" class="h-10 w-10 rounded-full border border-white/10 object-cover">
-      </a>
-      <button class="inline-flex rounded-lg border border-white/15 px-3 py-2 md:hidden" onclick="document.getElementById('mobile-nav').classList.toggle('hidden')">
-        <span class="font-mono text-lg">≡</span>
-      </button>
-    </div>
-    <div id="mobile-nav" class="hidden border-t border-white/10 bg-black/60 md:hidden">
-      <div class="mx-auto grid max-w-7xl gap-3 px-4 py-4 text-lg">
-        <a href="music.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Music</a>
-        <a href="book.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Book</a>
-        <a href="collab.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Collab</a>
-        <a href="media.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Media</a>
-        <a href="tour.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Tour</a>
-        <a href="https://store.aguocha.com" rel="noopener" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Store</a>
-        <div class="flex gap-2 pt-2">
-          <a href="tel:+17622486242" class="btn w-full rounded-xl px-4 py-2 text-center font-semibold">Call</a>
-          <a href="sms:+17622486242" class="btn w-full rounded-xl px-4 py-2 text-center font-semibold">Text</a>
-        </div>
-      </div>
-    </div>
-  </header>
+  <!-- Shared header include -->
+  <div id="site-header"></div>
 
   <main>
-    <!-- YOUR GRID, first in body -->
-    <section class="border-b border-white/5">
-      <div class="mx-auto max-w-7xl px-4 py-16">
-        <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          <article class="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-jet p-6">
-            <div>
-              <h2 class="text-lg font-semibold">Private &amp; Corporate</h2>
-              <p class="mt-2 text-sm text-steel">Elevate summits, galas, and destination weekends with custom score design and lighting cues.</p>
-            </div>
-            <a href="<!-- GHL_PRIVATE_FORM_LINK -->" class="btn-primary mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Start Booking</a>
-          </article>
+  <!-- YOUR GRID, first in body -->
+  <section class="border-b border-white/5">
+    <div class="mx-auto max-w-7xl px-4 py-16">
+      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
 
-          <article class="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-jet p-6">
-            <div>
-              <h2 class="text-lg font-semibold">Festivals &amp; Tours</h2>
-              <p class="mt-2 text-sm text-steel">Modular rigs for global routing, late-night slots, and co-headline runs.</p>
+        <!-- Private & Corporate -->
+        <article class="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-jet p-6">
+          <div>
+            <h2 class="text-lg font-semibold">Private &amp; Corporate</h2>
+            <!-- 3x2 Image -->
+            <div class="mt-3">
+              <img src="img/private-corporate.png" alt="Private and corporate event setup"
+                   class="w-full rounded-xl object-cover" style="aspect-ratio:3/2;" loading="lazy">
             </div>
-            <a href="<!-- GHL_FESTIVAL_FORM_LINK -->" class="btn mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Start Booking</a>
-          </article>
+            <p class="mt-2 text-sm text-steel">
+              Elevate summits, galas, and destination weekends with custom score design and lighting cues.
+            </p>
+          </div>
+          <a href="private-corporate.html"
+             class="btn-primary mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Start Booking</a>
+        </article>
 
-          <article class="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-jet p-6">
-            <div>
-              <h2 class="text-lg font-semibold">Residencies</h2>
-              <p class="mt-2 text-sm text-steel">Seasonal takeovers with evolving setlists, lighting packages, and guest collaborators.</p>
+        <!-- Festivals & Tours -->
+        <article class="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-jet p-6">
+          <div>
+            <h2 class="text-lg font-semibold">Festivals &amp; Tours</h2>
+            <!-- 3x2 Image -->
+            <div class="mt-3">
+              <img src="img/festivals-tours.png" alt="Festival stage performance"
+                   class="w-full rounded-xl object-cover" style="aspect-ratio:3/2;" loading="lazy">
             </div>
-            <a href="<!-- GHL_RESIDENCY_FORM_LINK -->" class="btn mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Start Booking</a>
-          </article>
+            <p class="mt-2 text-sm text-steel">
+              Modular rigs for global routing, late-night slots, and co-headline runs.
+            </p>
+          </div>
+          <a href="festivals-tours.html"
+             class="btn mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Start Booking</a>
+        </article>
 
-          <article class="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-jet p-6">
-            <div>
-              <h2 class="text-lg font-semibold">Brand Activations</h2>
-              <p class="mt-2 text-sm text-steel">Launch moments, runway soundtracks, and immersive retail scoring.</p>
+        <!-- Residencies -->
+        <article class="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-jet p-6">
+          <div>
+            <h2 class="text-lg font-semibold">Residencies</h2>
+            <!-- 3x2 Image -->
+            <div class="mt-3">
+              <img src="img/residencies.png" alt="Residency stage lighting"
+                   class="w-full rounded-xl object-cover" style="aspect-ratio:3/2;" loading="lazy">
             </div>
-            <a href="<!-- GHL_BRAND_FORM_LINK -->" class="btn mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Start Booking</a>
-          </article>
-        </div>
+            <p class="mt-2 text-sm text-steel">
+              Seasonal takeovers with evolving setlists, lighting packages, and guest collaborators.
+            </p>
+          </div>
+          <a href="residencies.html"
+             class="btn mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Start Booking</a>
+        </article>
+
+        <!-- Brand Activations -->
+        <article class="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-jet p-6">
+          <div>
+            <h2 class="text-lg font-semibold">Brand Activations</h2>
+            <!-- 3x2 Image -->
+            <div class="mt-3">
+              <img src="img/brand-activation.png" alt="Brand activation visual show"
+                   class="w-full rounded-xl object-cover" style="aspect-ratio:3/2;" loading="lazy">
+            </div>
+            <p class="mt-2 text-sm text-steel">
+              Launch moments, runway soundtracks, and immersive retail scoring.
+            </p>
+          </div>
+          <a href="brand-activations.html"
+             class="btn mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Start Booking</a>
+        </article>
+
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Copy line + one YouTube embed -->
-    <section class="border-b border-white/5">
-      <div class="mx-auto max-w-7xl px-4 py-16">
-        <p class="lead max-w-4xl text-white/90">
-          Agu Ocha engineers immersive sets that travel from underground rooms to headline stages.
-          Precision sound design, cinematic visuals, and bilingual storytelling keep every audience in motion.
-        </p>
-        <div class="card mt-8 rounded-2xl p-3">
-          <!-- Swap VIDEO_ID_1 with your actual video id -->
-          <iframe class="h-64 w-full rounded-xl border border-white/10"
-                  src="https://www.youtube.com/embed/C_ynqwU8_74"
-                  title="Agu Ocha — Booking highlight"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen></iframe>
-        </div>
+  <!-- Copy line + one YouTube embed -->
+  <section class="border-b border-white/5">
+    <div class="mx-auto max-w-7xl px-4 py-16">
+      <p class="lead max-w-4xl text-white/90">
+        Agu Ocha engineers immersive sets that travel from underground rooms to headline stages.
+        Precision sound design, cinematic visuals, and bilingual storytelling keep every audience in motion.
+      </p>
+      <div class="card mt-8 rounded-2xl p-3">
+        <!-- Swap VIDEO_ID_1 with your actual video id -->
+        <iframe class="h-64 w-full rounded-xl border border-white/10"
+                style="aspect-ratio:16/9; height:auto;"
+                src="https://www.youtube.com/embed/C_ynqwU8_74"
+                title="Agu Ocha — Booking highlight"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
       </div>
-    </section>
+    </div>
+  </section>
   </main>
 
-  <!-- Footer with Navigate block -->
-  <footer class="border-t border-white/10">
-    <div class="mx-auto max-w-7xl px-4 py-10 grid gap-8 md:grid-cols-4">
-      <div>
-        <div class="flex items-center gap-3">
-          <img src="img/agu-logo.png" alt="Agu Ocha logo" class="h-10 w-10 rounded-full border border-white/10 object-cover">
-          <div class="font-bold">Agu Ocha</div>
-        </div>
-        <p class="mt-3 text-sm text-white/70">Afrohouse | New England • Worldwide</p>
-      </div>
-      <div>
-        <div class="font-semibold mb-3">Navigate</div>
-        <ul class="space-y-2 text-sm">
-          <li><a class="underline-offset-4 hover:underline" href="music.html">Music</a></li>
-          <li><a class="underline-offset-4 hover:underline" href="book.html">Book</a>
-            <span class="text-white/60"> — private and corporate — festivals and tours — residencies — brand activations</span>
-          </li>
-          <li><a class="underline-offset-4 hover:underline" href="collab.html">Collab</a></li>
-          <li><a class="underline-offset-4 hover:underline" href="media.html">Media</a></li>
-          <li><a class="underline-offset-4 hover:underline" href="tour.html">Tour</a></li>
-          <li><a class="underline-offset-4 hover:underline" href="https://store.aguocha.com" rel="noopener">Store</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="font-semibold mb-3">Contact</div>
-        <ul class="space-y-2 text-sm">
-          <li><a class="underline-offset-4 hover:underline" href="tel:+17622486242">+1 (762) 248-6242</a></li>
-          <li><a class="underline-offset-4 hover:underline" href="sms:+17622486242">Text Agu Ocha</a></li>
-          <li><a class="underline-offset-4 hover:underline" href="mailto:bookings@aguocha.com">bookings@aguocha.com</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="font-semibold mb-3">Booking Calendar</div>
-        <a href="book.html" class="btn-primary inline-block rounded-xl px-4 py-2 font-semibold">Open Booking</a>
-      </div>
-    </div>
-    <div class="mx-auto max-w-7xl px-4 pb-10">
-      <div class="text-center text-sm leading-relaxed">
-        © 2025 all rights reserved Agu Ocha<br>
-        powered by <a href="https://chatbotfarm.ai" target="_blank" rel="noopener" class="underline">chatbotfarm.ai</a> <br>• Connecting Business to the Grid™
-      </div>
-    </div>
-  </footer>
+  <!-- Shared footer include -->
+  <div id="site-footer"></div>
+
+  <!-- Loader for shared header/footer -->
+  <script>
+    async function loadHTML(id, file) {
+      try {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const res = await fetch(file, { cache: "no-cache" });
+        if (!res.ok) throw new Error('Failed to load ' + file + ': ' + res.status);
+        el.innerHTML = await res.text();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    loadHTML("site-header", "header.html");
+    loadHTML("site-footer", "footer.html");
+  </script>
 </body>
 </html>

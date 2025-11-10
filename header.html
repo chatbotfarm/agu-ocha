@@ -1,0 +1,71 @@
+<header class="sticky top-0 z-50 border-b border-white/10 bg-black/40 backdrop-blur">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
+    <a href="index.html" class="flex items-center gap-3" aria-label="Home">
+      <img src="img/agu-logo.png" alt="Agu Ocha logo" class="h-10 w-10 rounded-full border border-white/10 object-cover">
+      <span class="font-bold tracking-wide">Agu Ocha</span>
+    </a>
+
+    <!-- DESKTOP NAV -->
+    <nav class="hidden items-center gap-6 font-medium md:flex">
+      <a href="music.html">Music</a>
+
+      <!-- Book dropdown -->
+      <div class="relative group">
+        <a href="book.html" class="inline-flex items-center gap-1">Book <span aria-hidden>▾</span></a>
+        <div class="invisible absolute right-0 z-50 mt-2 w-72 rounded-xl border border-white/10 bg-black/70 backdrop-blur p-2 opacity-0 transition duration-150 group-hover:visible group-hover:opacity-100"
+             role="menu" aria-label="Book submenu">
+          <a href="private-corporate.html" class="block rounded-lg px-3 py-2 hover:bg-white/10" role="menuitem">Private &amp; Corporate</a>
+          <a href="festivals-tours.html" class="block rounded-lg px-3 py-2 hover:bg-white/10" role="menuitem">Festivals &amp; Tours</a>
+          <a href="residencies.html" class="block rounded-lg px-3 py-2 hover:bg-white/10" role="menuitem">Residencies</a>
+          <a href="brand-activations.html" class="block rounded-lg px-3 py-2 hover:bg-white/10" role="menuitem">Brand Activations</a>
+        </div>
+      </div>
+
+      <a href="collab.html">Collab</a>
+      <a href="media.html">Media</a>
+      <a href="tour.html">Tour</a>
+      <a href="https://store.aguocha.com" rel="noopener">Store</a>
+    </nav>
+
+    <div class="hidden items-center gap-2 md:flex">
+      <a href="tel:+17622486242" class="btn rounded-xl px-4 py-2 font-semibold">Call</a>
+      <a href="sms:+17622486242" class="btn rounded-xl px-4 py-2 font-semibold">Text</a>
+    </div>
+
+    <!-- right logo -->
+    <a href="index.html" class="hidden md:block" aria-label="Home">
+      <img src="img/agu-logo.png" alt="Agu Ocha logo" class="h-10 w-10 rounded-full border border-white/10 object-cover">
+    </a>
+
+    <!-- mobile toggle -->
+    <button class="inline-flex rounded-lg border border-white/15 px-3 py-2 md:hidden"
+            onclick="document.getElementById('mobile-nav')?.classList.toggle('hidden')">
+      <span class="font-mono text-lg">≡</span>
+    </button>
+  </div>
+
+  <!-- MOBILE NAV -->
+  <div id="mobile-nav" class="hidden border-t border-white/10 bg-black/60 md:hidden">
+    <div class="mx-auto grid max-w-7xl gap-3 px-4 py-4 text-lg">
+      <a href="music.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Music</a>
+
+      <a href="book.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Book</a>
+      <div class="ml-4 grid gap-2 text-base text-white/90">
+        <a href="private-corporate.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Private &amp; Corporate</a>
+        <a href="festivals-tours.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Festivals &amp; Tours</a>
+        <a href="residencies.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Residencies</a>
+        <a href="brand-activations.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Brand Activations</a>
+      </div>
+
+      <a href="collab.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Collab</a>
+      <a href="media.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Media</a>
+      <a href="tour.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Tour</a>
+      <a href="https://store.aguocha.com" rel="noopener" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Store</a>
+
+      <div class="flex gap-2 pt-2">
+        <a href="tel:+17622486242" class="btn w-full rounded-xl px-4 py-2 text-center font-semibold">Call</a>
+        <a href="sms:+17622486242" class="btn w-full rounded-xl px-4 py-2 text-center font-semibold">Text</a>
+      </div>
+    </div>
+  </div>
+</header>
