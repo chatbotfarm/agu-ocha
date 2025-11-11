@@ -1,4 +1,4 @@
-<footer class="border-t border-white/10">
+<footer class="border-t border-white/10"> 
   <div class="mx-auto max-w-7xl px-4 py-10 grid gap-8 md:grid-cols-4">
     <!-- Brand -->
     <div>
@@ -46,24 +46,9 @@
   <!-- Bottom Section -->
   <div class="border-t border-white/10 bg-black/40 backdrop-blur mt-6">
     <div class="mx-auto max-w-7xl px-4 py-6 text-center text-sm leading-relaxed text-white/80">
-      © <span id="current-year"></span> all rights reserved <strong>Agu Ocha</strong><br>
+      © <span id="current-year">2025</span> all rights reserved <strong>Agu Ocha</strong><br>
       powered by <a href="https://chatbotfarm.ai" target="_blank" rel="noopener" class="underline">chatbotfarm.ai</a><br>
       <span class="text-white/60">Connecting Business to the Grid™</span>
     </div>
   </div>
 </footer>
-
-<!-- Move this script OUTSIDE the footer include -->
-<script>
-  // Wait until footer is loaded and year element exists
-  function updateYear() {
-    const yearSpan = document.getElementById("current-year");
-    if (yearSpan) {
-      yearSpan.textContent = new Date().getFullYear();
-    } else {
-      // Retry if footer hasn't been injected yet
-      setTimeout(updateYear, 300);
-    }
-  }
-  updateYear();
-</script>
