@@ -51,9 +51,19 @@
       <span class="text-white/60">Connecting Business to the Grid™</span>
     </div>
   </div>
-
-  <script>
-    // Auto-update the year dynamically
-    document.getElementById("current-year").textContent = new Date().getFullYear();
-  </script>
 </footer>
+
+<!-- Move this script OUTSIDE the footer include -->
+<script>
+  // Wait until footer is loaded and year element exists
+  function updateYear() {
+    const yearSpan = document.getElementById("current-year");
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    } else {
+      // Retry if footer hasn't been injected yet
+      setTimeout(updateYear, 300);
+    }
+  }
+  updateYear();
+</script>
