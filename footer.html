@@ -1,13 +1,18 @@
 <footer class="border-t border-white/10">
   <div class="mx-auto max-w-7xl px-4 py-10 grid gap-8 md:grid-cols-4">
+    <!-- Brand -->
     <div>
       <div class="flex items-center gap-3">
-        <img src="img/agu-logo.png" alt="Agu Ocha logo" class="h-10 w-10 rounded-full border border-white/10 object-cover">
+        <img src="img/agu-logo.png" alt="Agu Ocha logo"
+             class="h-10 w-10 rounded-full border border-white/10 object-cover">
         <div class="font-bold">Agu Ocha</div>
       </div>
-      <p class="mt-3 text-sm text-white/70">Event Curated Music | New England • Worldwide</p>
+      <p class="mt-3 text-sm text-white/70">
+        Event Curated Music | New England • Worldwide
+      </p>
     </div>
 
+    <!-- Navigation -->
     <div>
       <div class="font-semibold mb-3">Navigate</div>
       <ul class="space-y-2 text-sm">
@@ -28,18 +33,27 @@
       </ul>
     </div>
 
+    <!-- Contact -->
     <div>
       <div class="font-semibold mb-3">Contact</div>
       <ul class="space-y-2 text-sm">
         <li><a class="underline-offset-4 hover:underline" href="tel:+17622486242">+1 (762) AGU-OCHA</a></li>
         <li><a class="underline-offset-4 hover:underline" href="sms:+17622486242">Text Agu Ocha</a></li>
-       </ul>
-    </div>
-
-  <div class="mx-auto max-w-7xl px-4 pb-10">
-    <div class="text-center text-sm leading-relaxed">
-      © 2025 all rights reserved Agu Ocha<br>
-      powered by <a href="https://chatbotfarm.ai" target="_blank" rel="noopener" class="underline">chatbotfarm.ai</a> <br> • Connecting Business to the Grid™ •
+      </ul>
     </div>
   </div>
+
+  <!-- Bottom Section -->
+  <div class="border-t border-white/10 bg-black/40 backdrop-blur mt-6">
+    <div class="mx-auto max-w-7xl px-4 py-6 text-center text-sm leading-relaxed text-white/80">
+      © <span id="current-year"></span> all rights reserved <strong>Agu Ocha</strong><br>
+      powered by <a href="https://chatbotfarm.ai" target="_blank" rel="noopener" class="underline">chatbotfarm.ai</a><br>
+      <span class="text-white/60">Connecting Business to the Grid™</span>
+    </div>
+  </div>
+
+  <script>
+    // Auto-update the year dynamically
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+  </script>
 </footer>
