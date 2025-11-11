@@ -140,40 +140,19 @@
 
   <!-- Loader for shared header/footer -->
   <script>
-  // Your existing include loader
-  async function loadHTML(id, file) {
-    try {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const res = await fetch(file, { cache: "no-cache" });
-      if (!res.ok) throw new Error('Failed to load ' + file + ': ' + res.status);
-      el.innerHTML = await res.text();
-    } catch (err) {
-      console.error(err);
+    async function loadHTML(id, file) {
+      try {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const res = await fetch(file, { cache: "no-cache" });
+        if (!res.ok) throw new Error('Failed to load ' + file + ': ' + res.status);
+        el.innerHTML = await res.text();
+      } catch (err) {
+        console.error(err);
+      }
     }
-  }
-
-  // Load shared components
-  loadHTML("site-header", "header.html");
-  loadHTML("site-footer", "footer.html");
-
-  // After footer arrives, update the year (robust for GitHub Pages + mobile)
-  (function setYearWhenReady(){
-    const mount = document.getElementById("site-footer");
-    if (!mount) return;
-
-    const trySet = () => {
-      const span = document.getElementById("current-year");
-      if (span) { span.textContent = new Date().getFullYear(); return true; }
-      return false;
-    };
-
-    if (trySet()) return; // already injected
-
-    const obs = new MutationObserver(() => { if (trySet()) obs.disconnect(); });
-    obs.observe(mount, { childList: true, subtree: true });
-  })();
-</script>
-
+    loadHTML("site-header", "header.html");
+    loadHTML("site-footer", "footer.html");
+  </script>
 </body>
 </html>
