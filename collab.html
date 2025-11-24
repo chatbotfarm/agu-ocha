@@ -33,7 +33,7 @@
   <div id="site-header"></div>
 
   <main>
-    <!-- Collab intro + YouTube + Spotify block -->
+    <!-- Intro + YouTube + Spotify -->
     <section class="section">
       <div class="mx-auto container px-4">
         <h1 class="font-extrabold text-3xl md:text-4xl">Collaboration Opportunities.</h1>
@@ -69,8 +69,8 @@
           </div>
         </div>
 
-        <!-- Title + description for calendar (stays in container, no iframe here) -->
-        <div class="mt-10">
+        <!-- Title in its own rounded card (no calendar inside) -->
+        <div class="card mt-10 rounded-2xl p-6">
           <h2 class="font-bold text-2xl">Schedule a Virtual Meeting</h2>
           <p class="mt-2 text-white/80">
             Use the calendar below to request a collab chat.
@@ -79,7 +79,7 @@
       </div>
     </section>
 
-    <!-- Full-width calendar outside the container -->
+    <!-- Full-width calendar (no wrapper card, takes entire screen width) -->
     <section class="pb-0">
       <div class="w-screen max-w-none -mx-[calc(50vw-50%)]">
         <iframe
