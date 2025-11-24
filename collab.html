@@ -13,13 +13,20 @@
   <meta property="og:url" content="https://aguocha.com/collab.html">
   <meta property="og:image" content="https://aguocha.com/img/agu-mask-portrait.jpg">
   <script src="https://cdn.tailwindcss.com"></script>
+
   <style>
-    :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
+    :root{
+      --jet:#0B0B0C;
+      --ink:#111114;
+      --leopard:#F7F7F8;
+      --steel:#B5B8BE;
+      --brand:#D41414;
+    }
     html{font-size:17px}
     @media(min-width:1024px){html{font-size:18px}}
     body{background:var(--jet);color:var(--leopard);line-height:1.65}
     .btn{border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--leopard);transition:all .2s ease}
-    .btn:hover{background:var(--leopard);color:var(--jet)} 
+    .btn:hover{background:var(--leopard);color:var(--jet)}
     .btn-primary{background:var(--brand);color:var(--leopard);border-color:transparent}
     .btn-primary:hover{background:var(--leopard);color:var(--jet)}
     .card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)}
@@ -28,12 +35,14 @@
     .container{max-width:72rem}
   </style>
 </head>
+
 <body>
+
   <!-- Shared header include -->
   <div id="site-header"></div>
 
   <main>
-    <!-- Intro + YouTube + Spotify -->
+    <!-- INTRO -->
     <section class="section">
       <div class="mx-auto container px-4">
         <h1 class="font-extrabold text-3xl md:text-4xl">Collaboration Opportunities.</h1>
@@ -42,6 +51,8 @@
         </p>
 
         <div class="mt-8 grid gap-6 md:grid-cols-2">
+
+          <!-- YouTube Warm-Up -->
           <div class="card rounded-2xl p-3">
             <iframe
               class="h-64 w-full rounded-xl border border-white/10"
@@ -51,35 +62,39 @@
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowfullscreen></iframe>
           </div>
+
+          <!-- Spotify Playlist Collaboration -->
           <div class="card rounded-2xl p-6 flex flex-col justify-between">
-            <div>
-              <h2 class="font-bold text-2xl">Spotify Collaboration</h2>
-              <p class="mt-2 text-white/80">
-                Warm up with the playlist — get a feel for the sound, then pitch your best track.
-              </p>
-            </div>
-            <div class="mt-4">
-              <a
-                href="https://open.spotify.com/playlist/5UP8zLioz5jelEk4n5sFi8?si=hm1a73niTRKoBKbXOpFyuw&pi=pUSC7Jd4RFSx3"
-                target="_blank" rel="noopener"
-                class="btn-primary rounded-xl px-4 py-2 font-semibold">
-                Open Spotify Playlist
-              </a>
-            </div>
+            <h2 class="font-bold text-2xl">Spotify Collaboration</h2>
+            <p class="mt-2 text-white/80">
+              Warm up with the playlist — get a feel for the sound, then pitch your best track.
+            </p>
+
+            <iframe
+              style="border-radius:12px"
+              src="https://open.spotify.com/embed/playlist/5UP8zLioz5jelEk4n5sFi8?utm_source=generator"
+              width="100%"
+              height="352"
+              frameborder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              class="mt-4"></iframe>
           </div>
+
         </div>
 
-        <!-- Title in its own rounded card (no calendar inside) -->
+        <!-- Title Card (separated from calendar) -->
         <div class="card mt-10 rounded-2xl p-6">
           <h2 class="font-bold text-2xl">Schedule a Virtual Meeting</h2>
           <p class="mt-2 text-white/80">
             Use the calendar below to request a collab chat.
           </p>
         </div>
+
       </div>
     </section>
 
-    <!-- Full-width calendar (no wrapper card, takes entire screen width) -->
+    <!-- FULL-WIDTH CALENDAR -->
     <section class="pb-0">
       <div class="w-screen max-w-none -mx-[calc(50vw-50%)]">
         <iframe
@@ -88,6 +103,7 @@
           scrolling="no"
           id="4Zwyq5uTC8G7JdZW4ltW_1762570922744"
           class="block"></iframe>
+
         <script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
       </div>
     </section>
@@ -102,15 +118,19 @@
       try {
         const el = document.getElementById(id);
         if (!el) return;
+
         const res = await fetch(file, { cache: "no-cache" });
         if (!res.ok) throw new Error('Failed to load ' + file + ': ' + res.status);
+
         el.innerHTML = await res.text();
       } catch (err) {
         console.error(err);
       }
     }
+
     loadHTML("site-header", "header.html");
     loadHTML("site-footer", "footer.html");
   </script>
+
 </body>
 </html>
