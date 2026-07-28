@@ -47,21 +47,7 @@
   <!-- Shared footer include -->
   <div id="site-footer"></div>
 
-  <!-- Loader for shared header/footer -->
-  <script>
-    async function loadHTML(id, file) {
-      try {
-        const el = document.getElementById(id);
-        if (!el) return;
-        const res = await fetch(file, { cache: "no-cache" });
-        if (!res.ok) throw new Error('Failed to load ' + file + ': ' + res.status);
-        el.innerHTML = await res.text();
-      } catch (err) {
-        console.error(err);
-      }
-    }
-    loadHTML("site-header", "header.html");
-    loadHTML("site-footer", "footer.html");
-  </script>
+  <!-- Shared header/footer loader + nav behavior -->
+  <script src="assets/site.js" defer></script>
 </body>
 </html>
