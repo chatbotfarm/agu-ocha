@@ -1,5 +1,22 @@
+<!-- Shared header fragment. Injected into #site-header by assets/site.js.
+     Note: <script> inside an innerHTML-injected fragment never executes, which
+     is why all nav behavior is delegated from assets/site.js and hooked up via
+     the data-nav-toggle / data-nav-close attributes below. A <style> element,
+     unlike a <script>, DOES apply when injected this way - so the shared focus
+     styles for the header and footer live here, in one place, rather than being
+     duplicated across every page's inline <style> block. -->
+<style>
+  header a:focus-visible,
+  header button:focus-visible,
+  footer a:focus-visible{
+    outline:2px solid #F7F7F8;
+    outline-offset:3px;
+    border-radius:.375rem;
+  }
+</style>
+
 <header class="sticky top-0 z-50 border-b border-white/10 bg-black/40 backdrop-blur">
-  <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
+  <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-y-3 px-4 py-4">
     <!-- Left Logo -->
     <a href="index.html" class="flex items-center gap-3" aria-label="Home">
       <img src="img/agu-logo.png" alt="Agu Ocha logo" class="h-10 w-10 rounded-full border border-white/10 object-cover">
@@ -7,7 +24,7 @@
     </a>
 
     <!-- DESKTOP NAV -->
-    <nav class="hidden items-center gap-6 font-medium md:flex">
+    <nav class="hidden items-center gap-6 font-medium lg:flex" aria-label="Primary">
       <a href="music.html">Music</a>
 
       <!-- Book dropdown (hover glitch fixed) -->
@@ -16,7 +33,7 @@
         <a href="book.html"
            class="peer inline-flex items-center gap-1"
            aria-haspopup="true" aria-expanded="false">
-          Book <span aria-hidden>▾</span>
+          Book <span aria-hidden="true">▾</span>
         </a>
 
         <!-- dropdown menu -->
@@ -26,7 +43,8 @@
                  opacity-0 scale-95 pointer-events-none
                  transition duration-150 ease-out
                  group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto
-                 peer-focus:opacity-100 peer-focus:scale-100 peer-focus:pointer-events-auto">
+                 peer-focus:opacity-100 peer-focus:scale-100 peer-focus:pointer-events-auto
+                 focus-within:opacity-100 focus-within:scale-100 focus-within:pointer-events-auto">
           <a href="private-corporate.html" class="block rounded-lg px-3 py-2 hover:bg-white/10" role="menuitem">
             Private &amp; Corporate
           </a>
@@ -49,43 +67,52 @@
     </nav>
 
     <!-- Right buttons -->
-    <div class="hidden items-center gap-2 md:flex">
+    <div class="hidden items-center gap-2 lg:flex">
+      <a href="suno-vibez.html"
+         title="Submit Song to a Playlist"
+         aria-label="Submit Song to a Playlist"
+         class="btn-primary whitespace-nowrap rounded-xl px-4 py-2 font-semibold">Submit Song</a>
       <a href="tel:+17622486242" class="btn rounded-xl px-4 py-2 font-semibold">Call</a>
       <a href="sms:+17622486242" class="btn rounded-xl px-4 py-2 font-semibold">Text</a>
     </div>
 
 
     <!-- Mobile nav toggle -->
-    <button class="inline-flex rounded-lg border border-white/15 px-3 py-2 md:hidden"
-            onclick="document.getElementById('mobile-nav')?.classList.toggle('hidden')">
-      <span class="font-mono text-lg">≡</span>
+    <button type="button"
+            class="inline-flex rounded-lg border border-white/15 px-3 py-2 lg:hidden"
+            data-nav-toggle
+            aria-controls="mobile-nav"
+            aria-expanded="false"
+            aria-label="Menu">
+      <span class="font-mono text-lg" aria-hidden="true">≡</span>
     </button>
   </div>
 
   <!-- MOBILE NAV -->
-  <div id="mobile-nav" class="hidden border-t border-white/10 bg-black/60 md:hidden">
-    <div class="mx-auto grid max-w-7xl gap-3 px-4 py-4 text-lg">
-      <a href="music.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Music</a>
+  <div id="mobile-nav" class="hidden border-t border-white/10 bg-black/60 lg:hidden">
+    <nav class="mx-auto grid max-w-7xl gap-3 px-4 py-4 text-lg" aria-label="Primary (mobile)">
+      <a href="music.html" data-nav-close>Music</a>
 
       <!-- Book submenu (mobile only) -->
-      <a href="book.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Book</a>
+      <a href="book.html" data-nav-close>Book</a>
       <div class="ml-4 grid gap-2 text-base text-white/90">
-        <a href="private-corporate.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Private &amp; Corporate</a>
-        <a href="festivals-tours.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Festivals &amp; Tours</a>
-        <a href="residencies.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Residencies</a>
-        <a href="brand-activations.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Brand Activations</a>
+        <a href="private-corporate.html" data-nav-close>Private &amp; Corporate</a>
+        <a href="festivals-tours.html" data-nav-close>Festivals &amp; Tours</a>
+        <a href="residencies.html" data-nav-close>Residencies</a>
+        <a href="brand-activations.html" data-nav-close>Brand Activations</a>
       </div>
 
-      <a href="collab.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Collab</a>
-      <a href="media.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Media</a>
-      <a href="tour.html" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Tour</a>
-      <a href="https://store.aguocha.com" rel="noopener" onclick="document.getElementById('mobile-nav').classList.add('hidden')">Store</a>
+      <a href="collab.html" data-nav-close>Collab</a>
+      <a href="media.html" data-nav-close>Media</a>
+      <a href="tour.html" data-nav-close>Tour</a>
+      <a href="https://store.aguocha.com" rel="noopener" data-nav-close>Store</a>
+      <a href="suno-vibez.html" data-nav-close>Submit Song to a Playlist</a>
 
       <!-- Contact Buttons -->
       <div class="flex gap-2 pt-2">
-        <a href="tel:+17622486242" class="btn w-full rounded-xl px-4 py-2 text-center font-semibold">Call</a>
-        <a href="sms:+17622486242" class="btn w-full rounded-xl px-4 py-2 text-center font-semibold">Text</a>
+        <a href="tel:+17622486242" class="btn w-full rounded-xl px-4 py-2 text-center font-semibold" data-nav-close>Call</a>
+        <a href="sms:+17622486242" class="btn w-full rounded-xl px-4 py-2 text-center font-semibold" data-nav-close>Text</a>
       </div>
-    </div>
+    </nav>
   </div>
 </header>
