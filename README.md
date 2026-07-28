@@ -95,7 +95,17 @@ Known limit: the GHL form is a cross-origin iframe, so per-field events inside i
 
 ### Operator TODO
 
-1. **Set `ghlFormUrl`.** It is empty, so the form area shows a Text/Email fallback instead. Paste the GoHighLevel **form** URL (`.../widget/form/<id>`). The form must write to the exact field keys in §12.1 — `track_link`, `creator_name`, `email`, `genre`, `submission_notes`, `rights_confirmed` — because renaming them later means re-keying every downstream workflow.
+1. **Trim the GoHighLevel form to the §7.3 field set.** `ghlFormUrl` is wired to the live "playlist submission Form" (`hNlynM8h8zLs9jkDlTVW`) and it works — `track_link` prefill confirmed, `form_embed.js` resize confirmed. But the form as built asks for **ten** visible fields, not five, and several are ones §7.5 excludes by name:
+   - **Phone, and it is required.** §7.5 calls this "the highest-friction field in existence for a music submission." Nothing in the review workflow needs it. This is the single biggest conversion risk on the page.
+   - **First Name and Last Name**, which duplicate Creator Name — §7.3 wants one "how you want to be credited" field.
+   - **Official Release Date** — §7.5 excludes it as a professional-infrastructure signal that alienates Segment A, and it is meaningless for unreleased Lane A tracks.
+   - **The "Rights Confirmed" checkbox is labelled "Option 1"**, so the §7.7 representation the creator is supposed to be making is not actually stated. This is the one with legal weight — it should read the Lane A/Lane B wording.
+   - **The SMS consent text still contains unfilled template placeholders**, `[BUSINESS NAME]` and `[USE_CASE_FROM_CAMPAIGN_DESCRIPTION]`, which real submitters currently see.
+   - **`terms_and_conditions` appears twice.**
+
+   Until it is trimmed, the page cannot honestly say "Five fields. About a minute." (§7.8) — the copy is temporarily "Takes a minute or two." Restore the spec line verbatim once the form matches.
+
+   Field keys are correct and should not be renamed: `track_link`, `creator_name`, `email`, `genre`, `submission_notes`, `rights_confirmed` (§12.1).
 2. **Set the post-submit redirect** in GoHighLevel to `https://aguocha.com/thank-you.html`, or the confirmation page is unreachable. Append `?track=<title>` if you want the page to name the track back.
 3. **Fill in `curator`.** Real name, photograph, and profile links (§6.5.1). While `name` is empty the whole "Who listens" block is removed — a half-filled curator block is worse than none, and an anonymous curator is indistinguishable from a fake-playlist operator.
 4. **Add `lanes.a.playlistUrl`** once the Suno-hosted playlist exists, and confirm `lanes.b` points at the right Spotify playlist.

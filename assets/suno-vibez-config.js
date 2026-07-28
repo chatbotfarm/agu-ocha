@@ -45,9 +45,17 @@
  */
 window.SUNO_VIBEZ_CONFIG = {
   /* ---- Submission form (spec §7) ---------------------------------------- */
-  ghlFormUrl: "",
+  // GoHighLevel form "playlist submission Form" (id hNlynM8h8zLs9jkDlTVW).
+  // Must be a /widget/form/ URL, not /widget/booking/ — a booking widget is a
+  // date picker with no track-link field.
+  ghlFormUrl: "https://api.leadconnectorhq.com/widget/form/hNlynM8h8zLs9jkDlTVW",
   ghlFormTitle: "Suno Vibez track submission form",
-  ghlFormMinHeight: 900,
+  // GHL reports this form's natural height as data-height="1342". It is only a
+  // reservation — form_embed.js resizes the frame to fit once it attaches.
+  ghlFormMinHeight: 1342,
+  ghlFormName: "playlist submission Form",
+  // Query parameter used to prefill the pasted link. This must match the
+  // field key in the GHL form itself (spec §12.1) or GHL silently ignores it.
   prefillParam: "track_link",
 
   /* ---- Playlists (spec §6.2) -------------------------------------------- */

@@ -258,20 +258,45 @@
 
     var segments = url.pathname.split("/").filter(Boolean);
     var widgetId = segments.length ? segments[segments.length - 1] : "submission";
+    var isForm = url.pathname.indexOf("/widget/form/") !== -1;
+    var height = CFG.ghlFormMinHeight || 900;
 
     var frame = document.createElement("iframe");
     frame.setAttribute("src", url.href);
-    frame.setAttribute("id", widgetId + "_" + Date.now());
     frame.setAttribute("title", CFG.ghlFormTitle || "Track submission form");
     frame.setAttribute("scrolling", "no");
     frame.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
     frame.setAttribute(
       "style",
-      "width:100%;border:none;overflow:hidden;min-height:" +
-        (CFG.ghlFormMinHeight || 900) +
-        "px"
+      "width:100%;border:none;overflow:hidden;min-height:" + height + "px"
     );
     frame.className = "block rounded-xl";
+
+    /*
+     * form_embed.js keys its resize handshake off different conventions for the
+     * two widget types, and gets it wrong silently — the frame just never
+     * resizes. Forms want id="inline-<formId>" plus the data-* set below;
+     * booking widgets want "<calendarId>_<timestamp>".
+     */
+    if (isForm) {
+      var domId = "inline-" + widgetId;
+      frame.setAttribute("id", domId);
+      frame.setAttribute("data-layout", "{'id':'INLINE'}");
+      frame.setAttribute("data-trigger-type", "alwaysShow");
+      frame.setAttribute("data-trigger-value", "");
+      frame.setAttribute("data-activation-type", "alwaysActivated");
+      frame.setAttribute("data-activation-value", "");
+      frame.setAttribute("data-deactivation-type", "neverDeactivate");
+      frame.setAttribute("data-deactivation-value", "");
+      frame.setAttribute("data-form-name", CFG.ghlFormName || "Track submission form");
+      frame.setAttribute("data-height", String(height));
+      frame.setAttribute("data-layout-iframe-id", domId);
+      frame.setAttribute("data-form-id", widgetId);
+    } else {
+      frame.setAttribute("id", widgetId + "_" + Date.now());
+    }
+
+    // The GHL form paints its own white card, so it needs no wrapper here.
     mount.replaceChildren(frame);
     formRendered = true;
 
