@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Excludes /suno-vibez/ (redirect stub), thank-you.html and 404.html (noindex). -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://aguocha.com/</loc><priority>1.0</priority></url>
+  <url><loc>https://aguocha.com/music.html</loc><priority>0.8</priority></url>
+  <url><loc>https://aguocha.com/book.html</loc><priority>0.8</priority></url>
+  <url><loc>https://aguocha.com/private-corporate.html</loc><priority>0.6</priority></url>
+  <url><loc>https://aguocha.com/festivals-tours.html</loc><priority>0.6</priority></url>
+  <url><loc>https://aguocha.com/residencies.html</loc><priority>0.6</priority></url>
+  <url><loc>https://aguocha.com/brand-activations.html</loc><priority>0.6</priority></url>
+  <url><loc>https://aguocha.com/collab.html</loc><priority>0.7</priority></url>
+  <url><loc>https://aguocha.com/suno-vibez.html</loc><priority>0.9</priority></url>
+  <url><loc>https://aguocha.com/media.html</loc><priority>0.6</priority></url>
+  <url><loc>https://aguocha.com/tour.html</loc><priority>0.6</priority></url>
+  <url><loc>https://aguocha.com/store.html</loc><priority>0.5</priority></url>
+  <url><loc>https://aguocha.com/submission-terms.html</loc><priority>0.3</priority></url>
+  <url><loc>https://aguocha.com/privacy.html</loc><priority>0.3</priority></url>
+</urlset>

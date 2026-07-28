@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aguocha.com/sitemap.xml
