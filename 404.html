@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- GitHub Pages serves this file for unmatched paths at ANY depth, so the
+       document URL can be /a/b/c. Without this <base>, every relative URL below
+       - including the header/footer fetch in assets/site.js - would resolve
+       against /a/b/ and 404. Must stay the first element in <head>. -->
+  <base href="/">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page Not Found | Agu Ocha</title>
+  <meta name="description" content="That page does not exist. Find music, bookings, and song submissions here.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="favicon.ico">
+  <link rel="apple-touch-icon" href="img/agu-logo.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
+    html{font-size:17px}
+    @media(min-width:1024px){html{font-size:18px}}
+    body{background:var(--jet);color:var(--leopard);line-height:1.65}
+    .btn{border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--leopard);transition:all .2s ease}
+    .btn:hover{background:var(--leopard);color:var(--jet)}
+    .btn-primary{background:var(--brand);color:var(--leopard);border-color:transparent}
+    .btn-primary:hover{background:var(--leopard);color:var(--jet)}
+    .card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)}
+    .lead{font-size:1.125rem}
+    .section{padding-top:4rem;padding-bottom:4rem}
+    .container{max-width:72rem}
+    :focus-visible{outline:2px solid var(--leopard);outline-offset:3px}
+  </style>
+</head>
+<body>
+  <!-- Shared header include -->
+  <div id="site-header"></div>
+
+  <main>
+    <section class="section">
+      <div class="mx-auto max-w-3xl px-4">
+        <p class="font-mono text-sm uppercase tracking-widest text-white/50">Error 404</p>
+        <h1 class="mt-2 font-extrabold tracking-tight text-3xl md:text-4xl">That page does not exist.</h1>
+        <p class="lead mt-4 text-white/85">
+          The link may be out of date, or the address may have a typo. Here is where to go instead.
+        </p>
+
+        <div class="mt-8 grid gap-3 sm:grid-cols-2">
+          <a class="card rounded-2xl p-5 hover:bg-white/10" href="index.html">
+            <span class="font-bold">Home</span>
+            <span class="mt-1 block text-sm text-white/75">Start from the top.</span>
+          </a>
+          <a class="card rounded-2xl p-5 hover:bg-white/10" href="music.html">
+            <span class="font-bold">Music</span>
+            <span class="mt-1 block text-sm text-white/75">Listen to Agu Ocha.</span>
+          </a>
+          <a class="card rounded-2xl p-5 hover:bg-white/10" href="book.html">
+            <span class="font-bold">Book</span>
+            <span class="mt-1 block text-sm text-white/75">Events, festivals, residencies.</span>
+          </a>
+          <a class="card rounded-2xl p-5 hover:bg-white/10" href="suno-vibez.html">
+            <span class="font-bold">Submit Song to a Playlist</span>
+            <span class="mt-1 block text-sm text-white/75">Send a track for monthly review.</span>
+          </a>
+        </div>
+
+        <div class="mt-10 flex flex-wrap gap-3">
+          <a href="tel:+17622486242" class="btn-primary rounded-xl px-5 py-3 font-semibold">Call</a>
+          <a href="sms:+17622486242" class="btn rounded-xl px-5 py-3 font-semibold">Text</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared footer include -->
+  <div id="site-footer"></div>
+
+  <script src="assets/site.js" defer></script>
+</body>
+</html>
