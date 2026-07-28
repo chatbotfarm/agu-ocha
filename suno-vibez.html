@@ -3,142 +3,34 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Submit Song to a Playlist | Agu Ocha</title>
-  <meta name="description" content="Submit your song to Agu Ocha for consideration on an independently curated monthly playlist. Free to submit. Placement is never sold.">
-  <link rel="canonical" href="https://aguocha.com/suno-vibez.html">
+  <title>Suno Vibez — submit a track</title>
+  <!-- Backward-compatibility stub. This route shipped as the submission page
+       before the canonical slug moved to /submit (spec §11.3), so it is kept
+       working rather than removed. Canonical points at the real page. -->
+  <meta http-equiv="refresh" content="0; url=submit.html">
+  <meta name="robots" content="noindex, follow">
+  <link rel="canonical" href="https://aguocha.com/submit">
   <link rel="icon" href="favicon.ico">
-  <link rel="apple-touch-icon" href="img/agu-logo.png">
-  <meta property="og:title" content="Submit Song to a Playlist | Agu Ocha">
-  <meta property="og:description" content="Submit your track for monthly playlist consideration.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://aguocha.com/suno-vibez.html">
-  <meta property="og:image" content="https://aguocha.com/img/agu-logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
+    :root{--jet:#0B0B0C;--leopard:#F7F7F8;--brand:#D41414}
     html{font-size:17px}
-    @media(min-width:1024px){html{font-size:18px}}
     body{background:var(--jet);color:var(--leopard);line-height:1.65}
-    .btn{border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--leopard);transition:all .2s ease}
-    .btn:hover{background:var(--leopard);color:var(--jet)}
     .btn-primary{background:var(--brand);color:var(--leopard);border-color:transparent}
     .btn-primary:hover{background:var(--leopard);color:var(--jet)}
-    .card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)}
-    .lead{font-size:1.125rem}
-    .section{padding-top:4rem;padding-bottom:4rem}
-    .container{max-width:72rem}
     :focus-visible{outline:2px solid var(--leopard);outline-offset:3px}
   </style>
 </head>
 <body>
-  <!-- Shared header include -->
-  <div id="site-header"></div>
-
-  <main>
-    <!-- HERO -->
-    <section class="section">
-      <div class="mx-auto max-w-4xl px-4">
-        <h1 class="font-extrabold tracking-tight text-3xl md:text-5xl">Submit Your Song to a Playlist</h1>
-        <p class="lead mt-4 text-white/85">
-          Agu Ocha reviews incoming tracks for an independently curated monthly playlist.
-          Every submission gets listened to and logged, and the strongest tracks are shortlisted
-          for the next monthly update. Submitting is free, and placement is never sold.
-        </p>
-
-        <div class="mt-7 flex flex-wrap gap-3">
-          <a href="#submit" class="btn-primary rounded-xl px-5 py-3 font-semibold">Submit Song</a>
-          <a href="collab.html" class="btn rounded-xl px-5 py-3 font-semibold">Hear the sound first</a>
-        </div>
-
-        <p class="mt-6 text-white/70">
-          <strong class="text-white">Submission does not guarantee playlist placement.</strong>
-          Selections are made at Agu Ocha&rsquo;s discretion.
-        </p>
-
-        <!-- Non-affiliation disclosure, kept above the fold -->
-        <div class="card mt-8 rounded-2xl p-5 text-sm text-white/75">
-          <p>
-            <strong class="text-white">Independent and unaffiliated.</strong>
-            This playlist is curated and operated by Agu Ocha. It is not affiliated with,
-            endorsed by, sponsored by, approved by, or operated by Suno or its owners.
-            All product names, logos, and brands are the property of their respective owners,
-            and any reference is for identification purposes only.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- WHAT WE LISTEN FOR -->
-    <section class="section border-t border-white/10 pt-12">
-      <div class="mx-auto max-w-4xl px-4">
-        <h2 class="font-extrabold text-2xl md:text-3xl">What gets shortlisted</h2>
-        <div class="mt-6 grid gap-5 md:grid-cols-3">
-          <div class="card rounded-2xl p-5">
-            <h3 class="font-bold text-lg">Afrohouse-leaning</h3>
-            <p class="mt-2 text-sm text-white/80">
-              Percussion-forward, vocal-driven, and built to move a floor. Adjacent genres are welcome
-              if the groove fits.
-            </p>
-          </div>
-          <div class="card rounded-2xl p-5">
-            <h3 class="font-bold text-lg">Finished and cleared</h3>
-            <p class="mt-2 text-sm text-white/80">
-              Mixed and mastered, with every sample, interpolation, and feature cleared. Rough demos
-              are hard to place.
-            </p>
-          </div>
-          <div class="card rounded-2xl p-5">
-            <h3 class="font-bold text-lg">Publicly streamable</h3>
-            <p class="mt-2 text-sm text-white/80">
-              Send a public link &mdash; Spotify, SoundCloud, YouTube, or a direct stream. Please do not
-              send file attachments.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SUBMISSION -->
-    <section id="submit" class="section border-t border-white/10 pt-12">
-      <div class="mx-auto max-w-4xl px-4">
-        <h2 class="font-extrabold text-2xl md:text-3xl">Submit Your Song</h2>
-
-        <div class="card mt-5 rounded-2xl p-6">
-          <h3 class="font-bold text-lg">How submissions work right now</h3>
-          <p class="mt-2 text-white/85">
-            Submissions are reviewed on a short scheduled listening call. Pick a time below and bring a
-            public link to your track (Spotify, SoundCloud, YouTube, or a direct stream link). We listen,
-            log it, and it enters the next monthly playlist review.
-            <strong class="text-white">Submission does not guarantee playlist placement.</strong>
-          </p>
-          <p class="mt-3 text-white/85">
-            Prefer not to book a call? Text your track link to
-            <a class="underline underline-offset-4" href="sms:+17622486242">+1 (762) 248-6242</a>
-            and it goes into the same queue.
-          </p>
-        </div>
-
-        <!-- Embed is built by assets/suno-vibez.js from assets/suno-vibez-config.js.
-             Falls back to an accessible unavailable panel when unconfigured. -->
-        <div id="submission-embed" class="mt-8"></div>
-
-        <p class="mt-8 text-sm text-white/70">
-          By submitting, you keep full ownership of your track and grant Agu Ocha a limited,
-          revocable permission to listen to it, evaluate it, and &mdash; only if it is selected &mdash;
-          include it in an Agu Ocha-curated playlist and promote that placement.
-          Read the full <a class="underline underline-offset-4" href="submission-terms.html">submission terms</a>
-          and the <a class="underline underline-offset-4" href="privacy.html">privacy notice</a>.
-        </p>
-      </div>
-    </section>
+  <main class="mx-auto max-w-xl px-4 py-16 text-center">
+    <h1 class="font-extrabold text-2xl">Suno Vibez</h1>
+    <p class="mt-3 text-white/80">Taking you to the submission page&hellip;</p>
+    <p class="mt-6">
+      <a class="btn-primary inline-block rounded-xl px-5 py-3 font-semibold" href="submit.html">
+        Submit your track
+      </a>
+    </p>
   </main>
-
-  <!-- Shared footer include -->
-  <div id="site-footer"></div>
-
-  <!-- Deferred, in order: config, shared site behavior, embed builder. -->
-  <script src="assets/suno-vibez-config.js" defer></script>
-  <script src="assets/site.js" defer></script>
-  <script src="assets/suno-vibez.js" defer></script>
+  <script>location.replace("submit.html");</script>
 </body>
 </html>

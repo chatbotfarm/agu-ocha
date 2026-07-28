@@ -27,6 +27,8 @@
     .lead{font-size:1.125rem}
     .section{padding-top:4rem;padding-bottom:4rem}
     .container{max-width:72rem}
+    /* Reserve the injected header height so the fetch does not shift the page (CLS). */
+    #site-header{min-height:84px}
     :focus-visible{outline:2px solid var(--leopard);outline-offset:3px}
   </style>
 </head>
@@ -47,7 +49,14 @@
           <div>
             <h2 class="font-bold text-xl">What this site collects directly</h2>
             <p class="mt-2 text-white/85">
-              Nothing. The pages are served as static files and store no data about you.
+              Nothing. The pages are served as static files and send no data about you anywhere.
+            </p>
+            <p class="mt-2 text-white/85">
+              Two small exceptions worth naming, neither of which leaves your device. On the
+              submission page, a link you paste is held in your browser&rsquo;s session storage so the
+              form can fill it in for you; it is cleared when you close the tab. That page also
+              records which buttons and fields you used, in memory only, so we can see where the
+              form is confusing. Nothing is transmitted, and nothing is stored between visits.
             </p>
           </div>
 
@@ -106,7 +115,7 @@
         </div>
 
         <div class="mt-12 flex flex-wrap gap-3">
-          <a href="suno-vibez.html" class="btn-primary rounded-xl px-5 py-3 font-semibold">Submit Song</a>
+          <a href="submit.html" class="btn-primary rounded-xl px-5 py-3 font-semibold">Submit Song</a>
           <a href="submission-terms.html" class="btn rounded-xl px-5 py-3 font-semibold">Submission terms</a>
         </div>
       </div>

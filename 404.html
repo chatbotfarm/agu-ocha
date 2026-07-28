@@ -27,6 +27,8 @@
     .lead{font-size:1.125rem}
     .section{padding-top:4rem;padding-bottom:4rem}
     .container{max-width:72rem}
+    /* Reserve the injected header height so the fetch does not shift the page (CLS). */
+    #site-header{min-height:84px}
     :focus-visible{outline:2px solid var(--leopard);outline-offset:3px}
   </style>
 </head>
@@ -56,7 +58,7 @@
             <span class="font-bold">Book</span>
             <span class="mt-1 block text-sm text-white/75">Events, festivals, residencies.</span>
           </a>
-          <a class="card rounded-2xl p-5 hover:bg-white/10" href="suno-vibez.html">
+          <a class="card rounded-2xl p-5 hover:bg-white/10" href="submit.html">
             <span class="font-bold">Submit Song to a Playlist</span>
             <span class="mt-1 block text-sm text-white/75">Send a track for monthly review.</span>
           </a>
