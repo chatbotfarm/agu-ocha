@@ -13,15 +13,18 @@ This repository contains static, Tailwind-powered HTML pages for Agu Ocha’s of
 ├── tour.html
 ├── store.html
 ├── private-corporate.html · festivals-tours.html · residencies.html · brand-activations.html
-├── suno-vibez.html            # "Submit Song to a Playlist" — canonical route
-├── suno-vibez/index.html      # redirect stub → ../suno-vibez.html
+├── submit.html                # Suno Vibez landing page — canonical route /submit
+├── suno-vibez.html            # redirect stub → submit.html (legacy route)
+├── suno-vibez/index.html      # redirect stub → ../submit.html (legacy route)
 ├── submission-terms.html · privacy.html · thank-you.html
 ├── 404.html
 ├── header.html · footer.html  # shared fragments, fetched at runtime
 ├── assets/
 │   ├── site.js                # shared loader + nav behavior (all pages)
-│   ├── suno-vibez-config.js   # GoHighLevel embed URL
-│   └── suno-vibez.js          # builds/validates the submission embed
+│   ├── suno-vibez-config.js   # every external URL and toggle /submit needs
+│   ├── analytics.js           # event surface, no vendor, no network, no cookies
+│   ├── submit.js              # /submit behavior: paste, lanes, embeds, accordion
+│   └── thank-you.js           # confirmation page: reply-by date, follow, share
 ├── scripts/check-links.mjs
 ├── img/agu-logo.png
 ├── favicon.ico
@@ -48,29 +51,57 @@ Two things follow from this and are easy to get wrong:
 
 The navigation collapses to the mobile menu below `lg` (1024px). It is not `md`: at 768px the root font size is 17px, which leaves only ~734px of usable width — not enough for the full nav plus the Submit Song CTA.
 
-## Song submission funnel
+## Suno Vibez — the submission funnel
 
-The canonical route is **`/suno-vibez.html`**. `/suno-vibez/` (and `/suno-vibez`, which GitHub Pages redirects to it) is a stub that forwards there, so older links keep working and there is only one canonical URL.
+Built to the Suno Vibez landing page specification. The canonical route is **`/submit`** (spec §11.3), served by `submit.html`; GitHub Pages resolves the extension-less path. Internal links point at `submit.html` so they resolve under any host, including a local `python -m http.server`, and the canonical tag consolidates both onto `/submit`.
 
-The `suno-vibez` / `SUNO_VIBEZ_CONFIG` names are **internal identifiers only**, kept for URL and integration stability. No visitor-facing text uses them — the user-facing wording is "Submit Song" and "Submit Song to a Playlist" throughout.
+The earlier routes still work and are kept deliberately: `/suno-vibez.html`, `/suno-vibez/`, and `/suno-vibez` are `noindex, follow` stubs that forward to `submit.html`.
 
-`suno-vibez.html` loads three deferred scripts, and the order matters:
+`suno-vibez-config.js` / `SUNO_VIBEZ_CONFIG` remain **internal identifiers**, unchanged for integration stability. "Suno Vibez" *is* the visible brand on `/submit`; what never appears is a Suno logo, wordmark, brand colour, or any claim of partnership. The sitewide footer carries the non-affiliation line.
+
+### Script order
+
+`submit.html` loads four deferred scripts, and the order is load-bearing:
 
 ```html
 <script src="assets/suno-vibez-config.js" defer></script>
+<script src="assets/analytics.js" defer></script>
 <script src="assets/site.js" defer></script>
-<script src="assets/suno-vibez.js" defer></script>
+<script src="assets/submit.js" defer></script>
 ```
 
-`defer` preserves document order and runs after parsing, so the config always exists by the time the builder reads it. Do **not** inline the builder: an inline script runs during parse, before the deferred config is defined, and would always fall through to the "unavailable" state.
+`defer` preserves document order and runs after parsing, so the config always exists by the time anything reads it. Do **not** inline any of them: an inline script runs during parse, before the deferred config is defined, and would always fall through to the fallback state.
 
-`assets/suno-vibez.js` validates the configured URL (must be `https:` on `api.leadconnectorhq.com` or `link.msgsndr.com`) and builds the iframe with `createElement`/`setAttribute`. Config values are never passed through `innerHTML`. If the URL is missing or fails validation, the page renders an accessible "temporarily unavailable" panel with Call/Text fallbacks instead of a broken frame.
+### How the page behaves
+
+- **Two-stage reveal (§7.2).** The hero holds one field. What you paste is written to `sessionStorage` and forwarded to the GHL form as the `track_link` query parameter, so nobody retypes it.
+- **Lane routing (§7.6).** The pasted URL selects Lane A (Suno, any tier) or Lane B (released track) and changes the helper copy only. It **never blocks submission** — an unrecognised link shows a nudge and still goes through. A regex that rejects a valid-but-unanticipated URL silently destroys submissions.
+- **Lazy third parties (§6.2, §10.2).** The playlist renders as a lightweight facade and only loads the Spotify iframe on click. The GHL form renders when it comes within 400px of the viewport. Neither competes with LCP.
+- **Graceful empty states.** Every config-driven block validates its URL (`https:` + exact host allowlist) and builds DOM with `createElement`/`setAttribute`. No config value ever passes through `innerHTML`. Missing curator, missing metrics, missing community link, and missing playlist are each *omitted* rather than shown half-filled — per §6.5.3, "omit rather than shrink."
+
+### Events (§13.3)
+
+`assets/analytics.js` is **not** an analytics vendor. It makes no network request, sets no cookie, and loads no third-party script — it queues events on `window.svEvents` and dispatches `sv:track` on `document`. Wiring the events now means the field-level drop-off data exists from day one; retrofitting always loses it.
+
+Emitted: `hero_link_paste`, `form_start`, `field_complete`, `form_abandon` (with last field touched), `playlist_play`, `faq_open`.
+
+To start collecting, attach one listener — **and update `privacy.html` in the same change**:
+
+```js
+document.addEventListener("sv:track", (e) => { /* forward e.detail */ });
+```
+
+Known limit: the GHL form is a cross-origin iframe, so per-field events inside it are not observable from the parent. `field_complete` currently covers the hero link field only. Real per-field data requires either GHL's own form analytics or a natively-hosted form.
 
 ### Operator TODO
 
-1. **Point `ghlEmbedUrl` at a real submission form.** It currently reuses the *booking calendar* that `collab.html` uses (`.../widget/booking/4Zwyq5uTC8G7JdZW4ltW`). That widget is a date/time slot picker with no track-link field, and because the calendar is shared, playlist submissions and collab inquiries are indistinguishable in the CRM. Replace it with a dedicated GoHighLevel form (`.../widget/form/<id>`) that has a required "track link" field, or at minimum a separate calendar. It is a one-line change in `assets/suno-vibez-config.js`.
-2. **Set the post-submit redirect** in the GoHighLevel calendar/form settings to `https://aguocha.com/thank-you.html`. Until that is done, `thank-you.html` is unreachable.
-3. **Have `submission-terms.html` reviewed by counsel.** It is a careful draft, not vetted legal advice.
+1. **Set `ghlFormUrl`.** It is empty, so the form area shows a Text/Email fallback instead. Paste the GoHighLevel **form** URL (`.../widget/form/<id>`). The form must write to the exact field keys in §12.1 — `track_link`, `creator_name`, `email`, `genre`, `submission_notes`, `rights_confirmed` — because renaming them later means re-keying every downstream workflow.
+2. **Set the post-submit redirect** in GoHighLevel to `https://aguocha.com/thank-you.html`, or the confirmation page is unreachable. Append `?track=<title>` if you want the page to name the track back.
+3. **Fill in `curator`.** Real name, photograph, and profile links (§6.5.1). While `name` is empty the whole "Who listens" block is removed — a half-filled curator block is worse than none, and an anonymous curator is indistinguishable from a fake-playlist operator.
+4. **Add `lanes.a.playlistUrl`** once the Suno-hosted playlist exists, and confirm `lanes.b` points at the right Spotify playlist.
+5. **Flip `metrics.show` to `true`** after the first monthly cycle, once the numbers are real.
+6. **Add a 1200×630 OG image** and point `og:image` on `submit.html` at it.
+7. **Have `submission-terms.html` reviewed by counsel.** A careful draft, not vetted legal advice.
 
 Never put API keys, tokens, or private webhook URLs in `assets/` — those files are public.
 
