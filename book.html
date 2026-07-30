@@ -13,6 +13,7 @@
   <meta property="og:url" content="https://aguocha.com/book.html">
   <meta property="og:image" content="https://aguocha.com/img/agu-logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/site.css">
   <style>
     :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
     html{font-size:17px}
@@ -39,102 +40,177 @@
   <div id="site-header"></div>
 
   <main>
-  <!-- YOUR GRID, first in body -->
-  <section class="border-b border-white/5">
-    <div class="mx-auto max-w-7xl px-4 py-16">
-      <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-
-        <!-- Private & Corporate -->
-        <article class="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-jet p-6">
-          <div>
-            <h2 class="text-lg font-semibold">Private &amp; Corporate</h2>
-            <!-- 3x2 Image -->
-            <div class="mt-3">
-              <img src="img/private-corporate.png" alt="Private and corporate event setup"
-                   class="w-full rounded-xl object-cover" style="aspect-ratio:3/2;" loading="lazy">
-            </div>
-            <p class="mt-2 text-sm text-steel">
-              Elevate summits, galas, and destination weekends with custom score design and lighting cues.
-            </p>
-          </div>
-          <a href="private-corporate.html"
-             class="btn-primary mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Start Booking</a>
-        </article>
-
-        <!-- Festivals & Tours -->
-        <article class="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-jet p-6">
-          <div>
-            <h2 class="text-lg font-semibold">Festivals &amp; Tours</h2>
-            <!-- 3x2 Image -->
-            <div class="mt-3">
-              <img src="img/festivals-tours.png" alt="Festival stage performance"
-                   class="w-full rounded-xl object-cover" style="aspect-ratio:3/2;" loading="lazy">
-            </div>
-            <p class="mt-2 text-sm text-steel">
-              Modular rigs for global routing, late-night slots, and co-headline runs.
-            </p>
-          </div>
-          <a href="festivals-tours.html"
-             class="btn mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Start Booking</a>
-        </article>
-
-        <!-- Residencies -->
-        <article class="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-jet p-6">
-          <div>
-            <h2 class="text-lg font-semibold">Residencies</h2>
-            <!-- 3x2 Image -->
-            <div class="mt-3">
-              <img src="img/residencies.png" alt="Residency stage lighting"
-                   class="w-full rounded-xl object-cover" style="aspect-ratio:3/2;" loading="lazy">
-            </div>
-            <p class="mt-2 text-sm text-steel">
-              Seasonal takeovers with evolving setlists, lighting packages, and guest collaborators.
-            </p>
-          </div>
-          <a href="residencies.html"
-             class="btn mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Start Booking</a>
-        </article>
-
-        <!-- Brand Activations -->
-        <article class="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-jet p-6">
-          <div>
-            <h2 class="text-lg font-semibold">Brand Activations</h2>
-            <!-- 3x2 Image -->
-            <div class="mt-3">
-              <img src="img/brand-activation.png" alt="Brand activation visual show"
-                   class="w-full rounded-xl object-cover" style="aspect-ratio:3/2;" loading="lazy">
-            </div>
-            <p class="mt-2 text-sm text-steel">
-              Launch moments, runway soundtracks, and immersive retail scoring.
-            </p>
-          </div>
-          <a href="brand-activations.html"
-             class="btn mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Start Booking</a>
-        </article>
-
+    <!-- ============================================= 1. HERO (Stage B, B1) -->
+    <section class="section pb-8">
+      <div class="mx-auto container px-4">
+        <h1 class="font-extrabold tracking-tight text-3xl md:text-4xl">Book Agu Ocha</h1>
+        <!-- EDITORIAL REVIEW REQUIRED: provisional lead. Sentence retained
+             verbatim from the previous book.html copy block. -->
+        <p class="lead mt-4 max-w-4xl text-white/90">
+          Agu Ocha engineers immersive sets that travel from underground rooms to headline stages.
+          Precision sound design, cinematic visuals, and bilingual storytelling keep every audience in motion.
+        </p>
+        <p class="mt-4 max-w-3xl text-white/75">
+          Choose the category that matches your event. Each one opens its own booking calendar.
+        </p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Copy line + one YouTube embed -->
-  <section class="border-b border-white/5">
-    <div class="mx-auto max-w-7xl px-4 py-16">
-      <p class="lead max-w-4xl text-white/90">
-        Agu Ocha engineers immersive sets that travel from underground rooms to headline stages.
-        Precision sound design, cinematic visuals, and bilingual storytelling keep every audience in motion.
-      </p>
-      <div class="card mt-8 rounded-2xl p-3">
-        <!-- Swap VIDEO_ID_1 with your actual video id -->
-        <iframe class="h-64 w-full rounded-xl border border-white/10"
-                style="aspect-ratio:16/9; height:auto;"
-                src="https://www.youtube.com/embed/C_ynqwU8_74"
-                title="Agu Ocha — Booking highlight"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
+    <!-- =================================== 2. CATEGORY CARDS (Stage B, B1) -->
+    <section class="border-y border-white/5">
+      <div class="mx-auto max-w-7xl px-4 py-14">
+        <h2 class="font-extrabold text-2xl md:text-3xl">Booking categories</h2>
+
+        <!-- EDITORIAL REVIEW REQUIRED: each description below is the existing
+             card text, carried over unchanged. Final wording is a later
+             page-by-page decision. -->
+        <div class="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+
+          <!-- Private & Corporate -->
+          <article class="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-jet p-6">
+            <div>
+              <h3 class="text-lg font-semibold">Private &amp; Corporate</h3>
+              <div class="mt-3">
+                <img src="img/private-corporate.png" alt="Private and corporate event setup"
+                     class="w-full rounded-xl object-cover" style="aspect-ratio:3/2;" loading="lazy">
+              </div>
+              <p class="mt-3 text-sm text-steel">
+                Elevate summits, galas, and destination weekends with custom score design and lighting cues.
+              </p>
+            </div>
+            <a href="private-corporate.html"
+               class="btn-primary mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">View availability</a>
+          </article>
+
+          <!-- Festivals & Tours -->
+          <article class="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-jet p-6">
+            <div>
+              <h3 class="text-lg font-semibold">Festivals &amp; Tours</h3>
+              <div class="mt-3">
+                <img src="img/festivals-tours.png" alt="Festival stage performance"
+                     class="w-full rounded-xl object-cover" style="aspect-ratio:3/2;" loading="lazy">
+              </div>
+              <p class="mt-3 text-sm text-steel">
+                Modular rigs for global routing, late-night slots, and co-headline runs.
+              </p>
+            </div>
+            <a href="festivals-tours.html"
+               class="btn-primary mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">View availability</a>
+          </article>
+
+          <!-- Residencies -->
+          <article class="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-jet p-6">
+            <div>
+              <h3 class="text-lg font-semibold">Residencies</h3>
+              <div class="mt-3">
+                <img src="img/residencies.png" alt="Residency stage lighting"
+                     class="w-full rounded-xl object-cover" style="aspect-ratio:3/2;" loading="lazy">
+              </div>
+              <p class="mt-3 text-sm text-steel">
+                Seasonal takeovers with evolving setlists, lighting packages, and guest collaborators.
+              </p>
+            </div>
+            <a href="residencies.html"
+               class="btn-primary mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">View availability</a>
+          </article>
+
+          <!-- Brand Activations -->
+          <article class="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-jet p-6">
+            <div>
+              <h3 class="text-lg font-semibold">Brand Activations</h3>
+              <div class="mt-3">
+                <img src="img/brand-activation.png" alt="Brand activation visual show"
+                     class="w-full rounded-xl object-cover" style="aspect-ratio:3/2;" loading="lazy">
+              </div>
+              <p class="mt-3 text-sm text-steel">
+                Launch moments, runway soundtracks, and immersive retail scoring.
+              </p>
+            </div>
+            <a href="brand-activations.html"
+               class="btn-primary mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">View availability</a>
+          </article>
+
+          <!-- Collaborations. No category image exists in img/ for this one. -->
+          <!-- EDITORIAL REVIEW REQUIRED: description derived from the existing
+               collab.html copy. A matching 3:2 image would make this card
+               consistent with the other four. -->
+          <article class="flex h-full flex-col justify-between rounded-2xl border border-white/10 bg-jet p-6">
+            <div>
+              <h3 class="text-lg font-semibold">Collaborations</h3>
+              <p class="mt-3 text-sm text-steel">
+                Collaboration opportunities for artists and brands. Book a virtual meeting to talk
+                through an idea before committing to a date.
+              </p>
+            </div>
+            <a href="collab.html"
+               class="btn-primary mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">View availability</a>
+          </article>
+
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- ================================= 3. BOOKING PROCESS (Stage B, B1) -->
+    <section class="section">
+      <div class="mx-auto container px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">How booking works</h2>
+        <!-- EDITORIAL REVIEW REQUIRED: describes only the mechanics of the
+             existing calendars. Deliberately states no response time, no
+             availability window, and no pricing. -->
+        <ol class="mt-6 grid gap-5 md:grid-cols-3">
+          <li class="card rounded-2xl p-5">
+            <span class="font-mono text-sm text-white/50">Step 1</span>
+            <h3 class="mt-1 font-bold">Choose a category</h3>
+            <p class="mt-2 text-sm text-white/80">Pick the option above that matches your event.</p>
+          </li>
+          <li class="card rounded-2xl p-5">
+            <span class="font-mono text-sm text-white/50">Step 2</span>
+            <h3 class="mt-1 font-bold">Open its calendar</h3>
+            <p class="mt-2 text-sm text-white/80">Each category page carries its own booking calendar.</p>
+          </li>
+          <li class="card rounded-2xl p-5">
+            <span class="font-mono text-sm text-white/50">Step 3</span>
+            <h3 class="mt-1 font-bold">Request a time</h3>
+            <p class="mt-2 text-sm text-white/80">Submit your details through the calendar to start the conversation.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Existing booking highlight video, carried over from the previous page. -->
+    <section class="section border-t border-white/10 pt-0">
+      <div class="mx-auto container px-4">
+        <div class="card mt-4 rounded-2xl p-3">
+          <iframe class="h-64 w-full rounded-xl border border-white/10"
+                  style="aspect-ratio:16/9; height:auto;"
+                  src="https://www.youtube.com/embed/C_ynqwU8_74"
+                  title="Agu Ocha — Booking highlight"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================= 4. CALL / TEXT FALLBACK (B1, B4) -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <div class="card rounded-2xl p-6">
+          <h2 class="font-bold text-xl">Prefer to talk first?</h2>
+          <p class="mt-2 text-white/80">
+            If a calendar does not load, or you would rather not use one, reach out directly.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href="tel:+17622486242" class="btn-primary rounded-xl px-5 py-3 font-semibold">Call</a>
+            <a href="sms:+17622486242" class="btn rounded-xl px-5 py-3 font-semibold">Text</a>
+          </div>
+          <p class="mt-4 text-sm text-white/60">
+            Booking requests are handled through GoHighLevel. See the
+            <a class="underline underline-offset-4" href="privacy.html">Privacy Notice</a>.
+          </p>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Shared footer include -->
