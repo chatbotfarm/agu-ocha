@@ -958,3 +958,24 @@ a security vulnerability, a UX defect, or a bug, and no remediation is proposed.
 No existing repository file was created, edited, renamed, or deleted to produce
 it. No form was submitted, no calendar was opened, no GHL asset was tested, no
 dependency was installed, and no navigation, copy, or embed was changed.
+
+---
+
+## Implementation note — 2026-07-30
+
+Added on branch `rebuild/high-conversion-site`. This note is **additive**: no
+finding above has been altered. The findings remain accurate as of the date they
+were written.
+
+Two externally broken destinations recorded above have since been **retired from
+the public site**:
+
+- `https://tour.aguocha.com` — removed from `tour.html`. The page was rebuilt as
+  an on-site Tour & Appearances signup. The subdomain itself still does not
+  resolve; DNS remains an operator action.
+- `https://app.aguocha.com/media-request-form` — removed from `media.html`.
+  Media requests are now handled in-page at `media.html#media-request`.
+
+Both destinations are intentionally still described above as they were found, so
+the audit trail stays intact. Current status is tracked in
+`docs/GHL_OPERATOR_ACTIONS.md` and `docs/SITE_REBUILD_AUDIT.md`.

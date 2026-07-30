@@ -797,3 +797,24 @@ No production file was modified. No form or booking was submitted.
 *End of Stage E validation. No production website file was modified. No form or
 booking was submitted. No deployment occurred. Awaiting page-by-page editorial
 review.*
+
+---
+
+## Implementation note — 2026-07-30
+
+Added on branch `rebuild/high-conversion-site`. This note is **additive**: no
+finding above has been altered. The findings remain accurate as of the date they
+were written.
+
+Two externally broken destinations recorded above have since been **retired from
+the public site**:
+
+- `https://tour.aguocha.com` — removed from `tour.html`. The page was rebuilt as
+  an on-site Tour & Appearances signup. The subdomain itself still does not
+  resolve; DNS remains an operator action.
+- `https://app.aguocha.com/media-request-form` — removed from `media.html`.
+  Media requests are now handled in-page at `media.html#media-request`.
+
+Both destinations are intentionally still described above as they were found, so
+the audit trail stays intact. Current status is tracked in
+`docs/GHL_OPERATOR_ACTIONS.md` and `docs/SITE_REBUILD_AUDIT.md`.
