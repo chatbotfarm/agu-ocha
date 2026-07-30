@@ -4,43 +4,42 @@ Last updated: 2026-07-30
 Branch: `rebuild/high-conversion-site`
 
 This file tracks GoHighLevel work that **cannot be done from this repository**.
-Nothing here blocks the site: every unconfigured embed already renders a working
-fallback with real contact routes. Each item below turns a fallback into a form.
+
+## Form configuration status
+
+| Funnel | Form ID | Form URL | Repository status |
+| --- | --- | --- | --- |
+| Tour Updates | `VH5umJecHaUdTesROA21` | `https://api.leadconnectorhq.com/widget/form/VH5umJecHaUdTesROA21` | **Configured** |
+| Media Request | `jqVlv3qxUCz06vUEHVMk` | `https://api.leadconnectorhq.com/widget/form/jqVlv3qxUCz06vUEHVMk` | **Configured** |
+
+Both values live in `assets/site-config.js` and were supplied by the operator on
+2026-07-30.
+
+> **"Configured" means the repository points at the right URL and the embed
+> renders.** It is *not* confirmation that the form's fields, consent text,
+> workflows, notifications, tags or post-submit redirect are correct. None of
+> that is visible from this repository and none of it has been tested. The
+> recommended field sets below remain **operator confirmations**.
 
 ---
 
-## 1. Tour Updates form — **NOT CONFIGURED**
+## 1. Tour Updates form — **CONFIGURED**
 
 | | |
 | --- | --- |
-| Status | **Missing — operator action required** |
-| Where it goes | `assets/site-config.js` → `tourUpdatesFormUrl` |
+| Repository status | **Configured** |
+| Form ID | `VH5umJecHaUdTesROA21` |
+| URL | `https://api.leadconnectorhq.com/widget/form/VH5umJecHaUdTesROA21` |
+| Set in | `assets/site-config.js` → `tourUpdatesFormUrl` |
 | Renders on | `tour.html`, section `#tour-updates` |
-| Current behaviour | Loading line is removed; the static "Prefer to reach out directly?" panel (Text / Call / Privacy Notice) is the working route |
+| Iframe title | `DJ Agu Ocha tour updates signup form` |
+| If it ever fails | Loading line is removed and the static "Prefer to reach out directly?" panel (Text / Call / Privacy Notice) remains the working route |
 
-### What to paste
+`assets/forms.js` validates the URL on every page load — https, an allowlisted
+LeadConnector host, a `/widget/form/` path, a non-empty form id. A
+`/widget/booking/` URL is a **calendar** and is rejected on purpose.
 
-The full LeadConnector form URL, not just the ID:
-
-```
-https://api.leadconnectorhq.com/widget/form/<FORM_ID>
-```
-
-Set it in `assets/site-config.js`:
-
-```js
-tourUpdatesFormUrl: "https://api.leadconnectorhq.com/widget/form/XXXXXXXXXXXXXXXXXXXX",
-```
-
-No other file needs to change. `assets/forms.js` validates the URL (https, an
-allowlisted LeadConnector host, a `/widget/form/` path, a non-empty form id) and
-renders the embed. If the URL fails validation the fallback simply stays up — no
-error is shown to visitors.
-
-> A `/widget/booking/` URL is a **calendar**, not a form, and is rejected on
-> purpose. Do not paste a calendar URL here.
-
-### Recommended fields (build these in GoHighLevel)
+### Recommended fields — **still requires operator confirmation in GoHighLevel**
 
 | Field | Required |
 | --- | --- |
@@ -57,20 +56,19 @@ Recommended tag: `Agu Ocha - Tour Updates`
 
 ---
 
-## 2. Media Request form — **NOT CONFIGURED**
+## 2. Media Request form — **CONFIGURED**
 
 | | |
 | --- | --- |
-| Status | **Missing — operator action required** |
-| Where it goes | `assets/site-config.js` → `mediaRequestFormUrl` |
+| Repository status | **Configured** |
+| Form ID | `jqVlv3qxUCz06vUEHVMk` |
+| URL | `https://api.leadconnectorhq.com/widget/form/jqVlv3qxUCz06vUEHVMk` |
+| Set in | `assets/site-config.js` → `mediaRequestFormUrl` |
 | Renders on | `media.html`, section `#media-request` |
-| Current behaviour | Loading line is removed; the static "Send a request directly" panel (Text a Media Request / Call / Privacy Notice) is the working route |
+| Iframe title | `DJ Agu Ocha media and press request form` |
+| If it ever fails | Loading line is removed and the static "Send a request directly" panel (Text a Media Request / Call / Privacy Notice) remains the working route |
 
-```js
-mediaRequestFormUrl: "https://api.leadconnectorhq.com/widget/form/XXXXXXXXXXXXXXXXXXXX",
-```
-
-### Recommended fields
+### Recommended fields — **still requires operator confirmation in GoHighLevel**
 
 **Required**
 

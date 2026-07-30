@@ -22,22 +22,31 @@ note has been appended to each where a previously reported defect is now closed.
 
 ---
 
-## 2. Missing form IDs — treated as fallback states, not blockers
+## 2. Form IDs — built as fallback states, now configured
 
-Neither ID was invented and no unrelated GHL asset was reused.
+The rebuild was built and validated with both slots empty, so a missing
+third-party form could never block it. Neither ID was invented and no unrelated
+GHL asset was reused.
 
-| Slot | Config key | State | Visitor sees |
-| --- | --- | --- | --- |
-| Tour Updates | `tourUpdatesFormUrl` | Empty | Static Text / Call panel + Privacy Notice |
-| Media Request | `mediaRequestFormUrl` | Empty | Static Text a Media Request / Call panel + Privacy Notice |
+**Updated 2026-07-30 — both URLs supplied by the operator and configured:**
 
-The empty state is deliberate and complete: no iframe is created, no technical
-error appears, no placeholder text is exposed, and every alternative action
-stays live. `assets/forms.js` removes the loading line and leaves the static
-panel as the working route.
+| Slot | Config key | Form ID | State | Visitor sees |
+| --- | --- | --- | --- | --- |
+| Tour Updates | `tourUpdatesFormUrl` | `VH5umJecHaUdTesROA21` | **Configured** | Embedded form in `#tour-updates` |
+| Media Request | `mediaRequestFormUrl` | `jqVlv3qxUCz06vUEHVMk` | **Configured** | Embedded form in `#media-request` |
 
-Populating either value in `assets/site-config.js` renders the form **with no
-structural page change**.
+Populating the values required **no structural page change** — only
+`assets/site-config.js`, exactly as the architecture intended.
+
+The empty state remains the designed fallback and is still exercised whenever a
+value is blank or fails validation: no iframe is created, no technical error
+appears, no placeholder text is exposed, and every alternative action stays
+live. `assets/forms.js` removes the loading line and leaves the static panel as
+the working route.
+
+Configuring a URL is **not** confirmation that the form's fields, consent text,
+workflows, notifications or redirect are correct in GoHighLevel — see
+`docs/GHL_OPERATOR_ACTIONS.md`.
 
 ---
 
@@ -115,7 +124,7 @@ separate collaboration-chat calendar, and its existing function is preserved.
 
 | File | Purpose |
 | --- | --- |
-| `assets/site-config.js` | Public config; the two empty form URLs live here |
+| `assets/site-config.js` | Public config; both GHL form URLs live here |
 | `assets/forms.js` | Validated GHL **form** embedder for Tour and Media |
 | `assets/booking.js` | Booking category router; injects one calendar |
 | `docs/GHL_OPERATOR_ACTIONS.md` | Outstanding GHL work |
@@ -161,8 +170,6 @@ request is made in any state.
 
 ## 8. Still outstanding
 
-1. Tour Updates GHL form ID — operator
-2. Media Request GHL form ID — operator
-3. `tour.aguocha.com` DNS or GHL redirect — operator (site no longer depends on it)
+1. ~~Tour Updates GHL form ID~~ — **supplied and configured 2026-07-30** (`VH5umJecHaUdTesROA21`); GHL-side fields, consent and workflow still need operator confirmation\n2. ~~Media Request GHL form ID~~ — **supplied and configured 2026-07-30** (`jqVlv3qxUCz06vUEHVMk`); same GHL-side confirmation outstanding\n3. `tour.aguocha.com` DNS or GHL redirect — operator (site no longer depends on it)
 4. Submit Music post-submit redirect to `thank-you.html` — operator
 5. Items carried forward in `docs/GHL_OPERATOR_ACTIONS.md` §5
