@@ -3,23 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- EDITORIAL REVIEW REQUIRED: provisional metadata. Final positioning copy
+       is a later page-by-page decision. -->
   <title>Agu Ocha — Official Site</title>
   <meta name="description" content="DJ Agu Ocha — Afrohouse. Bookings, music, media, and collaborations.">
+  <!-- Canonical matches sitemap.xml, which lists the homepage as the bare root. -->
+  <link rel="canonical" href="https://aguocha.com/">
   <link rel="icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="img/agu-logo.png">
   <meta property="og:title" content="Agu Ocha — Official Site">
   <meta property="og:description" content="DJ Agu Ocha — Afrohouse. Bookings, music, media, and collaborations.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://aguocha.com/index.html">
-  <meta property="og:image" content="https://aguocha.com/img/agu-mask-portrait.jpg">
+  <meta property="og:url" content="https://aguocha.com/">
+  <meta property="og:image" content="https://aguocha.com/img/agu-logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/site.css">
   <style>
     :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
     html{font-size:17px}
     @media(min-width:1024px){html{font-size:18px}}
     body{background:var(--jet);color:var(--leopard);line-height:1.65}
     .btn{border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--leopard);transition:all .2s ease}
-    .btn:hover{background:var(--leopard);color:var(--jet)} 
+    .btn:hover{background:var(--leopard);color:var(--jet)}
     .btn-primary{background:var(--brand);color:var(--leopard);border-color:transparent}
     .btn-primary:hover{background:var(--leopard);color:var(--jet)}
     .card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)}
@@ -35,18 +40,22 @@
   <div id="site-header"></div>
 
   <main>
-    <section class="section">
+    <!-- ==================================================== 1. HERO (D3) -->
+    <section class="section pb-10">
       <div class="mx-auto container px-4">
         <div class="grid gap-10 md:grid-cols-2 md:items-center">
           <div>
             <h1 class="font-extrabold tracking-tight text-4xl md:text-5xl">Agu Ocha</h1>
+            <!-- EDITORIAL REVIEW REQUIRED: existing lead, retained verbatim. -->
             <p class="lead mt-4 text-white/80">Afrohouse DJ and producer. New England based — performing worldwide.</p>
             <div class="mt-6 flex flex-wrap gap-3">
-              <a href="book.html" class="btn-primary rounded-xl px-4 py-2 font-semibold">Book</a>
-              <a href="music.html" class="btn rounded-xl px-4 py-2 font-semibold">Listen</a>
-              <a href="media.html" class="btn rounded-xl px-4 py-2 font-semibold">Watch</a>
+              <a href="music.html" class="btn-primary rounded-xl px-5 py-3 font-semibold">Listen</a>
+              <a href="book.html" class="btn rounded-xl px-5 py-3 font-semibold">Book</a>
+              <a href="submit.html" class="btn rounded-xl px-5 py-3 font-semibold">Submit Music</a>
             </div>
           </div>
+
+          <!-- ============================== 2. FEATURED VIDEO (D3) -->
           <div class="card rounded-2xl p-3">
             <iframe class="h-64 w-full rounded-xl border border-white/10" src="https://www.youtube.com/embed/rCBM8kuzI3U" title="Agu Ocha live video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
@@ -54,11 +63,142 @@
       </div>
     </section>
 
+    <!-- ==================================== 3. THREE ACTION CARDS (D3) --
+         The site's three primary visitor journeys, in priority order. -->
     <section class="section border-t border-white/10">
       <div class="mx-auto container px-4">
-        <h2 class="font-extrabold text-3xl md:text-4xl">Upcoming Shows.</h2>
-        <p class="mt-4 text-white/90">Check the booking calendar — DJ Agu Ocha can currently be booked only with <strong>1-month notice</strong>.</p>
-        <a href="book.html" class="mt-6 inline-block btn rounded-xl px-4 py-2 font-semibold">Open Booking Calendar</a>
+        <h2 class="font-extrabold text-2xl md:text-3xl">Start here</h2>
+        <div class="mt-8 grid gap-6 md:grid-cols-3">
+
+          <article class="card flex h-full flex-col justify-between rounded-2xl p-6">
+            <div>
+              <h3 class="font-bold text-xl">Listen</h3>
+              <p class="mt-2 text-white/80">
+                The catalogue, official videos, and where to follow.
+              </p>
+            </div>
+            <a href="music.html" class="btn-primary mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Open Music</a>
+          </article>
+
+          <article class="card flex h-full flex-col justify-between rounded-2xl p-6">
+            <div>
+              <h3 class="font-bold text-xl">Book</h3>
+              <p class="mt-2 text-white/80">
+                Private and corporate events, festivals and tours, residencies,
+                brand activations, and collaborations.
+              </p>
+            </div>
+            <a href="book.html" class="btn-primary mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Open Booking</a>
+          </article>
+
+          <article class="card flex h-full flex-col justify-between rounded-2xl p-6">
+            <div>
+              <h3 class="font-bold text-xl">Submit Music</h3>
+              <p class="mt-2 text-white/80">
+                Send a track for playlist consideration. Free, and every
+                submission gets an answer.
+              </p>
+            </div>
+            <a href="submit.html" class="btn-primary mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Open Submit Music</a>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================= 4. BOOKING CATEGORY OVERVIEW (D3) --
+         Links only. No calendar is duplicated here — each category page
+         carries its own. -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">Booking categories</h2>
+        <p class="mt-3 max-w-3xl text-white/80">
+          Each category opens its own booking calendar.
+        </p>
+        <!-- EDITORIAL REVIEW REQUIRED: labels only; descriptions live on
+             book.html and the category pages. -->
+        <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <a class="card rounded-xl p-4 hover:bg-white/10" href="private-corporate.html">Private &amp; Corporate</a>
+          <a class="card rounded-xl p-4 hover:bg-white/10" href="festivals-tours.html">Festivals &amp; Tours</a>
+          <a class="card rounded-xl p-4 hover:bg-white/10" href="residencies.html">Residencies</a>
+          <a class="card rounded-xl p-4 hover:bg-white/10" href="brand-activations.html">Brand Activations</a>
+          <a class="card rounded-xl p-4 hover:bg-white/10" href="collab.html">Collaborations</a>
+          <a class="card rounded-xl p-4 hover:bg-white/10" href="book.html">All categories</a>
+        </div>
+        <!-- EDITORIAL REVIEW REQUIRED: existing booking-notice sentence,
+             retained verbatim from the previous homepage. -->
+        <p class="mt-6 text-white/90">
+          DJ Agu Ocha can currently be booked only with <strong>1-month notice</strong>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ====================== 5. CURRENT SUBMIT MUSIC OPPORTUNITY (D3) --
+         Summary only. The form itself lives on submit.html and is not
+         duplicated here. -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">Current playlist opportunity</h2>
+        <!-- EDITORIAL REVIEW REQUIRED: campaign summary. Suno Vibez is the
+             currently featured opportunity; full detail is on submit.html. -->
+        <div class="card mt-6 rounded-2xl p-6 md:p-8">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-white/50">Open now</p>
+          <h3 class="mt-2 font-bold text-xl">Suno Vibez</h3>
+          <p class="mt-3 max-w-3xl text-white/85">
+            A monthly playlist built entirely from creator submissions. Free to enter, and every
+            track gets a real listen with an answer either way.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href="submit.html" class="btn-primary rounded-xl px-5 py-3 font-semibold">Submit your track</a>
+            <a href="submission-terms.html" class="btn rounded-xl px-5 py-3 font-semibold">Submission Terms</a>
+          </div>
+          <p class="mt-4 text-sm text-white/55">
+            Submission does not guarantee playlist placement.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================ 6. MEDIA AND PERFORMANCE (D3) --
+         Also the homepage route to tour.html, which is no longer in the
+         primary navigation. -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">Media and performances</h2>
+        <div class="mt-6 grid gap-6 md:grid-cols-2">
+          <article class="card flex h-full flex-col justify-between rounded-2xl p-6">
+            <div>
+              <h3 class="font-bold text-lg">Press and media</h3>
+              <p class="mt-2 text-white/80">Fast facts and media requests.</p>
+            </div>
+            <a href="media.html" class="btn mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Open Media</a>
+          </article>
+          <article class="card flex h-full flex-col justify-between rounded-2xl p-6">
+            <div>
+              <h3 class="font-bold text-lg">Tour updates</h3>
+              <!-- EDITORIAL REVIEW REQUIRED: deliberately claims no dates. No
+                   verified upcoming events exist in the repository. -->
+              <p class="mt-2 text-white/80">Sign up to hear about upcoming dates and tickets.</p>
+            </div>
+            <a href="tour.html" class="btn mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Open Tour</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================= 7. CONTACT CTA (D3) -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <div class="card rounded-2xl p-6">
+          <h2 class="font-bold text-xl">Rather talk to a person?</h2>
+          <p class="mt-2 text-white/80">
+            Call or text directly — for bookings, media, or anything the pages above don&rsquo;t answer.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href="tel:+17622486242" class="btn-primary rounded-xl px-5 py-3 font-semibold">Call</a>
+            <a href="sms:+17622486242" class="btn rounded-xl px-5 py-3 font-semibold">Text</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>

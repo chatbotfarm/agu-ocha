@@ -3,23 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- EDITORIAL REVIEW REQUIRED: provisional metadata. -->
   <title>Music — Agu Ocha</title>
   <meta name="description" content="Listen to Agu Ocha’s latest releases.">
+  <link rel="canonical" href="https://aguocha.com/music.html">
   <link rel="icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="img/agu-logo.png">
   <meta property="og:title" content="Music — Agu Ocha">
   <meta property="og:description" content="Listen to Agu Ocha’s latest releases.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aguocha.com/music.html">
-  <meta property="og:image" content="https://aguocha.com/img/agu-mask-portrait.jpg">
+  <meta property="og:image" content="https://aguocha.com/img/agu-logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/site.css">
   <style>
     :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
     html{font-size:17px}
     @media(min-width:1024px){html{font-size:18px}}
     body{background:var(--jet);color:var(--leopard);line-height:1.65}
     .btn{border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--leopard);transition:all .2s ease}
-    .btn:hover{background:var(--leopard);color:var(--jet)} 
+    .btn:hover{background:var(--leopard);color:var(--jet)}
     .btn-primary{background:var(--brand);color:var(--leopard);border-color:transparent}
     .btn-primary:hover{background:var(--leopard);color:var(--jet)}
     .card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)}
@@ -35,55 +38,117 @@
   <div id="site-header"></div>
 
   <main>
-    <section class="section">
+    <!-- ==================================================== 1. HERO (D4) -->
+    <section class="section pb-8">
       <div class="mx-auto container px-4">
-        <h1 class="font-extrabold text-3xl md:text-4xl">Music</h1>
-        <p class="mt-3 text-white/85">
+        <h1 class="font-extrabold tracking-tight text-3xl md:text-4xl">Music</h1>
+        <!-- EDITORIAL REVIEW REQUIRED: existing lead, retained verbatim. -->
+        <p class="lead mt-4 max-w-3xl text-white/85">
           Selected releases and the evolving sound of Agu Ocha.
         </p>
+      </div>
+    </section>
 
-        <!-- Spotify Artist Embed -->
-        <div class="card mt-6 rounded-2xl p-4">
-          <h2 class="font-bold text-xl mb-2">Listen on Spotify</h2>
-          <p class="text-sm text-white/80 mb-4">
-            Dive into the catalog and follow Agu Ocha on Spotify to stay updated on new drops.
+    <!-- ====================================== 2. FEATURED PLAYER (D4) -->
+    <section class="mx-auto container px-4">
+      <div class="card rounded-2xl p-4">
+        <h2 class="font-bold text-xl mb-2">Listen on Spotify</h2>
+        <p class="text-sm text-white/80 mb-4">
+          Dive into the catalog and follow Agu Ocha on Spotify to stay updated on new drops.
+        </p>
+        <iframe
+          data-testid="embed-iframe"
+          style="border-radius:12px"
+          src="https://open.spotify.com/embed/artist/5ymz8gAPHU5sgDUhdhVqzh?utm_source=generator"
+          title="Agu Ocha on Spotify"
+          width="100%"
+          height="352"
+          frameborder="0"
+          allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <!-- ================================ 3. STREAMING DESTINATIONS (D4) --
+         Spotify is the only streaming destination verified in this repository.
+         The artist URL below is the canonical form of the embed ID already in
+         use above — it is derived, not invented. No other platform is listed
+         because no other platform link exists to reference. -->
+    <section class="section">
+      <div class="mx-auto container px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">Where to listen</h2>
+        <!-- EDITORIAL REVIEW REQUIRED: operator to confirm this Spotify artist
+             URL, and to supply any additional streaming destinations. -->
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="https://open.spotify.com/artist/5ymz8gAPHU5sgDUhdhVqzh"
+             target="_blank" rel="noopener noreferrer"
+             class="btn-primary rounded-xl px-5 py-3 font-semibold">Open on Spotify</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================= 4. RELEASES (D4) --
+         No release titles, dates or counts are stated: none are recorded in
+         this repository. The catalogue itself is the player above. -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">Releases</h2>
+        <!-- EDITORIAL REVIEW REQUIRED: individual releases can be listed here
+             once the operator supplies titles and links. Deliberately makes no
+             claim about release dates, counts, or chart performance. -->
+        <p class="mt-4 max-w-3xl text-white/80">
+          The full catalogue is on Spotify, in the player above.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================================== 5. VIDEO / PERFORMANCE (D4) -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">Video</h2>
+
+        <div class="mt-6 grid gap-6 md:grid-cols-2">
+          <div class="card rounded-2xl p-3">
+            <h3 class="font-bold text-lg mb-3">Official Video</h3>
+            <iframe
+              class="w-full rounded-xl border border-white/10"
+              style="aspect-ratio:16/9; height:auto;"
+              src="https://www.youtube.com/embed/rCBM8kuzI3U"
+              title="Agu Ocha — Official video"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+          </div>
+
+          <div class="card rounded-2xl p-3">
+            <h3 class="font-bold text-lg mb-3">Live / Alternate Cut</h3>
+            <iframe
+              class="w-full rounded-xl border border-white/10"
+              style="aspect-ratio:16/9; height:auto;"
+              src="https://www.youtube.com/embed/1JGjYV1WcHE"
+              title="Agu Ocha — Live / alternate video"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= 6. COLLABORATION / SUBMIT MUSIC CTA (D4) -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <div class="card rounded-2xl p-6">
+          <h2 class="font-bold text-xl">Making music yourself?</h2>
+          <p class="mt-2 max-w-3xl text-white/80">
+            Send a track for playlist consideration, or book a collaboration chat.
           </p>
-          <iframe
-            data-testid="embed-iframe"
-            style="border-radius:12px"
-            src="https://open.spotify.com/embed/artist/5ymz8gAPHU5sgDUhdhVqzh?utm_source=generator"
-            width="100%"
-            height="352"
-            frameborder="0"
-            allowfullscreen=""
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"></iframe>
-        </div>
-
-        <!-- YouTube Video 1 -->
-        <div class="card mt-6 rounded-2xl p-3">
-          <h2 class="font-bold text-lg mb-3">Official Video</h2>
-          <iframe
-            class="w-full rounded-xl border border-white/10"
-            style="aspect-ratio:16/9; height:auto;"
-            src="https://www.youtube.com/embed/rCBM8kuzI3U"
-            title="Agu Ocha — Official video"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
-        </div>
-
-        <!-- YouTube Video 2 -->
-        <div class="card mt-6 rounded-2xl p-3">
-          <h2 class="font-bold text-lg mb-3">Live / Alternate Cut</h2>
-          <iframe
-            class="w-full rounded-xl border border-white/10"
-            style="aspect-ratio:16/9; height:auto;"
-            src="https://www.youtube.com/embed/1JGjYV1WcHE"
-            title="Agu Ocha — Live / alternate video"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href="submit.html" class="btn-primary rounded-xl px-5 py-3 font-semibold">Submit Music</a>
+            <a href="collab.html" class="btn rounded-xl px-5 py-3 font-semibold">Collaborations</a>
+            <a href="book.html" class="btn rounded-xl px-5 py-3 font-semibold">Book Agu Ocha</a>
+          </div>
         </div>
       </div>
     </section>

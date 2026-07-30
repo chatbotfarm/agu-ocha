@@ -1,0 +1,33 @@
+# Repository hygiene for a static, build-free site.
+#
+# Scope note: this file deliberately does NOT ignore node_modules/, dist/, or
+# build output. There is no build step, no package manifest, and none of those
+# directories exist. Add them in the same change that introduces the tooling,
+# so this file never implies a project shape that isn't real.
+
+# Local agent configuration. Until now this was kept out of the repository only
+# by a machine-local global gitignore, which is not portable to other clones.
+.claude/
+
+# Environment and secrets. Never commit these.
+.env
+.env.*
+*.local
+
+# Logs
+*.log
+
+# OS-generated files
+.DS_Store
+._*
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Editor and tooling temporaries
+.vscode/
+.idea/
+*.swp
+*.tmp
+*.bak
+*~

@@ -27,12 +27,18 @@
     <nav class="hidden items-center gap-6 font-medium lg:flex" aria-label="Primary">
       <a href="music.html">Music</a>
 
-      <!-- Book dropdown (hover glitch fixed) -->
+      <!-- Book dropdown. A CSS disclosure, not a JS menu widget: it opens on
+           hover, on trigger focus (peer-focus) and on focus inside
+           (focus-within), so every destination is keyboard reachable.
+           Deliberately carries no aria-haspopup/aria-expanded/role="menuitem" —
+           nothing here updates aria-expanded, so declaring it would report a
+           permanently false state, and role="menuitem" is invalid without a
+           role="menu" parent. Plain links are correct and are announced
+           correctly. Every destination below is also listed in the mobile menu,
+           in the footer, and on book.html, so none is hover-only. -->
       <div class="relative group">
         <!-- focusable trigger -->
-        <a href="book.html"
-           class="peer inline-flex items-center gap-1"
-           aria-haspopup="true" aria-expanded="false">
+        <a href="book.html" class="peer inline-flex items-center gap-1">
           Book <span aria-hidden="true">▾</span>
         </a>
 
@@ -45,33 +51,36 @@
                  group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto
                  peer-focus:opacity-100 peer-focus:scale-100 peer-focus:pointer-events-auto
                  focus-within:opacity-100 focus-within:scale-100 focus-within:pointer-events-auto">
-          <a href="private-corporate.html" class="block rounded-lg px-3 py-2 hover:bg-white/10" role="menuitem">
+          <a href="private-corporate.html" class="block rounded-lg px-3 py-2 hover:bg-white/10">
             Private &amp; Corporate
           </a>
-          <a href="festivals-tours.html" class="block rounded-lg px-3 py-2 hover:bg-white/10" role="menuitem">
+          <a href="festivals-tours.html" class="block rounded-lg px-3 py-2 hover:bg-white/10">
             Festivals &amp; Tours
           </a>
-          <a href="residencies.html" class="block rounded-lg px-3 py-2 hover:bg-white/10" role="menuitem">
+          <a href="residencies.html" class="block rounded-lg px-3 py-2 hover:bg-white/10">
             Residencies
           </a>
-          <a href="brand-activations.html" class="block rounded-lg px-3 py-2 hover:bg-white/10" role="menuitem">
+          <a href="brand-activations.html" class="block rounded-lg px-3 py-2 hover:bg-white/10">
             Brand Activations
+          </a>
+          <a href="collab.html" class="block rounded-lg px-3 py-2 hover:bg-white/10">
+            Collaborations
           </a>
         </div>
       </div>
 
-      <a href="collab.html">Collab</a>
+      <!-- Submit Music sits in the nav sequence but keeps the primary emphasis:
+           it is one of the site's four core journeys. -->
+      <a href="submit.html"
+         title="Submit Music for playlist consideration"
+         class="btn-primary whitespace-nowrap rounded-xl px-4 py-2 font-semibold">Submit Music</a>
       <a href="media.html">Media</a>
-      <a href="tour.html">Tour</a>
       <a href="https://store.aguocha.com" rel="noopener">Store</a>
     </nav>
 
-    <!-- Right buttons -->
+    <!-- Right buttons. Tour is no longer a primary nav item; it stays reachable
+         from the homepage, from media.html and from the footer. -->
     <div class="hidden items-center gap-2 lg:flex">
-      <a href="submit.html"
-         title="Submit Song to a Playlist"
-         aria-label="Submit Song to a Playlist"
-         class="btn-primary whitespace-nowrap rounded-xl px-4 py-2 font-semibold">Submit Song</a>
       <a href="tel:+17622486242" class="btn rounded-xl px-4 py-2 font-semibold">Call</a>
       <a href="sms:+17622486242" class="btn rounded-xl px-4 py-2 font-semibold">Text</a>
     </div>
@@ -93,20 +102,19 @@
     <nav class="mx-auto grid max-w-7xl gap-3 px-4 py-4 text-lg" aria-label="Primary (mobile)">
       <a href="music.html" data-nav-close>Music</a>
 
-      <!-- Book submenu (mobile only) -->
+      <!-- Book submenu (mobile only). Same five destinations as desktop. -->
       <a href="book.html" data-nav-close>Book</a>
       <div class="ml-4 grid gap-2 text-base text-white/90">
         <a href="private-corporate.html" data-nav-close>Private &amp; Corporate</a>
         <a href="festivals-tours.html" data-nav-close>Festivals &amp; Tours</a>
         <a href="residencies.html" data-nav-close>Residencies</a>
         <a href="brand-activations.html" data-nav-close>Brand Activations</a>
+        <a href="collab.html" data-nav-close>Collaborations</a>
       </div>
 
-      <a href="collab.html" data-nav-close>Collab</a>
+      <a href="submit.html" data-nav-close>Submit Music</a>
       <a href="media.html" data-nav-close>Media</a>
-      <a href="tour.html" data-nav-close>Tour</a>
       <a href="https://store.aguocha.com" rel="noopener" data-nav-close>Store</a>
-      <a href="submit.html" data-nav-close>Submit Song to a Playlist</a>
 
       <!-- Contact Buttons -->
       <div class="flex gap-2 pt-2">

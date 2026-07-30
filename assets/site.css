@@ -1,0 +1,77 @@
+/*
+ * Agu Ocha — shared booking styles.
+ *
+ * WHY THIS FILE EXISTS (Stage B, REMEDIATION-PLAN.md §10.2)
+ *
+ * The site otherwise has no stylesheet: every page carries its own inline
+ * <style> block, and shared CSS normally lives in header.html's <style>
+ * element (see the note at header.html:1-7 explaining that a <style> DOES
+ * apply when injected via innerHTML, unlike a <script>).
+ *
+ * The booking wrapper cannot use either of those places:
+ *
+ *   1. header.html is fetched and injected by assets/site.js. Its styles
+ *      therefore only apply once JavaScript has run. The booking fallback must
+ *      stay legible with JavaScript disabled, which rules that out.
+ *   2. Duplicating the wrapper across six pages' inline <style> blocks would
+ *      recreate exactly the duplication header.html:1-7 argues against.
+ *
+ * A plain <link> is static, needs no JavaScript, and keeps one source of
+ * truth. It is loaded only by the six booking pages; every other page is
+ * untouched.
+ *
+ * Scope: layout and resilience only. No design tokens are redefined here —
+ * each page still owns --jet/--brand and .btn/.card in its inline block.
+ */
+
+/* ---------------------------------------------------------------- calendar */
+
+/*
+ * Guards against horizontal overflow on narrow screens. The GHL widget sets
+ * its own width via the inline style attribute on the iframe; this only
+ * constrains the container so a wide child can never push the page sideways.
+ */
+.bk-embed {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/*
+ * Minimum-height floor. form_embed.js sizes the frame over postMessage; when
+ * that handshake does not complete, the iframe would otherwise fall back to
+ * the HTML default height (150px) with scrolling suppressed, clipping the
+ * calendar unusably. 850px matches the value collab.html has carried in
+ * production, which REMEDIATION-PLAN.md §10.1 designates as the reference.
+ *
+ * display:block removes the inline-element descender gap below the frame.
+ * Width and border come from each iframe's existing inline style attribute,
+ * which is deliberately left untouched.
+ */
+.bk-frame {
+  display: block;
+  min-height: 850px;
+}
+
+/*
+ * Transient "loading" line. Visible in static markup, so it appears before
+ * any script runs; assets/site.js removes it on the iframe's load event.
+ * Each page also carries a <noscript> rule that hides it outright, because
+ * with JavaScript off nothing would ever clear it.
+ */
+.bk-status {
+  font-size: 0.9rem;
+  color: rgba(247, 247, 248, 0.6);
+}
+
+/* --------------------------------------------------------------- a11y */
+
+/*
+ * The booking pages had no focus ring of their own — header.html:8-16 styles
+ * only header and footer links. This is the same rule the newer pages already
+ * declare inline (e.g. privacy.html:32), applied here for consistency.
+ */
+:focus-visible {
+  outline: 2px solid #f7f7f8;
+  outline-offset: 3px;
+}

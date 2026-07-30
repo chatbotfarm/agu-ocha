@@ -2,8 +2,8 @@
  * Suno Vibez — confirmation page behavior (spec §7.9).
  *
  * The moment after submission is peak engagement, so this page does real work
- * rather than saying "thanks": it names a concrete reply-by date, then offers
- * follow > community > share, in that order of value.
+ * rather than saying "thanks": it offers follow > community > share, in that
+ * order of value.
  *
  * Deferred, after assets/suno-vibez-config.js. No inline JS.
  */
@@ -27,7 +27,12 @@
     return url;
   }
 
-  /* Reply-by date: submission + the SLA we promise on the page. */
+  /*
+   * Reply-by date. Dormant by design: the confirmation page deliberately makes
+   * no response-date promise, so #reply-by no longer exists and this returns
+   * early. Kept, rather than deleted, so the behaviour is available again if a
+   * response SLA is ever confirmed by the operator process.
+   */
   function setReplyDate() {
     var node = document.getElementById("reply-by");
     if (!node) return;
@@ -42,17 +47,39 @@
   }
 
   /*
+   * A plain track title, and nothing else.
+   *
+   * textContent already rules out XSS, but length alone is not enough: without
+   * a character constraint, a crafted ?track= link could render an arbitrary
+   * sentence inside this page's own <h1> — a social-engineering lure sitting on
+   * a legitimate aguocha.com URL. The allowed set excludes ":" and "/", so a
+   * URL cannot be formed; a phone-length run of digits and "www." are rejected
+   * outright. Anything that fails falls back to the neutral default.
+   */
+  var TRACK_NAME_ALLOWED =
+    /^[A-Za-z0-9 '&,.()!?À-ɏ‘’–—-]+$/;
+
+  function safeTrackName(raw) {
+    var value = (raw || "").trim().slice(0, 120);
+    if (!value) return "";
+    if (!TRACK_NAME_ALLOWED.test(value)) return "";
+    if (/www\./i.test(value)) return "";
+    if (value.replace(/\D/g, "").length >= 7) return "";
+    return value;
+  }
+
+  /*
    * If GHL is configured to append the track title on redirect, name it back.
    * textContent only — this value comes from the query string.
    */
   function setTrackName() {
     var node = document.getElementById("track-name");
     if (!node) return;
-    var value = "";
+    var raw = "";
     try {
-      value = new URLSearchParams(window.location.search).get("track") || "";
+      raw = new URLSearchParams(window.location.search).get("track") || "";
     } catch (err) {}
-    value = value.trim().slice(0, 120);
+    var value = safeTrackName(raw);
     node.textContent = value ? "“" + value + "”" : "Your track";
   }
 

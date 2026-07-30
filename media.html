@@ -3,16 +3,19 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- EDITORIAL REVIEW REQUIRED: provisional metadata. -->
   <title>Media — Agu Ocha</title>
   <meta name="description" content="Media requests and fast facts for Agu Ocha.">
+  <link rel="canonical" href="https://aguocha.com/media.html">
   <link rel="icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="img/agu-logo.png">
   <meta property="og:title" content="Media — Agu Ocha">
   <meta property="og:description" content="Media requests and fast facts for Agu Ocha.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aguocha.com/media.html">
-  <meta property="og:image" content="https://aguocha.com/img/agu-mask-portrait.jpg">
+  <meta property="og:image" content="https://aguocha.com/img/agu-logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/site.css">
   <style>
     :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
     html{font-size:17px}
@@ -23,6 +26,7 @@
     .btn-primary{background:var(--brand);color:var(--leopard);border-color:transparent}
     .btn-primary:hover{background:var(--leopard);color:var(--jet)}
     .card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)}
+    .lead{font-size:1.125rem}
     .section{padding-top:4rem;padding-bottom:4rem}
     .container{max-width:72rem}
     /* Reserve the injected header height so the fetch does not shift the page (CLS). */
@@ -35,14 +39,40 @@
   <div id="site-header"></div>
 
   <main>
-    <!-- Fast Facts only -->
+    <!-- ==================================================== 1. HERO (D5) -->
+    <section class="section pb-8">
+      <div class="mx-auto container px-4">
+        <h1 class="font-extrabold tracking-tight text-3xl md:text-4xl">Media</h1>
+        <!-- EDITORIAL REVIEW REQUIRED: provisional lead. -->
+        <p class="lead mt-4 max-w-3xl text-white/85">
+          Fast facts, media requests, and where to find performance footage.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================ 2. FEATURED MEDIA (D5) --
+         Deliberately links to the existing footage on music.html rather than
+         embedding a third-party player on a page that currently has none. -->
+    <section class="mx-auto container px-4">
+      <div class="card rounded-2xl p-6">
+        <h2 class="font-bold text-xl">Performance footage</h2>
+        <p class="mt-2 max-w-3xl text-white/80">
+          Official and live video is published on the Music page.
+        </p>
+        <a href="music.html" class="btn mt-5 inline-flex rounded-xl px-5 py-3 font-semibold">Open Music</a>
+      </div>
+    </section>
+
+    <!-- ================================= 3. AVAILABLE MEDIA RESOURCES (D5) -->
     <section class="section">
       <div class="mx-auto container px-4">
-        <h1 class="font-extrabold text-3xl md:text-4xl">Media</h1>
+        <h2 class="font-extrabold text-2xl md:text-3xl">Media resources</h2>
 
-        <div class="mt-8 grid gap-6 md:grid-cols-2">
+        <div class="mt-6 grid gap-6 md:grid-cols-2">
           <div class="card rounded-2xl p-6">
-            <h2 class="font-bold text-2xl">Fast Facts</h2>
+            <h3 class="font-bold text-xl">Fast Facts</h3>
+            <!-- EDITORIAL REVIEW REQUIRED: retained verbatim from the previous
+                 page. -->
             <dl class="mt-4 space-y-4">
               <div>
                 <dt class="text-sm uppercase tracking-wide text-white/60">Region</dt>
@@ -57,11 +87,57 @@
                 <dd class="mt-1 text-white/90">Cinematic electronics blending ancestral percussion, future bass, and vocal-driven storytelling.</dd>
               </div>
             </dl>
+          </div>
 
-            <div class="mt-6 flex flex-wrap gap-3">
-              <a href="https://app.aguocha.com/media-request-form" class="btn-primary rounded-xl px-4 py-2 font-semibold" target="_blank" rel="noopener">Media Request Form</a>
-              <a href="tel:+17622486242" class="btn rounded-xl px-4 py-2 font-semibold">Call +1 (762) AGU-OCHA</a>
-            </div>
+          <div class="card rounded-2xl p-6">
+            <h3 class="font-bold text-xl">Press assets</h3>
+            <!-- No downloadable press pack is published in this repository, so
+                 none is offered here. EDITORIAL REVIEW REQUIRED once the
+                 operator supplies photography, logos, and a biography. -->
+            <p class="mt-3 text-white/80">
+              Photography, logos, and biography are available on request through the media
+              request form.
+            </p>
+            <p class="mt-3 text-sm text-white/60">
+              Please include your outlet, deadline, and what you need.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================= 4. MEDIA REQUEST CTA (D5) --
+         External GoHighLevel-hosted destination, unchanged. -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <div class="card rounded-2xl p-6">
+          <h2 class="font-bold text-xl">Media request</h2>
+          <p class="mt-2 max-w-3xl text-white/80">
+            Interviews, press assets, guest lists, and other press enquiries.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href="https://app.aguocha.com/media-request-form" class="btn-primary rounded-xl px-5 py-3 font-semibold" target="_blank" rel="noopener">Media Request Form</a>
+            <a href="tour.html" class="btn rounded-xl px-5 py-3 font-semibold">Tour</a>
+          </div>
+          <p class="mt-4 text-sm text-white/60">
+            The form opens on an external Agu Ocha page hosted by GoHighLevel. See the
+            <a class="underline underline-offset-4" href="privacy.html">Privacy Notice</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================= 5. CONTACT FALLBACK (D5) -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <div class="card rounded-2xl p-6">
+          <h2 class="font-bold text-xl">On deadline?</h2>
+          <p class="mt-2 text-white/80">
+            If the request form does not load, call or text directly.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href="tel:+17622486242" class="btn-primary rounded-xl px-5 py-3 font-semibold">Call +1 (762) AGU-OCHA</a>
+            <a href="sms:+17622486242" class="btn rounded-xl px-5 py-3 font-semibold">Text</a>
           </div>
         </div>
       </div>

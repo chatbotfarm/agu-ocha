@@ -106,6 +106,39 @@
     if (el) el.textContent = String(new Date().getFullYear());
   }
 
+  /**
+   * Booking calendars ship a static "loading" line, so it is on screen before
+   * any script runs. Clear it once the frame reports load.
+   *
+   * If the document is already complete, every iframe has finished loading, so
+   * clear immediately — that closes the race where a cached frame fires load
+   * before this deferred script gets to attach a listener.
+   *
+   * Pages with JavaScript disabled hide the line with their own <noscript>
+   * rule instead, since nothing here would ever run to clear it. The fallback
+   * block beside the calendar is static and stays visible either way.
+   */
+  function initCalendarStatus() {
+    var frames = document.querySelectorAll("[data-calendar-frame]");
+
+    Array.prototype.forEach.call(frames, function (frame) {
+      var scope = frame.closest("[data-calendar-embed]") || document;
+      var status = scope.querySelector("[data-calendar-status]");
+      if (!status) return;
+
+      function clear() {
+        status.hidden = true;
+      }
+
+      if (document.readyState === "complete") {
+        clear();
+        return;
+      }
+      frame.addEventListener("load", clear);
+    });
+  }
+
   loadHTML("site-header", "header.html");
   loadHTML("site-footer", "footer.html").then(setCurrentYear);
+  initCalendarStatus();
 })();
