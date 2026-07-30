@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- EDITORIAL REVIEW REQUIRED: provisional metadata. -->
-  <title>Media — Agu Ocha</title>
-  <meta name="description" content="Media requests and fast facts for Agu Ocha.">
+  <!-- EDITORIAL REVIEW REQUIRED: provisional metadata. Describes the combined
+       information + request page; there is no separate media-request route. -->
+  <title>Media &amp; Press — Agu Ocha</title>
+  <meta name="description" content="Agu Ocha media and press: interview requests, podcasts, radio, editorial features, event coverage, fast facts, and approved media assets.">
   <link rel="canonical" href="https://aguocha.com/media.html">
   <link rel="icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="img/agu-logo.png">
-  <meta property="og:title" content="Media — Agu Ocha">
-  <meta property="og:description" content="Media requests and fast facts for Agu Ocha.">
+  <meta property="og:title" content="Media &amp; Press — Agu Ocha">
+  <meta property="og:description" content="Interview requests, podcasts, radio, editorial features, event coverage, and approved media assets.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aguocha.com/media.html">
   <meta property="og:image" content="https://aguocha.com/img/agu-logo.png">
@@ -31,7 +32,10 @@
     .container{max-width:72rem}
     /* Reserve the injected header height so the fetch does not shift the page (CLS). */
     #site-header{min-height:84px}
+    /* Anchor targets clear the sticky header so a jumped-to heading is not hidden. */
+    [id]{scroll-margin-top:96px}
   </style>
+  <noscript><style>[data-ghl-form-status]{display:none}</style></noscript>
 </head>
 
 <body>
@@ -39,41 +43,57 @@
   <div id="site-header"></div>
 
   <main>
-    <!-- ==================================================== 1. HERO (D5) -->
+    <!-- ==================================================== 1. HERO -->
     <section class="section pb-8">
       <div class="mx-auto container px-4">
-        <h1 class="font-extrabold tracking-tight text-3xl md:text-4xl">Media</h1>
-        <!-- EDITORIAL REVIEW REQUIRED: provisional lead. -->
-        <p class="lead mt-4 max-w-3xl text-white/85">
-          Fast facts, media requests, and where to find performance footage.
-        </p>
+        <div class="max-w-3xl">
+          <h1 class="font-extrabold tracking-tight text-4xl md:text-5xl">Media &amp; Press</h1>
+          <!-- EDITORIAL REVIEW REQUIRED: provisional supporting copy. -->
+          <p class="lead mt-5 text-white/85">
+            Interview requests, podcasts, radio, editorial features, event coverage, and approved
+            media assets.
+          </p>
+          <a href="#media-request" class="btn-primary mt-7 inline-block rounded-xl px-6 py-3 font-semibold">
+            Submit a Media Request
+          </a>
+        </div>
       </div>
     </section>
 
-    <!-- ============================================ 2. FEATURED MEDIA (D5) --
-         Deliberately links to the existing footage on music.html rather than
-         embedding a third-party player on a page that currently has none. -->
-    <section class="mx-auto container px-4">
-      <div class="card rounded-2xl p-6">
-        <h2 class="font-bold text-xl">Performance footage</h2>
-        <p class="mt-2 max-w-3xl text-white/80">
-          Official and live video is published on the Music page.
-        </p>
-        <a href="music.html" class="btn mt-5 inline-flex rounded-xl px-5 py-3 font-semibold">Open Music</a>
-      </div>
-    </section>
-
-    <!-- ================================= 3. AVAILABLE MEDIA RESOURCES (D5) -->
-    <section class="section">
+    <!-- ============================================ 2. FEATURED VIDEO ======
+         Existing verified embed, already used on index.html and music.html. -->
+    <section class="section border-t border-white/10 pt-10">
       <div class="mx-auto container px-4">
-        <h2 class="font-extrabold text-2xl md:text-3xl">Media resources</h2>
+        <h2 class="font-extrabold text-2xl md:text-3xl">Featured performance</h2>
+        <div class="card mt-6 rounded-2xl p-3">
+          <iframe
+            class="w-full rounded-xl border border-white/10"
+            style="aspect-ratio:16/9; height:auto;"
+            src="https://www.youtube.com/embed/rCBM8kuzI3U"
+            title="Agu Ocha — Official video"
+            frameborder="0"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+        </div>
+        <p class="mt-4 text-white/75">
+          More official and live video is published on the
+          <a class="underline underline-offset-4" href="music.html">Music page</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===================================== 3. FAST FACTS + BIOGRAPHY -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">Fast facts</h2>
 
         <div class="mt-6 grid gap-6 md:grid-cols-2">
           <div class="card rounded-2xl p-6">
-            <h3 class="font-bold text-xl">Fast Facts</h3>
             <!-- EDITORIAL REVIEW REQUIRED: retained verbatim from the previous
-                 page. -->
-            <dl class="mt-4 space-y-4">
+                 Media page. -->
+            <dl class="space-y-4">
               <div>
                 <dt class="text-sm uppercase tracking-wide text-white/60">Region</dt>
                 <dd class="mt-1 text-white/90">Based between New England and the Caribbean corridor.</dd>
@@ -90,54 +110,106 @@
           </div>
 
           <div class="card rounded-2xl p-6">
-            <h3 class="font-bold text-xl">Press assets</h3>
-            <!-- No downloadable press pack is published in this repository, so
-                 none is offered here. EDITORIAL REVIEW REQUIRED once the
-                 operator supplies photography, logos, and a biography. -->
-            <p class="mt-3 text-white/80">
-              Photography, logos, and biography are available on request through the media
-              request form.
-            </p>
-            <p class="mt-3 text-sm text-white/60">
-              Please include your outlet, deadline, and what you need.
+            <h3 class="font-bold text-xl">Short biography</h3>
+            <!-- EDITORIAL REVIEW REQUIRED: assembled only from copy already
+                 published elsewhere in this repository (index.html and
+                 book.html). No new biographical claims are made here. A longer
+                 approved biography should replace this before press use. -->
+            <p class="mt-3 text-white/85">
+              Agu Ocha is an Afrohouse DJ and producer, based in New England and performing
+              worldwide. The live show engineers immersive sets that travel from underground rooms
+              to headline stages, with precision sound design, cinematic visuals, and bilingual
+              storytelling.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ======================================= 4. MEDIA REQUEST CTA (D5) --
-         External GoHighLevel-hosted destination, unchanged. -->
+    <!-- ======================================== 4. MEDIA RESOURCES ========
+         Deliberately does NOT offer downloads. The press/ directory in this
+         repository is empty, so no downloadable asset is claimed or linked.
+         Resources are described as available on request. -->
     <section class="section border-t border-white/10">
       <div class="mx-auto container px-4">
-        <div class="card rounded-2xl p-6">
-          <h2 class="font-bold text-xl">Media request</h2>
-          <p class="mt-2 max-w-3xl text-white/80">
-            Interviews, press assets, guest lists, and other press enquiries.
+        <h2 class="font-extrabold text-2xl md:text-3xl">Media resources</h2>
+        <p class="mt-3 max-w-3xl text-white/80">
+          Approved resources are supplied on request. Tell us what you need and the intended use.
+        </p>
+        <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <li class="card rounded-xl p-4">Artist biography</li>
+          <li class="card rounded-xl p-4">Fast facts</li>
+          <li class="card rounded-xl p-4">Press photos</li>
+          <li class="card rounded-xl p-4">Agu Ocha logo</li>
+          <li class="card rounded-xl p-4">Music links</li>
+          <li class="card rounded-xl p-4">Video links</li>
+          <li class="card rounded-xl p-4">Track artwork</li>
+          <li class="card rounded-xl p-4">Booking contact</li>
+        </ul>
+        <p class="mt-5 text-sm text-white/60">
+          <!-- OPERATOR TODO: when a real press pack exists, publish the files
+               and link them here. Until then nothing is described as an
+               immediate download. -->
+          A downloadable press pack is not published yet &mdash; request assets below and they will
+          be sent across.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================================ 5. MEDIA REQUEST FORM SLOT ========
+         The heading, supporting copy, loading line and contact panel are static
+         markup, so they survive assets/forms.js failing, the config failing,
+         the GHL script failing, and JavaScript being off.
+
+         While AGU_SITE_CONFIG.mediaRequestFormUrl is empty, assets/forms.js
+         injects nothing and removes the loading line — the panel below is
+         already the working route. See docs/GHL_OPERATOR_ACTIONS.md. -->
+    <section id="media-request" class="section border-t border-white/10">
+      <div class="mx-auto max-w-2xl px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">Media and Press Requests</h2>
+        <p class="mt-3 text-white/80">
+          For interviews, press coverage, approved images, artist information or media
+          appearances, send a request with your publication, deadline and intended use.
+        </p>
+
+        <h3 class="mt-8 font-bold text-xl">Request an Interview or Media Asset</h3>
+
+        <div data-ghl-form="mediaRequest" class="mt-4">
+          <p class="bk-status" data-ghl-form-status role="status">
+            Loading the request form. If it does not appear, use the options below.
+          </p>
+        </div>
+
+        <!-- Always visible, and deliberately outside the form mount so the
+             injection above cannot remove it. -->
+        <div class="card mt-8 rounded-2xl p-6">
+          <h3 class="font-bold text-lg">Send a request directly</h3>
+          <p class="mt-2 text-white/80">
+            Include your publication, deadline, and what you need &mdash; interview, assets, or both.
           </p>
           <div class="mt-5 flex flex-wrap gap-3">
-            <a href="https://app.aguocha.com/media-request-form" class="btn-primary rounded-xl px-5 py-3 font-semibold" target="_blank" rel="noopener">Media Request Form</a>
-            <a href="tour.html" class="btn rounded-xl px-5 py-3 font-semibold">Tour</a>
+            <a href="sms:+17622486242" class="btn-primary rounded-xl px-5 py-3 font-semibold">Text a Media Request</a>
+            <a href="tel:+17622486242" class="btn rounded-xl px-5 py-3 font-semibold">Call</a>
           </div>
           <p class="mt-4 text-sm text-white/60">
-            The form opens on an external Agu Ocha page hosted by GoHighLevel. See the
+            What happens to your details is covered in the
             <a class="underline underline-offset-4" href="privacy.html">Privacy Notice</a>.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- ======================================= 5. CONTACT FALLBACK (D5) -->
+    <!-- ============================================== 6. BOOKING CTA -->
     <section class="section border-t border-white/10">
       <div class="mx-auto container px-4">
         <div class="card rounded-2xl p-6">
-          <h2 class="font-bold text-xl">On deadline?</h2>
-          <p class="mt-2 text-white/80">
-            If the request form does not load, call or text directly.
+          <h2 class="font-bold text-xl">Booking enquiries</h2>
+          <p class="mt-2 max-w-3xl text-white/80">
+            Event bookings are handled separately from press requests.
           </p>
           <div class="mt-5 flex flex-wrap gap-3">
-            <a href="tel:+17622486242" class="btn-primary rounded-xl px-5 py-3 font-semibold">Call +1 (762) AGU-OCHA</a>
-            <a href="sms:+17622486242" class="btn rounded-xl px-5 py-3 font-semibold">Text</a>
+            <a href="book.html" class="btn-primary rounded-xl px-5 py-3 font-semibold">Open Booking</a>
+            <a href="tour.html" class="btn rounded-xl px-5 py-3 font-semibold">Tour &amp; Appearances</a>
           </div>
         </div>
       </div>
@@ -147,7 +219,8 @@
   <!-- Shared footer include -->
   <div id="site-footer"></div>
 
-  <!-- Shared header/footer loader + nav behavior -->
+  <script src="assets/site-config.js" defer></script>
   <script src="assets/site.js" defer></script>
+  <script src="assets/forms.js" defer></script>
 </body>
 </html>
