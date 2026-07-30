@@ -64,6 +64,16 @@
   color: rgba(247, 247, 248, 0.6);
 }
 
+/*
+ * Selected booking category on book.html. The chooser is a set of links; this
+ * only marks which one produced the calendar currently on screen. Paired with
+ * aria-current="true" so the state is not conveyed by colour alone.
+ */
+.bk-selected {
+  border-color: var(--brand);
+  background: rgba(212, 20, 20, 0.08);
+}
+
 /* --------------------------------------------------------------- a11y */
 
 /*
