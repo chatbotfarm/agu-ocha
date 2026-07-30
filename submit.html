@@ -3,25 +3,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- PROVISIONAL: §11.3's exact title, meta description and heading tree did
-       not reach this session. These are written to spec intent (primary keyword
-       in H1 and title, no banned phrases) and should be replaced verbatim once
-       §11.3 is available. -->
-  <title>Submit a track to Suno Vibez — a free monthly playlist for music made with Suno</title>
-  <meta name="description" content="Suno Vibez is a monthly playlist built entirely from creator submissions. Free to enter, open to every Suno tier, and every track gets a real listen and a real answer within 7 days.">
+  <!-- EDITORIAL REVIEW REQUIRED: provisional metadata. The permanent identity
+       is "Submit Music"; the current featured opportunity is named after it so
+       the campaign stays discoverable. Final SEO wording is a later decision. -->
+  <title>Submit Music — Agu Ocha | Current opportunity: Suno Vibez</title>
+  <meta name="description" content="Submit your music for playlist consideration. The current opportunity is Suno Vibez, a monthly playlist built entirely from creator submissions.">
   <link rel="canonical" href="https://aguocha.com/submit">
   <link rel="icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="img/agu-logo.png">
-  <meta property="og:title" content="Suno Vibez — made with Suno, judged on the music">
-  <meta property="og:description" content="A free monthly playlist built entirely from creator submissions. Every track gets a real listen and a real answer within 7 days.">
+  <meta property="og:title" content="Submit Music — Agu Ocha">
+  <meta property="og:description" content="Submit your music for playlist consideration. Current opportunity: Suno Vibez, a monthly playlist built from creator submissions.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aguocha.com/submit">
-  <!-- OPERATOR TODO: replace with a purpose-built 1200x630 OG image (spec
-       §11.3). agu-logo.png is square, so no og:image:width/height is declared
-       rather than declaring dimensions that would be false. -->
+  <!-- OPERATOR TODO: a purpose-built 1200x630 OG image is still outstanding.
+       agu-logo.png is square, so no og:image:width/height is declared rather
+       than declaring dimensions that would be false. -->
   <meta property="og:image" content="https://aguocha.com/img/agu-logo.png">
   <meta name="twitter:card" content="summary_large_image">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/site.css">
   <style>
     :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
     html{font-size:17px}
@@ -39,7 +39,7 @@
     #site-header{min-height:84px}
     :focus-visible{outline:2px solid var(--leopard);outline-offset:3px}
 
-    /* Form controls: 16px minimum prevents iOS auto-zoom on focus (spec §10.1). */
+    /* Form controls: 16px minimum prevents iOS auto-zoom on focus. */
     .sv-field{
       width:100%;min-height:56px;font-size:16px;
       background:rgba(255,255,255,0.04);color:var(--leopard);
@@ -64,7 +64,7 @@
     .sv-facade-label{font-weight:700;font-size:1.05rem}
     .sv-facade-note{font-size:.8rem;color:rgba(247,247,248,.55)}
 
-    /* Sticky mobile CTA (spec §5.2): ~56px, dismissible, hidden at >=1024px. */
+    /* Sticky mobile CTA: ~56px, dismissible, hidden at >=1024px. */
     .sv-sticky{
       position:fixed;left:0;right:0;bottom:0;z-index:60;
       display:flex;align-items:center;gap:.5rem;
@@ -86,6 +86,8 @@
       white-space:nowrap;
     }
     .sv-dont{border-left:3px solid var(--brand)}
+    /* Campaign block: marks the one section that a future opportunity replaces. */
+    .sv-campaign{border-left:3px solid var(--brand)}
 
     .sv-faq-trigger{
       width:100%;display:flex;justify-content:space-between;align-items:center;gap:1rem;
@@ -100,27 +102,31 @@
     }
     html{scroll-behavior:smooth}
   </style>
-  <!-- Without JS the accordion panels stay open, so every answer is readable. -->
-  <noscript><style>[data-faq-panel]{display:block !important}</style></noscript>
+  <!-- Without JS the accordion panels stay open, so every answer is readable.
+       The form's loading line is also hidden, because nothing would clear it
+       and the form itself cannot run without JavaScript — the static contact
+       panel beside it is the working route in that case. -->
+  <noscript><style>
+    [data-faq-panel]{display:block !important}
+    [data-form-status]{display:none}
+  </style></noscript>
 </head>
 <body>
   <!-- Shared header include -->
   <div id="site-header"></div>
 
   <main>
-    <!-- ================================================ 1. HERO (spec §6.1) -->
+    <!-- ================================================== 1. HERO (C2 §2) --
+         Permanent identity. This section survives any campaign change. -->
     <section class="section pb-10">
       <div class="mx-auto container px-4">
         <div class="grid gap-10 lg:grid-cols-12 lg:items-start">
           <div class="lg:col-span-7">
-            <p class="font-mono text-xs uppercase tracking-[0.2em] text-white/50">Suno Vibez</p>
-            <h1 class="mt-3 font-extrabold tracking-tight text-4xl md:text-5xl">
-              Made with Suno. <br>Judged on the music.
-            </h1>
+            <h1 class="font-extrabold tracking-tight text-4xl md:text-5xl">Submit Music</h1>
+            <!-- EDITORIAL REVIEW REQUIRED: provisional permanent lead. -->
             <p class="lead mt-5 text-white/85">
-              Suno Vibez is a monthly playlist built entirely from creator submissions.
-              Free to enter, open to every tier, and every track gets a real listen from a
-              real person &mdash; with an answer either way within 7 days.
+              Send a track for playlist consideration. Every submission gets a real listen from a
+              real person, and an answer either way.
             </p>
 
             <div class="mt-7 max-w-lg">
@@ -149,7 +155,7 @@
             </div>
           </div>
 
-          <!-- ================================== 2. PLAYER (spec §6.2) -->
+          <!-- Current playlist player. Lane is campaign-specific. -->
           <div class="lg:col-span-5">
             <h2 class="font-bold text-lg">This month&rsquo;s playlist</h2>
             <div id="playlist-embed" data-lane="b" class="mt-3"></div>
@@ -162,48 +168,86 @@
       </div>
     </section>
 
-    <!-- ======================================= 3. WHY SUBMIT (spec §6.3) -->
+    <!-- ================================ 2. CURRENT OPPORTUNITY (C2 §3) ====
+         CAMPAIGN BLOCK. Everything between this marker and the matching END
+         marker describes the currently featured opportunity. Activating a
+         different playlist means replacing this block and the campaign values
+         in assets/suno-vibez-config.js — the surrounding page is permanent. -->
     <section class="section border-t border-white/10">
       <div class="mx-auto container px-4">
-        <h2 class="font-extrabold text-2xl md:text-3xl">Why submit</h2>
-        <div class="mt-6 grid gap-5 md:grid-cols-3">
-          <div class="card rounded-2xl p-5">
-            <h3 class="font-bold text-lg">A real listen, not an algorithm</h3>
-            <p class="mt-2 text-white/85">
-              Every track is played by a person. We listen for at least a full minute before
-              deciding, and longer if it&rsquo;s holding our attention.
-            </p>
-          </div>
-          <div class="card rounded-2xl p-5">
-            <h3 class="font-bold text-lg">An answer either way</h3>
-            <p class="mt-2 text-white/85">
-              Most submissions don&rsquo;t make the playlist &mdash; that&rsquo;s the nature of a curated
-              list. But you&rsquo;ll always get an email telling you where yours landed, usually
-              within 7 days.
-            </p>
-          </div>
-          <div class="card rounded-2xl p-5">
-            <h3 class="font-bold text-lg">Free, with nothing to upsell</h3>
-            <p class="mt-2 text-white/85">
-              No credits, no priority tier, no membership. We don&rsquo;t charge for submission or
-              placement, and we never will.
-            </p>
-          </div>
-        </div>
-
-        <div class="mt-8">
-          <a href="#submit-form" class="sv-cta btn-primary rounded-xl px-5 font-semibold">
-            Submit your track
-          </a>
+        <div class="sv-campaign card rounded-2xl p-6 md:p-8">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-white/50">Current opportunity</p>
+          <h2 class="mt-2 font-extrabold text-2xl md:text-3xl">Suno Vibez</h2>
+          <!-- EDITORIAL REVIEW REQUIRED: campaign pitch retained from the
+               previous page copy. -->
+          <p class="lead mt-4 max-w-3xl text-white/85">
+            Suno Vibez is a monthly playlist built entirely from creator submissions.
+            Free to enter, open to every tier, and every track gets a real listen from a
+            real person &mdash; with an answer either way within 7 days.
+          </p>
+          <p class="mt-4 text-white/80">
+            Made with Suno. Judged on the music.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- ==================================== 4. HOW IT WORKS (spec §6.4) -->
+    <!-- ==================================== 3. WHO SHOULD SUBMIT (C2 §4) -->
     <section class="section border-t border-white/10">
       <div class="mx-auto container px-4">
-        <h2 class="font-extrabold text-2xl md:text-3xl">How it works</h2>
+        <h2 class="font-extrabold text-2xl md:text-3xl">Who should submit</h2>
 
+        <!-- EDITORIAL REVIEW REQUIRED: eligibility below is campaign-specific
+             and is retained verbatim from the previous page. -->
+        <div class="mt-6 grid gap-5 md:grid-cols-2">
+          <div class="card rounded-2xl p-6">
+            <h3 class="font-bold text-lg">Lane A &mdash; a Suno link (open to everyone)</h3>
+            <ul class="mt-3 list-disc space-y-2 pl-5 text-white/85">
+              <li>Any track hosted on Suno, any subscription tier including free</li>
+              <li>Made by you</li>
+              <li>Released or unreleased, either is fine</li>
+              <li>Selected tracks join the Suno Vibez playlist on Suno</li>
+            </ul>
+          </div>
+          <div class="card rounded-2xl p-6">
+            <h3 class="font-bold text-lg">Lane B &mdash; a released track (Spotify, Apple Music and similar)</h3>
+            <ul class="mt-3 list-disc space-y-2 pl-5 text-white/85">
+              <li>The track is live on streaming and you hold the rights</li>
+              <li>Generated while you were on a Suno Pro or Premier plan &mdash; the free tier doesn&rsquo;t grant commercial rights, so free-tier tracks can&rsquo;t be distributed</li>
+              <li>AI involvement disclosed with your distributor</li>
+              <li>Selected tracks join the Suno Vibez playlist on Spotify</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="mt-5 text-white/85">
+          <strong class="text-white">Not sure which applies?</strong>
+          Paste your link and we&rsquo;ll work it out.
+          <a href="#faq" class="underline underline-offset-4">Read the questions first</a>
+          if you&rsquo;d rather.
+        </p>
+
+        <div class="card mt-8 rounded-2xl p-6">
+          <h3 class="font-bold text-lg">What we can&rsquo;t accept, in either lane</h3>
+          <ul class="mt-3 list-disc space-y-2 pl-5 text-white/85">
+            <li>Vocals imitating a real, identifiable artist without their permission</li>
+            <li>Tracks you didn&rsquo;t make, or that use samples you don&rsquo;t have rights to</li>
+            <li>Hate speech, harassment, or sexual content involving minors</li>
+            <li>Bulk submissions &mdash; one track per creator per month</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <!-- ================================= END CAMPAIGN BLOCK (Suno Vibez) -->
+
+    <!-- ================================ 4. HOW SUBMISSION WORKS (C2 §5) --
+         Permanent. Describes the process, not the playlist. -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">How submission works</h2>
+
+        <!-- EDITORIAL REVIEW REQUIRED: step labels and timings retained from
+             the previous page copy. -->
         <ol class="mt-6 grid gap-5 lg:grid-cols-5">
           <li class="card flex gap-4 rounded-2xl p-5 lg:flex-col lg:gap-3">
             <span class="sv-step-num" aria-hidden="true">1</span>
@@ -246,22 +290,114 @@
             </div>
           </li>
         </ol>
+      </div>
+    </section>
 
-        <div class="mt-8">
-          <a href="#submit-form" class="sv-cta btn-primary rounded-xl px-5 font-semibold">
-            Start your submission
-          </a>
+    <!-- ===================================== 5. WHAT TO PREPARE (C2 §6) --
+         Permanent. Mirrors the field set the GHL form asks for. -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">What to prepare</h2>
+        <!-- EDITORIAL REVIEW REQUIRED: provisional. The operator has updated
+             the GoHighLevel form, so this list should be checked against the
+             form's current fields before launch. -->
+        <ul class="mt-6 grid gap-4 md:grid-cols-2">
+          <li class="card rounded-2xl p-5">
+            <h3 class="font-bold">A public link to your track</h3>
+            <p class="mt-1 text-sm text-white/80">A link rather than a file attachment.</p>
+          </li>
+          <li class="card rounded-2xl p-5">
+            <h3 class="font-bold">How you want to be credited</h3>
+            <p class="mt-1 text-sm text-white/80">The creator name that should appear.</p>
+          </li>
+          <li class="card rounded-2xl p-5">
+            <h3 class="font-bold">An email address</h3>
+            <p class="mt-1 text-sm text-white/80">This is where the decision is sent.</p>
+          </li>
+          <li class="card rounded-2xl p-5">
+            <h3 class="font-bold">Your genre</h3>
+            <p class="mt-1 text-sm text-white/80">Plus anything short you want us to know.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================ 6. THE FORM + FALLBACK (C2 §7, §8) ====
+         The heading, guidance, loading line and the contact panel below are
+         all static markup, so they survive assets/submit.js failing, the
+         config failing, the GHL script failing, and JavaScript being off.
+
+         #submission-form is the JS mount. assets/submit.js replaces its
+         children with the GHL iframe, which is what clears the loading line —
+         no extra hide logic, and no race to handle. -->
+    <section id="submit-form" class="section border-t border-white/10">
+      <div class="mx-auto max-w-2xl px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">Submit your music</h2>
+        <p class="mt-2 text-white/70">One track per creator per month. Takes a minute or two.</p>
+
+        <div id="submission-form" class="mt-6" data-form-mount>
+          <!-- Worded so it stays accurate whether it clears or lingers. -->
+          <p class="bk-status" data-form-status role="status">
+            Loading the submission form. If it does not appear, use the options below.
+          </p>
+        </div>
+
+        <!-- Always visible, and deliberately outside #submission-form so the
+             mount replacement above cannot remove it. Framed as an alternative
+             route rather than an error, so it reads correctly in every state. -->
+        <div class="card mt-8 rounded-2xl p-6">
+          <h3 class="font-bold text-lg">Prefer not to use the form?</h3>
+          <p class="mt-2 text-white/80">
+            Send your track link by text or call instead. It goes into the same review queue.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href="sms:+17622486242" class="btn-primary rounded-xl px-5 py-3 font-semibold">Text your track link</a>
+            <a href="tel:+17622486242" class="btn rounded-xl px-5 py-3 font-semibold">Call</a>
+          </div>
+          <p class="mt-4 text-sm text-white/60">
+            The form is hosted by GoHighLevel, which receives what you submit. Read the
+            <a class="underline underline-offset-4" href="submission-terms.html">Submission Terms</a>
+            and the <a class="underline underline-offset-4" href="privacy.html">Privacy Notice</a>.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- ========================================== 5. TRUST (spec §6.5) -->
+    <!-- ============================= 7. SUBMISSION EXPECTATIONS (C2 §9) --
+         Permanent. What a submitter can expect, independent of playlist. -->
     <section class="section border-t border-white/10">
       <div class="mx-auto container px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">What to expect</h2>
+        <!-- EDITORIAL REVIEW REQUIRED: retained from the previous page copy. -->
+        <div class="mt-6 grid gap-5 md:grid-cols-3">
+          <div class="card rounded-2xl p-5">
+            <h3 class="font-bold text-lg">A real listen, not an algorithm</h3>
+            <p class="mt-2 text-white/85">
+              Every track is played by a person. We listen for at least a full minute before
+              deciding, and longer if it&rsquo;s holding our attention.
+            </p>
+          </div>
+          <div class="card rounded-2xl p-5">
+            <h3 class="font-bold text-lg">An answer either way</h3>
+            <p class="mt-2 text-white/85">
+              Most submissions don&rsquo;t make the playlist &mdash; that&rsquo;s the nature of a curated
+              list. But you&rsquo;ll always get an email telling you where yours landed, usually
+              within 7 days.
+            </p>
+          </div>
+          <div class="card rounded-2xl p-5">
+            <h3 class="font-bold text-lg">Free, with nothing to upsell</h3>
+            <p class="mt-2 text-white/85">
+              No credits, no priority tier, no membership. We don&rsquo;t charge for submission or
+              placement, and we never will.
+            </p>
+          </div>
+        </div>
+
         <!-- Rendered from config; removed entirely if no real curator is set. -->
-        <div id="curator-block">
-          <h2 class="font-extrabold text-2xl md:text-3xl">Who listens</h2>
-          <div class="card mt-6 rounded-2xl p-6">
+        <div id="curator-block" class="mt-10">
+          <h3 class="font-bold text-xl">Who listens</h3>
+          <div class="card mt-4 rounded-2xl p-6">
             <p class="text-white/70">
               Curator details are being added before launch.
             </p>
@@ -270,92 +406,37 @@
 
         <!-- Metrics render only when real; otherwise this block is removed. -->
         <div id="metrics-block" class="mt-8"></div>
+      </div>
+    </section>
 
-        <div class="sv-dont card mt-10 rounded-2xl p-6">
-          <h2 class="font-extrabold text-xl md:text-2xl">What we don&rsquo;t do</h2>
-          <ul class="mt-4 space-y-3 text-white/85">
-            <li>We don&rsquo;t guarantee placement. Selection is a judgement call, and most tracks don&rsquo;t make it.</li>
+    <!-- ================== 8. OWNERSHIP AND PLACEMENT SUMMARY (C2 §10) --
+         Permanent. Must stay adjacent in meaning to the form above. -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">Ownership and placement</h2>
+        <!-- EDITORIAL REVIEW REQUIRED: summary only. The binding text lives in
+             submission-terms.html and is not restated or reworded here. -->
+        <div class="sv-dont card mt-6 rounded-2xl p-6">
+          <ul class="space-y-3 text-white/85">
+            <li><strong class="text-white">You keep full ownership of your track.</strong> Nothing here transfers any rights.</li>
+            <li><strong class="text-white">We don&rsquo;t guarantee placement.</strong> Selection is a judgement call, and most tracks don&rsquo;t make it.</li>
             <li>We don&rsquo;t charge for submission, review, or placement &mdash; and there&rsquo;s no paid fast lane.</li>
             <li>We don&rsquo;t buy streams, run stream-swaps, or ask you to stream other people&rsquo;s tracks.</li>
             <li>We don&rsquo;t sell or share your email. One confirmation, one decision, and a monthly playlist email you can leave any time.</li>
-            <li>We don&rsquo;t require a paid Suno plan to submit.</li>
           </ul>
+          <p class="mt-5 text-sm text-white/70">
+            Full detail in the
+            <a class="underline underline-offset-4" href="submission-terms.html">Submission Terms</a>
+            and the <a class="underline underline-offset-4" href="privacy.html">Privacy Notice</a>.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- ==================================== 6. REQUIREMENTS (spec §6.6) -->
-    <section class="section border-t border-white/10">
-      <div class="mx-auto container px-4">
-        <h2 class="font-extrabold text-2xl md:text-3xl">What we accept</h2>
-
-        <div class="mt-6 grid gap-5 md:grid-cols-2">
-          <div class="card rounded-2xl p-6">
-            <h3 class="font-bold text-lg">Lane A &mdash; a Suno link (open to everyone)</h3>
-            <ul class="mt-3 list-disc space-y-2 pl-5 text-white/85">
-              <li>Any track hosted on Suno, any subscription tier including free</li>
-              <li>Made by you</li>
-              <li>Released or unreleased, either is fine</li>
-              <li>Selected tracks join the Suno Vibez playlist on Suno</li>
-            </ul>
-          </div>
-          <div class="card rounded-2xl p-6">
-            <h3 class="font-bold text-lg">Lane B &mdash; a released track (Spotify, Apple Music and similar)</h3>
-            <ul class="mt-3 list-disc space-y-2 pl-5 text-white/85">
-              <li>The track is live on streaming and you hold the rights</li>
-              <li>Generated while you were on a Suno Pro or Premier plan &mdash; the free tier doesn&rsquo;t grant commercial rights, so free-tier tracks can&rsquo;t be distributed</li>
-              <li>AI involvement disclosed with your distributor</li>
-              <li>Selected tracks join the Suno Vibez playlist on Spotify</li>
-            </ul>
-          </div>
-        </div>
-
-        <p class="mt-5 text-white/85">
-          <strong class="text-white">Not sure which applies?</strong>
-          Paste your link and we&rsquo;ll work it out.
-          <a href="#faq" class="underline underline-offset-4">Read the questions first</a>
-          if you&rsquo;d rather.
-        </p>
-
-        <div class="card mt-8 rounded-2xl p-6">
-          <h3 class="font-bold text-lg">What we can&rsquo;t accept, in either lane</h3>
-          <ul class="mt-3 list-disc space-y-2 pl-5 text-white/85">
-            <li>Vocals imitating a real, identifiable artist without their permission</li>
-            <li>Tracks you didn&rsquo;t make, or that use samples you don&rsquo;t have rights to</li>
-            <li>Hate speech, harassment, or sexual content involving minors</li>
-            <li>Bulk submissions &mdash; one track per creator per month</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ========================================== 7. FORM (spec §7) -->
-    <section id="submit-form" class="section border-t border-white/10">
-      <div class="mx-auto max-w-2xl px-4">
-        <h2 class="font-extrabold text-2xl md:text-3xl">Submit your track</h2>
-        <!-- Spec §7.8 specifies "Five fields. About a minute." The live GHL form
-             currently asks for ten, including a required phone number, so that
-             line would be false. Restore it verbatim once the form is trimmed
-             to the §7.3 field set. -->
-        <p class="mt-2 text-white/70">Takes a minute or two.</p>
-
-        <!-- Populated by assets/submit.js from SUNO_VIBEZ_CONFIG.ghlFormUrl,
-             with the hero paste carried down as a prefill parameter. -->
-        <div id="submission-form" class="mt-6"></div>
-
-        <p class="mt-6 text-sm text-white/60">
-          Free. No account. We answer every submission.
-          <strong class="text-white">We don&rsquo;t guarantee placement.</strong>
-        </p>
-        <p class="mt-3 text-sm text-white/60">
-          You keep full ownership of your track. Read the
-          <a class="underline underline-offset-4" href="submission-terms.html">submission terms</a>
-          and the <a class="underline underline-offset-4" href="privacy.html">privacy notice</a>.
-        </p>
-      </div>
-    </section>
-
-    <!-- ============================================ 8. FAQ (spec §8) -->
+    <!-- ============================================== 9. FAQ (C2 §11) --
+         EDITORIAL REVIEW REQUIRED: all answers below are provisional and
+         retained from the previous page, except where a statement referred to
+         page content that is removed at runtime (see the two notes inline). -->
     <section id="faq" class="section border-t border-white/10">
       <div class="mx-auto max-w-3xl px-4">
         <h2 class="font-extrabold text-2xl md:text-3xl">Questions</h2>
@@ -376,9 +457,12 @@
             <p>Not to submit. Any tier, including free, can submit a Suno link for the Suno playlist. For the Spotify playlist it&rsquo;s different &mdash; Suno&rsquo;s free tier only grants personal, non-commercial use, so free-tier tracks can&rsquo;t legally be distributed to streaming at all. Commercial rights come with Pro and Premier, for tracks made while you&rsquo;re subscribed.</p>
           </div>
 
+          <!-- Corrected: the previous answer said the acceptance rate is
+               published "at the top of this page". The metrics block is removed
+               at runtime while metrics.show is false, so that was not true. -->
           <h3><button type="button" class="sv-faq-trigger" data-faq-trigger aria-controls="faq-4" aria-expanded="false">What are my actual chances?<span class="sv-faq-marker" aria-hidden="true">+</span></button></h3>
           <div id="faq-4" data-faq-panel class="py-4 text-white/85" hidden>
-            <p>Low, honestly. We publish our acceptance rate at the top of this page and it&rsquo;s usually in the single digits &mdash; which is normal for curated playlists across the whole industry. What we can promise is that you&rsquo;ll get a real listen and a real answer.</p>
+            <p>Low, honestly &mdash; usually in the single digits, which is normal for curated playlists across the whole industry. What we can promise is that you&rsquo;ll get a real listen and a real answer.</p>
           </div>
 
           <h3><button type="button" class="sv-faq-trigger" data-faq-trigger aria-controls="faq-5" aria-expanded="false">Will I actually hear back?<span class="sv-faq-marker" aria-hidden="true">+</span></button></h3>
@@ -431,28 +515,31 @@
             <p>Different track, next month, absolutely &mdash; and plenty of creators are accepted on their second or third try. Same track, only if you&rsquo;ve substantially reworked it.</p>
           </div>
 
+          <!-- Corrected: the previous answer pointed at a "who listens" section
+               "above", which is removed at runtime while curator.name is empty. -->
           <h3><button type="button" class="sv-faq-trigger" data-faq-trigger aria-controls="faq-15" aria-expanded="false">Who&rsquo;s behind this?<span class="sv-faq-marker" aria-hidden="true">+</span></button></h3>
           <div id="faq-15" data-faq-panel class="py-4 text-white/85" hidden>
-            <p>A Suno creator &mdash; photo, links, and contact details are in the &ldquo;who listens&rdquo; section above. If you can&rsquo;t find a real person behind a playlist, that&rsquo;s usually a reason to be careful, which is why we put ours up front.</p>
+            <p>A Suno creator. If you can&rsquo;t find a real person behind a playlist, that&rsquo;s usually a reason to be careful &mdash; so you can reach us directly by call or text, and curator details are being added to this page before launch.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ====================================== 9. FINAL CTA (spec §9) -->
+    <!-- =============================== 10. FUTURE OPPORTUNITIES (C2 §12) --
+         Deliberately names nothing. No inactive campaign cards, no dates, no
+         availability claims — only the fact that the page can carry more. -->
     <section class="section border-t border-white/10">
-      <div class="mx-auto max-w-3xl px-4 text-center">
-        <h2 class="font-extrabold text-2xl md:text-4xl">One track. One link. One minute.</h2>
-        <p class="lead mt-4 text-white/85">
-          The playlist refreshes on the 1st. Submissions are open now, they&rsquo;re free, and
-          whatever we decide, you&rsquo;ll hear back within 7 days.
+      <div class="mx-auto container px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">Other opportunities</h2>
+        <!-- EDITORIAL REVIEW REQUIRED: provisional holding copy. -->
+        <p class="mt-4 max-w-3xl text-white/80">
+          Suno Vibez is the opportunity open right now. When others open, they will be listed
+          here alongside it.
         </p>
-        <a href="#submit-form" class="sv-cta btn-primary mt-7 rounded-xl px-6 font-semibold">
-          Submit your track
-        </a>
-        <p class="mt-4 text-sm text-white/60">
-          Free &middot; No account &middot; Every submission gets an answer
-        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="#submit-form" class="sv-cta btn-primary rounded-xl px-5 font-semibold">Submit your track</a>
+          <a href="collab.html" class="sv-cta btn rounded-xl px-5 font-semibold">Collaborations</a>
+        </div>
       </div>
     </section>
   </main>
@@ -460,8 +547,8 @@
   <!-- Shared footer include -->
   <div id="site-footer"></div>
 
-  <!-- Sticky mobile CTA (spec §5.2). Hidden until 25% scroll, and whenever the
-       form is on screen, so it can never cover the thing it points at. -->
+  <!-- Sticky mobile CTA. Hidden until 25% scroll, and whenever the form is on
+       screen, so it can never cover the thing it points at. -->
   <div id="sticky-cta" class="sv-sticky" hidden>
     <a href="#submit-form" class="sv-cta btn-primary flex-1 rounded-xl px-4 font-semibold">
       Submit a track &mdash; free
@@ -478,7 +565,7 @@
       {"@type":"Question","name":"Is it really free?","acceptedAnswer":{"@type":"Answer","text":"Yes, and it stays free. There's no paid tier, no priority review, no membership. We don't charge for submission or for placement — partly on principle, and partly because paying for playlist placement violates Spotify's rules and would put your music at risk, not just ours."}},
       {"@type":"Question","name":"Do you accept AI-generated music?","acceptedAnswer":{"@type":"Answer","text":"That's the whole point. Suno Vibez exists because tracks made with AI tools get rejected by a lot of curators on principle, before anyone listens. We listen first and decide on the music."}},
       {"@type":"Question","name":"Do I need a paid Suno plan?","acceptedAnswer":{"@type":"Answer","text":"Not to submit. Any tier, including free, can submit a Suno link for the Suno playlist. For the Spotify playlist it's different — Suno's free tier only grants personal, non-commercial use, so free-tier tracks can't legally be distributed to streaming at all. Commercial rights come with Pro and Premier, for tracks made while you're subscribed."}},
-      {"@type":"Question","name":"What are my actual chances?","acceptedAnswer":{"@type":"Answer","text":"Low, honestly. We publish our acceptance rate and it's usually in the single digits — which is normal for curated playlists across the whole industry. What we can promise is that you'll get a real listen and a real answer."}},
+      {"@type":"Question","name":"What are my actual chances?","acceptedAnswer":{"@type":"Answer","text":"Low, honestly — usually in the single digits, which is normal for curated playlists across the whole industry. What we can promise is that you'll get a real listen and a real answer."}},
       {"@type":"Question","name":"Will I actually hear back?","acceptedAnswer":{"@type":"Answer","text":"Every time, within 7 days. Yes or no, always by email. If we ever miss that window, tell us and we'll fix it."}},
       {"@type":"Question","name":"Does my track need to be on Spotify already?","acceptedAnswer":{"@type":"Answer","text":"No. Unreleased Suno tracks are welcome and go to the Suno playlist. If your track is already on streaming, paste that link instead and we'll consider it for the Spotify playlist too."}},
       {"@type":"Question","name":"Will my track get taken down for being AI-generated?","acceptedAnswer":{"@type":"Answer","text":"Not for being AI-generated in itself. Spotify allows AI music but requires it to be disclosed, which happens through your distributor via a standard metadata field. What does trigger removals is undisclosed AI, vocals imitating real artists without permission, and mass-upload spam patterns. Distributors vary quite a bit — DistroKid accepts disclosed AI tracks where you own the rights, TuneCore applies a human-contribution requirement, and CD Baby has been the strictest. Check your distributor's current policy before you release."}},
@@ -489,7 +576,7 @@
       {"@type":"Question","name":"How do you decide?","acceptedAnswer":{"@type":"Answer","text":"A person listens to the whole track, at least a minute. The main question is whether there's a clear idea and a reason to hit replay. Production polish helps but doesn't decide it — a rough track with a real idea beats a clean track with nothing in it."}},
       {"@type":"Question","name":"What happens to my email?","acceptedAnswer":{"@type":"Answer","text":"You get a confirmation, a decision, and a monthly email when the playlist updates. That's all. We don't sell or share it, and unsubscribe is one click."}},
       {"@type":"Question","name":"I got rejected. Can I resubmit?","acceptedAnswer":{"@type":"Answer","text":"Different track, next month, absolutely — and plenty of creators are accepted on their second or third try. Same track, only if you've substantially reworked it."}},
-      {"@type":"Question","name":"Who's behind this?","acceptedAnswer":{"@type":"Answer","text":"A Suno creator — photo, links, and contact details are in the 'who listens' section of the page. If you can't find a real person behind a playlist, that's usually a reason to be careful, which is why we put ours up front."}}
+      {"@type":"Question","name":"Who's behind this?","acceptedAnswer":{"@type":"Answer","text":"A Suno creator. If you can't find a real person behind a playlist, that's usually a reason to be careful — so you can reach us directly by call or text, and curator details are being added to this page before launch."}}
     ]
   }
   </script>
