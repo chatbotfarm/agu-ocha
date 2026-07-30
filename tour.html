@@ -3,23 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- EDITORIAL REVIEW REQUIRED: provisional metadata. -->
   <title>Tour — Agu Ocha</title>
-  <meta name="description" content="Tour dates and tickets.">
+  <meta name="description" content="Tour updates, dates, and tickets for Agu Ocha.">
+  <link rel="canonical" href="https://aguocha.com/tour.html">
   <link rel="icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="img/agu-logo.png">
   <meta property="og:title" content="Tour — Agu Ocha">
-  <meta property="og:description" content="Tour dates and tickets.">
+  <meta property="og:description" content="Tour updates, dates, and tickets for Agu Ocha.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aguocha.com/tour.html">
   <meta property="og:image" content="https://aguocha.com/img/agu-logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/site.css">
   <style>
     :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
     html{font-size:17px}
     @media(min-width:1024px){html{font-size:18px}}
     body{background:var(--jet);color:var(--leopard);line-height:1.65}
     .btn{border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--leopard);transition:all .2s ease}
-    .btn:hover{background:var(--leopard);color:var(--jet)} 
+    .btn:hover{background:var(--leopard);color:var(--jet)}
     .btn-primary{background:var(--brand);color:var(--leopard);border-color:transparent}
     .btn-primary:hover{background:var(--leopard);color:var(--jet)}
     .card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)}
@@ -35,15 +38,79 @@
   <div id="site-header"></div>
 
   <main>
+    <!-- ==================================================== 1. HERO (D6) -->
+    <section class="section pb-8">
+      <div class="mx-auto container px-4">
+        <h1 class="font-extrabold tracking-tight text-3xl md:text-4xl">Tour</h1>
+        <!-- EDITORIAL REVIEW REQUIRED: existing lead, retained verbatim. -->
+        <p class="lead mt-4 max-w-3xl text-white/85">
+          Be first to know about upcoming tour dates, tickets, and special events.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================== 2. CURRENT APPEARANCES (D6) ========
+         No dates, venues or events are listed: none are recorded anywhere in
+         this repository, and D6 forbids inventing them. This section states
+         only what is verifiable — that announcements go out through the
+         updates list. Replace with a real date list when one exists. -->
+    <section class="mx-auto container px-4">
+      <div class="card rounded-2xl p-6">
+        <h2 class="font-bold text-xl">Upcoming appearances</h2>
+        <!-- EDITORIAL REVIEW REQUIRED: neutral holding copy. Makes no claim
+             that dates do or do not currently exist. -->
+        <p class="mt-3 max-w-3xl text-white/85">
+          Dates are announced to the updates list first. Sign up below and you will hear about
+          them as they are confirmed.
+        </p>
+      </div>
+    </section>
+
+    <!-- ================================ 3. TOUR UPDATES DESTINATION (D6) --
+         External destination, unchanged. -->
     <section class="section">
       <div class="mx-auto container px-4 text-center">
-        <h1 class="font-extrabold text-3xl md:text-4xl">Tour</h1>
-        <p class="mt-3 text-white/85">Be first to know about upcoming tour dates, tickets, and special events.</p>
-        <p class="mt-6">
+        <p>
           <a class="btn-primary rounded-xl px-6 py-3 font-semibold text-lg" href="https://tour.aguocha.com" target="_blank" rel="noopener">
             Sign Up for Tour Updates
           </a>
         </p>
+        <p class="mt-4 text-sm text-white/60">
+          Opens an external Agu Ocha page.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================ 4. BOOKING CTA (D6) -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <div class="card rounded-2xl p-6">
+          <h2 class="font-bold text-xl">Booking Agu Ocha for your own event?</h2>
+          <p class="mt-2 max-w-3xl text-white/80">
+            Festivals and tours have their own booking calendar, alongside private events,
+            residencies, and brand activations.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href="festivals-tours.html" class="btn-primary rounded-xl px-5 py-3 font-semibold">Festivals &amp; Tours</a>
+            <a href="book.html" class="btn rounded-xl px-5 py-3 font-semibold">All booking categories</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================= 5. CONTACT FALLBACK (D6) -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <div class="card rounded-2xl p-6">
+          <h2 class="font-bold text-xl">Questions about a date?</h2>
+          <p class="mt-2 text-white/80">
+            If the updates page does not load, call or text directly.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href="tel:+17622486242" class="btn-primary rounded-xl px-5 py-3 font-semibold">Call</a>
+            <a href="sms:+17622486242" class="btn rounded-xl px-5 py-3 font-semibold">Text</a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
