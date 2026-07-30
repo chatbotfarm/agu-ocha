@@ -2,8 +2,8 @@
  * Suno Vibez — confirmation page behavior (spec §7.9).
  *
  * The moment after submission is peak engagement, so this page does real work
- * rather than saying "thanks": it names a concrete reply-by date, then offers
- * follow > community > share, in that order of value.
+ * rather than saying "thanks": it offers follow > community > share, in that
+ * order of value.
  *
  * Deferred, after assets/suno-vibez-config.js. No inline JS.
  */
@@ -27,7 +27,12 @@
     return url;
   }
 
-  /* Reply-by date: submission + the SLA we promise on the page. */
+  /*
+   * Reply-by date. Dormant by design: the confirmation page deliberately makes
+   * no response-date promise, so #reply-by no longer exists and this returns
+   * early. Kept, rather than deleted, so the behaviour is available again if a
+   * response SLA is ever confirmed by the operator process.
+   */
   function setReplyDate() {
     var node = document.getElementById("reply-by");
     if (!node) return;
