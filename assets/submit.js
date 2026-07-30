@@ -36,6 +36,39 @@
     return url;
   }
 
+  /**
+   * https-only absolute URL, no embedded credentials, no host allowlist.
+   *
+   * Used for curator profile links, which may legitimately live on any host —
+   * so unlike validUrl() this deliberately has no allowlist. What it does
+   * enforce is the scheme, which is the part that matters: these values reach
+   * an <a href>, where a javascript: URL would execute on click.
+   * Relative strings throw here (no base is supplied) and are rejected.
+   */
+  function validHttpsUrl(raw) {
+    if (typeof raw !== "string" || raw.trim() === "") return null;
+    var url;
+    try {
+      url = new URL(raw.trim());
+    } catch (err) {
+      return null;
+    }
+    if (url.protocol !== "https:") return null;
+    if (url.username || url.password) return null;
+    return url;
+  }
+
+  /**
+   * Curator photograph. Restricted to a first-party img/ path on purpose: the
+   * photo belongs in this repository, and permitting an arbitrary host would
+   * add a third-party request that privacy.html does not disclose.
+   */
+  function validPhotoPath(raw) {
+    if (typeof raw !== "string") return null;
+    var value = raw.trim();
+    return /^img\/[A-Za-z0-9._\-/]+$/.test(value) ? value : null;
+  }
+
   function el(tag, className, text) {
     var node = document.createElement(tag);
     if (className) node.className = className;
@@ -193,46 +226,24 @@
 
   var formRendered = false;
 
-  function fallbackPanel(mount) {
-    var panel = el("div", "card rounded-2xl p-6");
-    panel.setAttribute("role", "status");
-
-    panel.appendChild(el("h3", "font-bold text-xl", "Submissions open shortly"));
-    panel.appendChild(
+  /**
+   * Form unavailable — missing, empty, or non-allowlisted ghlFormUrl.
+   *
+   * submit.html now ships a static contact panel *below* the mount, carrying
+   * Text, Call, Submission Terms and the Privacy Notice. That panel is outside
+   * #submission-form, so it survives this replacement and is already the
+   * working route. All this needs to do is clear the loading line and say so
+   * in one neutral sentence — no technical detail, no error code, and no
+   * redirect away from the page.
+   */
+  function formUnavailable(mount) {
+    mount.replaceChildren(
       el(
         "p",
-        "mt-2 text-white/80",
-        "The submission form is not live yet. Send your track link by text in the meantime and it goes into exactly the same review queue, with the same answer within " +
-          (CFG.responseSlaDays || 7) +
-          " days."
+        "bk-status",
+        "The submission form isn't available right now. Use the options below."
       )
     );
-
-    var actions = el("div", "mt-5 flex flex-wrap gap-3");
-    actions.appendChild(
-      link(
-        "sms:" + (CFG.phone || "+17622486242"),
-        "btn-primary rounded-xl px-4 py-2 font-semibold",
-        "Text your track link"
-      )
-    );
-    actions.appendChild(
-      link(
-        "tel:" + (CFG.phone || "+17622486242"),
-        "btn rounded-xl px-4 py-2 font-semibold",
-        "Call " + (CFG.phoneDisplay || "")
-      )
-    );
-    panel.appendChild(actions);
-
-    panel.appendChild(
-      el(
-        "p",
-        "mt-4 text-sm text-white/60",
-        "Free. We don't guarantee placement, and most tracks don't make it — but you always get an answer."
-      )
-    );
-    mount.replaceChildren(panel);
   }
 
   function renderForm() {
@@ -243,7 +254,7 @@
     var url = validUrl(CFG.ghlFormUrl, FORM_HOSTS);
     if (!url) {
       formRendered = true;
-      fallbackPanel(mount);
+      formUnavailable(mount);
       return;
     }
 
@@ -416,9 +427,10 @@
     }
 
     var wrap = el("div", "card rounded-2xl p-6 md:flex md:items-start md:gap-6");
-    if (c.photo) {
+    var photo = validPhotoPath(c.photo);
+    if (photo) {
       var img = document.createElement("img");
-      img.setAttribute("src", c.photo);
+      img.setAttribute("src", photo);
       img.setAttribute("alt", "Photograph of " + c.name);
       img.setAttribute("width", "96");
       img.setAttribute("height", "96");
@@ -434,8 +446,11 @@
     if (Array.isArray(c.links) && c.links.length) {
       var list = el("p", "mt-3 flex flex-wrap gap-x-4 gap-y-1 text-sm");
       c.links.forEach(function (item) {
-        if (!item || !item.url) return;
-        var a = link(item.url, "underline underline-offset-4", item.label || item.url);
+        if (!item) return;
+        // These reach an <a href>, so the scheme is validated before use.
+        var href = validHttpsUrl(item.url);
+        if (!href) return;
+        var a = link(href.href, "underline underline-offset-4", item.label || href.href);
         a.setAttribute("rel", "noopener");
         list.appendChild(a);
       });
