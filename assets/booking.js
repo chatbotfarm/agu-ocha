@@ -24,7 +24,7 @@
   var CALENDARS = {
     "private-corporate": {
       label: "Private or Corporate Event",
-      blurb: "Summits, galas, and destination weekends.",
+      blurb: "Private celebrations, company events and hospitality experiences.",
       legacy: "private-corporate.html",
       src: "https://api.leadconnectorhq.com/widget/booking/gVxSS7k0YEJNYBFPQILA",
       iframeId: "gVxSS7k0YEJNYBFPQILA_1762813037092",
@@ -34,7 +34,7 @@
     },
     festival: {
       label: "Festival or Public Event",
-      blurb: "Global routing, late-night slots, and co-headline runs.",
+      blurb: "Public events, showcases and festival performances.",
       legacy: "festivals-tours.html",
       src: "https://api.leadconnectorhq.com/widget/booking/X56pKuTIpw1vu5xdOVpX",
       iframeId: "X56pKuTIpw1vu5xdOVpX_1762812281356",
@@ -44,7 +44,7 @@
     },
     residency: {
       label: "Club or Residency",
-      blurb: "Seasonal takeovers with evolving setlists.",
+      blurb: "Recurring sets shaped around the venue, time slot and audience.",
       legacy: "residencies.html",
       src: "https://api.leadconnectorhq.com/widget/booking/6tuaToT0K8aZFMLYJ2VU",
       iframeId: "6tuaToT0K8aZFMLYJ2VU_1762813167563",
@@ -54,7 +54,7 @@
     },
     brand: {
       label: "Brand Collaboration",
-      blurb: "Launch moments, runway soundtracks, and retail scoring.",
+      blurb: "Music, appearances and event-based brand collaborations.",
       legacy: "brand-activations.html",
       src: "https://api.leadconnectorhq.com/widget/booking/Fwzuvt3S944xnibxng7O",
       iframeId: "Fwzuvt3S944xnibxng7O_1762813595022",
