@@ -76,9 +76,16 @@ for (const file of files) {
     const [path, hash] = value.split("#");
     if (!path) continue;
 
-    const target = path.startsWith("/")
-      ? join(ROOT, path)
-      : resolve(baseDir, path);
+    // A query string is not part of the file path. book.html?type=festival is
+    // book.html with a parameter, not a file named "book.html?type=festival".
+    // Strip it before touching the filesystem, or every parameterised internal
+    // link is reported as broken.
+    const filePath = path.split("?")[0];
+    if (!filePath) continue;
+
+    const target = filePath.startsWith("/")
+      ? join(ROOT, filePath)
+      : resolve(baseDir, filePath);
 
     let resolved = target;
     if (existsSync(target) && statSync(target).isDirectory()) {
