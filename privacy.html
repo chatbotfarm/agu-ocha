@@ -13,7 +13,6 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aguocha.com/privacy.html">
   <meta property="og:image" content="https://aguocha.com/img/agu-logo.png">
-  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
     html{font-size:17px}
@@ -31,6 +30,13 @@
     #site-header{min-height:84px}
     :focus-visible{outline:2px solid var(--leopard);outline-offset:3px}
   </style>
+  <!-- Compiled Tailwind. Loaded LAST on purpose: the Play CDN this replaced
+       appended its generated stylesheet to the end of <head>, so utilities won
+       every specificity tie against the project classes above. That is also
+       Tailwind's intended cascade — `class="section pt-10"` is written
+       expecting pt-10 to win. Moving this link higher silently changes
+       line-height, section padding and card borders sitewide. -->
+  <link rel="stylesheet" href="assets/tailwind.css">
 </head>
 <body>
   <!-- Shared header include -->

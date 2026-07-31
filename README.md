@@ -1,6 +1,8 @@
 # Agu Ocha Static Site
 
-This repository contains static, Tailwind-powered HTML pages for Agu Ocha’s official site. The project is designed for GitHub Pages hosting with no build step required.
+This repository contains static, Tailwind-powered HTML pages for Agu Ocha’s official site. It is designed for GitHub Pages hosting: every file that is served is committed, and GitHub Pages runs no build of its own.
+
+There is exactly one build step, and it is local and optional: the Tailwind stylesheet is compiled ahead of time and its output is committed. See [Building the CSS](#building-the-css). If you are only editing copy, you do not need it.
 
 ## Structure
 
@@ -34,7 +36,31 @@ This repository contains static, Tailwind-powered HTML pages for Agu Ocha’s of
 └── .nojekyll
 ```
 
-All pages share a consistent header, footer, and CTA patterns. Tailwind CSS is loaded via CDN and configured inline according to the Agu Ocha design system.
+All pages share a consistent header, footer, and CTA patterns.
+
+## Building the CSS
+
+Every page loads `assets/tailwind.css`, a **compiled, committed** stylesheet. Earlier revisions loaded `https://cdn.tailwindcss.com` instead. That CDN is the Tailwind **Play CDN**, which its own documentation marks as development-only: it ships a full JIT compiler to every visitor, generates styles in the browser, and makes the entire site depend on a third-party host being reachable and on JavaScript being enabled just to look styled.
+
+### Requirements
+
+Node.js 18 or newer, and npm. Both are needed only to *build*; neither is needed to serve or view the site.
+
+### Install and build
+
+```bash
+npm install          # restores node_modules/ (ignored by git)
+npm run build:css    # assets/tailwind-input.css -> assets/tailwind.css (minified)
+npm run watch:css    # same, rebuilding on change, for local work
+```
+
+### The rules that keep this working
+
+- **Edit `assets/tailwind-input.css`, never `assets/tailwind.css`.** The latter is generated and will be overwritten by the next build without warning.
+- **Commit `assets/tailwind.css` with the change that caused it.** GitHub Pages serves committed files and runs no build. A change to markup that adds a utility class, committed without a rebuilt stylesheet, ships an unstyled element to production.
+- **Tailwind is pinned to v3.** This is deliberate, not neglect. The Play CDN this replaced was v3, and v4 changes enough defaults that upgrading in the same step would have been an unannounced redesign rather than a build change. Upgrading is a separate, deliberate piece of work.
+- **New content locations must be added to `content` in `tailwind.config.js`.** Tailwind only emits classes it can see in the files it scans. It currently scans root `*.html` (which includes the `header.html` / `footer.html` fragments), `suno-vibez/*.html`, and `assets/**/*.js`. A class in a file outside those globs compiles to nothing and fails silently — the page just renders wrong.
+- **A class assembled at runtime is invisible to the scanner.** Tailwind matches literal strings, so `"text-" + color` never resolves. Write the whole class name out, or add it to `safelist` in `tailwind.config.js` — that is what the existing safelist entries are for: they name classes that only ever appear from JavaScript.
 
 ### Shared header and footer
 
@@ -145,14 +171,18 @@ The site currently runs **no analytics, trackers, marketing pixels, or first-par
 
 ## Validation
 
-No build step and no dependencies. From the repository root:
+From the repository root:
 
 ```bash
 node --check assets/site.js
 node --check assets/suno-vibez-config.js
-node --check assets/suno-vibez.js
+node --check assets/submit.js
+node --check assets/thank-you.js
 node scripts/check-links.mjs     # internal links, fragments, http://, target=_blank rel, inline handlers
+npm run build:css                # then `git diff --stat assets/tailwind.css` must be empty
 ```
+
+That last line is the one people forget. If rebuilding the stylesheet produces a diff, the committed CSS is stale and production is serving classes that no longer match the markup.
 
 To preview, serve over HTTP — `file://` blocks `fetch`, so the header and footer render blank and the result is easy to misread:
 
@@ -162,4 +192,6 @@ python -m http.server 8000       # then open http://localhost:8000/
 
 ## Support
 
-For additional adjustments, modify the HTML files directly and commit the updates. No compilation or dependency installation is necessary.
+For copy and content changes, modify the HTML files directly and commit the updates — no compilation or dependency installation is necessary.
+
+If your change adds, removes, or renames a Tailwind utility class anywhere, run `npm run build:css` and commit `assets/tailwind.css` alongside it.

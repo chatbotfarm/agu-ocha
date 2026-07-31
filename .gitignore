@@ -1,9 +1,15 @@
-# Repository hygiene for a static, build-free site.
+# Repository hygiene.
 #
-# Scope note: this file deliberately does NOT ignore node_modules/, dist/, or
-# build output. There is no build step, no package manifest, and none of those
-# directories exist. Add them in the same change that introduces the tooling,
-# so this file never implies a project shape that isn't real.
+# Scope note: the site is still served as static files with no server-side
+# build. The one exception is the Tailwind stylesheet, which is compiled from
+# assets/tailwind-input.css by the Tailwind CLI. Its *output*
+# (assets/tailwind.css) is committed on purpose so GitHub Pages can serve it
+# directly; only the toolchain that produces it is ignored. Nothing else in
+# this file describes a project shape that does not exist.
+
+# Tailwind CLI toolchain. Restore with `npm install`; rebuild with
+# `npm run build:css`. The compiled assets/tailwind.css is NOT ignored.
+node_modules/
 
 # Local agent configuration. Until now this was kept out of the repository only
 # by a machine-local global gitignore, which is not portable to other clones.
