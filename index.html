@@ -3,19 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- EDITORIAL REVIEW REQUIRED: provisional metadata. Final positioning copy
-       is a later page-by-page decision. -->
-  <title>Agu Ocha — Official Site</title>
-  <meta name="description" content="DJ Agu Ocha — Afrohouse. Bookings, music, media, and collaborations.">
+  <title>Agu Ocha — Music, Vibe Production and Live Experiences</title>
+  <meta name="description" content="Agu Ocha creates music, online performances and a home for AI-assisted and vibe-produced creators. Listen, submit music or explore booking.">
   <!-- Canonical matches sitemap.xml, which lists the homepage as the bare root. -->
   <link rel="canonical" href="https://aguocha.com/">
   <link rel="icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="img/agu-logo.png">
-  <meta property="og:title" content="Agu Ocha — Official Site">
-  <meta property="og:description" content="DJ Agu Ocha — Afrohouse. Bookings, music, media, and collaborations.">
+  <meta property="og:title" content="Agu Ocha — Where Music Meets Vibe Production">
+  <meta property="og:description" content="New England based. Performing online. AI-assisted and vibe-produced music welcome.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aguocha.com/">
-  <meta property="og:image" content="https://aguocha.com/img/agu-logo.png">
+  <!-- Widest first-party asset that actually shows the persona. It is 1536x1024
+       (3:2), not 1200x630, so no og:image:width/height is declared rather than
+       declaring dimensions that would be false. A purpose-built 1200x630 crop is
+       recorded as an outstanding operator asset. -->
+  <meta property="og:image" content="https://aguocha.com/img/private-corporate.png">
+  <meta property="og:image:alt" content="Agu Ocha performing in the white leopard mask behind an Agu Ocha booth.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://aguocha.com/img/private-corporate.png">
   <link rel="stylesheet" href="assets/site.css">
   <style>
     :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
@@ -32,7 +37,106 @@
     .container{max-width:72rem}
     /* Reserve the injected header height so the fetch does not shift the page (CLS). */
     #site-header{min-height:84px}
+    :focus-visible{outline:2px solid var(--leopard);outline-offset:3px}
+
+    /* ====================================================================
+       Homepage-scoped styles. Prefixed .hp- so nothing here can collide with
+       a Tailwind utility or with the shared classes above, and so this block
+       never reaches another page. Shared CSS is deliberately untouched.
+       ==================================================================== */
+
+    /* Comfortable tap target for every homepage action at 320px. */
+    .hp-cta{min-height:52px;display:inline-flex;align-items:center;justify-content:center}
+
+    /* Reserve the box before the image decodes, so nothing shifts. */
+    .hp-frame{position:relative;overflow:hidden;background:var(--ink)}
+    .hp-frame > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+    /* 5/4 on desktop rather than square: a square image runs ~120px taller than
+       the copy beside it, which left the left column floating in dead space. */
+    .hp-frame-hero{aspect-ratio:4/3}
+    @media(min-width:768px){.hp-frame-hero{aspect-ratio:5/4}}
+    .hp-frame-square{aspect-ratio:1/1}
+    .hp-frame-wide{aspect-ratio:16/10}
+    /* Brand-mark tile: contain, not cover, so the mask is never cropped, and
+       inset so it reads as a mark rather than as cover artwork. */
+    .hp-frame-mark{background:#000}
+    .hp-frame-mark > img{object-fit:contain;padding:16%;transform:none}
+    .hp-tile:hover .hp-frame-mark > img{transform:none}
+
+    /* Crops. The subject in each source sits off-centre, so the focal point is
+       set explicitly rather than letting object-fit guess. */
+    .hp-crop-dj{object-position:63% 32%}
+    .hp-crop-dj-tight{object-position:63% 24%}
+    .hp-crop-stage{object-position:50% 42%}
+    .hp-crop-stage-tight{object-position:50% 46%}
+    .hp-crop-decks{object-position:50% 62%}
+
+    /* Vibe-production band: the mask mark as a large graphic, bled off the edge
+       and held behind the type. Not a floating logo. */
+    .hp-vibe{position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,0.10);border-bottom:1px solid rgba(255,255,255,0.10)}
+    .hp-vibe-mark{
+      position:absolute;pointer-events:none;user-select:none;
+      width:34rem;max-width:120%;right:-9rem;top:50%;transform:translateY(-50%);
+      opacity:.16;filter:grayscale(1) contrast(1.15);
+    }
+    @media(max-width:767px){
+      .hp-vibe-mark{width:26rem;right:-8rem;top:auto;bottom:-4rem;transform:none;opacity:.12}
+    }
+    .hp-rule{width:4.5rem;height:3px;background:var(--brand);border-radius:2px}
+    .hp-movement{font-size:1.5rem;line-height:1.3;font-weight:800;letter-spacing:-.01em}
+    @media(min-width:768px){.hp-movement{font-size:2rem}}
+
+    /* Editorial full-bleed band for the booking feature. */
+    .hp-band{position:relative;overflow:hidden;min-height:26rem;display:flex;align-items:flex-end}
+    @media(min-width:768px){.hp-band{min-height:32rem}}
+    .hp-band > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+    .hp-band-veil{
+      position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(11,11,12,.35) 0%,rgba(11,11,12,.78) 55%,rgba(11,11,12,.96) 100%);
+    }
+
+    /* Music tiles: the label sits over the bottom of the crop. */
+    .hp-tile-label{
+      position:absolute;left:0;right:0;bottom:0;padding:1rem;
+      background:linear-gradient(180deg,rgba(11,11,12,0) 0%,rgba(11,11,12,.85) 60%,rgba(11,11,12,.95) 100%);
+    }
+    .hp-tile:hover .hp-frame > img{transform:scale(1.03)}
+    .hp-frame > img{transition:transform .35s ease}
+
+    /* Suno Vibez facade. Reserves the embed height so swapping in the iframe
+       cannot shift the page. */
+    .hp-facade{
+      width:100%;min-height:352px;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;gap:.75rem;text-align:center;
+      background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.10);
+      border-radius:1rem;color:var(--leopard);cursor:pointer;padding:1.5rem;
+      transition:background .2s ease;
+    }
+    .hp-facade:hover{background:rgba(255,255,255,0.07)}
+    /* CSS-only play mark. Keeps the brand mask from appearing a third time on
+       one page, and adds no request. */
+    .hp-play{
+      width:4.5rem;height:4.5rem;border-radius:9999px;background:var(--brand);
+      display:flex;align-items:center;justify-content:center;margin-bottom:.25rem;
+    }
+    .hp-play::after{
+      content:"";border-style:solid;border-width:.85rem 0 .85rem 1.35rem;
+      border-color:transparent transparent transparent var(--leopard);
+      margin-left:.28rem;
+    }
+    .hp-facade:hover .hp-play{background:var(--leopard)}
+    .hp-facade:hover .hp-play::after{border-left-color:var(--jet)}
+    .hp-embed{width:100%;min-height:352px;border:0;border-radius:1rem;display:block}
+
+    @media(prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
+      .hp-tile:hover .hp-frame > img{transform:none}
+    }
   </style>
+  <!-- Without JavaScript the Spotify facade button cannot do anything, so it is
+       hidden and the direct Follow Playlist link becomes the only route. The
+       section still explains itself and stays fully usable. -->
+  <noscript><style>[data-spotify-facade]{display:none}</style></noscript>
   <!-- Compiled Tailwind. Loaded LAST on purpose: the Play CDN this replaced
        appended its generated stylesheet to the end of <head>, so utilities won
        every specificity tie against the project classes above. That is also
@@ -46,165 +150,198 @@
   <div id="site-header"></div>
 
   <main>
-    <!-- ==================================================== 1. HERO (D3) -->
-    <section class="section pb-10">
+    <!-- ============================================================ 1. HERO
+         Static image, not a video. The previous hero auto-loaded a YouTube
+         iframe that rendered as an empty black rectangle before (and often
+         after) load; a first-party still of the persona is both more reliable
+         and a stronger opening image. -->
+    <section class="pt-10 pb-14 md:pt-14 md:pb-20">
       <div class="mx-auto container px-4">
-        <div class="grid gap-10 md:grid-cols-2 md:items-center">
-          <div>
-            <h1 class="font-extrabold tracking-tight text-4xl md:text-5xl">Agu Ocha</h1>
-            <!-- EDITORIAL REVIEW REQUIRED: existing lead, retained verbatim. -->
-            <p class="lead mt-4 text-white/80">Afrohouse DJ and producer. New England based — performing worldwide.</p>
-            <div class="mt-6 flex flex-wrap gap-3">
-              <a href="music.html" class="btn-primary rounded-xl px-5 py-3 font-semibold">Listen</a>
-              <a href="book.html" class="btn rounded-xl px-5 py-3 font-semibold">Book</a>
-              <a href="submit.html" class="btn rounded-xl px-5 py-3 font-semibold">Submit Music</a>
+        <div class="grid items-center gap-10 md:grid-cols-12 md:gap-12">
+
+          <div class="md:col-span-7 lg:col-span-6">
+            <h1 class="font-extrabold tracking-tight text-5xl sm:text-6xl md:text-7xl">Agu Ocha</h1>
+            <p class="lead mt-5 text-white/85">New England based. Performing online.</p>
+            <p class="mt-2 text-white/70">AI-assisted and vibe-produced music welcome.</p>
+
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="music.html" class="hp-cta btn-primary rounded-xl px-7 font-semibold">Listen</a>
+              <a href="submit.html" class="hp-cta btn rounded-xl px-6 font-semibold border-white/40">Submit Music</a>
+              <a href="book.html" class="hp-cta btn rounded-xl px-6 font-semibold">Book</a>
             </div>
           </div>
 
-          <!-- ============================== 2. FEATURED VIDEO (D3) -->
-          <div class="card rounded-2xl p-3">
-            <iframe class="h-64 w-full rounded-xl border border-white/10" src="https://www.youtube.com/embed/rCBM8kuzI3U" title="Agu Ocha live video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <div class="md:col-span-5 lg:col-span-6">
+            <div class="hp-frame hp-frame-hero rounded-2xl border border-white/10">
+              <img src="img/private-corporate.png" width="1536" height="1024"
+                   class="hp-crop-dj"
+                   alt="Agu Ocha performing in the white leopard mask behind an Agu Ocha booth, with a crowd in front."
+                   loading="eager" fetchpriority="high" decoding="async">
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================================== 3. THREE ACTION CARDS (D3) --
-         The site's three primary visitor journeys, in priority order. -->
-    <section class="section border-t border-white/10">
-      <div class="mx-auto container px-4">
-        <h2 class="font-extrabold text-2xl md:text-3xl">Start here</h2>
-        <div class="mt-8 grid gap-6 md:grid-cols-3">
-
-          <article class="card flex h-full flex-col justify-between rounded-2xl p-6">
-            <div>
-              <h3 class="font-bold text-xl">Listen</h3>
-              <p class="mt-2 text-white/80">
-                The catalogue, official videos, and where to follow.
-              </p>
-            </div>
-            <a href="music.html" class="btn-primary mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Open Music</a>
-          </article>
-
-          <article class="card flex h-full flex-col justify-between rounded-2xl p-6">
-            <div>
-              <h3 class="font-bold text-xl">Book</h3>
-              <p class="mt-2 text-white/80">
-                Private and corporate events, festivals and tours, residencies,
-                brand activations, and collaborations.
-              </p>
-            </div>
-            <a href="book.html" class="btn-primary mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Open Booking</a>
-          </article>
-
-          <article class="card flex h-full flex-col justify-between rounded-2xl p-6">
-            <div>
-              <h3 class="font-bold text-xl">Submit Music</h3>
-              <p class="mt-2 text-white/80">
-                Send a track for playlist consideration. Free to submit, and
-                AI-assisted music is welcome.
-              </p>
-            </div>
-            <a href="submit.html" class="btn-primary mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Open Submit Music</a>
-          </article>
 
         </div>
       </div>
     </section>
 
-    <!-- ============================= 4. BOOKING CATEGORY OVERVIEW (D3) --
-         Links only. No calendar is duplicated here — each category page
-         carries its own. -->
-    <section class="section border-t border-white/10">
-      <div class="mx-auto container px-4">
-        <h2 class="font-extrabold text-2xl md:text-3xl">Booking categories</h2>
-        <p class="mt-3 max-w-3xl text-white/80">
-          Each category opens its own booking calendar.
-        </p>
-        <!-- EDITORIAL REVIEW REQUIRED: labels only; descriptions live on
-             book.html and the category pages. -->
-        <div class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <a class="card rounded-xl p-4 hover:bg-white/10" href="private-corporate.html">Private &amp; Corporate</a>
-          <a class="card rounded-xl p-4 hover:bg-white/10" href="festivals-tours.html">Festivals &amp; Tours</a>
-          <a class="card rounded-xl p-4 hover:bg-white/10" href="residencies.html">Residencies</a>
-          <a class="card rounded-xl p-4 hover:bg-white/10" href="brand-activations.html">Brand Activations</a>
-          <a class="card rounded-xl p-4 hover:bg-white/10" href="collab.html">Collaborations</a>
-          <a class="card rounded-xl p-4 hover:bg-white/10" href="book.html">All categories</a>
-        </div>
-        <!-- EDITORIAL REVIEW REQUIRED: existing booking-notice sentence,
-             retained verbatim from the previous homepage. -->
-        <p class="mt-6 text-white/90">
-          DJ Agu Ocha can currently be booked only with <strong>1-month notice</strong>.
-        </p>
-      </div>
-    </section>
-
-    <!-- ====================== 5. CURRENT SUBMIT MUSIC OPPORTUNITY (D3) --
-         Summary only. The form itself lives on submit.html and is not
-         duplicated here. -->
-    <section class="section border-t border-white/10">
-      <div class="mx-auto container px-4">
-        <h2 class="font-extrabold text-2xl md:text-3xl">Current playlist opportunity</h2>
-        <!-- EDITORIAL REVIEW REQUIRED: campaign summary. Suno Vibez is the
-             currently featured opportunity; full detail is on submit.html. -->
-        <div class="card mt-6 rounded-2xl p-6 md:p-8">
-          <p class="font-mono text-xs uppercase tracking-[0.2em] text-white/50">Open now</p>
-          <h3 class="mt-2 font-bold text-xl">Suno Vibez</h3>
-          <p class="mt-3 max-w-3xl text-white/85">
-            A monthly playlist built entirely from creator submissions. Free to enter, AI-assisted
-            music is welcome, and you keep ownership of your track. If yours is selected,
-            we&rsquo;ll contact you within seven days.
+    <!-- ====================================== 2. VIBE-PRODUCTION STATEMENT
+         A single composition, deliberately not a row of cards. The mask mark
+         is bled off the right edge behind the type so it reads as artwork
+         rather than as a logo dropped into a box. -->
+    <section class="hp-vibe section">
+      <img src="img/agu-logo.png" width="1024" height="1024" class="hp-vibe-mark"
+           alt="" aria-hidden="true" loading="lazy" decoding="async">
+      <div class="relative mx-auto container px-4">
+        <div class="max-w-3xl">
+          <div class="hp-rule"></div>
+          <h2 class="mt-6 font-extrabold tracking-tight text-3xl md:text-5xl">Where music meets vibe production.</h2>
+          <p class="lead mt-6 text-white/85">
+            Coders vibe-code. Designers and filmmakers create with AI. Music creators deserve the
+            same freedom. Use the tools. Own your sound. Let the music speak.
           </p>
-          <div class="mt-5 flex flex-wrap gap-3">
-            <a href="submit.html" class="btn-primary rounded-xl px-5 py-3 font-semibold">Submit your track</a>
-            <a href="submission-terms.html" class="btn rounded-xl px-5 py-3 font-semibold">Submission Terms</a>
-          </div>
-          <p class="mt-4 text-sm text-white/55">
-            Submission does not guarantee playlist placement.
+          <p class="hp-movement mt-8">Don&rsquo;t ban the tools. Judge the music.</p>
+          <p class="mt-6">
+            <a href="submit.html" class="underline underline-offset-4 text-white/70 hover:text-white">Submit your music</a>
           </p>
         </div>
       </div>
     </section>
 
-    <!-- ================================ 6. MEDIA AND PERFORMANCE (D3) --
-         Also the homepage route to tour.html, which is no longer in the
-         primary navigation. -->
-    <section class="section border-t border-white/10">
+    <!-- ==================================================== 3. LATEST MUSIC
+         The repository verifies two YouTube destinations and the music page.
+         It does NOT verify any release title, release date or cover artwork,
+         so none is shown and none is invented. The titles below are the exact
+         labels already used on music.html. -->
+    <section class="section">
       <div class="mx-auto container px-4">
-        <h2 class="font-extrabold text-2xl md:text-3xl">Media and performances</h2>
-        <div class="mt-6 grid gap-6 md:grid-cols-2">
-          <article class="card flex h-full flex-col justify-between rounded-2xl p-6">
-            <div>
-              <h3 class="font-bold text-lg">Press and media</h3>
-              <p class="mt-2 text-white/80">Fast facts and media requests.</p>
+        <h2 class="font-extrabold tracking-tight text-3xl md:text-4xl">Latest Music</h2>
+
+        <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+          <a class="hp-tile group block" href="https://www.youtube.com/watch?v=rCBM8kuzI3U"
+             target="_blank" rel="noopener noreferrer">
+            <div class="hp-frame hp-frame-square rounded-2xl border border-white/10">
+              <img src="img/residencies.png" width="1536" height="1024"
+                   class="hp-crop-decks"
+                   alt="A DJ booth and dance floor during an Agu Ocha set." loading="lazy" decoding="async">
+              <div class="hp-tile-label">
+                <h3 class="font-bold text-lg">Official Video</h3>
+                <span class="mt-1 inline-block text-sm font-semibold text-white/75 group-hover:text-white">Watch &rarr;</span>
+              </div>
             </div>
-            <a href="media.html" class="btn mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Open Media</a>
-          </article>
-          <article class="card flex h-full flex-col justify-between rounded-2xl p-6">
-            <div>
-              <h3 class="font-bold text-lg">Tour updates</h3>
-              <!-- EDITORIAL REVIEW REQUIRED: deliberately claims no dates. No
-                   verified upcoming events exist in the repository. -->
-              <p class="mt-2 text-white/80">Sign up to hear about upcoming dates and tickets.</p>
+          </a>
+
+          <a class="hp-tile group block" href="https://www.youtube.com/watch?v=1JGjYV1WcHE"
+             target="_blank" rel="noopener noreferrer">
+            <div class="hp-frame hp-frame-square rounded-2xl border border-white/10">
+              <img src="img/festivals-tours.png" width="1536" height="1024"
+                   class="hp-crop-stage-tight"
+                   alt="The Agu Ocha leopard mask lit on a festival stage above the crowd." loading="lazy" decoding="async">
+              <div class="hp-tile-label">
+                <h3 class="font-bold text-lg">Live / Alternate Cut</h3>
+                <span class="mt-1 inline-block text-sm font-semibold text-white/75 group-hover:text-white">Watch &rarr;</span>
+              </div>
             </div>
-            <a href="tour.html" class="btn mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Open Tour</a>
-          </article>
+          </a>
+
+          <!-- Deliberately the brand mark rather than a photograph: this tile is
+               a route to the music page, and dressing it as a photo would imply
+               it is a release. No release artwork exists in this repository. -->
+          <a class="hp-tile group block sm:col-span-2 lg:col-span-1" href="music.html">
+            <div class="hp-frame hp-frame-square hp-frame-mark rounded-2xl border border-white/10">
+              <img src="img/agu-logo.png" width="1024" height="1024"
+                   alt="" aria-hidden="true" loading="lazy" decoding="async">
+              <div class="hp-tile-label">
+                <h3 class="font-bold text-lg">Explore Music</h3>
+                <span class="mt-1 inline-block text-sm font-semibold text-white/75 group-hover:text-white">Listen &rarr;</span>
+              </div>
+            </div>
+          </a>
+
         </div>
       </div>
     </section>
 
-    <!-- ============================================= 7. CONTACT CTA (D3) -->
+    <!-- ====================================================== 4. SUNO VIBEZ
+         The Spotify iframe is never loaded on arrival. A facade holds the
+         reserved height and swaps in the embed on click, so a blocked or slow
+         Spotify costs nothing and the direct link always works. -->
     <section class="section border-t border-white/10">
       <div class="mx-auto container px-4">
-        <div class="card rounded-2xl p-6">
-          <h2 class="font-bold text-xl">Rather talk to a person?</h2>
-          <p class="mt-2 text-white/80">
-            Call or text directly — for bookings, media, or anything the pages above don&rsquo;t answer.
-          </p>
-          <div class="mt-5 flex flex-wrap gap-3">
-            <a href="tel:+17622486242" class="btn-primary rounded-xl px-5 py-3 font-semibold">Call</a>
-            <a href="sms:+17622486242" class="btn rounded-xl px-5 py-3 font-semibold">Text</a>
+        <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
+
+          <div class="lg:col-span-5">
+            <div class="hp-rule"></div>
+            <h2 class="mt-6 font-extrabold tracking-tight text-3xl md:text-4xl">Suno Vibez</h2>
+            <p class="lead mt-4 text-white/85">A home for AI-assisted and vibe-produced music.</p>
+            <p class="mt-3 text-white/60">Free to submit. Placement is not guaranteed.</p>
+
+            <div class="mt-7 flex flex-wrap gap-3">
+              <a href="https://open.spotify.com/playlist/5u17B3EXagZ5F2bm0mgCTq?si=f1371b6ab08b4b5f"
+                 target="_blank" rel="noopener noreferrer"
+                 class="hp-cta btn-primary rounded-xl px-6 font-semibold">Follow Playlist</a>
+              <a href="submit.html" class="hp-cta btn rounded-xl px-6 font-semibold border-white/40">Submit Music</a>
+            </div>
           </div>
+
+          <div class="lg:col-span-7">
+            <div data-spotify-mount>
+              <button type="button" class="hp-facade" data-spotify-facade
+                      data-src="https://open.spotify.com/embed/playlist/5u17B3EXagZ5F2bm0mgCTq?utm_source=generator">
+                <span class="hp-play" aria-hidden="true"></span>
+                <span class="font-bold text-lg">Play the Suno Vibez playlist</span>
+                <span class="text-sm text-white/55">Loads Spotify only when you ask for it.</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================== 5. BOOKING FEATURE
+         One editorial band. The individual enquiry types and their calendars
+         live on book.html and are deliberately not duplicated here. -->
+    <section class="hp-band border-y border-white/10">
+      <img src="img/festivals-tours.png" width="1536" height="1024" class="hp-crop-stage"
+           alt="A festival crowd in front of a stage carrying the Agu Ocha leopard mask."
+           loading="lazy" decoding="async">
+      <div class="hp-band-veil"></div>
+      <div class="relative w-full">
+        <div class="mx-auto container px-4 pb-12 pt-24 md:pb-16 md:pt-32">
+          <div class="max-w-2xl">
+            <h2 class="font-extrabold tracking-tight text-3xl md:text-5xl">Book Agu Ocha</h2>
+            <p class="lead mt-4 text-white/85">Private events, festivals, residencies and collaborations.</p>
+            <a href="book.html" class="hp-cta btn-primary mt-7 rounded-xl px-7 font-semibold">Explore Booking</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================== 6. MEDIA AND TOUR STRIP
+         Secondary by design: two routes, one line each, no imagery, so it
+         cannot compete with Music, Suno Vibez or Booking. -->
+    <section class="py-12 md:py-14">
+      <div class="mx-auto container px-4">
+        <h2 class="sr-only">Media and tour</h2>
+        <div class="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2">
+
+          <a href="media.html" class="group flex items-center justify-between gap-4 bg-[#0B0B0C] p-6 hover:bg-white/5">
+            <span>
+              <span class="block font-bold text-lg">Media Requests</span>
+              <span class="mt-1 block text-sm text-white/60">Press enquiries and fast facts.</span>
+            </span>
+            <span aria-hidden="true" class="text-xl text-white/40 group-hover:text-white">&rarr;</span>
+          </a>
+
+          <a href="tour.html" class="group flex items-center justify-between gap-4 bg-[#0B0B0C] p-6 hover:bg-white/5">
+            <span>
+              <span class="block font-bold text-lg">Tour Updates</span>
+              <span class="mt-1 block text-sm text-white/60">Hear when new dates are announced.</span>
+            </span>
+            <span aria-hidden="true" class="text-xl text-white/40 group-hover:text-white">&rarr;</span>
+          </a>
+
         </div>
       </div>
     </section>
@@ -215,5 +352,7 @@
 
   <!-- Shared header/footer loader + nav behavior -->
   <script src="assets/site.js" defer></script>
+  <!-- Homepage only: click-to-load Spotify facade. -->
+  <script src="assets/home.js" defer></script>
 </body>
 </html>
