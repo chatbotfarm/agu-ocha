@@ -74,18 +74,29 @@ window.SUNO_VIBEZ_CONFIG = {
     },
     b: {
       label: "Spotify playlist",
-      /* Current Suno Vibez playlist (updated 2026-07-31, replacing
-       * 5UP8zLioz5jelEk4n5sFi8). This is the single source of truth: /submit
-       * renders both the embed and the "Follow the playlist" link from here,
-       * and thank-you.html reads the same value, so both surfaces move together
-       * and cannot drift apart.
+      /* Current Suno Vibez playlist, 5u17B3EXagZ5F2bm0mgCTq (updated
+       * 2026-07-31). It replaces an unrelated Afrobeat playlist that was
+       * configured here previously — see git history for the retired ID. If the
+       * embed ever renders a playlist name other than "Suno Vibez", either this
+       * value is stale or the deployed copy is behind the repository; check
+       * which commit is live before editing anything here.
+       *
+       * This is the single source of truth: /submit renders BOTH the embed and
+       * the "Follow the playlist" link from here, and thank-you.html reads the
+       * same value, so the surfaces move together and cannot drift apart. Do
+       * not hardcode a playlist URL into either page.
+       *
+       * The link carries ?si=... (Spotify's share token) because that is what
+       * was supplied for sharing. The embed deliberately carries no query
+       * string: the iframe needs only the playlist ID, and ?si= is a share
+       * token rather than an embed parameter.
        *
        * NOTE: collab.html still hardcodes the previous playlist ID. It does not
        * read this config, so it is deliberately untouched here and is recorded
        * as a separate follow-up. */
-      playlistUrl: "https://open.spotify.com/playlist/5u17B3EXagZ5F2bm0mgCTq?si=045af572f7e04dde",
+      playlistUrl: "https://open.spotify.com/playlist/5u17B3EXagZ5F2bm0mgCTq?si=2840471ba6ed40a3",
       playlistEmbedUrl:
-        "https://open.spotify.com/embed/playlist/5u17B3EXagZ5F2bm0mgCTq?utm_source=generator"
+        "https://open.spotify.com/embed/playlist/5u17B3EXagZ5F2bm0mgCTq"
     }
   },
   playlistUpdatedLabel: "Updated on the 1st of each month",
