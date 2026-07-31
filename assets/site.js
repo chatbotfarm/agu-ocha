@@ -138,7 +138,11 @@
     });
   }
 
-  loadHTML("site-header", "header.html");
-  loadHTML("site-footer", "footer.html").then(setCurrentYear);
+  /* Root-relative on purpose. Clean routes are physical directories, so from
+   * /booking/residencies/ a relative "header.html" would resolve to
+   * /booking/residencies/header.html and 404. These two paths are the reason
+   * every nested page still gets a header and footer. */
+  loadHTML("site-header", "/header.html");
+  loadHTML("site-footer", "/footer.html").then(setCurrentYear);
   initCalendarStatus();
 })();

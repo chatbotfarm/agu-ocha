@@ -11,9 +11,15 @@
  * served directly. Rebuild it with `npm run build:css` after changing markup.
  */
 module.exports = {
+  /* Clean routes are physical directories containing index.html, nested up to
+   * two levels (/booking/residencies/). If these globs miss a route, Tailwind
+   * silently emits nothing for the classes only that page uses and it renders
+   * unstyled — so this list must cover every directory route, not just the
+   * root. */
   content: [
     "./*.html",
-    "./suno-vibez/*.html",
+    "./*/index.html",
+    "./*/*/index.html",
     "./assets/**/*.js"
   ],
 
