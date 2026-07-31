@@ -144,16 +144,24 @@ typo, it means no consent was actually described.
 
 ---
 
-## 5. Post-submit redirect
+## 5. Post-submit redirect — DONE
 
-Set the form's post-submit action to redirect to:
+**Operator confirmed on 2026-07-31.** The form's post-submit action now redirects to:
 
 ```
-https://aguocha.com/thank-you.html
+https://aguocha.com/thank-you/
 ```
 
-Without this, `thank-you.html` is unreachable and the funnel ends on GoHighLevel's default
-confirmation. The page is already built and handles the rest.
+That is the canonical clean route. The operator made this change inside GoHighLevel directly — no
+repository change and no GoHighLevel API call was involved, and the production form has not been
+submitted from the repository side to verify it.
+
+`thank-you.html` still exists, but only as a legacy compatibility redirect for older links. Because
+GoHighLevel now targets the canonical route directly, a new submission no longer passes through
+that redirect at all. This also retires an edge case that mattered while the old URL was the
+target: the legacy redirect preserves `?track=` through JavaScript but not through its
+`<meta refresh>`, so a submitter with JavaScript disabled would have lost the track name. Normal new
+submissions no longer touch that path.
 
 Optionally append `?track=<track title>` and the confirmation page will name the track back to the
 creator. It is optional; the page renders correctly without it.
@@ -202,12 +210,14 @@ Do these in order. Steps 1–4 are in GoHighLevel; steps 5–8 are on the live s
 2. Confirm exactly six visible controls, with the keys in §2 spelled exactly as written.
 3. Confirm the rights checkbox shows the §4.1 wording, not "Option 1".
 4. Confirm no `[BUSINESS NAME]` or `[USE_CASE_FROM_CAMPAIGN_DESCRIPTION]` string survives anywhere.
-5. Open `https://aguocha.com/submit` and confirm the form renders.
+5. Open `https://aguocha.com/submit-music/` and confirm the form renders. (`/submit` and
+   `/submit.html` still work, but only as legacy compatibility redirects.)
 6. Paste a track link into the hero field, continue to the form, and confirm **`track_link` is
    prefilled**. This is the step that silently breaks if a field key was renamed.
 7. Submit once, using an email address you control and a real but disposable track link. **Do not
    enter anyone else's personal information.** Confirm:
-   - the browser lands on `https://aguocha.com/thank-you.html`;
+   - the browser lands on `https://aguocha.com/thank-you/` (the redirect the operator
+     configured on 2026-07-31);
    - the contact appears in GoHighLevel with all six values stored;
    - the reviewer notification arrives.
 8. Delete the test contact.
