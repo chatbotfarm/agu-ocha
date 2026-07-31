@@ -112,7 +112,10 @@ window.SUNO_VIBEZ_CONFIG = {
    * rather than a placeholder silhouette.
    *
    * OPERATOR: a portrait at 512x512 or larger, square, committed to img/,
-   * would replace the logo here with no other change.
+   * would replace the logo here with no other change. Write the value with a
+   * LEADING SLASH — "/img/portrait.jpg". A bare "img/portrait.jpg" is rejected
+   * by validPhotoPath and the curator photo silently disappears, because a
+   * relative path would resolve against /submit-music/ rather than the root.
    *
    * `links` contains only profiles whose exact URL is verified in this
    * repository. The Spotify artist URL is the canonical form of the embed ID

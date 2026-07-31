@@ -1,7 +1,9 @@
 /*
  * Agu Ocha — shared site behavior.
  *
- * Loaded on every page as <script src="assets/site.js" defer></script>.
+ * Loaded on every page as <script src="/assets/site.js" defer></script>.
+ * Root-relative: clean routes are directories, so a relative src would break
+ * on any nested page such as /booking/residencies/.
  *
  * Why the nav behavior lives here and not inside header.html:
  * header.html is injected with innerHTML, and scripts inserted via innerHTML
