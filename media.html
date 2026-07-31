@@ -3,230 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- EDITORIAL REVIEW REQUIRED: provisional metadata. Describes the combined
-       information + request page; there is no separate media-request route. -->
-  <title>Media &amp; Press — Agu Ocha</title>
-  <meta name="description" content="Agu Ocha media and press: interview requests, podcasts, radio, editorial features, event coverage, fast facts, and approved media assets.">
-  <link rel="canonical" href="https://aguocha.com/media.html">
-  <link rel="icon" href="favicon.ico">
-  <link rel="apple-touch-icon" href="img/agu-logo.png">
-  <meta property="og:title" content="Media &amp; Press — Agu Ocha">
-  <meta property="og:description" content="Interview requests, podcasts, radio, editorial features, event coverage, and approved media assets.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://aguocha.com/media.html">
-  <meta property="og:image" content="https://aguocha.com/img/agu-logo.png">
-  <link rel="stylesheet" href="assets/site.css">
-  <style>
-    :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
-    html{font-size:17px}
-    @media(min-width:1024px){html{font-size:18px}}
-    body{background:var(--jet);color:var(--leopard);line-height:1.65}
-    .btn{border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--leopard);transition:all .2s ease}
-    .btn:hover{background:var(--leopard);color:var(--jet)}
-    .btn-primary{background:var(--brand);color:var(--leopard);border-color:transparent}
-    .btn-primary:hover{background:var(--leopard);color:var(--jet)}
-    .card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)}
-    .lead{font-size:1.125rem}
-    .section{padding-top:4rem;padding-bottom:4rem}
-    .container{max-width:72rem}
-    /* Reserve the injected header height so the fetch does not shift the page (CLS). */
-    #site-header{min-height:84px}
-    /* Anchor targets clear the sticky header so a jumped-to heading is not hidden. */
-    [id]{scroll-margin-top:96px}
-  </style>
-  <noscript><style>[data-ghl-form-status]{display:none}</style></noscript>
-  <!-- Compiled Tailwind. Loaded LAST on purpose: the Play CDN this replaced
-       appended its generated stylesheet to the end of <head>, so utilities won
-       every specificity tie against the project classes above. That is also
-       Tailwind's intended cascade — `class="section pt-10"` is written
-       expecting pt-10 to win. Moving this link higher silently changes
-       line-height, section padding and card borders sitewide. -->
-  <link rel="stylesheet" href="assets/tailwind.css">
+  <title>Moved — Agu Ocha Media and Press</title>
+  <!-- Legacy URL kept alive so existing inbound links do not 404.
+       NOTE: GitHub Pages serves static files only and cannot issue a real
+       HTTP 301 for this path. This is a client-side redirect: a meta refresh
+       with a JavaScript replace() enhancement. It is not a 301 and must not be
+       described as one. Search engines are told where the real page is by the
+       canonical tag plus noindex,follow. -->
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://aguocha.com/media/">
+  <meta http-equiv="refresh" content="0;url=/media/">
+  <script>
+    /* Preserves the query string and fragment. Both come from location, which
+       is assigned to location.replace() — never written into the document — so
+       nothing untrusted is interpolated into HTML. */
+    location.replace("/media/" + location.search + location.hash);
+  </script>
 </head>
-
-<body>
-  <!-- Shared header include -->
-  <div id="site-header"></div>
-
-  <main>
-    <!-- ==================================================== 1. HERO -->
-    <section class="section pb-8">
-      <div class="mx-auto container px-4">
-        <div class="max-w-3xl">
-          <h1 class="font-extrabold tracking-tight text-4xl md:text-5xl">Media &amp; Press</h1>
-          <!-- EDITORIAL REVIEW REQUIRED: provisional supporting copy. -->
-          <p class="lead mt-5 text-white/85">
-            Interview requests, podcasts, radio, editorial features, event coverage, and approved
-            media assets.
-          </p>
-          <a href="#media-request" class="btn-primary mt-7 inline-block rounded-xl px-6 py-3 font-semibold">
-            Submit a Media Request
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================ 2. FEATURED VIDEO ======
-         Existing verified embed, already used on index.html and music.html. -->
-    <section class="section border-t border-white/10 pt-10">
-      <div class="mx-auto container px-4">
-        <h2 class="font-extrabold text-2xl md:text-3xl">Featured performance</h2>
-        <div class="card mt-6 rounded-2xl p-3">
-          <iframe
-            class="w-full rounded-xl border border-white/10"
-            style="aspect-ratio:16/9; height:auto;"
-            src="https://www.youtube.com/embed/rCBM8kuzI3U"
-            title="Agu Ocha — Official video"
-            frameborder="0"
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
-        </div>
-        <p class="mt-4 text-white/75">
-          More official and live video is published on the
-          <a class="underline underline-offset-4" href="music.html">Music page</a>.
-        </p>
-      </div>
-    </section>
-
-    <!-- ===================================== 3. FAST FACTS + BIOGRAPHY -->
-    <section class="section border-t border-white/10">
-      <div class="mx-auto container px-4">
-        <h2 class="font-extrabold text-2xl md:text-3xl">Fast facts</h2>
-
-        <div class="mt-6 grid gap-6 md:grid-cols-2">
-          <div class="card rounded-2xl p-6">
-            <!-- EDITORIAL REVIEW REQUIRED: retained verbatim from the previous
-                 Media page. -->
-            <dl class="space-y-4">
-              <div>
-                <dt class="text-sm uppercase tracking-wide text-white/60">Region</dt>
-                <dd class="mt-1 text-white/90">Based between New England and the Caribbean corridor.</dd>
-              </div>
-              <div>
-                <dt class="text-sm uppercase tracking-wide text-white/60">Availability</dt>
-                <dd class="mt-1 text-white/90">Tour-ready year-round with select blackout weeks for studio intensives.</dd>
-              </div>
-              <div>
-                <dt class="text-sm uppercase tracking-wide text-white/60">Styles</dt>
-                <dd class="mt-1 text-white/90">Cinematic electronics blending ancestral percussion, future bass, and vocal-driven storytelling.</dd>
-              </div>
-            </dl>
-          </div>
-
-          <div class="card rounded-2xl p-6">
-            <h3 class="font-bold text-xl">Short biography</h3>
-            <!-- EDITORIAL REVIEW REQUIRED: assembled only from copy already
-                 published elsewhere in this repository (index.html and
-                 book.html). No new biographical claims are made here. A longer
-                 approved biography should replace this before press use. -->
-            <p class="mt-3 text-white/85">
-              Agu Ocha is an Afrohouse DJ and producer, based in New England and performing
-              worldwide. The live show engineers immersive sets that travel from underground rooms
-              to headline stages, with precision sound design, cinematic visuals, and bilingual
-              storytelling.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================== 4. MEDIA RESOURCES ========
-         Deliberately does NOT offer downloads. The press/ directory in this
-         repository is empty, so no downloadable asset is claimed or linked.
-         Resources are described as available on request. -->
-    <section class="section border-t border-white/10">
-      <div class="mx-auto container px-4">
-        <h2 class="font-extrabold text-2xl md:text-3xl">Media resources</h2>
-        <p class="mt-3 max-w-3xl text-white/80">
-          Approved resources are supplied on request. Tell us what you need and the intended use.
-        </p>
-        <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <li class="card rounded-xl p-4">Artist biography</li>
-          <li class="card rounded-xl p-4">Fast facts</li>
-          <li class="card rounded-xl p-4">Press photos</li>
-          <li class="card rounded-xl p-4">Agu Ocha logo</li>
-          <li class="card rounded-xl p-4">Music links</li>
-          <li class="card rounded-xl p-4">Video links</li>
-          <li class="card rounded-xl p-4">Track artwork</li>
-          <li class="card rounded-xl p-4">Booking contact</li>
-        </ul>
-        <p class="mt-5 text-sm text-white/60">
-          <!-- OPERATOR TODO: when a real press pack exists, publish the files
-               and link them here. Until then nothing is described as an
-               immediate download. -->
-          A downloadable press pack is not published yet &mdash; request assets below and they will
-          be sent across.
-        </p>
-      </div>
-    </section>
-
-    <!-- ================================ 5. MEDIA REQUEST FORM SLOT ========
-         The heading, supporting copy, loading line and contact panel are static
-         markup, so they survive assets/forms.js failing, the config failing,
-         the GHL script failing, and JavaScript being off.
-
-         While AGU_SITE_CONFIG.mediaRequestFormUrl is empty, assets/forms.js
-         injects nothing and removes the loading line — the panel below is
-         already the working route. See docs/GHL_OPERATOR_ACTIONS.md. -->
-    <section id="media-request" class="section border-t border-white/10">
-      <div class="mx-auto max-w-2xl px-4">
-        <h2 class="font-extrabold text-2xl md:text-3xl">Media and Press Requests</h2>
-        <p class="mt-3 text-white/80">
-          For interviews, press coverage, approved images, artist information or media
-          appearances, send a request with your publication, deadline and intended use.
-        </p>
-
-        <h3 class="mt-8 font-bold text-xl">Request an Interview or Media Asset</h3>
-
-        <div data-ghl-form="mediaRequest" class="mt-4">
-          <p class="bk-status" data-ghl-form-status role="status">
-            Loading the request form. If it does not appear, use the options below.
-          </p>
-        </div>
-
-        <!-- Always visible, and deliberately outside the form mount so the
-             injection above cannot remove it. -->
-        <div class="card mt-8 rounded-2xl p-6">
-          <h3 class="font-bold text-lg">Send a request directly</h3>
-          <p class="mt-2 text-white/80">
-            Include your publication, deadline, and what you need &mdash; interview, assets, or both.
-          </p>
-          <div class="mt-5 flex flex-wrap gap-3">
-            <a href="sms:+17622486242" class="btn-primary rounded-xl px-5 py-3 font-semibold">Text a Media Request</a>
-            <a href="tel:+17622486242" class="btn rounded-xl px-5 py-3 font-semibold">Call</a>
-          </div>
-          <p class="mt-4 text-sm text-white/60">
-            What happens to your details is covered in the
-            <a class="underline underline-offset-4" href="privacy.html">Privacy Notice</a>.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================== 6. BOOKING CTA -->
-    <section class="section border-t border-white/10">
-      <div class="mx-auto container px-4">
-        <div class="card rounded-2xl p-6">
-          <h2 class="font-bold text-xl">Booking enquiries</h2>
-          <p class="mt-2 max-w-3xl text-white/80">
-            Event bookings are handled separately from press requests.
-          </p>
-          <div class="mt-5 flex flex-wrap gap-3">
-            <a href="book.html" class="btn-primary rounded-xl px-5 py-3 font-semibold">Open Booking</a>
-            <a href="tour.html" class="btn rounded-xl px-5 py-3 font-semibold">Tour &amp; Appearances</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Shared footer include -->
-  <div id="site-footer"></div>
-
-  <script src="assets/site-config.js" defer></script>
-  <script src="assets/site.js" defer></script>
-  <script src="assets/forms.js" defer></script>
+<body style="background:#0B0B0C;color:#F7F7F8;font:16px/1.6 system-ui,sans-serif;padding:2rem">
+  <p>This page has moved to <a style="color:#F7F7F8" href="/media/">/media/</a>.</p>
 </body>
 </html>

@@ -3,126 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Brand Activations — Book Agu Ocha</title>
-  <meta name="description" content="Book Agu Ocha for music, appearances and event-based creative collaborations for brands and organizations.">
-  <link rel="icon" href="favicon.ico">
-  <link rel="apple-touch-icon" href="img/agu-logo.png">
-  <meta property="og:title" content="Brand Activations — Book Agu Ocha">
-  <meta property="og:description" content="Book Agu Ocha for music, appearances and event-based creative collaborations for brands and organizations.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://aguocha.com/brand-activations.html">
-  <meta property="og:image" content="https://aguocha.com/img/agu-logo.png">
-  <link rel="stylesheet" href="assets/site.css">
-  <style>
-    :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
-    html{font-size:17px}
-    @media(min-width:1024px){html{font-size:18px}}
-    body{background:var(--jet);color:var(--leopard);line-height:1.65}
-    .btn{border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--leopard);transition:all .2s ease}
-    .btn:hover{background:var(--leopard);color:var(--jet)}
-    .btn-primary{background:var(--brand);color:var(--leopard);border-color:transparent}
-    .btn-primary:hover{background:var(--leopard);color:var(--jet)}
-    .card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)}
-    .lead{font-size:1.125rem}
-    .section{padding-top:4rem;padding-bottom:4rem}
-    .container{max-width:72rem}
-    /* Reserve the injected header height so the fetch does not shift the page (CLS). */
-    #site-header{min-height:84px}
-  </style>
-  <!-- With JavaScript off nothing clears the loading line, so hide it outright.
-       The static fallback block below the calendar stays visible regardless. -->
-  <noscript><style>[data-calendar-status]{display:none}</style></noscript>
-  <!-- Compiled Tailwind. Loaded LAST on purpose: the Play CDN this replaced
-       appended its generated stylesheet to the end of <head>, so utilities won
-       every specificity tie against the project classes above. That is also
-       Tailwind's intended cascade — `class="section pt-10"` is written
-       expecting pt-10 to win. Moving this link higher silently changes
-       line-height, section padding and card borders sitewide. -->
-  <link rel="stylesheet" href="assets/tailwind.css">
+  <title>Moved — Music and Brand Collaborations | Agu Ocha</title>
+  <!-- Legacy URL kept alive so existing inbound links do not 404.
+       NOTE: GitHub Pages serves static files only and cannot issue a real
+       HTTP 301 for this path. This is a client-side redirect: a meta refresh
+       with a JavaScript replace() enhancement. It is not a 301 and must not be
+       described as one. Search engines are told where the real page is by the
+       canonical tag plus noindex,follow. -->
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://aguocha.com/booking/brand-collaborations/">
+  <meta http-equiv="refresh" content="0;url=/booking/brand-collaborations/">
+  <script>
+    /* Preserves the query string and fragment. Both come from location, which
+       is assigned to location.replace() — never written into the document — so
+       nothing untrusted is interpolated into HTML. */
+    location.replace("/booking/brand-collaborations/" + location.search + location.hash);
+  </script>
 </head>
-
-<body>
-  <!-- Shared header include -->
-  <div id="site-header"></div>
-
-  <main>
-    <!-- Route back to the booking hub -->
-    <nav class="mx-auto max-w-7xl px-4 pt-8 text-sm text-white/60" aria-label="Breadcrumb">
-      <a class="underline underline-offset-4 hover:text-white" href="book.html">&larr; All booking categories</a>
-    </nav>
-
-    <!-- Compatibility entry point. Booking is consolidated on book.html, but
-         this page is retained for inbound links and keeps its own calendar so
-         booking still works without JavaScript. -->
-    <div class="mx-auto max-w-7xl px-4 pt-4">
-      <p class="card rounded-xl p-4 text-sm text-white/75">
-        Booking now lives on one page.
-        <a class="underline underline-offset-4" href="book.html?type=brand#booking">Open this category on the Book page</a>
-        &mdash; or carry on below.
-      </p>
-    </div>
-
-    <!-- Category identity and explanation -->
-    <section class="mx-auto max-w-7xl px-4 pt-6">
-      <h1 class="font-extrabold tracking-tight text-3xl md:text-4xl">Brand Activations</h1>
-      <p class="lead mt-4 max-w-3xl text-white/85">
-        Music, appearances and event-based creative collaborations for brands and organizations.
-      </p>
-      <ul class="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/70">
-        <li>Event appearances</li>
-        <li>Original music</li>
-        <li>Creative collaborations</li>
-      </ul>
-    </section>
-
-    <!-- ================================================= BOOKING CALENDAR ==
-         The embed below is unchanged. Its src, iframe id, inline style,
-         scrolling attribute and the form_embed.js source are exactly as
-         GoHighLevel generated them. Only the surrounding wrapper, the class
-         and the data-* hooks are ours (see assets/site.css).
-
-         Note: this page loads form_embed.js from api.leadconnectorhq.com while
-         three of the five load it from link.msgsndr.com. That split is left
-         exactly as found — standardising it needs GoHighLevel confirmation
-         first (SECURITY-REVIEW.md L-07). -->
-    <section class="section pt-10">
-      <div class="mx-auto max-w-7xl px-4">
-        <h2 class="font-bold text-xl">Check availability</h2>
-        <p class="mt-2 max-w-3xl text-white/75">Pick a time below to send a booking request.</p>
-      </div>
-
-      <div class="mx-auto max-w-7xl px-4 mt-6 bk-embed" data-calendar-embed>
-        <p class="bk-status mb-3" data-calendar-status role="status">Loading the booking calendar&hellip;</p>
-        <iframe src="https://api.leadconnectorhq.com/widget/booking/Fwzuvt3S944xnibxng7O" title="Brand activation booking calendar" style="width: 100%;border:none;overflow: hidden;" scrolling="no" id="Fwzuvt3S944xnibxng7O_1762813595022" class="bk-frame" data-calendar-frame></iframe>
-        <script src="https://api.leadconnectorhq.com/js/form_embed.js" type="text/javascript"></script>
-      </div>
-
-      <!-- Static fallback. Present in markup, so it survives a failed
-           calendar, a failed resize script, and JavaScript being disabled. -->
-      <div class="mx-auto max-w-7xl px-4 mt-10">
-        <div class="card rounded-2xl p-6">
-          <h2 class="font-bold text-lg">Calendar not loading?</h2>
-          <p class="mt-2 max-w-3xl text-white/80">
-            You can send the same booking request by phone or text instead.
-          </p>
-          <div class="mt-5 flex flex-wrap gap-3">
-            <a href="tel:+17622486242" class="btn-primary rounded-xl px-5 py-3 font-semibold">Call</a>
-            <a href="sms:+17622486242" class="btn rounded-xl px-5 py-3 font-semibold">Text</a>
-            <a href="book.html" class="btn rounded-xl px-5 py-3 font-semibold">Other categories</a>
-          </div>
-          <p class="mt-4 text-sm text-white/60">
-            The calendar is hosted by GoHighLevel, which receives what you submit. See the
-            <a class="underline underline-offset-4" href="privacy.html">Privacy Notice</a>.
-          </p>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Shared footer include -->
-  <div id="site-footer"></div>
-
-  <!-- Shared header/footer loader + nav behavior -->
-  <script src="assets/site.js" defer></script>
+<body style="background:#0B0B0C;color:#F7F7F8;font:16px/1.6 system-ui,sans-serif;padding:2rem">
+  <p>This page has moved to <a style="color:#F7F7F8" href="/booking/brand-collaborations/">/booking/brand-collaborations/</a>.</p>
 </body>
 </html>
