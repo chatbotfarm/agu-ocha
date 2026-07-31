@@ -74,9 +74,18 @@ window.SUNO_VIBEZ_CONFIG = {
     },
     b: {
       label: "Spotify playlist",
-      playlistUrl: "https://open.spotify.com/playlist/5UP8zLioz5jelEk4n5sFi8",
+      /* Current Suno Vibez playlist (updated 2026-07-31, replacing
+       * 5UP8zLioz5jelEk4n5sFi8). This is the single source of truth: /submit
+       * renders both the embed and the "Follow the playlist" link from here,
+       * and thank-you.html reads the same value, so both surfaces move together
+       * and cannot drift apart.
+       *
+       * NOTE: collab.html still hardcodes the previous playlist ID. It does not
+       * read this config, so it is deliberately untouched here and is recorded
+       * as a separate follow-up. */
+      playlistUrl: "https://open.spotify.com/playlist/5u17B3EXagZ5F2bm0mgCTq?si=045af572f7e04dde",
       playlistEmbedUrl:
-        "https://open.spotify.com/embed/playlist/5UP8zLioz5jelEk4n5sFi8?utm_source=generator"
+        "https://open.spotify.com/embed/playlist/5u17B3EXagZ5F2bm0mgCTq?utm_source=generator"
     }
   },
   playlistUpdatedLabel: "Updated on the 1st of each month",
