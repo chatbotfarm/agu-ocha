@@ -50,17 +50,20 @@
           Got it. <span id="track-name">Your track</span> is in the queue.
         </h1>
 
-        <!-- 2. What happens next. Deliberately states no reply date and no
-             promise that every submission gets a response: neither is
-             guaranteed by the current process. The #reply-by element is gone,
-             so setReplyDate() in assets/thank-you.js returns early. -->
+        <!-- 2. What happens next. This states exactly one promise, in the same
+             words as submit.html, submission-terms.html and the config comment
+             on selectedContactDays: contact within seven days IF SELECTED. It
+             does not promise a reply to every submission, because no workflow
+             is verified to send one. The #reply-by element is deliberately
+             absent, so setReplyDate() in assets/thank-you.js returns early. -->
         <p class="lead mt-4 text-white/85">
-          Your submission came through. Agu Ocha reviews tracks for upcoming playlists and monthly
-          DJ sets, and we&rsquo;ll be in touch if yours fits one.
+          Your submission came through. Agu Ocha reviews tracks personally for upcoming playlists and
+          monthly DJ sets. If your track is selected, we&rsquo;ll contact you within seven days.
         </p>
         <p class="mt-3 text-white/70">
-          Most tracks aren&rsquo;t selected &mdash; that&rsquo;s normal for a curated list, and it isn&rsquo;t a
-          verdict on your music. Submission doesn&rsquo;t guarantee placement.
+          We can&rsquo;t reply to every submission, so no reply isn&rsquo;t a rejection notice &mdash; it
+          usually just means the track wasn&rsquo;t a fit for the sets being built that month. Placement
+          isn&rsquo;t guaranteed, and you&rsquo;re welcome to submit again next month.
         </p>
 
         <!-- 3. Secondary CTA: follow the playlist (highest-value next action) -->

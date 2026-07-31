@@ -28,15 +28,16 @@
   }
 
   /*
-   * Reply-by date. Dormant by design: the confirmation page deliberately makes
-   * no response-date promise, so #reply-by no longer exists and this returns
-   * early. Kept, rather than deleted, so the behaviour is available again if a
-   * response SLA is ever confirmed by the operator process.
+   * Contact-by date for SELECTED tracks. Dormant by design: the confirmation
+   * page states the policy in words rather than as a dated promise, so
+   * #reply-by does not exist and this returns early. Kept so the behaviour is
+   * available if the operator later wants a concrete date shown to selected
+   * creators. This is NOT a universal response SLA.
    */
   function setReplyDate() {
     var node = document.getElementById("reply-by");
     if (!node) return;
-    var days = Number(CFG.responseSlaDays) || 7;
+    var days = Number(CFG.selectedContactDays) || 7;
     var due = new Date();
     due.setDate(due.getDate() + days);
     node.textContent = due.toLocaleDateString(undefined, {
