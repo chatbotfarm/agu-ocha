@@ -3,125 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Submission received | Submit Music</title>
-  <meta name="description" content="Your track is in the queue for review for upcoming Agu Ocha playlists and monthly DJ sets.">
-  <meta name="robots" content="noindex">
-  <link rel="icon" href="favicon.ico">
-  <link rel="apple-touch-icon" href="img/agu-logo.png">
-  <meta property="og:title" content="Submission received | Submit Music">
-  <meta property="og:description" content="Your track is queued for review for upcoming playlists and monthly DJ sets.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://aguocha.com/thank-you.html">
-  <meta property="og:image" content="https://aguocha.com/img/agu-logo.png">
-  <style>
-    :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
-    html{font-size:17px}
-    @media(min-width:1024px){html{font-size:18px}}
-    body{background:var(--jet);color:var(--leopard);line-height:1.65}
-    .btn{border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--leopard);transition:all .2s ease}
-    .btn:hover{background:var(--leopard);color:var(--jet)}
-    .btn-primary{background:var(--brand);color:var(--leopard);border-color:transparent}
-    .btn-primary:hover{background:var(--leopard);color:var(--jet)}
-    .card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)}
-    .lead{font-size:1.125rem}
-    .section{padding-top:4rem;padding-bottom:4rem}
-    .container{max-width:72rem}
-    /* Reserve the injected header height so the fetch does not shift the page (CLS). */
-    #site-header{min-height:84px}
-    :focus-visible{outline:2px solid var(--leopard);outline-offset:3px}
-  </style>
-  <!-- Compiled Tailwind. Loaded LAST on purpose: the Play CDN this replaced
-       appended its generated stylesheet to the end of <head>, so utilities won
-       every specificity tie against the project classes above. That is also
-       Tailwind's intended cascade — `class="section pt-10"` is written
-       expecting pt-10 to win. Moving this link higher silently changes
-       line-height, section padding and card borders sitewide. -->
-  <link rel="stylesheet" href="assets/tailwind.css">
+  <title>Moved — Submission received | Agu Ocha</title>
+  <!-- Legacy URL kept alive so existing inbound links do not 404.
+       NOTE: GitHub Pages serves static files only and cannot issue a real
+       HTTP 301 for this path. This is a client-side redirect: a meta refresh
+       with a JavaScript replace() enhancement. It is not a 301 and must not be
+       described as one. Search engines are told where the real page is by the
+       canonical tag plus noindex,follow. -->
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://aguocha.com/thank-you/">
+  <meta http-equiv="refresh" content="0;url=/thank-you/">
+  <script>
+    /* Preserves the query string and fragment. Both come from location, which
+       is assigned to location.replace() — never written into the document — so
+       nothing untrusted is interpolated into HTML. */
+    location.replace("/thank-you/" + location.search + location.hash);
+  </script>
 </head>
-<body>
-  <!-- Shared header include -->
-  <div id="site-header"></div>
-
-  <main>
-    <section class="section">
-      <div class="mx-auto max-w-2xl px-4">
-        <!-- 1. Acknowledge -->
-        <h1 class="font-extrabold tracking-tight text-3xl md:text-4xl">
-          Got it. <span id="track-name">Your track</span> is in the queue.
-        </h1>
-
-        <!-- 2. What happens next. This states exactly one promise, in the same
-             words as submit.html, submission-terms.html and the config comment
-             on selectedContactDays: contact within seven days IF SELECTED. It
-             does not promise a reply to every submission, because no workflow
-             is verified to send one. The #reply-by element is deliberately
-             absent, so setReplyDate() in assets/thank-you.js returns early. -->
-        <p class="lead mt-4 text-white/85">
-          Your submission came through. Agu Ocha reviews tracks personally for upcoming playlists and
-          monthly DJ sets. If your track is selected, we&rsquo;ll contact you within seven days.
-        </p>
-        <p class="mt-3 text-white/70">
-          We can&rsquo;t reply to every submission, so no reply isn&rsquo;t a rejection notice &mdash; it
-          usually just means the track wasn&rsquo;t a fit for the sets being built that month. Placement
-          isn&rsquo;t guaranteed, and you&rsquo;re welcome to submit again next month.
-        </p>
-
-        <!-- 3. Secondary CTA: follow the playlist (highest-value next action) -->
-        <div class="card mt-10 rounded-2xl p-6">
-          <h2 class="font-bold text-xl">Hear what you&rsquo;re submitting to</h2>
-          <p class="mt-2 text-white/80">
-            The playlist refreshes on the 1st of each month. Following it is the best way to
-            see what gets picked &mdash; and it helps every creator on it.
-          </p>
-          <a id="follow-playlist" href="#"
-             class="btn-primary mt-4 inline-block rounded-xl px-5 py-3 font-semibold">
-            Follow the playlist
-          </a>
-        </div>
-
-        <!-- 4. Tertiary CTA: community. Removed by JS if no URL is configured. -->
-        <p class="mt-6">
-          <a id="join-community" href="#" class="btn inline-block rounded-xl px-5 py-3 font-semibold">
-            Join the community
-          </a>
-        </p>
-
-        <!-- 5. Share -->
-        <div class="mt-10">
-          <h2 class="font-bold text-xl">Know someone else making tracks?</h2>
-          <p class="mt-2 text-white/80">
-            Submissions are free and always will be. Passing it on is how the queue gets good.
-          </p>
-          <p id="share-actions" class="mt-4"></p>
-        </div>
-
-        <!-- 6. Set the return expectation -->
-        <p class="mt-10 text-sm text-white/60">
-          Submissions open again on the 1st. One track per creator per month &mdash; so send your best one.
-        </p>
-        <p class="mt-3 text-sm text-white/60">
-          Need to change or withdraw your submission? Text
-          <a class="underline underline-offset-4" href="sms:+17622486242">+1 (762) 248-6242</a>.
-          The <a class="underline underline-offset-4" href="submission-terms.html">submission terms</a>
-          explain what happens to your track.
-        </p>
-
-        <!-- Static fallback navigation. The rest of this page's routes come from
-             the JS-injected footer, so these two remain reachable if that fetch
-             fails. -->
-        <p class="mt-8 flex flex-wrap gap-3">
-          <a href="submit.html" class="btn rounded-xl px-5 py-3 font-semibold">Back to Submit Music</a>
-          <a href="index.html" class="btn rounded-xl px-5 py-3 font-semibold">Home</a>
-        </p>
-      </div>
-    </section>
-  </main>
-
-  <!-- Shared footer include -->
-  <div id="site-footer"></div>
-
-  <script src="assets/suno-vibez-config.js" defer></script>
-  <script src="assets/site.js" defer></script>
-  <script src="assets/thank-you.js" defer></script>
+<body style="background:#0B0B0C;color:#F7F7F8;font:16px/1.6 system-ui,sans-serif;padding:2rem">
+  <p>This page has moved to <a style="color:#F7F7F8" href="/thank-you/">/thank-you/</a>.</p>
 </body>
 </html>

@@ -1,17 +1,19 @@
 /*
  * Suno Vibez — playlist submission configuration.
  *
- * Single source of truth for every external URL and toggle the /submit page
+ * Single source of truth for every external URL and toggle the /submit-music/ page
  * needs. Nothing here is secret: this file is public, served straight from
  * GitHub Pages. Never put API keys, tokens, or private webhook URLs in it.
  *
  * ---------------------------------------------------------------------------
- * OPERATOR ACTION — status as of 2026-07-30
+ * OPERATOR ACTION — status as of 2026-07-31
  *
  * DONE, do not undo:
  *   ghlFormUrl   set to the live "playlist submission Form".
  *   curator      populated (spec §6.5.1). See the note above that block for
  *                what is still missing and why nothing was invented.
+ *   redirect     post-submit destination is https://aguocha.com/thank-you/
+ *                (item 2 below, operator confirmed).
  *
  * STILL OPEN:
  *
@@ -34,9 +36,11 @@
  *    parameter (see prefillParam) so the creator does not retype it. GHL
  *    ignores a parameter that does not match a field key, without warning.
  *
- * 2. Post-submit redirect — set inside GHL, not here.
- *    Point it at https://aguocha.com/thank-you.html or the confirmation page
- *    (spec §7.9) is unreachable.
+ * 2. Post-submit redirect — DONE, operator confirmed 2026-07-31.
+ *    It points at https://aguocha.com/thank-you/ — the canonical clean route.
+ *    Set inside GHL, not here; no repository or GHL API change was made from
+ *    this side and the production form was not submitted to verify it.
+ *    thank-you.html survives only as a legacy compatibility redirect.
  *
  * 3. ghlFormSimplified — flip to true only AFTER item 1 is done and verified.
  *    See the comment at that key. It controls a factual claim about how long
@@ -81,8 +85,8 @@ window.SUNO_VIBEZ_CONFIG = {
        * value is stale or the deployed copy is behind the repository; check
        * which commit is live before editing anything here.
        *
-       * This is the single source of truth: /submit renders BOTH the embed and
-       * the "Follow the playlist" link from here, and thank-you.html reads the
+       * This is the single source of truth: /submit-music/ renders BOTH the embed and
+       * the "Follow the playlist" link from here, and /thank-you/ reads the
        * same value, so the surfaces move together and cannot drift apart. Do
        * not hardcode a playlist URL into either page.
        *
@@ -103,12 +107,15 @@ window.SUNO_VIBEZ_CONFIG = {
 
   /* ---- Curator (spec §6.5.1) --------------------------------------------
    * Populated 2026-07-31. `photo` is restricted by assets/submit.js to a
-   * first-party img/ path, so only assets committed to this repository can be
+   * first-party /img/ path, so only assets committed to this repository can be
    * shown. No real curator photograph exists yet, so the approved logo is used
    * rather than a placeholder silhouette.
    *
    * OPERATOR: a portrait at 512x512 or larger, square, committed to img/,
-   * would replace the logo here with no other change.
+   * would replace the logo here with no other change. Write the value with a
+   * LEADING SLASH — "/img/portrait.jpg". A bare "img/portrait.jpg" is rejected
+   * by validPhotoPath and the curator photo silently disappears, because a
+   * relative path would resolve against /submit-music/ rather than the root.
    *
    * `links` contains only profiles whose exact URL is verified in this
    * repository. The Spotify artist URL is the canonical form of the embed ID
@@ -118,7 +125,9 @@ window.SUNO_VIBEZ_CONFIG = {
    */
   curator: {
     name: "DJ Agu Ocha",
-    photo: "img/agu-logo.png",
+    // Root-relative. Clean routes are directories, so a bare "img/..." here
+    // would resolve to /submit-music/img/... and 404.
+    photo: "/img/agu-logo.png",
     bio: "Afrohouse DJ and producer, based in New England and performing worldwide. Every submission is reviewed personally for fit with an upcoming monthly set.",
     links: [
       { label: "Spotify", url: "https://open.spotify.com/artist/5ymz8gAPHU5sgDUhdhVqzh" }

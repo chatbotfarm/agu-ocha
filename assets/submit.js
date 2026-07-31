@@ -66,7 +66,15 @@
   function validPhotoPath(raw) {
     if (typeof raw !== "string") return null;
     var value = raw.trim();
-    return /^img\/[A-Za-z0-9._\-/]+$/.test(value) ? value : null;
+    /* Root-relative only. This used to accept a bare "img/..." path, which
+     * resolved against the current directory — fine when every page sat at the
+     * site root, broken the moment /submit-music/ became a directory, because
+     * the browser then asked for /submit-music/img/agu-logo.png. The leading
+     * slash is now required rather than optional, so the same class of bug
+     * cannot come back silently.
+     * The restriction to /img/ is the point: it keeps the photo first-party,
+     * so no third-party request appears that privacy.html has not disclosed. */
+    return /^\/img\/[A-Za-z0-9._\-/]+$/.test(value) ? value : null;
   }
 
   function el(tag, className, text) {
@@ -621,7 +629,12 @@
         return;
       }
 
-      var terms = target.closest('a[href="submission-terms.html"]');
+      /* Matched on a path prefix rather than an exact href. The clean route is
+       * /submission-terms/, but /submission-terms.html still exists as a
+       * redirect and may appear in older inbound markup, so both should count
+       * as the same click. An exact-match selector silently stopped firing the
+       * moment the URL changed. */
+      var terms = target.closest('a[href^="/submission-terms"]');
       if (terms) track("terms_click", {});
     });
   }

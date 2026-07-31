@@ -133,8 +133,12 @@ retired — the site no longer depends on it either way.
 
 Carried forward from `SECURITY-REVIEW.md` and `STAGE-E-VALIDATION.md`:
 
-- **Post-submit redirect** for the Submit Music form — confirm it points at
-  `https://aguocha.com/thank-you.html`, or `thank-you.html` stays unreachable.
+- ~~**Post-submit redirect** for the Submit Music form.~~ **Closed 2026-07-31 —
+  operator confirmed.** It now points at `https://aguocha.com/thank-you/`, the
+  canonical clean route. Changed by the operator inside GoHighLevel; no
+  repository or GoHighLevel API change was made from here, and the production
+  form was not submitted to verify it. `thank-you.html` remains only as a legacy
+  compatibility redirect for older links.
 - **Submit Music form fields and consent strings** — the repository cannot see
   inside form `hNlynM8h8zLs9jkDlTVW`. Confirm the consent text contains no
   unfilled placeholders and that the rights checkbox states the representation.

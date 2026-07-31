@@ -117,6 +117,62 @@ for (const file of files) {
   }
 }
 
+/* ------------------------------------------------------- clean-URL rules --
+ * The site serves clean directory routes (/submit-music/). Each old .html path
+ * survives only as a noindex redirect document. Two things can quietly undo
+ * that, and neither shows up as a broken link, because the legacy files still
+ * exist on disk:
+ *
+ *   1. a public page linking to a legacy .html route, which sends visitors
+ *      through a pointless client-side hop and splits ranking signals;
+ *   2. a redirect that points at itself or at another redirect, which is a
+ *      loop or a chain no crawler should be asked to follow.
+ */
+function isRedirectDoc(html) {
+  return /<meta\s+http-equiv=["']refresh["']/i.test(html);
+}
+
+const redirectTargets = new Map(); // file -> destination path
+
+for (const file of files) {
+  const html = readFileSync(file, "utf8");
+  const rel = relative(ROOT, file).replace(/\\/g, "/");
+  const redirect = isRedirectDoc(html);
+
+  if (redirect) {
+    const m = html.match(/<meta\s+http-equiv=["']refresh["']\s+content=["'][^;]*;\s*url=([^"']+)["']/i);
+    if (m) redirectTargets.set(rel, m[1].trim());
+    continue; // a redirect document is allowed to name its own legacy siblings
+  }
+
+  // Public pages must not link to legacy .html routes.
+  for (const [, raw] of html.matchAll(/\s(?:href)\s*=\s*["']([^"']*)["']/g)) {
+    const value = raw.trim();
+    if (/^(https?:|mailto:|tel:|sms:|data:|#)/i.test(value)) continue;
+    const path = value.split("?")[0].split("#")[0];
+    if (!path.endsWith(".html")) continue;
+    // index.html inside a directory route is the file itself, not a legacy route.
+    if (/(^|\/)index\.html$/.test(path)) continue;
+    errors.push(`${rel}: links to legacy route -> ${value}  (use the clean directory URL)`);
+  }
+}
+
+for (const [file, dest] of redirectTargets) {
+  const self = "/" + file.replace(/index\.html$/, "");
+  if (dest === self || dest === "/" + file) {
+    errors.push(`${file}: redirect points at itself -> ${dest}`);
+    continue;
+  }
+  // Resolve the destination and confirm it is a real page, not another redirect.
+  const target = dest.startsWith("/") ? join(ROOT, dest) : resolve(dirname(join(ROOT, file)), dest);
+  const resolved = existsSync(target) && statSync(target).isDirectory() ? join(target, "index.html") : target;
+  if (!existsSync(resolved)) {
+    errors.push(`${file}: redirect destination does not exist -> ${dest}`);
+  } else if (isRedirectDoc(readFileSync(resolved, "utf8"))) {
+    errors.push(`${file}: redirect chains into another redirect -> ${dest}`);
+  }
+}
+
 for (const w of warnings) console.log(`warn  ${w}`);
 for (const e of errors) console.error(`ERROR ${e}`);
 

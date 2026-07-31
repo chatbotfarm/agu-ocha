@@ -1,7 +1,9 @@
 /*
  * Agu Ocha — shared site behavior.
  *
- * Loaded on every page as <script src="assets/site.js" defer></script>.
+ * Loaded on every page as <script src="/assets/site.js" defer></script>.
+ * Root-relative: clean routes are directories, so a relative src would break
+ * on any nested page such as /booking/residencies/.
  *
  * Why the nav behavior lives here and not inside header.html:
  * header.html is injected with innerHTML, and scripts inserted via innerHTML
@@ -138,7 +140,11 @@
     });
   }
 
-  loadHTML("site-header", "header.html");
-  loadHTML("site-footer", "footer.html").then(setCurrentYear);
+  /* Root-relative on purpose. Clean routes are physical directories, so from
+   * /booking/residencies/ a relative "header.html" would resolve to
+   * /booking/residencies/header.html and 404. These two paths are the reason
+   * every nested page still gets a header and footer. */
+  loadHTML("site-header", "/header.html");
+  loadHTML("site-footer", "/footer.html").then(setCurrentYear);
   initCalendarStatus();
 })();

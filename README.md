@@ -6,29 +6,40 @@ There is exactly one build step, and it is local and optional: the Tailwind styl
 
 ## Structure
 
+Public URLs are clean directory routes. Each route is a real directory containing
+`index.html`, because GitHub Pages serves static files and cannot rewrite paths.
+
 ```
-├── index.html
-├── music.html
-├── book.html
-├── collab.html
-├── media.html
-├── tour.html
-├── store.html
+├── index.html                 # /
+├── music/index.html           # /music/
+├── submit-music/index.html    # /submit-music/   Suno Vibez landing page
+├── booking/index.html         # /booking/
+│   ├── private-corporate/index.html
+│   ├── festivals-tours/index.html
+│   ├── residencies/index.html
+│   └── brand-collaborations/index.html
+├── collaborate/index.html · media/index.html · tour/index.html · store/index.html
+├── submission-terms/index.html · privacy/index.html
+├── thank-you/index.html       # noindex; GHL post-submit destination
+│
+│   # Legacy .html files below are NOT pages. Each is a small noindex,follow
+│   # client-side redirect kept so old inbound links do not 404. GitHub Pages
+│   # cannot issue a repository-controlled HTTP 301, so these are meta-refresh
+│   # + location.replace(), never a 301.
+├── music.html · book.html · collab.html · media.html · tour.html · store.html
 ├── private-corporate.html · festivals-tours.html · residencies.html · brand-activations.html
-├── submit.html                # Suno Vibez landing page — canonical route /submit
-├── suno-vibez.html            # redirect stub → submit.html (legacy route)
-├── suno-vibez/index.html      # redirect stub → ../submit.html (legacy route)
-├── submission-terms.html · privacy.html · thank-you.html
+├── submit.html · submission-terms.html · privacy.html · thank-you.html
+├── suno-vibez.html · suno-vibez/index.html
 ├── 404.html
-├── header.html · footer.html  # shared fragments, fetched at runtime
+├── header.html · footer.html  # shared fragments, fetched at runtime from /
 ├── assets/
 │   ├── tailwind-input.css     # Tailwind source (3 @tailwind directives) — edit this
 │   ├── tailwind.css           # COMPILED OUTPUT, committed — do not hand-edit
 │   ├── site.css               # hand-written project CSS (embeds, nav, CTAs)
 │   ├── site.js                # shared loader + nav behavior (all pages)
-│   ├── suno-vibez-config.js   # every external URL and toggle /submit needs
+│   ├── suno-vibez-config.js   # every external URL and toggle /submit-music/ needs
 │   ├── analytics.js           # event surface, no vendor, no network, no cookies
-│   ├── submit.js              # /submit behavior: paste, lanes, embeds, accordion
+│   ├── submit.js              # /submit-music/ behavior: paste, lanes, embeds, accordion
 │   └── thank-you.js           # confirmation page: reply-by date, follow, share
 ├── scripts/check-links.mjs
 ├── package.json · package-lock.json · tailwind.config.js
@@ -36,7 +47,7 @@ There is exactly one build step, and it is local and optional: the Tailwind styl
 │   ├── SUBMIT_MUSIC_CONVERSION_AUDIT.md      # what the funnel did before this branch
 │   └── GHL_SUBMIT_MUSIC_FORM_REBUILD.md      # handover: the form is not in this repo
 ├── img/agu-logo.png
-├── img/submit-music-og.png    # 1200×630 social preview for /submit
+├── img/submit-music-og.png    # 1200×630 social preview for /submit-music/
 ├── favicon.ico
 ├── sitemap.xml · robots.txt
 ├── press/
@@ -67,7 +78,7 @@ npm run watch:css    # same, rebuilding on change, for local work
 - **Edit `assets/tailwind-input.css`, never `assets/tailwind.css`.** The latter is generated and will be overwritten by the next build without warning.
 - **Commit `assets/tailwind.css` with the change that caused it.** GitHub Pages serves committed files and runs no build. A change to markup that adds a utility class, committed without a rebuilt stylesheet, ships an unstyled element to production.
 - **Tailwind is pinned to v3.** This is deliberate, not neglect. The Play CDN this replaced was v3, and v4 changes enough defaults that upgrading in the same step would have been an unannounced redesign rather than a build change. Upgrading is a separate, deliberate piece of work.
-- **New content locations must be added to `content` in `tailwind.config.js`.** Tailwind only emits classes it can see in the files it scans. It currently scans root `*.html` (which includes the `header.html` / `footer.html` fragments), `suno-vibez/*.html`, and `assets/**/*.js`. A class in a file outside those globs compiles to nothing and fails silently — the page just renders wrong.
+- **New content locations must be added to `content` in `tailwind.config.js`.** Tailwind only emits classes it can see in the files it scans. It currently scans root `*.html` (which includes the `header.html` / `footer.html` fragments), `*/index.html` and `*/*/index.html` (every clean directory route, nested up to two levels), and `assets/**/*.js`. A class in a file outside those globs compiles to nothing and fails silently — the page just renders wrong. **Adding a new route directory means adding it here**, or that page ships unstyled.
 - **A class assembled at runtime is invisible to the scanner.** Tailwind matches literal strings, so `"text-" + color` never resolves. Write the whole class name out, or add it to `safelist` in `tailwind.config.js` — that is what the existing safelist entries are for: they name classes that only ever appear from JavaScript.
 
 ### Shared header and footer
@@ -75,7 +86,7 @@ npm run watch:css    # same, rebuilding on change, for local work
 `header.html` and `footer.html` are HTML **fragments**, fetched at runtime and injected into `#site-header` / `#site-footer` by `assets/site.js`. Every page loads it with a single tag:
 
 ```html
-<script src="assets/site.js" defer></script>
+<script src="/assets/site.js" defer></script>
 ```
 
 Two things follow from this and are easy to get wrong:
@@ -87,21 +98,21 @@ The navigation collapses to the mobile menu below `lg` (1024px). It is not `md`:
 
 ## Suno Vibez — the submission funnel
 
-Built to the Suno Vibez landing page specification. The canonical route is **`/submit`** (spec §11.3), served by `submit.html`; GitHub Pages resolves the extension-less path. Internal links point at `submit.html` so they resolve under any host, including a local `python -m http.server`, and the canonical tag consolidates both onto `/submit`.
+The canonical route is **`/submit-music/`**, served by `submit-music/index.html`. Internal links and the canonical tag both point there.
 
-The earlier routes still work and are kept deliberately: `/suno-vibez.html`, `/suno-vibez/`, and `/suno-vibez` are `noindex, follow` stubs that forward to `submit.html`.
+Three earlier routes still work and are kept deliberately, all as `noindex, follow` client-side redirects: `/submit.html`, `/submit` (the extension-less path GitHub Pages resolves to `submit.html`), and `/suno-vibez.html` / `/suno-vibez/`. None of them is a page; each forwards to `/submit-music/`.
 
-`suno-vibez-config.js` / `SUNO_VIBEZ_CONFIG` remain **internal identifiers**, unchanged for integration stability. "Suno Vibez" *is* the visible brand on `/submit`; what never appears is a Suno logo, wordmark, brand colour, or any claim of partnership. The sitewide footer carries the non-affiliation line.
+`suno-vibez-config.js` / `SUNO_VIBEZ_CONFIG` remain **internal identifiers**, unchanged for integration stability. "Suno Vibez" *is* the visible brand on `/submit-music/`; what never appears is a Suno logo, wordmark, brand colour, or any claim of partnership. The sitewide footer carries the non-affiliation line.
 
 ### Script order
 
-`submit.html` loads four deferred scripts, and the order is load-bearing:
+`submit-music/index.html` loads four deferred scripts, and the order is load-bearing:
 
 ```html
-<script src="assets/suno-vibez-config.js" defer></script>
-<script src="assets/analytics.js" defer></script>
-<script src="assets/site.js" defer></script>
-<script src="assets/submit.js" defer></script>
+<script src="/assets/suno-vibez-config.js" defer></script>
+<script src="/assets/analytics.js" defer></script>
+<script src="/assets/site.js" defer></script>
+<script src="/assets/submit.js" defer></script>
 ```
 
 `defer` preserves document order and runs after parsing, so the config always exists by the time anything reads it. Do **not** inline any of them: an inline script runs during parse, before the deferred config is defined, and would always fall through to the fallback state.
@@ -129,7 +140,7 @@ Emitted:
 | `faq_open` | an FAQ item is expanded |
 | `submit_cta_click` | any Submit CTA is clicked, labelled by position (`hero`, `sticky`, …) |
 | `curator_profile_click` | a curator profile link is followed |
-| `terms_click` | the submission terms are opened from `/submit` |
+| `terms_click` | the submission terms are opened from `/submit-music/` |
 | `form_load_success` | the GHL iframe fires `load` before the timeout |
 | `form_load_timeout` | it does not, and the failure panel is shown (`reason` distinguishes `timeout` from `unconfigured`) |
 
@@ -150,11 +161,11 @@ Known limit: the GHL form is a cross-origin iframe, so per-field events inside i
    Full specification, including what to remove and why, proposed consent wording, and a verification checklist: **[`docs/GHL_SUBMIT_MUSIC_FORM_REBUILD.md`](docs/GHL_SUBMIT_MUSIC_FORM_REBUILD.md)**.
 
    Field keys are correct and must not be renamed: `track_link`, `creator_name`, `email`, `genre`, `submission_notes`, `rights_confirmed` (§12.1). Renaming `track_link` in particular silently breaks the hero prefill.
-2. **Set the post-submit redirect** in GoHighLevel to `https://aguocha.com/thank-you.html`, or the confirmation page is unreachable. Append `?track=<title>` if you want the page to name the track back.
+2. ~~**Set the post-submit redirect** in GoHighLevel.~~ **Done — operator confirmed 2026-07-31.** The Submit Music form now redirects to `https://aguocha.com/thank-you/`, the canonical clean route. This was changed by the operator inside GoHighLevel; no repository change and no GHL API call was involved, and the production form has not been submitted from here. `thank-you.html` is kept as a legacy compatibility redirect for older links. Append `?track=<title>` if you want the page to name the track back.
 3. **Flip `ghlFormSimplified` to `true`** — but only after item 1 is done *and verified in the live form*. It controls a factual claim about how long the form takes to fill in, so it has to follow the form rather than lead it.
 4. **Add `lanes.a.playlistUrl`** once the Suno-hosted playlist exists, and confirm `lanes.b` points at the right Spotify playlist.
 5. **Flip `metrics.show` to `true`** after the first monthly cycle, once the numbers are real.
-6. **Replace the curator photo.** `curator` is populated, but `photo` points at the logo because no curator photograph exists in the repository. A square portrait, 512×512 or larger, committed to `img/`, is a one-line change from there. `assets/submit.js` restricts `photo` to a first-party `img/` path, so it cannot be pointed at a remote URL.
+6. **Replace the curator photo.** `curator` is populated, but `photo` points at the logo because no curator photograph exists in the repository. A square portrait, 512×512 or larger, committed to `img/`, is a one-line change from there. `assets/submit.js` restricts `photo` to a root-relative first-party `/img/` path, so it cannot be pointed at a remote URL.
 7. **Have `submission-terms.html` reviewed by counsel.** A careful draft, not vetted legal advice. The same applies to the consent wording proposed in the GHL rebuild document.
 
 Never put API keys, tokens, or private webhook URLs in `assets/` — those files are public.

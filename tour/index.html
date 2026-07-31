@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- EDITORIAL REVIEW REQUIRED: provisional metadata. Deliberately describes a
+       signup page, not a dates listing — no confirmed events exist in this
+       repository, so none is claimed. -->
+  <title>Agu Ocha Tour Updates and Appearances</title>
+  <meta name="description" content="Follow Agu Ocha tour and appearance updates. No public dates are currently posted.">
+  <link rel="canonical" href="https://aguocha.com/tour/">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/img/agu-logo.png">
+  <meta property="og:title" content="Agu Ocha Tour Updates">
+  <meta property="og:description" content="Follow tour and appearance updates. No public dates are currently posted.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aguocha.com/tour/">
+  <meta property="og:image" content="https://aguocha.com/img/festivals-tours.png">
+  <link rel="stylesheet" href="/assets/site.css">
+  <style>
+    :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
+    html{font-size:17px}
+    @media(min-width:1024px){html{font-size:18px}}
+    body{background:var(--jet);color:var(--leopard);line-height:1.65}
+    .btn{border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--leopard);transition:all .2s ease}
+    .btn:hover{background:var(--leopard);color:var(--jet)}
+    .btn-primary{background:var(--brand);color:var(--leopard);border-color:transparent}
+    .btn-primary:hover{background:var(--leopard);color:var(--jet)}
+    .card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)}
+    .lead{font-size:1.125rem}
+    .section{padding-top:4rem;padding-bottom:4rem}
+    .container{max-width:72rem}
+    /* Reserve the injected header height so the fetch does not shift the page (CLS). */
+    #site-header{min-height:84px}
+    /* Anchor targets clear the sticky header so a jumped-to heading is not hidden. */
+    [id]{scroll-margin-top:96px}
+  </style>
+  <!-- With JS off nothing clears the loading line, so hide it. The fallback
+       panel beside the form slot is static and stays visible either way. -->
+  <noscript><style>[data-ghl-form-status]{display:none}</style></noscript>
+  <!-- Compiled Tailwind. Loaded LAST on purpose: the Play CDN this replaced
+       appended its generated stylesheet to the end of <head>, so utilities won
+       every specificity tie against the project classes above. That is also
+       Tailwind's intended cascade — `class="section pt-10"` is written
+       expecting pt-10 to win. Moving this link higher silently changes
+       line-height, section padding and card borders sitewide. -->
+  <link rel="stylesheet" href="/assets/tailwind.css">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://aguocha.com/img/festivals-tours.png">
+</head>
+<body>
+  <!-- Shared header include -->
+  <div id="site-header"></div>
+
+  <main>
+    <!-- ==================================================== 1. HERO -->
+    <section class="section pb-8">
+      <div class="mx-auto container px-4">
+        <div class="max-w-3xl">
+          <h1 class="font-extrabold tracking-tight text-4xl md:text-5xl">See DJ Agu Ocha Live</h1>
+          <!-- EDITORIAL REVIEW REQUIRED: provisional supporting copy. -->
+          <p class="lead mt-5 text-white/85">
+            Confirmed public appearances will be posted here. Join the updates list to hear about
+            new dates, releases and performances.
+          </p>
+          <div class="mt-7 flex flex-wrap gap-3">
+            <a href="#tour-updates" class="btn-primary rounded-xl px-6 py-3 font-semibold">Get Tour Updates</a>
+            <a href="/booking/" class="btn rounded-xl px-6 py-3 font-semibold">Check Booking Availability</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================= 2. EVENTS STATE ======
+         No confirmed events exist anywhere in this repository, so none is
+         invented. When real dates exist, replace the empty-state card below
+         with a list of <article> entries carrying date, event name, city and
+         state, venue, and a ticket or information link. -->
+    <section class="section border-t border-white/10 pt-10">
+      <div class="mx-auto container px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">Dates</h2>
+
+        <div class="card mt-6 rounded-2xl p-6">
+          <p class="lead text-white/85">No public dates are currently posted.</p>
+          <p class="mt-3 max-w-3xl text-white/75">
+            New appearances go to the updates list first. In the meantime you can check
+            availability for your own event, or follow along for releases.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="/booking/" class="btn-primary rounded-xl px-5 py-3 font-semibold">Check Booking Availability</a>
+            <!-- Verified destination: the same Spotify artist profile already
+                 linked from music.html, derived from the embed ID in use there. -->
+            <a href="https://open.spotify.com/artist/5ymz8gAPHU5sgDUhdhVqzh"
+               target="_blank" rel="noopener noreferrer"
+               class="btn rounded-xl px-5 py-3 font-semibold">Follow Agu Ocha</a>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-3">
+            <a href="tel:+17622486242" class="btn rounded-xl px-5 py-3 font-semibold">Call</a>
+            <a href="sms:+17622486242" class="btn rounded-xl px-5 py-3 font-semibold">Text</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================ 3. WHAT YOU'LL HEAR -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">What the list covers</h2>
+        <ul class="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <li class="card rounded-xl p-4">Tour dates</li>
+          <li class="card rounded-xl p-4">Live appearances</li>
+          <li class="card rounded-xl p-4">Festivals</li>
+          <li class="card rounded-xl p-4">Special events</li>
+          <li class="card rounded-xl p-4">New cities</li>
+          <li class="card rounded-xl p-4">New releases</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================================== 4. TOUR UPDATES FORM SLOT =======
+         The heading, supporting line, loading message and contact panel are all
+         static markup, so they survive assets/forms.js failing, the config
+         failing, the GHL script failing, and JavaScript being off.
+
+         While AGU_SITE_CONFIG.tourUpdatesFormUrl is empty, assets/forms.js
+         injects nothing and simply removes the loading line — the panel below
+         is already the working route. Paste a valid LeadConnector form URL into
+         assets/site-config.js and the form renders here with no other change.
+         See docs/GHL_OPERATOR_ACTIONS.md. -->
+    <section id="tour-updates" class="section border-t border-white/10">
+      <div class="mx-auto max-w-2xl px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">Get Tour Updates</h2>
+        <p class="mt-2 text-white/75">
+          Join the list and choose how you want to hear about new announcements.
+        </p>
+
+        <div data-ghl-form="tourUpdates" class="mt-6">
+          <p class="bk-status" data-ghl-form-status role="status">
+            Loading the signup form. If it does not appear, use the options below.
+          </p>
+        </div>
+
+        <!-- Always visible, and deliberately outside the form mount so the
+             injection above cannot remove it. Written as an alternative route
+             rather than an error, so it reads correctly in every state. -->
+        <div class="card mt-8 rounded-2xl p-6">
+          <h3 class="font-bold text-lg">Prefer to reach out directly?</h3>
+          <p class="mt-2 text-white/80">
+            Text or call to be added to the announcements list, or to ask about a date.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href="sms:+17622486242" class="btn-primary rounded-xl px-5 py-3 font-semibold">Text to join</a>
+            <a href="tel:+17622486242" class="btn rounded-xl px-5 py-3 font-semibold">Call</a>
+          </div>
+          <p class="mt-4 text-sm text-white/60">
+            What happens to your details is covered in the
+            <a class="underline underline-offset-4" href="/privacy/">Privacy Notice</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================== 5. PROMOTER / VENUE CTA -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <div class="card rounded-2xl p-6">
+          <h2 class="font-bold text-xl">Booking Agu Ocha</h2>
+          <p class="mt-2 max-w-3xl text-white/80">
+            Promoters, venues, and event organizers can use the Book page to request availability.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a href="/booking/" class="btn-primary rounded-xl px-5 py-3 font-semibold">Open Booking</a>
+            <a href="/booking/?type=festival" class="btn rounded-xl px-5 py-3 font-semibold">Festival or Public Event</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared footer include -->
+  <div id="site-footer"></div>
+
+  <script src="/assets/site-config.js" defer></script>
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/forms.js" defer></script>
+</body>
+</html>
