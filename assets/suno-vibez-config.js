@@ -6,16 +6,23 @@
  * GitHub Pages. Never put API keys, tokens, or private webhook URLs in it.
  *
  * ---------------------------------------------------------------------------
- * OPERATOR ACTION REQUIRED
+ * OPERATOR ACTION — status as of 2026-07-30
  *
- * 1. ghlFormUrl — REQUIRED, currently empty.
- *    Paste the GoHighLevel *form* URL for the five-field submission form
- *    (spec §7.3), e.g. https://api.leadconnectorhq.com/widget/form/<FORM_ID>.
- *    Until this is set, the page renders an accessible fallback panel with
- *    Text/Email routes instead of a broken frame — it never shows an error.
+ * DONE, do not undo:
+ *   ghlFormUrl   set to the live "playlist submission Form".
+ *   curator      populated (spec §6.5.1). See the note above that block for
+ *                what is still missing and why nothing was invented.
  *
- *    The GHL form must write to these exact field keys (spec §12.1). Renaming
- *    them later means re-keying every downstream workflow and report:
+ * STILL OPEN:
+ *
+ * 1. Rebuild the GoHighLevel form itself. The URL below points at a working
+ *    form, but the form asks for far more than the six approved fields, and
+ *    that is now the largest remaining conversion cost in the funnel. No change
+ *    to this repository can fix it — the form lives in GoHighLevel.
+ *    Full specification: docs/GHL_SUBMIT_MUSIC_FORM_REBUILD.md
+ *
+ *    The approved field keys (spec §12.1). Renaming any of them re-keys every
+ *    downstream workflow and report, and silently breaks the prefill below:
  *        track_link          URL,      required
  *        creator_name        text,     required
  *        email               email,    required
@@ -24,17 +31,16 @@
  *        rights_confirmed    checkbox, required
  *
  *    Prefill: the hero paste field forwards the pasted link as a query
- *    parameter (see prefillParam) so the creator does not retype it.
+ *    parameter (see prefillParam) so the creator does not retype it. GHL
+ *    ignores a parameter that does not match a field key, without warning.
  *
  * 2. Post-submit redirect — set inside GHL, not here.
  *    Point it at https://aguocha.com/thank-you.html or the confirmation page
  *    (spec §7.9) is unreachable.
  *
- * 3. curator — REQUIRED before launch (spec §6.5.1).
- *    Real name, real photograph, and at least two public profile links. The
- *    spec is blunt that an anonymous curator is indistinguishable from a
- *    fake-playlist operator. While `name` is empty the whole "Who listens"
- *    block is omitted rather than shown half-filled.
+ * 3. ghlFormSimplified — flip to true only AFTER item 1 is done and verified.
+ *    See the comment at that key. It controls a factual claim about how long
+ *    the form takes, so it must follow the form, not lead it.
  *
  * 4. lanes.a.playlistUrl — the Suno-hosted playlist for Lane A. Empty for now.
  *
@@ -75,12 +81,30 @@ window.SUNO_VIBEZ_CONFIG = {
   },
   playlistUpdatedLabel: "Updated on the 1st of each month",
 
-  /* ---- Curator (spec §6.5.1) -------------------------------------------- */
+  /* ---- Curator (spec §6.5.1) --------------------------------------------
+   * Populated 2026-07-31. `photo` is restricted by assets/submit.js to a
+   * first-party img/ path, so only assets committed to this repository can be
+   * shown. No real curator photograph exists yet, so the approved logo is used
+   * rather than a placeholder silhouette.
+   *
+   * OPERATOR: a portrait at 512x512 or larger, square, committed to img/,
+   * would replace the logo here with no other change.
+   *
+   * `links` contains only profiles whose exact URL is verified in this
+   * repository. The Spotify artist URL is the canonical form of the embed ID
+   * already used on music.html and tour.html. No Suno or Instagram profile URL
+   * exists anywhere in this repository or its history, so none is invented —
+   * assets/submit.js omits missing links gracefully.
+   */
   curator: {
-    name: "",
-    photo: "",
-    bio: "",
-    links: [] // [{ label: "Suno profile", url: "https://..." }, ...]
+    name: "DJ Agu Ocha",
+    photo: "img/agu-logo.png",
+    bio: "Afrohouse DJ and producer, based in New England and performing worldwide. Every submission is reviewed personally for fit with an upcoming monthly set.",
+    links: [
+      { label: "Spotify", url: "https://open.spotify.com/artist/5ymz8gAPHU5sgDUhdhVqzh" }
+      // OPERATOR: add { label: "Suno", url: "https://..." } and
+      // { label: "Instagram", url: "https://..." } once the exact URLs are supplied.
+    ]
   },
 
   /* ---- Transparency metrics (spec §6.5.3) ------------------------------- */
@@ -92,9 +116,28 @@ window.SUNO_VIBEZ_CONFIG = {
     medianResponseDays: null
   },
 
-  /* ---- Operational promises stated on the page -------------------------- */
-  responseSlaDays: 7,
+  /* ---- Operational promises stated on the page --------------------------
+   * selectedContactDays is the window for contacting creators whose track is
+   * SELECTED. It is deliberately NOT a universal response SLA: no workflow is
+   * verified to reply to every submitter, so no page may promise one.
+   * Public wording: "If your track is selected, we'll contact you within
+   * seven days."
+   */
+  selectedContactDays: 7,
   submissionsPerCreatorPerMonth: 1,
+
+  /* ---- GHL form state ----------------------------------------------------
+   * OPERATOR TOGGLE. Leave false until the GoHighLevel form has actually been
+   * reduced to the six approved fields (see docs/GHL_SUBMIT_MUSIC_FORM_REBUILD.md)
+   * AND that change has been verified in the live form.
+   *
+   * false -> the page shows "You keep ownership. No submission fee."
+   * true  -> the page shows "Takes about 60 seconds. You keep ownership."
+   *
+   * The 60-second claim is false against the current ~12-control form, so it
+   * must not be enabled on the promise of a future edit.
+   */
+  ghlFormSimplified: false,
 
   /* ---- Confirmation page (spec §7.9) ------------------------------------ */
   // Discord invite or email-list URL. Left empty until one exists — the
@@ -103,7 +146,7 @@ window.SUNO_VIBEZ_CONFIG = {
   communityLabel: "Join the Suno Vibez community",
   shareUrl: "https://aguocha.com/submit",
   shareText:
-    "Suno Vibez is a free monthly playlist for music made with Suno. Every submission gets a real listen and an answer within 7 days.",
+    "Suno Vibez is a free monthly playlist for music made with Suno. Submit one track — AI-assisted music is welcome, and submission is free.",
 
   /* ---- Contact fallbacks ------------------------------------------------ */
   phone: "+17622486242",

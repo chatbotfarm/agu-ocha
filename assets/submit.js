@@ -225,25 +225,51 @@
   /* ------------------------------------------------------------ the form */
 
   var formRendered = false;
+  var formLoadTimer = null;
+
+  /* Conservative windows before we treat a form as failed. Long enough that a
+   * slow connection is not misreported; short enough to be useful. The iframe
+   * is left in place either way, so a late load still works.
+   *
+   * FORM_LOAD_TIMEOUT_MS      no `load` event at all.
+   * FORM_HANDSHAKE_TIMEOUT_MS `load` fired, but no message ever arrived from
+   *                           the form's origin — the signature of a blocked
+   *                           request or an error page wearing a form's clothes.
+   *
+   * Both are deliberately generous. A false failure panel sitting beside a
+   * form that actually works is worse than showing the panel a few seconds
+   * late, so these err towards patience. */
+  var FORM_LOAD_TIMEOUT_MS = 10000;
+  var FORM_HANDSHAKE_TIMEOUT_MS = 6000;
+
+  /**
+   * Reveal the failure panel.
+   *
+   * The panel lives in static markup OUTSIDE #submission-form and ships
+   * `hidden`, so it never competes with a working form. It offers a retry and
+   * the Submission Terms — deliberately NOT a phone or SMS route, because a
+   * track sent by message bypasses the rights-confirmation checkbox, which is
+   * the only control in this flow carrying legal weight.
+   */
+  function showFormFailure(reason) {
+    var panel = document.getElementById("form-failure");
+    if (panel) panel.hidden = false;
+
+    var status = document.querySelector("[data-form-status]");
+    if (status) status.remove();
+
+    track("form_load_timeout", { reason: reason });
+  }
 
   /**
    * Form unavailable — missing, empty, or non-allowlisted ghlFormUrl.
-   *
-   * submit.html now ships a static contact panel *below* the mount, carrying
-   * Text, Call, Submission Terms and the Privacy Notice. That panel is outside
-   * #submission-form, so it survives this replacement and is already the
-   * working route. All this needs to do is clear the loading line and say so
-   * in one neutral sentence — no technical detail, no error code, and no
-   * redirect away from the page.
+   * Nothing is injected; the static failure panel becomes the visible state.
+   * No technical detail is surfaced to the visitor.
    */
   function formUnavailable(mount) {
-    mount.replaceChildren(
-      el(
-        "p",
-        "bk-status",
-        "The submission form isn't available right now. Use the options below."
-      )
-    );
+    var status = mount.querySelector("[data-form-status]");
+    if (status) status.remove();
+    showFormFailure("unconfigured");
   }
 
   function renderForm() {
@@ -307,9 +333,72 @@
       frame.setAttribute("id", widgetId + "_" + Date.now());
     }
 
+    /*
+     * Load detection.
+     *
+     * `load` alone is NOT sufficient, and this is the trap worth documenting.
+     * It fires for whatever document ends up in the frame — including the error
+     * page the browser substitutes when the request is blocked by an extension,
+     * a network filter, a proxy, or an outage. It reports that the frame
+     * settled, not that a form is in it.
+     *
+     * Measured, with the GHL hosts made unresolvable at the browser level:
+     *   working form   handshake at ~455ms, frame load at ~687ms
+     *   unreachable    frame load at ~229ms, no handshake, ever
+     *
+     * So `load` fires FASTER when the form is broken. Keying success off it
+     * would hide the fallback in precisely the situation it exists for.
+     *
+     * The authoritative signal is GHL's own resize handshake: form_embed.js
+     * resizes the frame by receiving a postMessage FROM it, so a message
+     * arriving from the form's origin proves a real GHL document booted. We
+     * only inspect `event.origin`, never the frame's contents — reading across
+     * the origin boundary is blocked and is not needed here.
+     */
+    var formOrigin;
+    try {
+      formOrigin = new URL(url).origin;
+    } catch (e) {
+      formOrigin = null;
+    }
+
+    function settleFormLoaded(via) {
+      if (!formLoadTimer) return;          // already settled, or already failed
+      clearTimeout(formLoadTimer);
+      formLoadTimer = null;
+      window.removeEventListener("message", onFrameMessage);
+      track("form_load_success", { via: via });
+    }
+
+    function onFrameMessage(event) {
+      if (formOrigin && event.origin === formOrigin) settleFormLoaded("handshake");
+    }
+    window.addEventListener("message", onFrameMessage);
+
+    /*
+     * A frame that never fires `load` at all is failing harder than one that
+     * loads an error page, so give it the shorter deadline of the two.
+     */
+    frame.addEventListener("load", function () {
+      track("form_frame_load", {});
+      if (!formLoadTimer) return;
+      clearTimeout(formLoadTimer);
+      formLoadTimer = setTimeout(function () {
+        formLoadTimer = null;
+        window.removeEventListener("message", onFrameMessage);
+        showFormFailure("no-handshake");
+      }, FORM_HANDSHAKE_TIMEOUT_MS);
+    });
+
     // The GHL form paints its own white card, so it needs no wrapper here.
     mount.replaceChildren(frame);
     formRendered = true;
+
+    formLoadTimer = setTimeout(function () {
+      formLoadTimer = null;
+      window.removeEventListener("message", onFrameMessage);
+      showFormFailure("timeout");
+    }, FORM_LOAD_TIMEOUT_MS);
 
     if (!document.querySelector('script[src="' + FORM_EMBED_SCRIPT + '"]')) {
       var script = document.createElement("script");
@@ -450,8 +539,17 @@
         // These reach an <a href>, so the scheme is validated before use.
         var href = validHttpsUrl(item.url);
         if (!href) return;
-        var a = link(href.href, "underline underline-offset-4", item.label || href.href);
-        a.setAttribute("rel", "noopener");
+        // A standalone control, not a link inside a sentence, so it has to meet
+        // WCAG 2.2 SC 2.5.8 (24x24 CSS px) on its own. The bare underline
+        // measured 46x21 at 375px, which fails on the short axis.
+        var a = link(
+          href.href,
+          "inline-flex min-h-[44px] items-center py-2 underline underline-offset-4",
+          item.label || href.href
+        );
+        a.setAttribute("rel", "noopener noreferrer");
+        a.setAttribute("target", "_blank");
+        a.setAttribute("data-curator-link", item.label || "profile");
         list.appendChild(a);
       });
       body.appendChild(list);
@@ -515,11 +613,68 @@
     );
   }
 
+  /* -------------------------------------------------- microcopy + tracking */
+
+  /**
+   * Hero microcopy. The static markup carries the always-true line. The
+   * "about 60 seconds" variant is only swapped in when the operator has set
+   * ghlFormSimplified after actually reducing and verifying the GHL form —
+   * see assets/suno-vibez-config.js. Claiming 60 seconds against the current
+   * ~12-control form would be false, so the default never says it.
+   */
+  function initHeroMicrocopy() {
+    if (CFG.ghlFormSimplified !== true) return;
+    var node = document.getElementById("hero-microcopy");
+    if (node) node.textContent = "Takes about 60 seconds. You keep ownership.";
+  }
+
+  /**
+   * Retry after a failed form load. A full reload is used rather than
+   * re-injecting: form_embed.js has already attached by this point and is not
+   * safely re-entrant, so reloading is the reliable path.
+   */
+  function initFormRetry() {
+    var btn = document.querySelector("[data-form-retry]");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      window.location.reload();
+    });
+  }
+
+  /**
+   * Delegated click tracking. Names only — no track URL, creator name, email
+   * or note is ever passed to the event layer.
+   */
+  function initClickTracking() {
+    document.addEventListener("click", function (event) {
+      var target = event.target;
+      if (!(target instanceof Element)) return;
+
+      var cta = target.closest("[data-submit-cta]");
+      if (cta) {
+        track("submit_cta_click", { location: cta.getAttribute("data-submit-cta") });
+        return;
+      }
+
+      var profile = target.closest("[data-curator-link]");
+      if (profile) {
+        track("curator_profile_click", { label: profile.getAttribute("data-curator-link") });
+        return;
+      }
+
+      var terms = target.closest('a[href="submission-terms.html"]');
+      if (terms) track("terms_click", {});
+    });
+  }
+
   /* ----------------------------------------------------------------- init */
 
+  initHeroMicrocopy();
   initHeroPaste();
   initPlaylist();
   initPlaylistLinks();
+  initFormRetry();
+  initClickTracking();
   initForm();
   initStickyBar();
   initFaq();

@@ -1,0 +1,15 @@
+/*
+ * Tailwind source entry for aguocha.com.
+ *
+ * Compiled to assets/tailwind.css by `npm run build:css`. The compiled file is
+ * committed, because GitHub Pages serves this repository directly and never
+ * runs npm.
+ *
+ * Only the three Tailwind layers live here. Design tokens (--jet, --brand,
+ * and the rest) and the component classes (.btn, .card, .section, .sv-*) stay
+ * in each page's inline <style> block exactly as before — this change removes
+ * the runtime CDN, it does not restructure the styling system.
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -15,7 +15,6 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aguocha.com/media.html">
   <meta property="og:image" content="https://aguocha.com/img/agu-logo.png">
-  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="assets/site.css">
   <style>
     :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
@@ -36,6 +35,13 @@
     [id]{scroll-margin-top:96px}
   </style>
   <noscript><style>[data-ghl-form-status]{display:none}</style></noscript>
+  <!-- Compiled Tailwind. Loaded LAST on purpose: the Play CDN this replaced
+       appended its generated stylesheet to the end of <head>, so utilities won
+       every specificity tie against the project classes above. That is also
+       Tailwind's intended cascade — `class="section pt-10"` is written
+       expecting pt-10 to win. Moving this link higher silently changes
+       line-height, section padding and card borders sitewide. -->
+  <link rel="stylesheet" href="assets/tailwind.css">
 </head>
 
 <body>

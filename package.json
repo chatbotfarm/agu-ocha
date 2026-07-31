@@ -1,0 +1,14 @@
+{
+  "name": "agu-ocha-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static site for aguocha.com. Tailwind is compiled to a committed CSS file so GitHub Pages can serve it directly — Pages does not run npm.",
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/tailwind-input.css -o ./assets/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./assets/tailwind-input.css -o ./assets/tailwind.css --watch",
+    "check": "node scripts/check-links.mjs"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

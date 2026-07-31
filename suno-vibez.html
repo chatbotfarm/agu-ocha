@@ -11,7 +11,6 @@
   <meta name="robots" content="noindex, follow">
   <link rel="canonical" href="https://aguocha.com/submit">
   <link rel="icon" href="favicon.ico">
-  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root{--jet:#0B0B0C;--leopard:#F7F7F8;--brand:#D41414}
     html{font-size:17px}
@@ -20,6 +19,13 @@
     .btn-primary:hover{background:var(--leopard);color:var(--jet)}
     :focus-visible{outline:2px solid var(--leopard);outline-offset:3px}
   </style>
+  <!-- Compiled Tailwind. Loaded LAST on purpose: the Play CDN this replaced
+       appended its generated stylesheet to the end of <head>, so utilities won
+       every specificity tie against the project classes above. That is also
+       Tailwind's intended cascade — `class="section pt-10"` is written
+       expecting pt-10 to win. Moving this link higher silently changes
+       line-height, section padding and card borders sitewide. -->
+  <link rel="stylesheet" href="assets/tailwind.css">
 </head>
 <body>
   <main class="mx-auto max-w-xl px-4 py-16 text-center">

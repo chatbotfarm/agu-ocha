@@ -16,7 +16,6 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aguocha.com/">
   <meta property="og:image" content="https://aguocha.com/img/agu-logo.png">
-  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="assets/site.css">
   <style>
     :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
@@ -34,6 +33,13 @@
     /* Reserve the injected header height so the fetch does not shift the page (CLS). */
     #site-header{min-height:84px}
   </style>
+  <!-- Compiled Tailwind. Loaded LAST on purpose: the Play CDN this replaced
+       appended its generated stylesheet to the end of <head>, so utilities won
+       every specificity tie against the project classes above. That is also
+       Tailwind's intended cascade — `class="section pt-10"` is written
+       expecting pt-10 to win. Moving this link higher silently changes
+       line-height, section padding and card borders sitewide. -->
+  <link rel="stylesheet" href="assets/tailwind.css">
 </head>
 <body>
   <!-- Shared header include -->
@@ -95,8 +101,8 @@
             <div>
               <h3 class="font-bold text-xl">Submit Music</h3>
               <p class="mt-2 text-white/80">
-                Send a track for playlist consideration. Free, and every
-                submission gets an answer.
+                Send a track for playlist consideration. Free to submit, and
+                AI-assisted music is welcome.
               </p>
             </div>
             <a href="submit.html" class="btn-primary mt-6 inline-flex rounded-xl px-4 py-2 font-semibold">Open Submit Music</a>
@@ -145,8 +151,9 @@
           <p class="font-mono text-xs uppercase tracking-[0.2em] text-white/50">Open now</p>
           <h3 class="mt-2 font-bold text-xl">Suno Vibez</h3>
           <p class="mt-3 max-w-3xl text-white/85">
-            A monthly playlist built entirely from creator submissions. Free to enter, and every
-            track gets a real listen with an answer either way.
+            A monthly playlist built entirely from creator submissions. Free to enter, AI-assisted
+            music is welcome, and you keep ownership of your track. If yours is selected,
+            we&rsquo;ll contact you within seven days.
           </p>
           <div class="mt-5 flex flex-wrap gap-3">
             <a href="submit.html" class="btn-primary rounded-xl px-5 py-3 font-semibold">Submit your track</a>
