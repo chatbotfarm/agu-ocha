@@ -56,17 +56,6 @@
     .sv-facade-label{font-weight:700;font-size:1.05rem}
     .sv-facade-note{font-size:.8rem;color:rgba(247,247,248,.55)}
 
-    /* Sticky mobile CTA: ~56px, dismissible, hidden at >=1024px. */
-    .sv-sticky{
-      position:fixed;left:0;right:0;bottom:0;z-index:60;
-      display:flex;align-items:center;gap:.5rem;
-      padding:.5rem .75rem;min-height:56px;
-      background:rgba(11,11,12,.96);border-top:1px solid rgba(255,255,255,.12);
-      backdrop-filter:blur(8px);
-    }
-    .sv-sticky[hidden]{display:none}
-    @media(min-width:1024px){.sv-sticky{display:none}}
-
     .sv-step-num{
       width:2rem;height:2rem;flex:0 0 2rem;border-radius:9999px;
       background:var(--brand);display:flex;align-items:center;justify-content:center;
@@ -119,9 +108,14 @@
             Submit one track for consideration in DJ Agu Ocha&rsquo;s monthly DJ set and the
             Suno Vibez playlist. AI-assisted music is welcome.
           </p>
+          <!-- Plain anchor to #submit-form. No JavaScript is involved in the
+               jump: html{scroll-behavior:smooth} handles the animation and is
+               forced back to auto under prefers-reduced-motion, and
+               [id]{scroll-margin-top:96px} keeps the form heading clear of the
+               fixed header. With JS off this still works. -->
           <a href="#submit-form" data-submit-cta="hero"
              class="sv-cta btn-primary mt-7 rounded-xl px-6 font-semibold">
-            Submit One Track
+            Submit Your Track
           </a>
           <!-- Upgraded to the "about 60 seconds" line by assets/submit.js only
                when SUNO_VIBEZ_CONFIG.ghlFormSimplified is true. Static default
@@ -158,43 +152,32 @@
       </div>
     </section>
 
-    <!-- ================================================ 4. THE FORM =======
-         Moved to the top third of the page. The heading, guidance and the
-         failure panel are static markup, so they survive assets/submit.js
-         failing, the config failing, the GHL script failing, and JS being off.
+    <!-- ============================================ 4. SUNO VIBEZ PLAYLIST
+         Promoted to its own section. It used to be a side column beside the AI
+         positioning copy, which buried the one thing a visitor can actually
+         listen to before deciding whether their track belongs here.
 
-         #submission-form is the JS mount. assets/submit.js replaces its
-         children with the GHL iframe, which is what clears the loading line. -->
-    <section id="submit-form" class="section border-t border-white/10 pt-10">
-      <div class="mx-auto max-w-2xl px-4">
-        <!-- The old title here was "Submit one track", which restated the H1,
-             the highlighted nav item and the step label further down the page.
-             This slot is better spent removing the last objection before the
-             form than repeating where the visitor already knows they are. -->
-        <h2 class="font-extrabold text-2xl md:text-3xl">Submission and placement are free.</h2>
-        <p class="mt-2 text-white/70">One track per creator per month.</p>
-
-        <div id="submission-form" class="mt-6" data-form-mount>
-          <p class="bk-status" data-form-status role="status">Loading the submission form&hellip;</p>
-        </div>
-
-        <!-- Failure-only panel. Ships hidden and is revealed by
-             assets/submit.js when the form URL is missing or rejected, or the
-             load times out — and by the <noscript> rule when JS is off.
-             Deliberately offers NO phone or SMS submission route: a track sent
-             by message bypasses the rights-confirmation checkbox. -->
-        <div id="form-failure" class="card mt-6 rounded-2xl p-6" hidden>
-          <h3 class="font-bold text-lg">The submission form could not be loaded</h3>
-          <p class="mt-2 text-white/80">Please try again later.</p>
-          <div class="mt-5 flex flex-wrap gap-3">
-            <button type="button" data-form-retry
-                    class="btn-primary rounded-xl px-5 py-3 font-semibold">Reload the page</button>
-            <a href="submission-terms.html" class="btn rounded-xl px-5 py-3 font-semibold">Submission Terms</a>
+         #playlist-embed is a JS mount: assets/submit.js renders a facade and
+         only loads the Spotify iframe on click. The "Follow the playlist" href
+         is filled from assets/suno-vibez-config.js, so the link and the embed
+         can never point at different playlists. -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <div class="grid gap-8 lg:grid-cols-12 lg:items-center">
+          <div class="lg:col-span-5">
+            <p class="font-mono text-xs uppercase tracking-[0.2em] text-white/50">Current playlist</p>
+            <h2 class="mt-2 font-extrabold text-2xl md:text-3xl">Suno Vibez</h2>
+            <p class="lead mt-4 text-white/85">
+              The AI-friendly playlist behind these submissions. Hear what gets picked before
+              you send anything.
+            </p>
+            <p class="mt-4 text-sm text-white/60">
+              <a data-playlist-link="b" class="underline underline-offset-4" href="#">Follow the playlist</a>
+            </p>
           </div>
-          <p class="mt-4 text-sm text-white/60">
-            What happens to your details is covered in the
-            <a class="underline underline-offset-4" href="privacy.html">Privacy Notice</a>.
-          </p>
+          <div class="lg:col-span-7">
+            <div id="playlist-embed" data-lane="b"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -217,41 +200,7 @@
       </div>
     </section>
 
-    <!-- ============================ 6. AI POSITIONING + PLAYLIST ==========
-         Retained brand positioning, moved below the form so it supports the
-         conversion rather than blocking it. -->
-    <section class="section border-t border-white/10">
-      <div class="mx-auto container px-4">
-        <div class="grid gap-10 lg:grid-cols-12 lg:items-start">
-          <div class="lg:col-span-7">
-            <h2 class="font-extrabold text-2xl md:text-3xl">You don&rsquo;t have to hide your tools</h2>
-            <!-- EDITORIAL REVIEW REQUIRED: positioning copy. -->
-            <p class="lead mt-5 text-white/85">
-              Coders call it vibe coding. Designers, filmmakers and marketers use AI openly.
-              Music creators shouldn&rsquo;t have to pretend they don&rsquo;t.
-            </p>
-            <p class="mt-4 text-white/85">
-              Suno and other AI-assisted creators are welcome here. The only question is whether
-              the track works in the set.
-            </p>
-          </div>
-
-          <div class="lg:col-span-5">
-            <div class="sv-accent card rounded-2xl p-5">
-              <p class="font-mono text-xs uppercase tracking-[0.2em] text-white/50">Current playlist</p>
-              <h3 class="mt-2 font-bold text-xl">Suno Vibez</h3>
-              <p class="mt-2 text-sm text-white/80">The AI-friendly playlist behind these submissions.</p>
-              <div id="playlist-embed" data-lane="b" class="mt-4"></div>
-              <p class="mt-3 text-sm text-white/60">
-                <a data-playlist-link="b" class="underline underline-offset-4" href="#">Follow the playlist</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================================ 7. HOW SELECTION WORKS -->
+    <!-- ================================================ 6. HOW SELECTION WORKS -->
     <section class="section border-t border-white/10">
       <div class="mx-auto container px-4">
         <h2 class="font-extrabold text-2xl md:text-3xl">How selection works</h2>
@@ -269,6 +218,38 @@
             <div><h3 class="font-bold">Selected creators are contacted</h3></div>
           </li>
         </ol>
+
+        <!-- Mid-page CTA. The visitor now knows what the playlist sounds like,
+             what selection means and how it works, so this is the first point
+             where the ask is fully informed. Same plain anchor as the hero. -->
+        <div class="mt-10 text-center">
+          <a href="#submit-form" data-submit-cta="mid_page"
+             class="sv-cta btn-primary rounded-xl px-7 font-semibold">
+            Submit Your Track
+          </a>
+          <p class="mt-3 text-sm text-white/60">Free to submit. Placement is not guaranteed.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================== 7. AI AND VIBE-PRODUCTION POSITIONING
+         Kept after the process explanation: it reassures the visitor who is
+         still deciding whether AI-assisted work belongs here, without standing
+         between them and the form. -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <div class="max-w-3xl">
+          <h2 class="font-extrabold text-2xl md:text-3xl">You don&rsquo;t have to hide your tools</h2>
+          <!-- EDITORIAL REVIEW REQUIRED: positioning copy. -->
+          <p class="lead mt-5 text-white/85">
+            Coders call it vibe coding. Designers, filmmakers and marketers use AI openly.
+            Music creators shouldn&rsquo;t have to pretend they don&rsquo;t.
+          </p>
+          <p class="mt-4 text-white/85">
+            Suno and other AI-assisted creators are welcome here. The only question is whether
+            the track works in the set.
+          </p>
+        </div>
       </div>
     </section>
 
@@ -306,12 +287,66 @@
       </div>
     </section>
 
-    <!-- =================================================== 9. FINAL CTA -->
+    <!-- ================================================ 9. SUBMISSION FORM
+         The single GHL form on this page, and the last primary section before
+         the footer. Both CTAs above are plain anchors to this id.
+
+         The heading, guidance and failure panel are static markup, so they
+         survive assets/submit.js failing, the config failing, the GHL script
+         failing, and JavaScript being off.
+
+         #submission-form is the JS mount: assets/submit.js replaces its
+         children with the GHL iframe, which is what clears the loading line.
+         The form itself is unchanged — same GHL form, same id. -->
+    <section id="submit-form" class="section border-t border-white/10">
+      <div class="mx-auto max-w-2xl px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">Submit Your Track</h2>
+        <p class="lead mt-3 text-white/85">Send one track for consideration.</p>
+        <p class="mt-2 text-sm text-white/60">
+          One track per creator per month. Submission and placement are free.
+        </p>
+
+        <div id="submission-form" class="mt-6" data-form-mount>
+          <p class="bk-status" data-form-status role="status">Loading the submission form&hellip;</p>
+        </div>
+
+        <!-- Failure-only panel. Ships hidden and is revealed by
+             assets/submit.js when the form URL is missing or rejected, or the
+             load times out — and by the <noscript> rule when JS is off.
+             Deliberately offers NO phone or SMS submission route: a track sent
+             by message bypasses the rights-confirmation checkbox. -->
+        <div id="form-failure" class="card mt-6 rounded-2xl p-6" hidden>
+          <h3 class="font-bold text-lg">The submission form could not be loaded</h3>
+          <p class="mt-2 text-white/80">Please try again later.</p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <button type="button" data-form-retry
+                    class="btn-primary rounded-xl px-5 py-3 font-semibold">Reload the page</button>
+            <a href="submission-terms.html" class="btn rounded-xl px-5 py-3 font-semibold">Submission Terms</a>
+          </div>
+          <p class="mt-4 text-sm text-white/60">
+            What happens to your details is covered in the
+            <a class="underline underline-offset-4" href="privacy.html">Privacy Notice</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== 10. FINAL SUPPORTING NOTE
+         Deliberately a note, not a button. The form is directly above it, so a
+         third prominent Submit CTA here would only point back up the page. -->
     <section class="section border-t border-white/10">
-      <div class="mx-auto container px-4 text-center">
-        <h2 class="font-extrabold text-2xl md:text-3xl">One track. One link.</h2>
-        <a href="#submit-form" data-submit-cta="footer"
-           class="sv-cta btn-primary mt-6 rounded-xl px-6 font-semibold">Submit One Track</a>
+      <div class="mx-auto max-w-2xl px-4 text-center">
+        <!-- Deliberately does not restate the seven-day contact policy: "What
+             selection may include" already says it, and repeating it here reads
+             as filler rather than reassurance. -->
+        <p class="text-white/75">
+          One track. One link. Reviewed personally for fit with an upcoming set.
+        </p>
+        <p class="mt-3 text-sm text-white/55">
+          Full detail is in the
+          <a class="underline underline-offset-4" href="submission-terms.html">Submission Terms</a>
+          and the <a class="underline underline-offset-4" href="privacy.html">Privacy Notice</a>.
+        </p>
       </div>
     </section>
   </main>
@@ -319,16 +354,10 @@
   <!-- Shared footer include -->
   <div id="site-footer"></div>
 
-  <!-- Sticky mobile CTA. Hidden until 25% scroll, and whenever the form is on
-       screen, so it can never cover the thing it points at. -->
-  <div id="sticky-cta" class="sv-sticky" hidden>
-    <a href="#submit-form" data-submit-cta="sticky"
-       class="sv-cta btn-primary flex-1 rounded-xl px-4 font-semibold">
-      Submit one track &mdash; free
-    </a>
-    <button type="button" data-sticky-dismiss aria-label="Dismiss"
-            class="btn shrink-0 rounded-xl px-3 py-2 text-sm">✕</button>
-  </div>
+  <!-- The sticky mobile CTA was removed when the form moved to the end of the
+       page. The page now carries exactly two prominent Submit Your Track
+       anchors — hero and mid-page — and a third floating one would have been
+       both redundant and a permanent overlay on small screens. -->
 
   <!-- Structured data mirrors the five visible questions exactly. Keep the two
        in sync: search engines are shown the same answers as visitors. -->
