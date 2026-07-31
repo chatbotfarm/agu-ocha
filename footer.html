@@ -19,12 +19,16 @@
         <li><a class="underline-offset-4 hover:underline" href="music.html">Music</a></li>
         <li>
           <a class="underline-offset-4 hover:underline" href="book.html">Book</a>
-          <div class="mt-2 ml-4 grid gap-1 text-white/80">
-            <a class="hover:underline" href="private-corporate.html">Private &amp; Corporate</a>
-            <a class="hover:underline" href="festivals-tours.html">Festivals &amp; Tours</a>
-            <a class="hover:underline" href="residencies.html">Residencies</a>
-            <a class="hover:underline" href="brand-activations.html">Brand Activations</a>
-            <a class="hover:underline" href="collab.html">Collaborations</a>
+          <!-- py-1 gives these a 24px+ hit area. As bare inline links they
+               measured 21px tall, which fails WCAG 2.2 SC 2.5.8 (24x24 CSS px);
+               they are standalone navigation, so the "inline in a sentence"
+               exception does not cover them. -->
+          <div class="mt-2 ml-4 grid text-white/80">
+            <a class="block py-1 hover:underline" href="private-corporate.html">Private &amp; Corporate</a>
+            <a class="block py-1 hover:underline" href="festivals-tours.html">Festivals &amp; Tours</a>
+            <a class="block py-1 hover:underline" href="residencies.html">Residencies</a>
+            <a class="block py-1 hover:underline" href="brand-activations.html">Brand Activations</a>
+            <a class="block py-1 hover:underline" href="collab.html">Collaborations</a>
           </div>
         </li>
         <li><a class="underline-offset-4 hover:underline" href="submit.html" title="Submit Music for playlist consideration">Submit Music</a></li>
@@ -64,7 +68,8 @@
   <div class="border-t border-white/10 bg-black/40 backdrop-blur mt-6">
     <div class="mx-auto max-w-7xl px-4 py-6 text-center text-sm leading-relaxed text-white/80">
       © <span id="current-year">2025</span> all rights reserved <strong>Agu Ocha</strong><br>
-      powered by <a href="https://chatbotfarm.ai" target="_blank" rel="noopener noreferrer" class="underline">chatbotfarm.ai</a><br>
+      powered by <a href="https://chatbotfarm.ai" target="_blank" rel="noopener noreferrer"
+         class="inline-block py-1 underline">chatbotfarm.ai</a><br>
       <span class="text-white/60">Connecting Business to the Grid™</span>
       <p class="mx-auto mt-4 max-w-2xl text-xs text-white/50">
         Suno Vibez is an independent playlist curated and operated by Agu Ocha. It is not
