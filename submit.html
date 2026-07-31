@@ -4,21 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- EDITORIAL REVIEW REQUIRED: provisional metadata. -->
-  <title>Submit Music — Agu Ocha</title>
-  <meta name="description" content="DJ Agu Ocha releases a new DJ set every month. Submit your track for consideration — AI-assisted music welcome.">
+  <title>Submit Your Track — Agu Ocha</title>
+  <meta name="description" content="Submit one track for consideration in DJ Agu Ocha's monthly DJ set and the Suno Vibez playlist. AI-assisted music is welcome. Submission and placement are free.">
   <link rel="canonical" href="https://aguocha.com/submit">
   <link rel="icon" href="favicon.ico">
   <link rel="apple-touch-icon" href="img/agu-logo.png">
-  <meta property="og:title" content="Submit Music — Agu Ocha">
-  <meta property="og:description" content="A new DJ set every month. Submit your track for consideration — AI-assisted music welcome.">
+  <meta property="og:title" content="Submit Your Track — Agu Ocha">
+  <meta property="og:description" content="One track, considered for a monthly DJ set and the Suno Vibez playlist. AI-assisted music welcome. Free to submit.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aguocha.com/submit">
-  <!-- OPERATOR TODO: a purpose-built 1200x630 OG image is still outstanding.
-       agu-logo.png is square, so no og:image:width/height is declared rather
-       than declaring dimensions that would be false. -->
-  <meta property="og:image" content="https://aguocha.com/img/agu-logo.png">
+  <meta property="og:image" content="https://aguocha.com/img/submit-music-og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Agu Ocha — Submit Your Track. AI-assisted music welcome.">
   <meta name="twitter:card" content="summary_large_image">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="twitter:image" content="https://aguocha.com/img/submit-music-og.png">
   <link rel="stylesheet" href="assets/site.css">
   <style>
     :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
@@ -36,8 +36,9 @@
     /* Reserve the injected header height so the fetch does not shift the page (CLS). */
     #site-header{min-height:84px}
     :focus-visible{outline:2px solid var(--leopard);outline-offset:3px}
+    /* Anchor targets clear the sticky header so a jumped-to heading is not hidden. */
+    [id]{scroll-margin-top:96px}
 
-    /* 56px minimum keeps CTAs comfortable tap targets on mobile. */
     .sv-cta{min-height:56px;display:inline-flex;align-items:center;justify-content:center}
 
     /* Playlist facade — the third-party iframe loads only when asked for. */
@@ -86,14 +87,22 @@
     }
     html{scroll-behavior:smooth}
   </style>
-  <!-- Without JS the disclosure panels stay open, so every answer is readable.
-       The form's loading line is also hidden, because nothing would clear it
-       and the form itself cannot run without JavaScript — the static contact
-       panel beside it is the working route in that case. -->
+  <!-- Without JS the disclosure panels stay open so every answer is readable,
+       the loading line is hidden because nothing would clear it, and the
+       failure panel is revealed because the form cannot render at all — the
+       GHL form is itself a JavaScript application. -->
   <noscript><style>
     [data-faq-panel]{display:block !important}
     [data-form-status]{display:none}
+    #form-failure{display:block !important}
   </style></noscript>
+  <!-- Compiled Tailwind. Loaded LAST on purpose: the Play CDN this replaced
+       appended its generated stylesheet to the end of <head>, so utilities won
+       every specificity tie against the project classes above. That is also
+       Tailwind's intended cascade — `class="section pt-10"` is written
+       expecting pt-10 to win. Moving this link higher silently changes
+       line-height, section padding and card borders sitewide. -->
+  <link rel="stylesheet" href="assets/tailwind.css">
 </head>
 <body>
   <!-- Shared header include -->
@@ -101,29 +110,112 @@
 
   <main>
     <!-- ============================================================ 1. HERO -->
-    <section class="section pb-10">
+    <section class="section pb-8">
       <div class="mx-auto container px-4">
         <div class="max-w-3xl">
-          <h1 class="font-extrabold tracking-tight text-4xl md:text-5xl">Submit Music</h1>
-          <!-- The monthly DJ-set model is covered by submission-terms.html
-               section 3, which grants permission to include a selected track in
-               a recorded or streamed DJ set and to mix it using ordinary DJ
-               technique. Keep this page and that section in step. -->
+          <h1 class="font-extrabold tracking-tight text-4xl md:text-5xl">Submit Your Track</h1>
+          <!-- EDITORIAL REVIEW REQUIRED: provisional hero copy. -->
           <p class="lead mt-5 text-white/85">
-            DJ Agu Ocha releases a new DJ set every month and is always looking for the next
-            track. Submit your music for consideration in an upcoming set.
+            Submit one track for consideration in DJ Agu Ocha&rsquo;s monthly DJ set and the
+            Suno Vibez playlist. AI-assisted music is welcome. Submission and placement are free.
           </p>
-          <a href="#submit-form" class="sv-cta btn-primary mt-7 rounded-xl px-6 font-semibold">
-            Submit Your Track
+          <a href="#submit-form" data-submit-cta="hero"
+             class="sv-cta btn-primary mt-7 rounded-xl px-6 font-semibold">
+            Submit One Track
           </a>
-          <p class="mt-3 text-sm text-white/60">
-            AI-friendly. Creator-owned. Selected by the music.
+          <!-- Upgraded to the "about 60 seconds" line by assets/submit.js only
+               when SUNO_VIBEZ_CONFIG.ghlFormSimplified is true. Static default
+               stays true against the current form. -->
+          <p id="hero-microcopy" class="mt-3 text-sm text-white/60">
+            You keep ownership. No submission fee.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- ====================================== 2. AI-FRIENDLY STATEMENT -->
+    <!-- ================================================= 2. TRUST POINTS -->
+    <section class="mx-auto container px-4">
+      <ul class="sv-accent card grid gap-3 rounded-2xl p-5 sm:grid-cols-3">
+        <li class="font-semibold">Free to submit</li>
+        <li class="font-semibold">AI-assisted music welcome</li>
+        <li class="font-semibold">You keep ownership</li>
+      </ul>
+    </section>
+
+    <!-- ==================================================== 3. CURATOR ====
+         Heading and copy are static so they survive assets/submit.js failing.
+         #curator-block is the JS mount for the identity card (photo, name,
+         bio, verified profile links) and is removed cleanly if the curator
+         config is empty. -->
+    <section class="section pb-8">
+      <div class="mx-auto container px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">Reviewed by DJ Agu Ocha</h2>
+        <p class="mt-3 max-w-3xl text-white/85">
+          Every submission is reviewed for fit with an upcoming monthly set. There is no paid
+          placement and no automated acceptance.
+        </p>
+        <div id="curator-block" class="mt-6"></div>
+      </div>
+    </section>
+
+    <!-- ================================================ 4. THE FORM =======
+         Moved to the top third of the page. The heading, guidance and the
+         failure panel are static markup, so they survive assets/submit.js
+         failing, the config failing, the GHL script failing, and JS being off.
+
+         #submission-form is the JS mount. assets/submit.js replaces its
+         children with the GHL iframe, which is what clears the loading line. -->
+    <section id="submit-form" class="section border-t border-white/10 pt-10">
+      <div class="mx-auto max-w-2xl px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">Submit one track</h2>
+        <p class="mt-2 text-white/70">One track per creator per month.</p>
+
+        <div id="submission-form" class="mt-6" data-form-mount>
+          <p class="bk-status" data-form-status role="status">Loading the submission form&hellip;</p>
+        </div>
+
+        <!-- Failure-only panel. Ships hidden and is revealed by
+             assets/submit.js when the form URL is missing or rejected, or the
+             load times out — and by the <noscript> rule when JS is off.
+             Deliberately offers NO phone or SMS submission route: a track sent
+             by message bypasses the rights-confirmation checkbox. -->
+        <div id="form-failure" class="card mt-6 rounded-2xl p-6" hidden>
+          <h3 class="font-bold text-lg">The submission form could not be loaded</h3>
+          <p class="mt-2 text-white/80">Please try again later.</p>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <button type="button" data-form-retry
+                    class="btn-primary rounded-xl px-5 py-3 font-semibold">Reload the page</button>
+            <a href="submission-terms.html" class="btn rounded-xl px-5 py-3 font-semibold">Submission Terms</a>
+          </div>
+          <p class="mt-4 text-sm text-white/60">
+            What happens to your details is covered in the
+            <a class="underline underline-offset-4" href="privacy.html">Privacy Notice</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================== 5. WHAT SELECTION INCLUDES -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4">
+        <h2 class="font-extrabold text-2xl md:text-3xl">What selection may include</h2>
+        <!-- Wording kept deliberately permissive ("may") so it stays inside the
+             licence granted by submission-terms.html section 3. -->
+        <p class="lead mt-4 max-w-3xl text-white/85">
+          Selected tracks may be featured in a monthly DJ set, added to the playlist, and
+          credited in related promotion.
+        </p>
+        <p class="mt-4 max-w-3xl text-white/75">
+          If your track is selected, we&rsquo;ll contact you within seven days. Placement
+          isn&rsquo;t guaranteed. Full detail is in the
+          <a class="underline underline-offset-4" href="submission-terms.html">Submission Terms</a>.
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================ 6. AI POSITIONING + PLAYLIST ==========
+         Retained brand positioning, moved below the form so it supports the
+         conversion rather than blocking it. -->
     <section class="section border-t border-white/10">
       <div class="mx-auto container px-4">
         <div class="grid gap-10 lg:grid-cols-12 lg:items-start">
@@ -131,25 +223,20 @@
             <h2 class="font-extrabold text-2xl md:text-3xl">You don&rsquo;t have to hide your tools</h2>
             <!-- EDITORIAL REVIEW REQUIRED: positioning copy. -->
             <p class="lead mt-5 text-white/85">
-              Coders call it vibe coding. Designers, filmmakers, marketers, and businesses use AI
-              openly every day. Music creators shouldn&rsquo;t have to pretend they don&rsquo;t.
+              Coders call it vibe coding. Designers, filmmakers and marketers use AI openly.
+              Music creators shouldn&rsquo;t have to pretend they don&rsquo;t.
             </p>
             <p class="mt-4 text-white/85">
-              Suno and other AI-assisted creators are welcome here. Submit the track and let it
-              speak for itself &mdash; the only question is whether it works in the set.
+              Suno and other AI-assisted creators are welcome here. The only question is whether
+              the track works in the set.
             </p>
           </div>
 
-          <!-- Current community / featured opportunity. Kept compact so it
-               supports the permanent Submit Music identity rather than
-               replacing it. -->
           <div class="lg:col-span-5">
             <div class="sv-accent card rounded-2xl p-5">
-              <p class="font-mono text-xs uppercase tracking-[0.2em] text-white/50">Current community</p>
+              <p class="font-mono text-xs uppercase tracking-[0.2em] text-white/50">Current playlist</p>
               <h3 class="mt-2 font-bold text-xl">Suno Vibez</h3>
-              <p class="mt-2 text-sm text-white/80">
-                The AI-friendly playlist behind these submissions.
-              </p>
+              <p class="mt-2 text-sm text-white/80">The AI-friendly playlist behind these submissions.</p>
               <div id="playlist-embed" data-lane="b" class="mt-4"></div>
               <p class="mt-3 text-sm text-white/60">
                 <a data-playlist-link="b" class="underline underline-offset-4" href="#">Follow the playlist</a>
@@ -160,106 +247,28 @@
       </div>
     </section>
 
-    <!-- =================================================== 3. HOW IT WORKS -->
+    <!-- ================================================ 7. HOW SELECTION WORKS -->
     <section class="section border-t border-white/10">
       <div class="mx-auto container px-4">
-        <h2 class="font-extrabold text-2xl md:text-3xl">How it works</h2>
+        <h2 class="font-extrabold text-2xl md:text-3xl">How selection works</h2>
         <ol class="mt-6 grid gap-5 md:grid-cols-3">
           <li class="card flex gap-4 rounded-2xl p-5">
             <span class="sv-step-num" aria-hidden="true">1</span>
-            <div>
-              <h3 class="font-bold">Submit a listening link</h3>
-              <p class="mt-1 text-sm text-white/80">One link to the track you want considered.</p>
-            </div>
+            <div><h3 class="font-bold">Submit one track</h3></div>
           </li>
           <li class="card flex gap-4 rounded-2xl p-5">
             <span class="sv-step-num" aria-hidden="true">2</span>
-            <div>
-              <h3 class="font-bold">Agu Ocha listens</h3>
-              <p class="mt-1 text-sm text-white/80">Tracks are reviewed for upcoming monthly sets.</p>
-            </div>
+            <div><h3 class="font-bold">Agu Ocha reviews it</h3></div>
           </li>
           <li class="card flex gap-4 rounded-2xl p-5">
             <span class="sv-step-num" aria-hidden="true">3</span>
-            <div>
-              <h3 class="font-bold">We get in touch</h3>
-              <p class="mt-1 text-sm text-white/80">If a track fits a set, you&rsquo;ll hear from us.</p>
-            </div>
+            <div><h3 class="font-bold">Selected creators are contacted</h3></div>
           </li>
         </ol>
       </div>
     </section>
 
-    <!-- ================================================ 4. THE FORM ========
-         The heading, loading line and contact panel below are all static
-         markup, so they survive assets/submit.js failing, the config failing,
-         the GHL script failing, and JavaScript being off.
-
-         #submission-form is the JS mount. assets/submit.js replaces its
-         children with the GHL iframe, which is what clears the loading line. -->
-    <section id="submit-form" class="section border-t border-white/10">
-      <div class="mx-auto max-w-2xl px-4">
-        <h2 class="font-extrabold text-2xl md:text-3xl">Submit Your Track</h2>
-        <p class="mt-2 text-white/70">One track per creator per month.</p>
-
-        <div id="submission-form" class="mt-6" data-form-mount>
-          <!-- Worded so it stays accurate whether it clears or lingers. -->
-          <p class="bk-status" data-form-status role="status">
-            Loading the submission form. If it does not appear, use the options below.
-          </p>
-        </div>
-
-        <!-- Always visible, and deliberately outside #submission-form so the
-             mount replacement above cannot remove it. Framed as an alternative
-             route rather than an error, so it reads correctly in every state. -->
-        <div class="card mt-8 rounded-2xl p-6">
-          <h3 class="font-bold text-lg">Prefer not to use the form?</h3>
-          <p class="mt-2 text-white/80">
-            Send your track link by text or call instead.
-          </p>
-          <div class="mt-5 flex flex-wrap gap-3">
-            <a href="sms:+17622486242" class="btn-primary rounded-xl px-5 py-3 font-semibold">Text your track link</a>
-            <a href="tel:+17622486242" class="btn rounded-xl px-5 py-3 font-semibold">Call</a>
-          </div>
-          <p class="mt-4 text-sm text-white/60">
-            The form is hosted by GoHighLevel, which receives what you submit. Read the
-            <a class="underline underline-offset-4" href="submission-terms.html">Submission Terms</a>
-            and the <a class="underline underline-offset-4" href="privacy.html">Privacy Notice</a>.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================================= 5. TRUST STATEMENT -->
-    <section class="section border-t border-white/10">
-      <div class="mx-auto container px-4">
-        <div class="sv-accent card rounded-2xl p-6">
-          <!-- Deliberately not headings: these are three short labels in a
-               summary strip, not page sections. Marking them up as headings
-               would put them in the outline alongside real sections. -->
-          <ul class="grid gap-4 md:grid-cols-3">
-            <li>
-              <p class="font-bold text-lg">Free to submit</p>
-              <p class="mt-1 text-sm text-white/80">No fee for submission or for placement.</p>
-            </li>
-            <li>
-              <p class="font-bold text-lg">You keep ownership</p>
-              <p class="mt-1 text-sm text-white/80">Your track stays yours. Nothing here transfers rights.</p>
-            </li>
-            <li>
-              <p class="font-bold text-lg">AI-assisted is welcome</p>
-              <p class="mt-1 text-sm text-white/80">Judged on how it sounds, not on how it was made.</p>
-            </li>
-          </ul>
-          <p class="mt-5 text-sm text-white/60">
-            Submission does not guarantee placement. Full detail in the
-            <a class="underline underline-offset-4" href="submission-terms.html">Submission Terms</a>.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================ 6. FAQ -->
+    <!-- ============================================================ 8. FAQ -->
     <section id="faq" class="section border-t border-white/10">
       <div class="mx-auto max-w-3xl px-4">
         <h2 class="font-extrabold text-2xl md:text-3xl">Questions</h2>
@@ -272,7 +281,7 @@
 
           <h3><button type="button" class="sv-faq-trigger" data-faq-trigger aria-controls="faq-2" aria-expanded="false">Does submission guarantee placement?<span class="sv-faq-marker" aria-hidden="true">+</span></button></h3>
           <div id="faq-2" data-faq-panel class="py-4 text-white/85" hidden>
-            <p>No. Selection is entirely at Agu Ocha&rsquo;s discretion, and most tracks are not selected. We don&rsquo;t charge for submission or placement, and placement can&rsquo;t be bought.</p>
+            <p>Placement isn&rsquo;t guaranteed. Selection is at Agu Ocha&rsquo;s discretion. We don&rsquo;t charge for submission or placement, and placement can&rsquo;t be bought.</p>
           </div>
 
           <h3><button type="button" class="sv-faq-trigger" data-faq-trigger aria-controls="faq-3" aria-expanded="false">Do I keep ownership of my music?<span class="sv-faq-marker" aria-hidden="true">+</span></button></h3>
@@ -282,25 +291,23 @@
 
           <h3><button type="button" class="sv-faq-trigger" data-faq-trigger aria-controls="faq-4" aria-expanded="false">What type of link should I submit?<span class="sv-faq-marker" aria-hidden="true">+</span></button></h3>
           <div id="faq-4" data-faq-panel class="py-4 text-white/85" hidden>
-            <p>A public listening link &mdash; Suno, Spotify, or any similar platform &mdash; rather than a file attachment. One track per creator per month, and it should be your own work, including any samples.</p>
+            <p>A public listening link &mdash; Suno, Spotify, SoundCloud or any similar platform &mdash; rather than a file attachment. One track per creator per month, and it should be your own work, including any samples.</p>
           </div>
 
-          <!-- Operationally necessary eligibility detail, kept out of the main
-               conversion path per the editorial brief. -->
-          <h3><button type="button" class="sv-faq-trigger" data-faq-trigger aria-controls="faq-5" aria-expanded="false">Eligibility detail: Suno tiers and streaming<span class="sv-faq-marker" aria-hidden="true">+</span></button></h3>
+          <h3><button type="button" class="sv-faq-trigger" data-faq-trigger aria-controls="faq-5" aria-expanded="false">Can I submit a Suno free-tier track?<span class="sv-faq-marker" aria-hidden="true">+</span></button></h3>
           <div id="faq-5" data-faq-panel class="py-4 text-white/85" hidden>
-            <!-- EDITORIAL REVIEW REQUIRED: compressed from the previous Lane A /
-                 Lane B sections. The commercial-rights point is retained because
-                 it is a real eligibility constraint, not marketing copy. -->
-            <p>A Suno link works on any tier, including free. If your track is already released on streaming, send that link instead.</p>
-            <p class="mt-3">One thing worth knowing: Suno&rsquo;s free tier grants personal, non-commercial use only, so free-tier tracks can&rsquo;t be distributed to streaming platforms. Commercial rights come with Pro and Premier, for tracks made while subscribed.</p>
-            <p class="mt-3">We can&rsquo;t accept vocals imitating a real, identifiable artist without permission, or tracks using samples you don&rsquo;t hold rights to.</p>
+            <p>Yes, for the Suno playlist &mdash; any tier works, including free. For streaming platforms it&rsquo;s different: Suno&rsquo;s free tier grants personal, non-commercial use only, so free-tier tracks can&rsquo;t be distributed there. Commercial rights come with Pro and Premier, for tracks made while subscribed.</p>
           </div>
         </div>
+      </div>
+    </section>
 
-        <div class="mt-10">
-          <a href="#submit-form" class="sv-cta btn-primary rounded-xl px-6 font-semibold">Submit Your Track</a>
-        </div>
+    <!-- =================================================== 9. FINAL CTA -->
+    <section class="section border-t border-white/10">
+      <div class="mx-auto container px-4 text-center">
+        <h2 class="font-extrabold text-2xl md:text-3xl">One track. One link.</h2>
+        <a href="#submit-form" data-submit-cta="footer"
+           class="sv-cta btn-primary mt-6 rounded-xl px-6 font-semibold">Submit One Track</a>
       </div>
     </section>
   </main>
@@ -311,24 +318,26 @@
   <!-- Sticky mobile CTA. Hidden until 25% scroll, and whenever the form is on
        screen, so it can never cover the thing it points at. -->
   <div id="sticky-cta" class="sv-sticky" hidden>
-    <a href="#submit-form" class="sv-cta btn-primary flex-1 rounded-xl px-4 font-semibold">
-      Submit Your Track
+    <a href="#submit-form" data-submit-cta="sticky"
+       class="sv-cta btn-primary flex-1 rounded-xl px-4 font-semibold">
+      Submit one track &mdash; free
     </a>
     <button type="button" data-sticky-dismiss aria-label="Dismiss"
             class="btn shrink-0 rounded-xl px-3 py-2 text-sm">✕</button>
   </div>
 
-  <!-- Structured data mirrors the four visible questions exactly. Keep the two
+  <!-- Structured data mirrors the five visible questions exactly. Keep the two
        in sync: search engines are shown the same answers as visitors. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      {"@type":"Question","name":"Can I submit AI-generated music?","acceptedAnswer":{"@type":"Answer","text":"Yes. Music made with Suno or any other AI tool is welcome, and you don't need to play down how you made it. Tracks are judged on how they sound and whether they fit a set."}},
-      {"@type":"Question","name":"Does submission guarantee placement?","acceptedAnswer":{"@type":"Answer","text":"No. Selection is entirely at Agu Ocha's discretion, and most tracks are not selected. We don't charge for submission or placement, and placement can't be bought."}},
-      {"@type":"Question","name":"Do I keep ownership of my music?","acceptedAnswer":{"@type":"Answer","text":"Yes. You keep all ownership, and nothing transfers your copyright, master, or publishing rights. Submitting grants a limited, revocable licence to listen to your track and — only if it's selected — to feature it. The Submission Terms set out exactly what that covers."}},
-      {"@type":"Question","name":"What type of link should I submit?","acceptedAnswer":{"@type":"Answer","text":"A public listening link — Suno, Spotify, or any similar platform — rather than a file attachment. One track per creator per month, and it should be your own work, including any samples."}}
+      {"@type":"Question","name":"Can I submit AI-generated music?","acceptedAnswer":{"@type":"Answer","text":"Yes. Music made with Suno or any other AI tool is welcome, and you don’t need to play down how you made it. Tracks are judged on how they sound and whether they fit a set."}},
+      {"@type":"Question","name":"Does submission guarantee placement?","acceptedAnswer":{"@type":"Answer","text":"Placement isn’t guaranteed. Selection is at Agu Ocha’s discretion. We don’t charge for submission or placement, and placement can’t be bought."}},
+      {"@type":"Question","name":"Do I keep ownership of my music?","acceptedAnswer":{"@type":"Answer","text":"Yes. You keep all ownership, and nothing transfers your copyright, master, or publishing rights. Submitting grants a limited, revocable licence to listen to your track and — only if it’s selected — to feature it. The Submission Terms set out exactly what that covers."}},
+      {"@type":"Question","name":"What type of link should I submit?","acceptedAnswer":{"@type":"Answer","text":"A public listening link — Suno, Spotify, SoundCloud or any similar platform — rather than a file attachment. One track per creator per month, and it should be your own work, including any samples."}},
+      {"@type":"Question","name":"Can I submit a Suno free-tier track?","acceptedAnswer":{"@type":"Answer","text":"Yes, for the Suno playlist — any tier works, including free. For streaming platforms it’s different: Suno’s free tier grants personal, non-commercial use only, so free-tier tracks can’t be distributed there. Commercial rights come with Pro and Premier, for tracks made while subscribed."}}
     ]
   }
   </script>

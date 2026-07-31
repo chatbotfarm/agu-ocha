@@ -109,7 +109,23 @@ The earlier routes still work and are kept deliberately: `/suno-vibez.html`, `/s
 
 `assets/analytics.js` is **not** an analytics vendor. It makes no network request, sets no cookie, and loads no third-party script — it queues events on `window.svEvents` and dispatches `sv:track` on `document`. Wiring the events now means the field-level drop-off data exists from day one; retrofitting always loses it.
 
-Emitted: `hero_link_paste`, `form_start`, `field_complete`, `form_abandon` (with last field touched), `playlist_play`, `faq_open`.
+Emitted:
+
+| Event | Fires when |
+|---|---|
+| `hero_link_paste` | a link is pasted into the hero field |
+| `form_start` | the GHL form is first interacted with |
+| `field_complete` | a tracked field is completed (hero link field only — see the limit below) |
+| `form_abandon` | the page is left after starting, with the last field touched |
+| `playlist_play` | the playlist facade is clicked and the Spotify iframe loads |
+| `faq_open` | an FAQ item is expanded |
+| `submit_cta_click` | any Submit CTA is clicked, labelled by position (`hero`, `sticky`, …) |
+| `curator_profile_click` | a curator profile link is followed |
+| `terms_click` | the submission terms are opened from `/submit` |
+| `form_load_success` | the GHL iframe fires `load` before the timeout |
+| `form_load_timeout` | it does not, and the failure panel is shown (`reason` distinguishes `timeout` from `unconfigured`) |
+
+The last two are worth wiring up first if a listener is ever attached. They are the only signal that would reveal the form silently failing to load for a share of visitors — which is invisible in submission counts, because a visitor who never sees a form never shows up as a drop-off.
 
 To start collecting, attach one listener — **and update `privacy.html` in the same change**:
 
