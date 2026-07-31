@@ -436,47 +436,6 @@
     io.observe(mount);
   }
 
-  /* -------------------------------------------------------- sticky mobile */
-
-  function initStickyBar() {
-    var bar = document.getElementById("sticky-cta");
-    var formSection = document.getElementById("submit-form");
-    if (!bar) return;
-
-    var dismissed = false;
-    var dismiss = bar.querySelector("[data-sticky-dismiss]");
-    if (dismiss) {
-      dismiss.addEventListener("click", function () {
-        dismissed = true;
-        bar.hidden = true;
-      });
-    }
-
-    var formInView = false;
-    if (formSection && "IntersectionObserver" in window) {
-      new IntersectionObserver(
-        function (entries) {
-          formInView = entries[0].isIntersecting;
-          apply();
-        },
-        { threshold: 0 }
-      ).observe(formSection);
-    }
-
-    function apply() {
-      if (dismissed) return;
-      var doc = document.documentElement;
-      var max = doc.scrollHeight - doc.clientHeight;
-      var pct = max > 0 ? window.scrollY / max : 0;
-      // Appears after 25% scroll; must never overlap the form (spec §5.2, §10.1).
-      bar.hidden = !(pct > 0.25 && !formInView);
-    }
-
-    window.addEventListener("scroll", apply, { passive: true });
-    window.addEventListener("resize", apply, { passive: true });
-    apply();
-  }
-
   /* ------------------------------------------------------------ accordion */
 
   function initFaq() {
@@ -676,7 +635,6 @@
   initFormRetry();
   initClickTracking();
   initForm();
-  initStickyBar();
   initFaq();
   initCurator();
   initMetrics();
