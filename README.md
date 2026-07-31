@@ -22,13 +22,21 @@ There is exactly one build step, and it is local and optional: the Tailwind styl
 ├── 404.html
 ├── header.html · footer.html  # shared fragments, fetched at runtime
 ├── assets/
+│   ├── tailwind-input.css     # Tailwind source (3 @tailwind directives) — edit this
+│   ├── tailwind.css           # COMPILED OUTPUT, committed — do not hand-edit
+│   ├── site.css               # hand-written project CSS (embeds, nav, CTAs)
 │   ├── site.js                # shared loader + nav behavior (all pages)
 │   ├── suno-vibez-config.js   # every external URL and toggle /submit needs
 │   ├── analytics.js           # event surface, no vendor, no network, no cookies
 │   ├── submit.js              # /submit behavior: paste, lanes, embeds, accordion
 │   └── thank-you.js           # confirmation page: reply-by date, follow, share
 ├── scripts/check-links.mjs
+├── package.json · package-lock.json · tailwind.config.js
+├── docs/
+│   ├── SUBMIT_MUSIC_CONVERSION_AUDIT.md      # what the funnel did before this branch
+│   └── GHL_SUBMIT_MUSIC_FORM_REBUILD.md      # handover: the form is not in this repo
 ├── img/agu-logo.png
+├── img/submit-music-og.png    # 1200×630 social preview for /submit
 ├── favicon.ico
 ├── sitemap.xml · robots.txt
 ├── press/
@@ -137,29 +145,23 @@ Known limit: the GHL form is a cross-origin iframe, so per-field events inside i
 
 ### Operator TODO
 
-1. **Trim the GoHighLevel form to the §7.3 field set.** `ghlFormUrl` is wired to the live "playlist submission Form" (`hNlynM8h8zLs9jkDlTVW`) and it works — `track_link` prefill confirmed, `form_embed.js` resize confirmed. But the form as built asks for **ten** visible fields, not five, and several are ones §7.5 excludes by name:
-   - **Phone, and it is required.** §7.5 calls this "the highest-friction field in existence for a music submission." Nothing in the review workflow needs it. This is the single biggest conversion risk on the page.
-   - **First Name and Last Name**, which duplicate Creator Name — §7.3 wants one "how you want to be credited" field.
-   - **Official Release Date** — §7.5 excludes it as a professional-infrastructure signal that alienates Segment A, and it is meaningless for unreleased Lane A tracks.
-   - **The "Rights Confirmed" checkbox is labelled "Option 1"**, so the §7.7 representation the creator is supposed to be making is not actually stated. This is the one with legal weight — it should read the Lane A/Lane B wording.
-   - **The SMS consent text still contains unfilled template placeholders**, `[BUSINESS NAME]` and `[USE_CASE_FROM_CAMPAIGN_DESCRIPTION]`, which real submitters currently see.
-   - **`terms_and_conditions` appears twice.**
+1. **Rebuild the GoHighLevel form.** This is now the largest remaining conversion cost in the funnel, and it is the one thing no change to this repository can fix — the form lives in GoHighLevel, inside a cross-origin iframe. `ghlFormUrl` points at the live "playlist submission Form" (`hNlynM8h8zLs9jkDlTVW`) and it works, but it asks for far more than the six approved fields, including a **required phone number**, split first/last name, an official release date, a rights checkbox still labelled **"Option 1"**, and SMS consent text containing unfilled `[BUSINESS NAME]` placeholders that real submitters currently see.
 
-   Until it is trimmed, the page cannot honestly say "Five fields. About a minute." (§7.8) — the copy is temporarily "Takes a minute or two." Restore the spec line verbatim once the form matches.
+   Full specification, including what to remove and why, proposed consent wording, and a verification checklist: **[`docs/GHL_SUBMIT_MUSIC_FORM_REBUILD.md`](docs/GHL_SUBMIT_MUSIC_FORM_REBUILD.md)**.
 
-   Field keys are correct and should not be renamed: `track_link`, `creator_name`, `email`, `genre`, `submission_notes`, `rights_confirmed` (§12.1).
+   Field keys are correct and must not be renamed: `track_link`, `creator_name`, `email`, `genre`, `submission_notes`, `rights_confirmed` (§12.1). Renaming `track_link` in particular silently breaks the hero prefill.
 2. **Set the post-submit redirect** in GoHighLevel to `https://aguocha.com/thank-you.html`, or the confirmation page is unreachable. Append `?track=<title>` if you want the page to name the track back.
-3. **Fill in `curator`.** Real name, photograph, and profile links (§6.5.1). While `name` is empty the whole "Who listens" block is removed — a half-filled curator block is worse than none, and an anonymous curator is indistinguishable from a fake-playlist operator.
+3. **Flip `ghlFormSimplified` to `true`** — but only after item 1 is done *and verified in the live form*. It controls a factual claim about how long the form takes to fill in, so it has to follow the form rather than lead it.
 4. **Add `lanes.a.playlistUrl`** once the Suno-hosted playlist exists, and confirm `lanes.b` points at the right Spotify playlist.
 5. **Flip `metrics.show` to `true`** after the first monthly cycle, once the numbers are real.
-6. **Add a 1200×630 OG image** and point `og:image` on `submit.html` at it.
-7. **Have `submission-terms.html` reviewed by counsel.** A careful draft, not vetted legal advice.
+6. **Replace the curator photo.** `curator` is populated, but `photo` points at the logo because no curator photograph exists in the repository. A square portrait, 512×512 or larger, committed to `img/`, is a one-line change from there. `assets/submit.js` restricts `photo` to a first-party `img/` path, so it cannot be pointed at a remote URL.
+7. **Have `submission-terms.html` reviewed by counsel.** A careful draft, not vetted legal advice. The same applies to the consent wording proposed in the GHL rebuild document.
 
 Never put API keys, tokens, or private webhook URLs in `assets/` — those files are public.
 
 ## Replacing Placeholders
 
-- **Hero image**: `img/agu-mask-portrait.jpg` is referenced as the `og:image` on the eleven original pages but **does not exist in the repo**, so social previews on those pages are currently broken. Either add a 1200×1500+ portrait at that exact path, or repoint those tags at `img/agu-logo.png` (which is what the newer pages use).
+- **Social preview images**: every `og:image` now points at a file that exists — `img/submit-music-og.png` (1200×630) on `/submit`, and `img/agu-logo.png` everywhere else. The earlier reference to a non-existent `img/agu-mask-portrait.jpg` is gone. The logo is square, so it is a working preview rather than a good one: a 1200×630 image per page section would be better, and adding one is a drop-in change to that page's `og:image`.
 - **Logo mark**: Swap `img/agu-logo.png` if a different brand mark is preferred. Update the favicon if needed.
 - **Music embeds**: Search for `VIDEO_ID_`, `PLAYLIST_ID`, `TRACK_ID_`, and `PROFILE` within the HTML files and replace each placeholder with the correct YouTube, Spotify, or SoundCloud IDs.
 - **GHL forms**: Replace the `<!-- GHL_*_FORM_LINK -->` comments with live form URLs for private events, festivals, residencies, brand activations, collaborations, and media inquiries.
