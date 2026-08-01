@@ -101,6 +101,11 @@
     frame.setAttribute("title", cal.title);
     frame.setAttribute("style", cal.style);
     frame.setAttribute("scrolling", "no");
+    /* Same value the legacy category pages and both other embedders use. GHL
+     * needs no path or query from the referrer — the widget id is already in
+     * the src — so this only stops /booking/?type=... from being disclosed to
+     * a third party on browsers that still default to sending the full URL. */
+    frame.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
     frame.setAttribute("id", cal.iframeId);
     frame.className = "bk-frame";
     frame.setAttribute("data-calendar-frame", "");
