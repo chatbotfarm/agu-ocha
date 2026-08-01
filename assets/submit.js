@@ -74,6 +74,14 @@
      * cannot come back silently.
      * The restriction to /img/ is the point: it keeps the photo first-party,
      * so no third-party request appears that privacy.html has not disclosed. */
+    /* The character class below has to allow "." (file extensions) and "/"
+     * (subdirectories), which together also spell "..". Without this guard
+     * "/img/../../anything" satisfies the pattern and leaves /img/ entirely,
+     * defeating the restriction the comment above describes. Traversal cannot
+     * reach another origin, so this is hardening rather than a live hole — but
+     * a validator that does not enforce its own stated contract is a trap for
+     * whoever widens this input next. */
+    if (value.indexOf("..") !== -1) return null;
     return /^\/img\/[A-Za-z0-9._\-/]+$/.test(value) ? value : null;
   }
 
