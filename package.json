@@ -6,7 +6,9 @@
   "scripts": {
     "build:css": "tailwindcss -i ./assets/tailwind-input.css -o ./assets/tailwind.css --minify",
     "watch:css": "tailwindcss -i ./assets/tailwind-input.css -o ./assets/tailwind.css --watch",
-    "check": "node scripts/check-links.mjs"
+    "check": "node scripts/check-links.mjs && node scripts/check-embeds.mjs",
+    "check:links": "node scripts/check-links.mjs",
+    "check:embeds": "node scripts/check-embeds.mjs"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.17"
