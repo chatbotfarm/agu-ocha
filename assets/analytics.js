@@ -24,8 +24,12 @@
  *     form_start        { lane, source }
  *     field_complete    { field }              one per field, first completion
  *     form_abandon      { lastField, completed }
- *     playlist_play     { lane }
  *     faq_open          { question, index }
+ *
+ * playlist_play was retired when the Suno Vibez player stopped being a
+ * click-to-load facade. The playlist is now a plain iframe, so there is no
+ * click of ours to count — Spotify's own play control lives inside a
+ * cross-origin frame and is not observable from here.
  */
 (function () {
   "use strict";
