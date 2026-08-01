@@ -1,0 +1,19 @@
+# Security contact information for https://aguocha.com
+# Format: RFC 9116. https://www.rfc-editor.org/rfc/rfc9116
+#
+# NOTE FOR THE OPERATOR: Expires must stay in the future. RFC 9116 says a
+# consumer should treat an expired file as stale, so review this annually and
+# push a new date. If a dedicated security mailbox is ever created, add it as
+# the first Contact line -- an address is materially better than a phone
+# number for vulnerability reports.
+
+Contact: tel:+1-762-248-6242
+Contact: https://github.com/chatbotfarm/agu-ocha/security/advisories/new
+Expires: 2027-08-01T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://aguocha.com/.well-known/security.txt
+Policy: https://github.com/chatbotfarm/agu-ocha/blob/main/SECURITY.md
+
+# Please do not submit a booking or a form to demonstrate an issue -- both
+# reach a real person. See SECURITY.md for the full testing rules and for the
+# out-of-scope list (third-party embeds, and headers GitHub Pages cannot set).

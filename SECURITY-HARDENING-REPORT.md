@@ -224,7 +224,7 @@ repository.
 | --- | --- | --- | --- | --- | --- |
 | M-01 | GHL `form_embed.js` executes first-party from two unversioned hosts with no SRI | Medium | Accepted risk | No | No |
 | L-01 | `validPhotoPath()` accepts `../` traversal, defeating its own first-party contract | Low | Verified | Yes | **Yes** |
-| L-02 | 12 of 15 in-markup iframes carry no `referrerpolicy` | Low | Verified | Yes | **Yes** |
+| L-02 | 12 of 15 in-markup iframes, plus the `/booking/?type=` router, carry no `referrerpolicy` | Low | Verified | Yes | **Yes** |
 | L-03 | Site is framable — no `frame-ancestors`, no `X-Frame-Options` | Low | Platform limit | No | No |
 | L-04 | Two distinct GHL hosts serve the same `form_embed.js` | Low | Needs GHL confirmation | Partly | No |
 | I-01 | No Content-Security-Policy | Informational | Now feasible | Partly | No |
@@ -363,10 +363,11 @@ asserts `/img/../../etc/passwd` → `null` and `/img/agu-logo.png` → unchanged
 
 ---
 
-### L-02 — 12 of 15 in-markup iframes carry no `referrerpolicy`
+### L-02 — 12 of 15 in-markup iframes, plus the `/booking/?type=` router, carry no `referrerpolicy`
 
 - **Severity:** Low. **Status:** Verified, **fixed in this branch**.
-- **Affected files (12):** `index.html:178`, `index.html:220`,
+- **Affected files (13 surfaces):** `assets/booking.js:99-107` — see the note
+  below — plus the following 12 in-markup iframes: `index.html:178`, `index.html:220`,
   `music/index.html:67`, `music/index.html:122`, `music/index.html:134`,
   `collaborate/index.html:92`, `collaborate/index.html:112`,
   `collaborate/index.html:147`, `booking/residencies/index.html:99`,
@@ -377,8 +378,17 @@ asserts `/img/../../etc/passwd` → `null` and `/img/agu-logo.png` → unchanged
 **Evidence.** Three in-markup iframes already carry
 `referrerpolicy="strict-origin-when-cross-origin"`
 (`submit-music/index.html:183`, `media/index.html:84`, `booking/index.html:256`),
-as do both JS-built frames (`assets/forms.js:82`, `assets/submit.js:265`). The
-other twelve carry none.
+as do two of the three JS-built frames (`assets/forms.js:82`,
+`assets/submit.js:265`). The other twelve markup iframes carry none.
+
+**A thirteenth surface was found while implementing the fix, not during the
+markup audit.** `assets/booking.js` builds a calendar iframe in code for the
+`/booking/?type=` route and set no `referrerpolicy` — unlike its two sibling
+embedders. The attribute-level markup scan could not see it because the element
+never exists in any HTML file. This is the more interesting instance of the two:
+`/booking/?type=residency` is precisely the URL whose **query string** discloses
+the visitor's booking category, and it is the one route where the referrer had
+something to leak beyond the origin. Fixed at `assets/booking.js:107`.
 
 **Attack scenario.** Not an attack — a passive privacy leak. On a browser whose
 default is `no-referrer-when-downgrade` (Safari on iOS below 14.5, and older
@@ -396,8 +406,9 @@ nothing.
 which is a real share of music-site traffic.
 
 **Recommended correction.** Add
-`referrerpolicy="strict-origin-when-cross-origin"` to the twelve iframes,
-matching the value already proven in this codebase on the other five frames.
+`referrerpolicy="strict-origin-when-cross-origin"` to the twelve iframes and to
+`assets/booking.js`, matching the value already proven in this codebase on the
+other five frames.
 
 **Regression risk.** None. This exact value is already live on Spotify, YouTube,
 and GoHighLevel frames in this same repository, so all three vendors are
@@ -405,7 +416,10 @@ confirmed to work with it. The policy still sends the origin, which is all any
 of them use.
 **Repository-fixable:** Yes. **Operator action:** No. **Counsel review:** No.
 **Test proving the correction:** `scripts/check-embeds.mjs` fails the build if
-any cross-origin iframe lacks `referrerpolicy` or `title`.
+any cross-origin iframe lacks `referrerpolicy` or `title`, and separately
+asserts that all three JS embedders set both — the check that would have caught
+`booking.js`. Negative-tested: removing the attribute from `index.html:178`
+reproduces the failure.
 
 ---
 
@@ -722,11 +736,11 @@ stored. Confirmed by `analytics.js:44-49`: only event names and
 
 | Host | Type | Purpose | Executable? | Version-pinned | SRI possible | `referrerpolicy` | Sandbox appropriate | `allow` excessive | Required for a primary journey | Fallback exists |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `api.leadconnectorhq.com` | iframe | 5 booking calendars, 3 forms | No — cross-origin frame | N/A | N/A | 3 of 6 before fix → **6 of 6 after** | **No** — would break GHL | No `allow` set | **Yes** — booking, submission | Yes, static panel on every page |
+| `api.leadconnectorhq.com` | iframe | 5 booking calendars, 3 forms — 8 frame surfaces (5 in markup, 3 JS-built) | No — cross-origin frame | N/A | N/A | 2 of 8 before fix → **8 of 8 after** | **No** — would break GHL | No `allow` set | **Yes** — booking, submission | Yes, static panel on every page |
 | `api.leadconnectorhq.com` | **script** | `form_embed.js` on 2 pages | **Yes — first-party** | **No** | **No** (see M-01) | N/A | N/A | N/A | Yes — resize handshake | Frame renders, may clip |
 | `link.msgsndr.com` | **script** | `form_embed.js` on 6 pages | **Yes — first-party** | **No** | **No** (see M-01) | N/A | N/A | N/A | Yes | As above |
 | `open.spotify.com` | iframe | 5 artist/playlist embeds | No | N/A | N/A | 1 of 5 → **5 of 5** | **No** — breaks playback | `fullscreen` — vendor default | No — enhancement | Yes, direct link |
-| `www.youtube.com` | iframe | 4 video embeds | No | N/A | N/A | 2 of 4 → **4 of 4** | **No** — breaks playback | `accelerometer; gyroscope` — I-05 | No — enhancement | Yes, surrounding copy |
+| `www.youtube.com` | iframe | 5 video embeds (4 unique videos) | No | N/A | N/A | 2 of 5 → **5 of 5** | **No** — breaks playback | `accelerometer; gyroscope` — I-05 | No — enhancement | Yes, surrounding copy |
 | `store.aguocha.com` | link | external store | No | N/A | N/A | N/A | N/A | N/A | No | Yes, phone/text panel |
 | `chatbotfarm.ai` | link | footer attribution | No | N/A | N/A | N/A | N/A | N/A | No | N/A |
 
@@ -1043,7 +1057,7 @@ change, no route removed, no dependency added, testable locally.
 | ID | Fix | Files | Regression risk |
 | --- | --- | --- | --- |
 | L-01 | Reject `..` in `validPhotoPath()` | `assets/submit.js` | None — the only production value is unaffected |
-| L-02 | Add `referrerpolicy="strict-origin-when-cross-origin"` to 12 iframes | 6 HTML files | None — value already proven on 5 frames in this repo |
+| L-02 | Add `referrerpolicy="strict-origin-when-cross-origin"` to 12 iframes and to the `/booking/?type=` router | 6 HTML files, `assets/booking.js` | None — value already proven on 5 frames in this repo |
 | I-02 | Add `SECURITY.md` and `.well-known/security.txt` | 2 new files | None — documentation only |
 | — | Add `scripts/check-embeds.mjs`; wire into `npm run check` | 2 files | None — test only, no shipped asset |
 
@@ -1092,7 +1106,8 @@ made, no request was sent to any production or third-party host.**
 | JSON-LD parse | all 6 blocks `JSON.parse`'d | **6/6 valid** |
 | Mixed content | `http://` resource URLs | 0 |
 | `target="_blank"` safety | all anchors, static and JS-built | **all carry `rel="noopener noreferrer"`** |
-| Iframe attribute audit | all 15 iframes: `title`, `referrerpolicy`, `allow`, `sandbox`, `loading` | 15/15 titled; 3/15 → **15/15** `referrerpolicy` |
+| Iframe attribute audit | all 15 iframes: `title`, `referrerpolicy`, `allow`, `sandbox`, `loading` | 15/15 titled; 3/15 → **15/15** `referrerpolicy`; JS embedders 2/3 → **3/3** |
+| Regression-test negative testing | reverted each fix in turn and re-ran `check-embeds.mjs` | **3/3 reproduced the expected failure** — the test is not vacuous |
 | External-host inventory | all `https?://` refs in HTML/JS/CSS/XML | 4 third-party origins; 0 external CSS/font |
 | **URL-parameter fuzzing** | 58 assertions against the shipped validators, copied verbatim | **57 pass, 1 fail → L-01** |
 | JS-disabled review | `<noscript>` rules + static `<main>` content, all pages | No blank surface; navigation lost (I-07) |
