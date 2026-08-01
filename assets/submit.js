@@ -170,65 +170,17 @@
     });
   }
 
-  /* -------------------------------------------------------- playlist embed */
-
-  /**
-   * Lazy facade (spec §6.2, §10.2). The iframe is the heaviest thing on the
-   * page and blocking on it wrecks LCP, so nothing third-party loads until the
-   * visitor actually asks for it.
-   */
-  function initPlaylist() {
-    var mount = document.getElementById("playlist-embed");
-    if (!mount) return;
-
-    var lane = mount.getAttribute("data-lane") || "b";
-    var laneCfg = (CFG.lanes && CFG.lanes[lane]) || {};
-    var embed = validUrl(laneCfg.playlistEmbedUrl, PLAYLIST_HOSTS);
-
-    if (!embed) {
-      var pending = el(
-        "p",
-        "text-sm text-white/60",
-        "This month's playlist goes live with the first cycle."
-      );
-      mount.appendChild(pending);
-      return;
-    }
-
-    var button = el("button", "sv-facade");
-    button.setAttribute("type", "button");
-    button.setAttribute(
-      "aria-label",
-      "Play this month's playlist. Loads an embedded player from Spotify."
-    );
-    button.appendChild(el("span", "sv-facade-icon", "▶"));
-    button.appendChild(el("span", "sv-facade-label", "Play this month's playlist"));
-    button.appendChild(
-      el(
-        "span",
-        "sv-facade-note",
-        "Loads an embedded player from Spotify."
-      )
-    );
-
-    button.addEventListener("click", function () {
-      var frame = document.createElement("iframe");
-      frame.setAttribute("src", embed.href);
-      frame.setAttribute("title", "Suno Vibez playlist");
-      frame.setAttribute("loading", "lazy");
-      frame.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
-      frame.setAttribute(
-        "allow",
-        "autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-      );
-      frame.setAttribute("style", "width:100%;height:380px;border:0;border-radius:12px");
-      mount.replaceChildren(frame);
-      track("playlist_play", { lane: lane });
-      frame.focus();
-    });
-
-    mount.appendChild(button);
-  }
+  /* -------------------------------------------------------- playlist embed
+   *
+   * There is no initPlaylist() any more. The Suno Vibez player used to be a
+   * click-to-load facade built here and swapped for an iframe on click; it is
+   * now a plain lazy <iframe> in the page markup, so no JavaScript is involved
+   * in rendering it. The `playlist_play` event went with the facade — there is
+   * no longer a click of ours to count, and Spotify's own play control is
+   * inside a cross-origin frame we cannot and should not observe.
+   *
+   * The "Follow the playlist" link is still populated from config below, so
+   * lanes[].playlistUrl remains the single source of truth for the playlist. */
 
   /* ------------------------------------------------------------ the form */
 
@@ -643,7 +595,6 @@
 
   initHeroMicrocopy();
   initHeroPaste();
-  initPlaylist();
   initPlaylistLinks();
   initFormRetry();
   initClickTracking();

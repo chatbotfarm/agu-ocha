@@ -41,20 +41,9 @@
 
     .sv-cta{min-height:56px;display:inline-flex;align-items:center;justify-content:center}
 
-    /* Playlist facade — the third-party iframe loads only when asked for. */
-    .sv-facade{
-      width:100%;min-height:180px;display:flex;flex-direction:column;
-      align-items:center;justify-content:center;gap:.5rem;cursor:pointer;
-      background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);
-      border-radius:.75rem;color:var(--leopard);padding:2rem 1rem;text-align:center;
-    }
-    .sv-facade:hover{background:rgba(255,255,255,0.07)}
-    .sv-facade-icon{
-      font-size:1.25rem;width:3.5rem;height:3.5rem;border-radius:9999px;
-      background:var(--brand);display:flex;align-items:center;justify-content:center;
-    }
-    .sv-facade-label{font-weight:700;font-size:1.05rem}
-    .sv-facade-note{font-size:.8rem;color:rgba(247,247,248,.55)}
+    /* Reserves the playlist embed's height before the lazy iframe arrives, so a
+       third-party frame cannot shift the page as it loads. */
+    .sv-playlist{min-height:352px}
 
     .sv-step-num{
       width:2rem;height:2rem;flex:0 0 2rem;border-radius:9999px;
@@ -157,10 +146,10 @@
          positioning copy, which buried the one thing a visitor can actually
          listen to before deciding whether their track belongs here.
 
-         #playlist-embed is a JS mount: assets/submit.js renders a facade and
-         only loads the Spotify iframe on click. The "Follow the playlist" href
-         is filled from assets/suno-vibez-config.js, so the link and the embed
-         can never point at different playlists. -->
+         The playlist iframe is static markup and loads without a click. The
+         "Follow the playlist" href is still filled from
+         assets/suno-vibez-config.js, so if the playlist ever changes, update it
+         there AND in the iframe src below — they are no longer wired together. -->
     <section class="section border-t border-white/10">
       <div class="mx-auto container px-4">
         <div class="grid gap-8 lg:grid-cols-12 lg:items-center">
@@ -176,7 +165,24 @@
             </p>
           </div>
           <div class="lg:col-span-7">
-            <div id="playlist-embed" data-lane="b"></div>
+            <!-- The playlist renders on arrival rather than behind a
+                 click-to-load facade. Lazy, so it still costs nothing until it
+                 nears the viewport, and the wrapper reserves its height so it
+                 cannot shift the page in. No autoplay: the `allow` list only
+                 grants the capability, it does not start playback. -->
+            <div class="sv-playlist">
+              <iframe
+                src="https://open.spotify.com/embed/playlist/5u17B3EXagZ5F2bm0mgCTq?utm_source=generator"
+                title="Suno Vibez playlist on Spotify"
+                width="100%"
+                height="352"
+                frameborder="0"
+                allowfullscreen
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                referrerpolicy="strict-origin-when-cross-origin"
+                style="border-radius:12px"></iframe>
+            </div>
           </div>
         </div>
       </div>
@@ -274,15 +280,6 @@
             <p>Yes. You keep all ownership, and nothing transfers your copyright, master, or publishing rights. Submitting grants a limited, revocable licence to listen to your track and &mdash; only if it&rsquo;s selected &mdash; to feature it. The <a class="underline underline-offset-4" href="/submission-terms/">Submission Terms</a> set out exactly what that covers.</p>
           </div>
 
-          <h3><button type="button" class="sv-faq-trigger" data-faq-trigger aria-controls="faq-4" aria-expanded="false">What type of link should I submit?<span class="sv-faq-marker" aria-hidden="true">+</span></button></h3>
-          <div id="faq-4" data-faq-panel class="py-4 text-white/85" hidden>
-            <p>A public listening link &mdash; Suno, Spotify, SoundCloud or any similar platform &mdash; rather than a file attachment. One track per creator per month, and it should be your own work, including any samples.</p>
-          </div>
-
-          <h3><button type="button" class="sv-faq-trigger" data-faq-trigger aria-controls="faq-5" aria-expanded="false">Can I submit a Suno free-tier track?<span class="sv-faq-marker" aria-hidden="true">+</span></button></h3>
-          <div id="faq-5" data-faq-panel class="py-4 text-white/85" hidden>
-            <p>Yes, for the Suno playlist &mdash; any tier works, including free. For streaming platforms it&rsquo;s different: Suno&rsquo;s free tier grants personal, non-commercial use only, so free-tier tracks can&rsquo;t be distributed there. Commercial rights come with Pro and Premier, for tracks made while subscribed.</p>
-          </div>
         </div>
       </div>
     </section>
@@ -368,9 +365,7 @@
     "mainEntity": [
       {"@type":"Question","name":"Can I submit AI-generated music?","acceptedAnswer":{"@type":"Answer","text":"Yes. Music made with Suno or any other AI tool is welcome, and you don’t need to play down how you made it. Tracks are judged on how they sound and whether they fit a set."}},
       {"@type":"Question","name":"Does submission guarantee placement?","acceptedAnswer":{"@type":"Answer","text":"Placement isn’t guaranteed. Selection is at Agu Ocha’s discretion. We don’t charge for submission or placement, and placement can’t be bought."}},
-      {"@type":"Question","name":"Do I keep ownership of my music?","acceptedAnswer":{"@type":"Answer","text":"Yes. You keep all ownership, and nothing transfers your copyright, master, or publishing rights. Submitting grants a limited, revocable licence to listen to your track and — only if it’s selected — to feature it. The Submission Terms set out exactly what that covers."}},
-      {"@type":"Question","name":"What type of link should I submit?","acceptedAnswer":{"@type":"Answer","text":"A public listening link — Suno, Spotify, SoundCloud or any similar platform — rather than a file attachment. One track per creator per month, and it should be your own work, including any samples."}},
-      {"@type":"Question","name":"Can I submit a Suno free-tier track?","acceptedAnswer":{"@type":"Answer","text":"Yes, for the Suno playlist — any tier works, including free. For streaming platforms it’s different: Suno’s free tier grants personal, non-commercial use only, so free-tier tracks can’t be distributed there. Commercial rights come with Pro and Premier, for tracks made while subscribed."}}
+      {"@type":"Question","name":"Do I keep ownership of my music?","acceptedAnswer":{"@type":"Answer","text":"Yes. You keep all ownership, and nothing transfers your copyright, master, or publishing rights. Submitting grants a limited, revocable licence to listen to your track and — only if it’s selected — to feature it. The Submission Terms set out exactly what that covers."}}
     ]
   }
   </script>
