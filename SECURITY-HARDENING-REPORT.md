@@ -18,6 +18,41 @@ are not restated as open findings.
 
 ---
 
+## Post-deployment factual corrections — August 1, 2026
+
+**This report was written before any live HTTP request was made to
+`aguocha.com`.** §21 limitation 1 recorded that at the time: statements about
+which headers GitHub Pages sends were drawn from platform documentation rather
+than measurement, and the operator was asked to confirm them with `curl -I`.
+
+After PR #8 merged (`main` @ `2557355`) and GitHub Pages deployed, that
+measurement was finally taken. It contradicted three statements below. All three
+are corrected in place, and each correction is marked **[Corrected 2026-08-01]**
+so the original claim and its replacement are both visible:
+
+1. **`X-Content-Type-Options` (§14).** The report claimed GitHub Pages already
+   sends `nosniff`, and marked the row "Already correct." **It does not.** The
+   live response carries no such header. This was the report's only over-claim —
+   an assertion of protection that is not present.
+2. **HTTPS enforcement and HSTS (§14, §16, §18).** The report framed this as
+   "confirm Enforce HTTPS is enabled." It is **disabled**: the Pages API reports
+   `https_enforced: false`, `http://aguocha.com/` returns 200 without redirecting
+   to HTTPS, and no `Strict-Transport-Security` header is present. This is now a
+   concrete operator action (§16 item 7, §18 item 13), not a confirmation step.
+3. **CodeQL (I-03, §16).** The report stated the repository has no CodeQL. It
+   does: **GitHub's default setup is configured** for JavaScript/TypeScript, and
+   CodeQL and Analyze both passed on PR #8's head `f09cca2`. The related claim —
+   that no `.github/` workflow directory exists — remains accurate; the two are
+   different mechanisms and the report previously conflated them.
+
+Corrections 1 and 2 make the security posture **worse** than originally
+described. Correction 3 makes it **better**. Nothing else in this report was
+rewritten, and no finding ID or severity was changed to accommodate them: the
+original point-in-time observations stand as made, with the live measurement
+recorded against them.
+
+---
+
 ## 1. Executive summary
 
 **No Critical and no High findings. One Medium, four Low, nine Informational.**
@@ -201,7 +236,7 @@ Verified: the site ships **zero trackers**, and `/privacy/` says so accurately.
 | Clickjacking | **Unmitigated** — L-03. No `frame-ancestors`, no `X-Frame-Options`. Impact limited: no authenticated action exists. |
 | Supply-chain risk | Build-time only (`tailwindcss` devDependency); the shipped CSS is committed. No runtime npm dependency. |
 | Dependency risk | One devDependency, not shipped to visitors. |
-| Repository hygiene | `.gitignore` present and correct. No CI, no CodeQL, no push protection — I-03. |
+| Repository hygiene | `.gitignore` present and correct. No repo-defined CI workflow, no push protection — I-03. (CodeQL default setup **is** active; corrected 2026-08-01.) |
 | Misconfigured public files | `robots.txt`, `sitemap.xml`, `CNAME`, `.nojekyll` all correct. |
 | Privacy leakage | Minor — L-02 (referrer), I-06 (`?si=` tokens). |
 | Referrer leakage | L-02. |
@@ -229,7 +264,7 @@ repository.
 | L-04 | Two distinct GHL hosts serve the same `form_embed.js` | Low | Needs GHL confirmation | Partly | No |
 | I-01 | No Content-Security-Policy | Informational | Now feasible | Partly | No |
 | I-02 | No vulnerability-disclosure route (`SECURITY.md` / `security.txt`) | Informational | Verified | Yes | **Yes** |
-| I-03 | No `.github/` — no CI, CodeQL, Dependabot, or push protection | Informational | Verified | Partly | No |
+| I-03 | No `.github/` — no repo-defined CI workflow, no Dependabot, no push protection (**CodeQL default setup IS active** — corrected 2026-08-01) | Informational | Verified | Partly | No |
 | I-04 | `favicon.ico` is 0 bytes but referenced by every page | Informational | Verified | Needs asset | No |
 | I-05 | YouTube iframes grant `accelerometer; gyroscope` motion sensors | Informational | Verified | Yes | No |
 | I-06 | Spotify `?si=` share tokens present on embed and link URLs | Informational | Verified | Yes | No |
@@ -513,14 +548,46 @@ using the phone number already published sitewide; no new contact channel was
 invented. **Operator note:** a dedicated security email would be materially
 better than a phone number and is recommended (§18).
 
-### I-03 — No `.github/` — no CI, CodeQL, Dependabot, or push protection
+### I-03 — No `.github/` — no repo-defined CI workflow, no Dependabot, no push protection
 
-`scripts/check-links.mjs` is a good checker that **never runs automatically**.
-Nothing prevents a commit that breaks every link, adds an `http://` resource, or
-introduces an inline handler from reaching production. Exact recommended
-settings in §16. **Not changed** — the brief forbids modifying GitHub settings
-without operator approval, and adding a workflow file is a deployment-affecting
-change beyond the remediation authority granted.
+*[Corrected 2026-08-01]* **This finding originally read "no CI, CodeQL,
+Dependabot, or push protection." The CodeQL half was wrong.**
+
+The correction turns on a distinction the original text collapsed. There are two
+ways to run CodeQL, and only one of them is visible in the repository tree:
+
+- **Repository-defined workflow** — a YAML file committed under `.github/workflows/`.
+  **Still absent**, as originally reported. The audit inspected the tree and
+  correctly found no `.github/` directory.
+- **GitHub-hosted default setup** — configured in repository Settings, with no
+  committed file anywhere. **This is active** and was invisible to a tree-only
+  inspection, which is how the original error was made.
+
+Measured 2026-08-01 via `GET /repos/chatbotfarm/agu-ocha/code-scanning/default-setup`:
+
+```
+state       : configured
+languages   : javascript, javascript-typescript, typescript
+query_suite : default
+schedule    : weekly
+updated_at  : 2026-07-28T20:29:24Z
+```
+
+So CodeQL has been running since on or about **2026-07-28**, before this audit
+began — the report simply failed to detect it. **CodeQL and Analyze
+(javascript-typescript) both completed with conclusion `success` on PR #8's head
+`f09cca2`.** No statement that this repository lacks CodeQL should be relied on.
+
+What remains accurate, and is the actual substance of I-03: **`scripts/check-links.mjs`
+and `scripts/check-embeds.mjs` never run automatically.** CodeQL scans for code
+vulnerabilities; it does not run this repository's own link and embed checkers,
+so nothing still prevents a commit that breaks every link, adds an `http://`
+resource, or drops an iframe's `referrerpolicy` from reaching production.
+Dependabot and push protection also remain unconfirmed.
+
+Exact recommended settings in §16. **Not changed** — the brief forbids modifying
+GitHub settings without operator approval, and adding a workflow file is a
+deployment-affecting change beyond the remediation authority granted.
 
 ### I-04 — `favicon.ico` is 0 bytes but referenced by every page
 
@@ -584,6 +651,11 @@ from the working tree, no status check is required, and no `.github/` workflow
 exists. Combined with I-03, a single mistaken push reaches `aguocha.com`
 immediately. Recommended settings in §16. **Not changed** — operator approval
 required.
+
+*[Clarified 2026-08-01]* CodeQL default setup being active (see I-03) does **not**
+soften this. CodeQL analyses code and reports findings; it is not a required
+status check here and does not gate the Pages deployment, which begins as soon as
+`main` moves. Nothing currently blocks a bad push from reaching production.
 
 ---
 
@@ -777,11 +849,41 @@ and no configuration surface. This governs everything below.
 | `X-Frame-Options` | Absent | **No** | **No — meta not honoured** | N/A | Needs a proxy. |
 | `Referrer-Policy` | Absent | Partly — `<meta name="referrer">` | Yes | No | Per-iframe `referrerpolicy` chosen instead — L-02. |
 | `Permissions-Policy` | Absent | **No** | **No** | Would restrict embeds | Per-iframe `allow` is the only lever — I-05. |
-| `Strict-Transport-Security` | **Set by GitHub** when "Enforce HTTPS" is on | No | **No** | N/A | Operator: confirm Enforce HTTPS is enabled (§16). |
-| `X-Content-Type-Options` | **`nosniff`, set by GitHub Pages** | No | No | N/A | Already correct. |
+| `Strict-Transport-Security` | **Absent — not sent** *[Corrected 2026-08-01]* | No | **No** | N/A | **"Enforce HTTPS" is currently DISABLED** (`https_enforced: false`), so no HSTS is emitted and `http://aguocha.com/` serves 200 without redirecting. Concrete operator action — §16 item 7, §18 item 13. Availability after enabling remains platform-controlled and must be re-measured. |
+| `X-Content-Type-Options` | **Absent — not sent** *[Corrected 2026-08-01]* | No | No | N/A | **Originally recorded as "`nosniff`, set by GitHub Pages — already correct." That was wrong**, and it was the report's only over-claim. Live measurement shows no such header. The repository cannot set this header on standard GitHub Pages, so it is a platform limitation, not a repository defect — and a further reason to consider a configurable proxy (§14 recommendation). |
 | `Cross-Origin-Opener-Policy` | Absent | No | No | `same-origin` would break GHL popups | Needs a proxy; test carefully. |
 | `Cross-Origin-Resource-Policy` | Absent | No | No | No | Needs a proxy. Low value here. |
 | `Cross-Origin-Embedder-Policy` | Absent | No | No | **Would break all embeds** | **Do not pursue.** |
+
+### Measured live response — 2026-08-01, after the PR #8 deployment
+
+*[Added 2026-08-01]* The "Current" column above was originally inferred from
+platform documentation, not measured (§21 limitation 1). It has now been measured
+against production at `main` @ `2557355`:
+
+```
+$ curl -sD - -o /dev/null https://aguocha.com/
+HTTP/1.1 200 OK
+Server: GitHub.com
+Content-Type: text/html; charset=utf-8
+Access-Control-Allow-Origin: *
+Cache-Control: max-age=600
+...
+```
+
+**Every security header in the table above is absent from the live response** —
+including `X-Content-Type-Options`, which this report had wrongly recorded as
+already set. The only security-relevant header GitHub Pages emits here is none.
+
+Separately, `curl -L http://aguocha.com/` returns **200 over plain HTTP** and
+does **not** redirect to HTTPS, consistent with `https_enforced: false` from the
+Pages API. Enabling "Enforce HTTPS" is the single highest-value hosting change
+available without a proxy, and it is a settings toggle, not a repository change.
+
+**Do not treat HSTS as active.** Enabling "Enforce HTTPS" causes GitHub to
+redirect HTTP→HTTPS; whether it also emits `Strict-Transport-Security`, and with
+what `max-age`, is platform-controlled and must be verified by measurement after
+the change, not assumed.
 
 ### What a meta CSP could and could not do
 
@@ -898,8 +1000,9 @@ No surface fails blank.
 | Control | State |
 | --- | --- |
 | `.gitignore` | **Present and correct.** Covers `node_modules/`, `.claude/`, `.env`, `.env.*`, `*.local`, `*.log`, OS and editor temporaries. Prior I-01 closed. |
-| `.github/` | **Absent** — no workflows, no CodeQL, no Dependabot, no issue/PR templates |
-| CI | **None.** `npm run check` never runs automatically |
+| `.github/` | **Absent** — no committed workflows, no Dependabot config, no issue/PR templates. *[Corrected 2026-08-01: this row originally also said "no CodeQL." CodeQL is configured via GitHub's hosted default setup, which commits nothing to the tree and so cannot be observed here — see I-03.]* |
+| CodeQL | **Configured** (default setup, JavaScript/TypeScript, weekly, since 2026-07-28). Passed on PR #8. *[Added 2026-08-01 — server-side, not visible in the tree]* |
+| CI for this repo's own checkers | **None.** `npm run check` never runs automatically. CodeQL does not run the link or embed checkers. |
 | Dependencies | One devDependency (`tailwindcss ^3.4.17`), build-time only, never shipped |
 | `package-lock.json` | Present and committed |
 | Deployment | Direct from `main` — no gate (I-09) |
@@ -926,15 +1029,33 @@ way.
    point-in-time result.
 4. **Dependabot:** enable security updates for `tailwindcss`. Low value (build
    only) but free.
-5. **CodeQL:** enable the default JavaScript setup. Low yield on 8 dependency-free
-   files, but it catches regressions in the sinks §12 confirms are currently
-   absent.
+5. ~~**CodeQL:** enable the default JavaScript setup.~~ **Already done — no action
+   required.** *[Corrected 2026-08-01]* Default setup has been configured since
+   2026-07-28 (JavaScript/TypeScript, weekly) and passed on PR #8. Nothing to
+   enable. Note it does **not** cover the link and embed checkers, so
+   recommendation 2 still stands on its own.
 6. **Actions permissions:** if any workflow is ever added, set the default
    `GITHUB_TOKEN` permission to read-only, grant `contents: write` only where
    required, and pin every third-party action to a full commit SHA rather than a
    tag.
-7. **Confirm "Enforce HTTPS" is enabled** in Pages settings — this is what emits
-   HSTS (§14).
+7. **Enable "Enforce HTTPS" in Pages settings.** *[Corrected 2026-08-01 — this
+   was previously written as "confirm it is enabled." It is **not** enabled.]*
+   Measured: the Pages API reports `https_enforced: false`, and
+   `http://aguocha.com/` returns 200 without redirecting to HTTPS. Steps:
+   1. Open the repository on GitHub → **Settings**.
+   2. Open **Pages**.
+   3. Tick **Enforce HTTPS**.
+   4. Verify `curl -sIL http://aguocha.com/` now redirects to
+      `https://aguocha.com/`.
+   5. Verify the resulting production response headers with
+      `curl -sD - -o /dev/null https://aguocha.com/`.
+   6. **Do not record HSTS as active until it is actually observed** in that
+      output. Whether GitHub emits `Strict-Transport-Security`, and with what
+      `max-age`, is platform-controlled — it must be measured, not assumed.
+
+   This is the highest-value hosting change available without a proxy, it is a
+   settings toggle rather than a repository change, and it was **not** performed
+   as part of this assessment.
 8. **Review contributor access** against least privilege.
 
 Suggested minimal workflow, to be added only with operator approval:
@@ -1033,7 +1154,14 @@ Each requires action in the GoHighLevel dashboard or by the operator.
 
 12. Apply the GitHub settings in §16 — branch protection and push protection
     first.
-13. Confirm "Enforce HTTPS" is on in Pages settings (emits HSTS).
+13. ⚠️ **Enable "Enforce HTTPS" in Pages settings.** *[Corrected 2026-08-01 —
+    previously "confirm it is on." It is off.]* Measured after the PR #8
+    deployment: `https_enforced: false`, `http://aguocha.com/` serves 200 over
+    plain HTTP with no redirect, and no `Strict-Transport-Security` header is
+    sent. Settings → Pages → tick **Enforce HTTPS**, then verify HTTP now
+    redirects to HTTPS and re-measure the response headers. **Do not record HSTS
+    as active until observed** — it is platform-controlled. Full steps in §16
+    item 7. Not performed by this assessment.
 14. **Consider a dedicated security contact email**, then update `SECURITY.md`
     and `.well-known/security.txt`. Both currently point at the public phone
     number because no email address exists anywhere on the site; an email is
@@ -1142,12 +1270,22 @@ Post-fix, all 58 assertions pass. The permanent regression test lives at
 
 ## 21. Limitations
 
-1. **No live production HTTP testing.** No request was made to `aguocha.com`, to
-   GoHighLevel, to Spotify, or to YouTube. Actual response headers, TLS
-   configuration, and GitHub Pages behaviour were **not** observed. §14's
-   statements about which headers GitHub Pages sets are drawn from platform
-   documentation, not measurement. **The operator should confirm them with
-   `curl -I https://aguocha.com`.**
+1. **No live production HTTP testing** *at the time this assessment was written.*
+   No request was made to `aguocha.com`, to GoHighLevel, to Spotify, or to
+   YouTube. Actual response headers, TLS configuration, and GitHub Pages
+   behaviour were **not** observed. §14's statements about which headers GitHub
+   Pages sets were drawn from platform documentation, not measurement.
+
+   **[Resolved 2026-08-01]** This limitation has since been closed, and closing
+   it is what produced the corrections at the top of this report. Production was
+   measured after PR #8 merged and deployed (`main` @ `2557355`): all 15
+   canonical routes, both shared fragments, `/SECURITY.md` and
+   `/.well-known/security.txt` return 200, and an unknown path returns 404. The
+   response-header measurement is recorded in §14 and **contradicted two of this
+   report's original claims** — `X-Content-Type-Options` is not sent, and HTTPS
+   enforcement is off. That is precisely the risk this limitation was written to
+   flag, and it materialised. Third-party hosts were still not contacted
+   directly.
 2. **No real-browser rendering or viewport testing.** No browser automation is
    available in this environment. Regression testing was static: markup
    inspection, the link checker, the embed checker, and reasoning about the CSS
