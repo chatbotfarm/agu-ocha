@@ -10,7 +10,7 @@
   <link rel="icon" href="/favicon.ico">
   <link rel="apple-touch-icon" href="/img/agu-logo.png">
   <meta property="og:title" content="Agu Ocha — Where Music Meets Vibe Production">
-  <meta property="og:description" content="New England based. Performing online. AI-assisted and vibe-produced music welcome.">
+  <meta property="og:description" content="New England based. Exploring the vibe.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://aguocha.com/">
   <!-- Widest first-party asset that actually shows the persona. It is 1536x1024
@@ -55,21 +55,14 @@
        the copy beside it, which left the left column floating in dead space. */
     .hp-frame-hero{aspect-ratio:4/3}
     @media(min-width:768px){.hp-frame-hero{aspect-ratio:5/4}}
-    .hp-frame-square{aspect-ratio:1/1}
-    .hp-frame-wide{aspect-ratio:16/10}
-    /* Brand-mark tile: contain, not cover, so the mask is never cropped, and
-       inset so it reads as a mark rather than as cover artwork. */
-    .hp-frame-mark{background:#000}
-    .hp-frame-mark > img{object-fit:contain;padding:16%;transform:none}
-    .hp-tile:hover .hp-frame-mark > img{transform:none}
+    /* Reserves the Spotify artist embed's height before the iframe loads, so a
+       lazy third-party frame cannot shift the page as it arrives. */
+    .hp-spotify{min-height:352px}
 
     /* Crops. The subject in each source sits off-centre, so the focal point is
        set explicitly rather than letting object-fit guess. */
     .hp-crop-dj{object-position:63% 32%}
-    .hp-crop-dj-tight{object-position:63% 24%}
     .hp-crop-stage{object-position:50% 42%}
-    .hp-crop-stage-tight{object-position:50% 46%}
-    .hp-crop-decks{object-position:50% 62%}
 
     /* Vibe-production band: the mask mark as a large graphic, bled off the edge
        and held behind the type. Not a floating logo. */
@@ -95,48 +88,10 @@
       background:linear-gradient(180deg,rgba(11,11,12,.35) 0%,rgba(11,11,12,.78) 55%,rgba(11,11,12,.96) 100%);
     }
 
-    /* Music tiles: the label sits over the bottom of the crop. */
-    .hp-tile-label{
-      position:absolute;left:0;right:0;bottom:0;padding:1rem;
-      background:linear-gradient(180deg,rgba(11,11,12,0) 0%,rgba(11,11,12,.85) 60%,rgba(11,11,12,.95) 100%);
-    }
-    .hp-tile:hover .hp-frame > img{transform:scale(1.03)}
-    .hp-frame > img{transition:transform .35s ease}
-
-    /* Suno Vibez facade. Reserves the embed height so swapping in the iframe
-       cannot shift the page. */
-    .hp-facade{
-      width:100%;min-height:352px;display:flex;flex-direction:column;
-      align-items:center;justify-content:center;gap:.75rem;text-align:center;
-      background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.10);
-      border-radius:1rem;color:var(--leopard);cursor:pointer;padding:1.5rem;
-      transition:background .2s ease;
-    }
-    .hp-facade:hover{background:rgba(255,255,255,0.07)}
-    /* CSS-only play mark. Keeps the brand mask from appearing a third time on
-       one page, and adds no request. */
-    .hp-play{
-      width:4.5rem;height:4.5rem;border-radius:9999px;background:var(--brand);
-      display:flex;align-items:center;justify-content:center;margin-bottom:.25rem;
-    }
-    .hp-play::after{
-      content:"";border-style:solid;border-width:.85rem 0 .85rem 1.35rem;
-      border-color:transparent transparent transparent var(--leopard);
-      margin-left:.28rem;
-    }
-    .hp-facade:hover .hp-play{background:var(--leopard)}
-    .hp-facade:hover .hp-play::after{border-left-color:var(--jet)}
-    .hp-embed{width:100%;min-height:352px;border:0;border-radius:1rem;display:block}
-
     @media(prefers-reduced-motion:reduce){
       *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
-      .hp-tile:hover .hp-frame > img{transform:none}
     }
   </style>
-  <!-- Without JavaScript the Spotify facade button cannot do anything, so it is
-       hidden and the direct Follow Playlist link becomes the only route. The
-       section still explains itself and stays fully usable. -->
-  <noscript><style>[data-spotify-facade]{display:none}</style></noscript>
   <!-- Compiled Tailwind. Loaded LAST on purpose: the Play CDN this replaced
        appended its generated stylesheet to the end of <head>, so utilities won
        every specificity tie against the project classes above. That is also
@@ -161,8 +116,7 @@
 
           <div class="md:col-span-7 lg:col-span-6">
             <h1 class="font-extrabold tracking-tight text-5xl sm:text-6xl md:text-7xl">Agu Ocha</h1>
-            <p class="lead mt-5 text-white/85">New England based. Performing online.</p>
-            <p class="mt-2 text-white/70">AI-assisted and vibe-produced music welcome.</p>
+            <p class="lead mt-5 text-white/85">New England based. Exploring the vibe.</p>
 
             <div class="mt-8 flex flex-wrap gap-3">
               <a href="/music/" class="hp-cta btn-primary rounded-xl px-7 font-semibold">Listen</a>
@@ -207,65 +161,42 @@
       </div>
     </section>
 
-    <!-- ==================================================== 3. LATEST MUSIC
-         The repository verifies two YouTube destinations and the music page.
-         It does NOT verify any release title, release date or cover artwork,
-         so none is shown and none is invented. The titles below are the exact
-         labels already used on music.html. -->
+    <!-- ============================================ 3. LATEST MUSIC ON SPOTIFY
+         The three-tile presentation this replaced could not name a release,
+         because the repository verifies no release title or cover artwork. The
+         Spotify artist embed sidesteps that entirely: it renders whatever is
+         actually current straight from Spotify, so the homepage no longer has
+         to describe releases it cannot verify.
+
+         The iframe is lazy-loaded and its height is reserved by .hp-spotify,
+         so it costs nothing above the fold and cannot shift the page in. -->
     <section class="section">
       <div class="mx-auto container px-4">
-        <h2 class="font-extrabold tracking-tight text-3xl md:text-4xl">Latest Music</h2>
+        <h2 class="font-extrabold tracking-tight text-3xl md:text-4xl">Latest Music on Spotify</h2>
 
-        <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-
-          <a class="hp-tile group block" href="https://www.youtube.com/watch?v=rCBM8kuzI3U"
-             target="_blank" rel="noopener noreferrer">
-            <div class="hp-frame hp-frame-square rounded-2xl border border-white/10">
-              <img src="/img/residencies.png" width="1536" height="1024"
-                   class="hp-crop-decks"
-                   alt="A DJ booth and dance floor during an Agu Ocha set." loading="lazy" decoding="async">
-              <div class="hp-tile-label">
-                <h3 class="font-bold text-lg">Official Video</h3>
-                <span class="mt-1 inline-block text-sm font-semibold text-white/75 group-hover:text-white">Watch &rarr;</span>
-              </div>
-            </div>
-          </a>
-
-          <a class="hp-tile group block" href="https://www.youtube.com/watch?v=1JGjYV1WcHE"
-             target="_blank" rel="noopener noreferrer">
-            <div class="hp-frame hp-frame-square rounded-2xl border border-white/10">
-              <img src="/img/festivals-tours.png" width="1536" height="1024"
-                   class="hp-crop-stage-tight"
-                   alt="The Agu Ocha leopard mask lit on a festival stage above the crowd." loading="lazy" decoding="async">
-              <div class="hp-tile-label">
-                <h3 class="font-bold text-lg">Live / Alternate Cut</h3>
-                <span class="mt-1 inline-block text-sm font-semibold text-white/75 group-hover:text-white">Watch &rarr;</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Deliberately the brand mark rather than a photograph: this tile is
-               a route to the music page, and dressing it as a photo would imply
-               it is a release. No release artwork exists in this repository. -->
-          <a class="hp-tile group block sm:col-span-2 lg:col-span-1" href="/music/">
-            <div class="hp-frame hp-frame-square hp-frame-mark rounded-2xl border border-white/10">
-              <img src="/img/agu-logo.png" width="1024" height="1024"
-                   alt="" aria-hidden="true" loading="lazy" decoding="async">
-              <div class="hp-tile-label">
-                <h3 class="font-bold text-lg">Explore Music</h3>
-                <span class="mt-1 inline-block text-sm font-semibold text-white/75 group-hover:text-white">Listen &rarr;</span>
-              </div>
-            </div>
-          </a>
-
+        <div class="hp-spotify mt-8">
+          <iframe
+            data-testid="embed-iframe"
+            style="border-radius:12px"
+            src="https://open.spotify.com/embed/artist/5ymz8gAPHU5sgDUhdhVqzh?utm_source=generator&amp;si=370396ac9c84430c"
+            width="100%"
+            height="352"
+            frameborder="0"
+            allowfullscreen=""
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            title="Agu Ocha on Spotify">
+          </iframe>
         </div>
       </div>
     </section>
 
     <!-- ====================================================== 4. SUNO VIBEZ
-         The Spotify iframe is never loaded on arrival. A facade holds the
-         reserved height and swaps in the embed on click, so a blocked or slow
-         Spotify costs nothing and the direct link always works. -->
+         The playlist renders on arrival rather than behind a click-to-load
+         facade. The iframe is lazy, so it still costs nothing until it nears
+         the viewport, and .hp-spotify reserves its height so it cannot shift
+         the page in. If Spotify is blocked the frame simply stays blank — the
+         heading, copy and both actions beside it are unaffected. -->
     <section class="section border-t border-white/10">
       <div class="mx-auto container px-4">
         <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
@@ -285,13 +216,19 @@
           </div>
 
           <div class="lg:col-span-7">
-            <div data-spotify-mount>
-              <button type="button" class="hp-facade" data-spotify-facade
-                      data-src="https://open.spotify.com/embed/playlist/5u17B3EXagZ5F2bm0mgCTq?utm_source=generator">
-                <span class="hp-play" aria-hidden="true"></span>
-                <span class="font-bold text-lg">Play the Suno Vibez playlist</span>
-                <span class="text-sm text-white/55">Loads Spotify only when you ask for it.</span>
-              </button>
+            <div class="hp-spotify">
+              <iframe
+                data-testid="embed-iframe"
+                style="border-radius:12px"
+                src="https://open.spotify.com/embed/playlist/5u17B3EXagZ5F2bm0mgCTq?utm_source=generator"
+                width="100%"
+                height="352"
+                frameborder="0"
+                allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                title="Suno Vibez Spotify playlist">
+              </iframe>
             </div>
           </div>
 
@@ -373,7 +310,7 @@
         "alternateName": "DJ Agu Ocha",
         "url": "https://aguocha.com/",
         "image": "https://aguocha.com/img/private-corporate.png",
-        "description": "New England based. Performing online. AI-assisted and vibe-produced music welcome.",
+        "description": "New England based. Exploring the vibe.",
         "sameAs": ["https://open.spotify.com/artist/5ymz8gAPHU5sgDUhdhVqzh"]
       }
     ]
@@ -383,9 +320,10 @@
   <!-- Shared footer include -->
   <div id="site-footer"></div>
 
-  <!-- Shared header/footer loader + nav behavior -->
+  <!-- Shared header/footer loader + nav behavior. The homepage carries no
+       page-specific JavaScript: both Spotify embeds are plain lazy iframes, so
+       assets/home.js (which existed only to drive the click-to-load facade) was
+       removed rather than left as an empty file. -->
   <script src="/assets/site.js" defer></script>
-  <!-- Homepage only: click-to-load Spotify facade. -->
-  <script src="/assets/home.js" defer></script>
 </body>
 </html>
