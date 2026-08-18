@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Follow the Vibe | DJ Agu Ocha</title>
+  <meta name="description" content="Watch DJ sets, listen to Agu Ocha, follow the vibe, see appearances or book DJ Agu Ocha.">
+  <!-- This is the QR destination handed out at shows. It is a connection page,
+       not one we want ranking against /music/, /booking/ or /tour/, so it is
+       noindex,follow — the same directive the site's redirect stubs carry. It is
+       deliberately absent from sitemap.xml for the same reason. -->
+  <meta name="robots" content="noindex,follow">
+  <link rel="canonical" href="https://aguocha.com/hello/">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/img/agu-logo.png">
+  <meta property="og:title" content="Follow the Vibe | DJ Agu Ocha">
+  <meta property="og:description" content="Watch DJ sets, listen to Agu Ocha, follow the vibe, see appearances or book DJ Agu Ocha.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aguocha.com/hello/">
+  <meta property="og:image" content="https://aguocha.com/img/agu-logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://aguocha.com/img/agu-logo.png">
+
+  <!--
+    SELF-CONTAINED ON PURPOSE.
+
+    Every other page loads /assets/tailwind.css and fetch-injects header.html and
+    footer.html through /assets/site.js. This page does neither, and the reason is
+    the room it is used in: it opens from a printed QR code inside clubs and
+    venues, on congested mobile data, for someone who has already decided to look.
+    Dropping the stylesheet request and the two fragment fetches removes three
+    round trips before anything is readable, and the four choices ARE the page —
+    they have to paint on the first frame.
+
+    The tokens below are copied verbatim from the site's shared inline block (see
+    music/index.html), so this still renders in the Agu Ocha visual language. If
+    those tokens ever change, this page has to be updated with them. That is the
+    cost of the decision and it is deliberate.
+  -->
+  <style>
+    :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
+    *,*::before,*::after{box-sizing:border-box}
+    html{font-size:17px;-webkit-text-size-adjust:100%}
+    @media(min-width:1024px){html{font-size:18px}}
+    body{
+      margin:0;
+      background:var(--jet);
+      color:var(--leopard);
+      line-height:1.65;
+      font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      /* Nothing here is wider than the viewport; this makes a future edit
+         unable to introduce a sideways scroll on a phone. */
+      overflow-x:hidden;
+    }
+
+    .wrap{max-width:34rem;margin:0 auto;padding:1.25rem 1.25rem 2.5rem}
+
+    /* ---------------------------------------------------------- identity */
+    .id{display:flex;align-items:center;gap:.7rem;padding:.35rem 0 2.25rem}
+    .id a{
+      display:inline-flex;align-items:center;gap:.7rem;
+      color:var(--leopard);text-decoration:none;
+      font-weight:700;letter-spacing:.02em;
+    }
+    .id img{
+      width:38px;height:38px;border-radius:9999px;
+      border:1px solid rgba(255,255,255,.1);object-fit:cover;display:block;
+    }
+
+    /* -------------------------------------------------------------- hero */
+    h1{
+      margin:0;
+      font-size:clamp(2rem,9vw,2.75rem);
+      line-height:1.1;
+      font-weight:800;
+      letter-spacing:-.02em;
+      text-transform:uppercase;
+    }
+    .kicker{margin:.6rem 0 0;color:rgba(247,247,248,.62);font-size:1rem}
+
+    /* ------------------------------------------------------------- cards */
+    .choices{list-style:none;margin:1.75rem 0 0;padding:0;display:grid;gap:.75rem}
+
+    /* One shared surface for the four choices, so a link and a <details>
+       summary are visually indistinguishable. */
+    .card{
+      display:flex;align-items:center;gap:1rem;width:100%;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.1);
+      border-radius:1rem;
+      padding:1.05rem 1.15rem;
+      color:var(--leopard);
+      text-decoration:none;
+      /* Comfortably past the 44px minimum target on the short axis. */
+      min-height:76px;
+      transition:border-color .18s ease,background-color .18s ease,transform .18s ease;
+    }
+    .card:hover{background:rgba(255,255,255,.055);border-color:var(--brand)}
+    .card:active{transform:scale(.995)}
+
+    .ic{
+      flex:0 0 auto;display:grid;place-items:center;
+      width:44px;height:44px;border-radius:.8rem;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.07);
+    }
+    .ic svg{width:23px;height:23px;display:block}
+
+    .txt{min-width:0}
+    .lbl{
+      display:block;font-weight:700;letter-spacing:.06em;
+      text-transform:uppercase;font-size:1.0625rem;line-height:1.25;
+    }
+    .sub{display:block;color:rgba(247,247,248,.6);font-size:.95rem;line-height:1.35;margin-top:.1rem}
+
+    .chev{margin-left:auto;flex:0 0 auto;color:rgba(247,247,248,.35)}
+    .chev svg{width:18px;height:18px;display:block}
+
+    /* ------------------------------------------------------------ follow */
+    /* Native <details>: the expander works with JavaScript disabled or blocked,
+       is keyboard operable for free, and announces its own expanded state. */
+    .follow{padding:0;border:0;background:none}
+    .follow > summary{list-style:none;cursor:pointer}
+    .follow > summary::-webkit-details-marker{display:none}
+    .follow[open] > summary{border-color:rgba(255,255,255,.16);background:rgba(255,255,255,.055)}
+    .follow > summary .chev{transition:transform .18s ease}
+    .follow[open] > summary .chev{transform:rotate(90deg)}
+
+    .socials{list-style:none;margin:.5rem 0 0;padding:0 0 0 .35rem;display:grid;gap:.5rem}
+    .social{
+      display:flex;align-items:center;gap:.85rem;
+      min-height:52px;padding:.7rem .95rem;
+      border-radius:.8rem;
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(255,255,255,.02);
+      color:var(--leopard);text-decoration:none;font-size:1rem;
+      transition:border-color .18s ease,background-color .18s ease;
+    }
+    .social:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.18)}
+    .social .ic{width:34px;height:34px;border-radius:.6rem}
+    .social .ic svg{width:18px;height:18px}
+    .social .sub{font-size:.95rem}
+
+    /* --------------------------------------------------------- secondary */
+    .more{margin:1.5rem 0 0;text-align:center}
+    .more a{
+      display:inline-flex;align-items:center;gap:.4rem;
+      /* Full tap height without reading as a fifth card. */
+      min-height:44px;padding:.5rem .75rem;
+      color:rgba(247,247,248,.78);font-size:1rem;
+      text-decoration:none;border-bottom:1px solid rgba(255,255,255,.18);
+    }
+    .more a:hover{color:var(--leopard);border-bottom-color:var(--brand)}
+    .more svg{width:15px;height:15px}
+
+    /* ------------------------------------------------------------ footer */
+    .foot{
+      margin-top:2.5rem;padding-top:1.35rem;
+      border-top:1px solid rgba(255,255,255,.08);
+      text-align:center;font-size:.9rem;color:rgba(247,247,248,.5);
+    }
+    .foot a{color:rgba(247,247,248,.62);text-decoration:none;padding:.3rem .1rem}
+    .foot a:hover{color:var(--leopard);text-decoration:underline}
+    .foot .dot{opacity:.4;padding:0 .45rem}
+
+    /* --------------------------------------------------------------- a11y */
+    :focus-visible{outline:2px solid var(--leopard);outline-offset:3px;border-radius:.35rem}
+
+    @media (prefers-reduced-motion: reduce){
+      *,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}
+      .card:active{transform:none}
+    }
+
+    @media (min-width:640px){
+      .wrap{padding-top:2rem}
+      .card{padding:1.15rem 1.3rem}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- Simplified identity instead of the global header. The full nav repeats
+         the four choices below it and adds a hamburger, a dropdown and two phone
+         buttons — friction on the one page whose entire job is to offer four
+         choices. The logo still links home, so nobody is trapped here. -->
+    <div class="id">
+      <a href="/" data-hello-internal>
+        <img src="/img/agu-logo.png" alt="" width="38" height="38" decoding="async">
+        <span>Agu Ocha</span>
+      </a>
+    </div>
+
+    <main>
+      <h1>Follow the vibe</h1>
+      <p class="kicker">Where do you want to go?</p>
+
+      <nav aria-label="Choose where to go next">
+        <ul class="choices">
+
+          <!-- WATCH -->
+          <li>
+            <a class="card" href="https://www.youtube.com/@blockblackprojects"
+               target="_blank" rel="noopener noreferrer"
+               data-hello-event="hello_watch_click">
+              <span class="ic" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                  <rect x="2.5" y="4.5" width="19" height="15" rx="3"></rect>
+                  <path d="M10 9.3v5.4l4.6-2.7z" fill="currentColor" stroke="none"></path>
+                </svg>
+              </span>
+              <span class="txt">
+                <span class="lbl">Watch</span>
+                <span class="sub">Sets &amp; video</span>
+              </span>
+              <span class="chev" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M7 17L17 7M17 7H9M17 7v8"></path></svg>
+              </span>
+            </a>
+          </li>
+
+          <!-- LISTEN -->
+          <li>
+            <a class="card" href="https://open.spotify.com/artist/5ymz8gAPHU5sgDUhdhVqzh?si=LCy9zxSBRhae4jmC3Kj61Q"
+               target="_blank" rel="noopener noreferrer"
+               data-hello-event="hello_listen_click">
+              <span class="ic" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                  <path d="M4 14.5v-2.3a8 8 0 0 1 16 0v2.3"></path>
+                  <rect x="2.4" y="13.6" width="4.6" height="6.6" rx="2.1"></rect>
+                  <rect x="17" y="13.6" width="4.6" height="6.6" rx="2.1"></rect>
+                </svg>
+              </span>
+              <span class="txt">
+                <span class="lbl">Listen</span>
+                <span class="sub">Music &amp; playlists</span>
+              </span>
+              <span class="chev" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M7 17L17 7M17 7H9M17 7v8"></path></svg>
+              </span>
+            </a>
+          </li>
+
+          <!-- FOLLOW — expands in place. No navigation, no platform favoured. -->
+          <li>
+            <details class="follow" id="follow-panel">
+              <summary class="card">
+                <span class="ic" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                    <path d="M11.2 3.4 12.8 8.1 17.5 9.7 12.8 11.3 11.2 16 9.6 11.3 4.9 9.7 9.6 8.1z"></path>
+                    <path d="M17.9 14.6l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7z"></path>
+                  </svg>
+                </span>
+                <span class="txt">
+                  <span class="lbl">Follow</span>
+                  <span class="sub">Stay connected</span>
+                </span>
+                <span class="chev" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M9 5l7 7-7 7"></path></svg>
+                </span>
+              </summary>
+
+              <!-- Only accounts the operator has confirmed. Instagram and TikTok
+                   sit here as peers; neither is styled to dominate. YouTube and
+                   Spotify are deliberately NOT repeated in this group — they are
+                   the WATCH and LISTEN cards directly above, one tap away, and
+                   duplicating them would pad the list without adding a route.
+                   Icons stay generic glyphs, not brand marks: the label names
+                   the platform, which is what actually identifies it. -->
+              <ul class="socials">
+                <li>
+                  <a class="social" href="https://www.instagram.com/djaguocha/"
+                     target="_blank" rel="noopener noreferrer"
+                     data-hello-event="hello_social_click" data-hello-platform="instagram">
+                    <span class="ic" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                        <rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"></rect>
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <circle cx="17.1" cy="6.9" r="1.05" fill="currentColor" stroke="none"></circle>
+                      </svg>
+                    </span>
+                    <span class="txt">
+                      <span>Instagram</span>
+                      <span class="sub">@djaguocha</span>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a class="social" href="https://www.tiktok.com/@agu_ocha"
+                     target="_blank" rel="noopener noreferrer"
+                     data-hello-event="hello_social_click" data-hello-platform="tiktok">
+                    <span class="ic" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                        <path d="M9.5 9.2v6.4a2.6 2.6 0 1 1-2.6-2.6"></path>
+                        <path d="M9.5 9.2V3.6c.7 2.3 2.3 3.7 4.7 4"></path>
+                      </svg>
+                    </span>
+                    <span class="txt">
+                      <span>TikTok</span>
+                      <span class="sub">@agu_ocha</span>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a class="social" href="https://open.spotify.com/playlist/5u17B3EXagZ5F2bm0mgCTq"
+                     target="_blank" rel="noopener noreferrer"
+                     data-hello-event="hello_social_click" data-hello-platform="spotify-playlist">
+                    <span class="ic" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                        <path d="M4 7h11M4 12h11M4 17h7"></path><circle cx="18" cy="16" r="2.6"></circle><path d="M20.6 16V8.5"></path>
+                      </svg>
+                    </span>
+                    <span class="txt">
+                      <span>Suno Vibez playlist</span>
+                      <span class="sub">Updated on the 1st of each month</span>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a class="social" href="sms:+17622486242"
+                     data-hello-event="hello_social_click" data-hello-platform="sms">
+                    <span class="ic" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                        <path d="M20 11.5a7.5 7.5 0 0 1-10.9 6.7L4 19.5l1.4-4.8A7.5 7.5 0 1 1 20 11.5z"></path>
+                      </svg>
+                    </span>
+                    <span class="txt">
+                      <span>Text Agu Ocha</span>
+                      <span class="sub">+1 (762) 248-6242</span>
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </details>
+          </li>
+
+          <!-- BOOK — same weight as the others on purpose. It carries no
+               primary/brand fill, so it stays available without dominating a
+               page whose audience is mostly people who just heard the set. -->
+          <li>
+            <a class="card" href="/booking/" data-hello-event="hello_book_click" data-hello-internal>
+              <span class="ic" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+                  <rect x="3" y="5.2" width="18" height="15.3" rx="3"></rect>
+                  <path d="M3 10.2h18M8.2 3.2v3.6M15.8 3.2v3.6"></path>
+                </svg>
+              </span>
+              <span class="txt">
+                <span class="lbl">Book</span>
+                <span class="sub">Shows &amp; events</span>
+              </span>
+              <span class="chev" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M9 5l7 7-7 7"></path></svg>
+              </span>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+
+      <p class="more">
+        <a href="/tour/" data-hello-event="hello_tour_click" data-hello-internal>
+          See upcoming appearances
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13M12 5l7 7-7 7"></path></svg>
+        </a>
+      </p>
+    </main>
+
+    <footer class="foot">
+      <a href="/" data-hello-internal>aguocha.com</a>
+      <span class="dot" aria-hidden="true">&middot;</span>
+      <a href="/privacy/" data-hello-internal>Privacy</a>
+    </footer>
+
+  </div>
+
+  <script src="/assets/analytics.js" defer></script>
+  <script src="/assets/hello.js" defer></script>
+</body>
+</html>
