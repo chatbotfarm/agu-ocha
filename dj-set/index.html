@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DJ Agu Ocha Sessions | Record a DJ Set at Your Location</title>
+  <meta name="description" content="DJ Agu Ocha records DJ sessions at coffee shops, lounges, restaurants and unique spaces. Bring your location into the next Agu Ocha set.">
+  <!-- Unlike /hello/, this page IS indexable. /hello/ is noindex because it is a
+       link hub that would compete with /music/, /booking/ and /tour/ for the same
+       queries. This page has a subject no other page covers — recording a set
+       inside a business's space — so it belongs in sitemap.xml.
+
+       The canonical carries a trailing slash to match every other route on the
+       site, /hello/ included. The printed card reads aguocha.com/dj-set; GitHub
+       Pages answers that with a redirect to /dj-set/, so the card still works and
+       the canonical never points at a URL that redirects. -->
+  <link rel="canonical" href="https://aguocha.com/dj-set/">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/img/agu-logo.png">
+  <meta property="og:title" content="Your Place. My Set. | DJ Agu Ocha Sessions">
+  <meta property="og:description" content="DJ Agu Ocha records DJ sessions at coffee shops, lounges, restaurants and unique spaces. Let's record something people want to watch.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://aguocha.com/dj-set/">
+  <!-- Widest first-party asset showing the persona performing inside a
+       hospitality space, which is exactly the concept this page describes. It is
+       1536x1024, not 1200x630, so no og:image:width/height is declared rather
+       than declaring dimensions that would be false. -->
+  <meta property="og:image" content="https://aguocha.com/img/private-corporate.png">
+  <meta property="og:image:alt" content="Agu Ocha performing in the white leopard mask behind a DJ booth while guests watch.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://aguocha.com/img/private-corporate.png">
+
+  <!--
+    SELF-CONTAINED ON PURPOSE — the same reasoning as /hello/.
+
+    This opens from a printed card handed to a business owner, on a phone, often
+    on venue wifi or congested mobile data, and the idea has to land in seconds.
+    Loading /assets/tailwind.css and fetch-injecting header.html and footer.html
+    would add three round trips before anything is readable, and the global nav
+    would put a hamburger, a booking dropdown and two phone buttons in front of a
+    page whose whole job is one idea and one action.
+
+    The :root tokens below are copied verbatim from the site's shared inline block
+    (see index.html). If those tokens ever change, this page has to be updated
+    with them. That is the cost of the decision and it is deliberate.
+  -->
+  <style>
+    :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
+    *,*::before,*::after{box-sizing:border-box}
+    html{font-size:17px;-webkit-text-size-adjust:100%}
+    @media(min-width:1024px){html{font-size:18px}}
+    body{
+      margin:0;
+      background:var(--jet);
+      color:var(--leopard);
+      line-height:1.6;
+      font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+      /* Guard: nothing here is wider than the viewport, and this stops a future
+         edit from introducing a sideways scroll on a phone. */
+      overflow-x:hidden;
+    }
+    img{max-width:100%;display:block}
+
+    .wrap{max-width:40rem;margin:0 auto;padding:0 1.25rem}
+
+    /* ------------------------------------------------------------ identity */
+    .id{display:flex;align-items:center;padding:1.1rem 0 1.75rem}
+    /* min-height keeps this past the 44px tap minimum; it measured 34px as a
+       bare inline-flex row, which is uncomfortable on the phone this page is
+       built for. */
+    .id a{display:inline-flex;align-items:center;min-height:44px;gap:.65rem;color:var(--leopard);text-decoration:none;font-weight:700;letter-spacing:.02em}
+    .id img{width:34px;height:34px;border-radius:9999px;border:1px solid rgba(255,255,255,.1);object-fit:cover}
+
+    /* ---------------------------------------------------------------- hero */
+    .kicker{
+      margin:0;font-size:.8125rem;font-weight:700;
+      letter-spacing:.22em;text-transform:uppercase;
+      color:rgba(247,247,248,.55);
+    }
+    h1{
+      margin:.85rem 0 0;
+      /* Two short lines on a phone, never wrapping mid-word. */
+      font-size:clamp(2.5rem,13vw,4.5rem);
+      line-height:.98;
+      font-weight:800;
+      letter-spacing:-.03em;
+      text-transform:uppercase;
+    }
+    .lede{margin:1.1rem 0 0;font-size:1.0625rem;color:rgba(247,247,248,.72);max-width:26rem}
+
+    /* Reserves the media box before the poster decodes, so the CTA underneath it
+       never jumps. 16/9 is the shape the session video will be. */
+    .media{
+      position:relative;margin:1.75rem 0 0;
+      aspect-ratio:16/9;overflow:hidden;
+      border-radius:1rem;border:1px solid rgba(255,255,255,.12);
+      background:var(--ink);
+    }
+    .media img,.media video,.media iframe{
+      position:absolute;inset:0;width:100%;height:100%;
+      object-fit:cover;border:0;
+    }
+    /* Keeps white type legible over a bright poster without hiding the image. */
+    .media::after{
+      content:"";position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(180deg,rgba(11,11,12,.15) 0%,rgba(11,11,12,.55) 100%);
+    }
+    .media-note{
+      position:absolute;left:0;right:0;bottom:0;z-index:1;margin:0;
+      padding:.85rem 1rem;
+      font-size:.8125rem;letter-spacing:.14em;text-transform:uppercase;
+      color:rgba(247,247,248,.75);
+    }
+    /* Play control. Only ever inserted by assets/dj-set.js, and only once a
+       session video is actually configured. */
+    .media-play{
+      position:absolute;inset:0;z-index:2;
+      display:grid;place-items:center;
+      width:100%;height:100%;padding:0;
+      background:transparent;border:0;cursor:pointer;color:var(--leopard);
+    }
+    .media-play span{
+      display:grid;place-items:center;
+      width:74px;height:74px;border-radius:9999px;
+      background:var(--brand);
+      transition:transform .18s ease,background-color .18s ease;
+    }
+    .media-play svg{width:26px;height:26px;margin-left:4px}
+    .media-play:hover span{background:var(--leopard);color:var(--jet);transform:scale(1.04)}
+
+    /* ----------------------------------------------------------------- CTA */
+    .cta{
+      display:flex;align-items:center;justify-content:center;gap:.6rem;
+      width:100%;min-height:64px;margin:1.5rem 0 0;
+      padding:1rem 1.5rem;
+      background:var(--brand);color:var(--leopard);
+      border:1px solid transparent;border-radius:1rem;
+      font-size:1.0625rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+      text-decoration:none;text-align:center;
+      transition:background-color .18s ease,transform .18s ease;
+    }
+    .cta:hover{background:var(--leopard);color:var(--jet)}
+    .cta:active{transform:scale(.995)}
+    .cta svg{width:19px;height:19px;flex:0 0 auto}
+    .cta-note{margin:.7rem 0 0;text-align:center;font-size:.9375rem;color:rgba(247,247,248,.5)}
+
+    /* --------------------------------------------------------- three ideas */
+    .band{border-top:1px solid rgba(255,255,255,.09);margin-top:3.25rem;padding-top:2.75rem}
+    .three{list-style:none;margin:0;padding:0;display:grid;gap:1rem}
+    @media(min-width:34rem){.three{grid-template-columns:repeat(3,1fr);gap:.85rem}}
+    .three li{
+      display:flex;align-items:center;gap:1rem;
+      padding:1.1rem;
+      border:1px solid rgba(255,255,255,.1);border-radius:1rem;
+      background:rgba(255,255,255,.03);
+    }
+    @media(min-width:34rem){
+      .three li{flex-direction:column;text-align:center;gap:.85rem;padding:1.5rem 1rem}
+    }
+    .three .ic{
+      flex:0 0 auto;display:grid;place-items:center;
+      width:48px;height:48px;border-radius:.85rem;
+      background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);
+    }
+    .three .ic svg{width:24px;height:24px}
+    .three .t{font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:.9375rem;line-height:1.3}
+
+    /* -------------------------------------------------------- core message */
+    .core{
+      margin:0;
+      font-size:clamp(1.75rem,7.5vw,2.75rem);
+      line-height:1.15;font-weight:800;letter-spacing:-.02em;
+    }
+    .core .dim{color:rgba(247,247,248,.45)}
+
+    /* ------------------------------------------------------------ sessions */
+    h2{
+      margin:0 0 1.35rem;
+      font-size:.8125rem;font-weight:700;
+      letter-spacing:.22em;text-transform:uppercase;
+      color:rgba(247,247,248,.55);
+    }
+    .sessions{list-style:none;margin:0;padding:0;display:grid;gap:.85rem}
+    @media(min-width:34rem){.sessions{grid-template-columns:repeat(2,1fr)}}
+    .sessions li{
+      position:relative;aspect-ratio:16/10;overflow:hidden;
+      border-radius:1rem;border:1px solid rgba(255,255,255,.1);background:var(--ink);
+    }
+    .sessions img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    /* A configured session tile wraps its poster and caption in one anchor, so
+       the whole tile is the tap target rather than the caption alone. */
+    .sessions a{position:absolute;inset:0;display:block;color:inherit;text-decoration:none}
+    .sessions a:hover .cap{color:var(--leopard)}
+    .sessions li::after{
+      content:"";position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(180deg,rgba(11,11,12,.1) 0%,rgba(11,11,12,.6) 100%);
+    }
+    .sessions .cap{
+      position:absolute;left:0;right:0;bottom:0;z-index:1;padding:.8rem .95rem;
+      font-size:.8125rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(247,247,248,.8);
+    }
+    .soon{margin:1rem 0 0;font-size:.9375rem;color:rgba(247,247,248,.5)}
+
+    /* -------------------------------------------------------------- payoff */
+    .payoff{
+      margin:0;
+      font-size:clamp(1.9rem,8.5vw,3rem);
+      line-height:1.08;font-weight:800;letter-spacing:-.025em;text-transform:uppercase;
+    }
+    .payoff-sub{margin:1rem 0 0;font-size:1.0625rem;color:rgba(247,247,248,.6)}
+
+    /* ---------------------------------------------------------------- form */
+    .form-mount{margin:1.5rem 0 0}
+    .ghl-status{margin:0;font-size:.9375rem;color:rgba(247,247,248,.5)}
+    .fallback{
+      margin:1.5rem 0 0;padding:1.35rem;
+      border:1px solid rgba(255,255,255,.1);border-radius:1rem;
+      background:rgba(255,255,255,.03);
+    }
+    .fallback p{margin:0 0 .9rem;font-size:1rem;color:rgba(247,247,248,.78)}
+    .fallback ul{margin:0 0 1.15rem;padding-left:1.15rem;color:rgba(247,247,248,.62);font-size:.9375rem}
+    .fallback li{margin:.2rem 0}
+    .routes{display:grid;gap:.65rem}
+    @media(min-width:26rem){.routes{grid-template-columns:1fr 1fr}}
+    .route{
+      display:flex;align-items:center;justify-content:center;gap:.55rem;
+      min-height:56px;padding:.85rem 1rem;
+      border:1px solid rgba(255,255,255,.18);border-radius:.85rem;
+      color:var(--leopard);text-decoration:none;font-weight:700;font-size:1rem;
+      transition:background-color .18s ease,border-color .18s ease;
+    }
+    .route:hover{background:rgba(255,255,255,.06);border-color:var(--leopard)}
+    .route svg{width:18px;height:18px;flex:0 0 auto}
+
+    /* -------------------------------------------------------------- footer */
+    .foot{
+      margin-top:3.25rem;padding:1.35rem 0 2.5rem;
+      border-top:1px solid rgba(255,255,255,.08);
+      text-align:center;font-size:.9rem;color:rgba(247,247,248,.5);
+    }
+    /* Same reason as .id a — these are standalone navigation, not links inside a
+       sentence, so the "inline in prose" tap-target exception does not apply. */
+    .foot a{display:inline-flex;align-items:center;min-height:44px;padding:0 .45rem;color:rgba(247,247,248,.62);text-decoration:none}
+    .foot a:hover{color:var(--leopard);text-decoration:underline}
+    .foot .dot{opacity:.4;padding:0 .45rem}
+
+    /* ---------------------------------------------------------------- a11y */
+    :focus-visible{outline:2px solid var(--leopard);outline-offset:3px;border-radius:.35rem}
+
+    @media (prefers-reduced-motion: reduce){
+      *,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}
+      .cta:active{transform:none}
+      .media-play:hover span{transform:none}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="wrap">
+    <!-- Simplified identity instead of the global header, matching /hello/. The
+         logo still links home, so nobody is trapped on this page. -->
+    <div class="id">
+      <a href="/" data-djset-internal>
+        <img src="/img/agu-logo.png" alt="" width="34" height="34" decoding="async">
+        <span>Agu Ocha</span>
+      </a>
+    </div>
+  </div>
+
+  <main>
+    <!-- =============================================================== HERO -->
+    <section class="wrap">
+      <p class="kicker">Agu Ocha DJ Set</p>
+      <h1>Your place.<br>My set.</h1>
+      <p class="lede">Let&rsquo;s record something people want to watch.</p>
+
+      <!--
+        HERO MEDIA — poster now, session video when one exists.
+
+        No session video exists in this repository yet, so this ships as the
+        poster alone. It is a real first-party still of Agu Ocha performing
+        inside a hospitality space, not stock photography, so the idea still
+        reads on the first screen.
+
+        assets/dj-set.js upgrades this to a click-to-play video the moment
+        AGU_SITE_CONFIG.djSetHeroVideoUrl holds a valid URL — no redesign
+        needed. Until then no play button is drawn, because a control that
+        cannot do anything is worse than no control at all.
+      -->
+      <div class="media" data-djset-hero>
+        <img src="/img/private-corporate.png"
+             alt="Agu Ocha performing in the white leopard mask behind a DJ booth while guests watch."
+             width="1536" height="1024" fetchpriority="high" decoding="async">
+        <p class="media-note" data-djset-hero-note>A session, filmed on location</p>
+      </div>
+
+      <a class="cta" href="#lets-record" data-djset-cta="hero">
+        Let&rsquo;s record a set
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h13M12 5l7 7-7 7"></path></svg>
+      </a>
+      <p class="cta-note">Coffee shops, lounges, restaurants, rooftops, galleries.</p>
+    </section>
+
+    <!-- ===================================================== THREE CONCEPTS -->
+    <section class="wrap band">
+      <ul class="three">
+        <li>
+          <span class="ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+              <path d="M3 8.5A2.5 2.5 0 0 1 5.5 6h2L9 4h6l1.5 2h2A2.5 2.5 0 0 1 21 8.5v8A2.5 2.5 0 0 1 18.5 19h-13A2.5 2.5 0 0 1 3 16.5z"></path>
+              <circle cx="12" cy="12.5" r="3.4"></circle>
+            </svg>
+          </span>
+          <span class="t">Your space</span>
+        </li>
+        <li>
+          <span class="ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+              <path d="M9 18V5l11-2v13"></path>
+              <circle cx="6.5" cy="18" r="2.6"></circle>
+              <circle cx="17.5" cy="16" r="2.6"></circle>
+            </svg>
+          </span>
+          <span class="t">The music</span>
+        </li>
+        <li>
+          <span class="ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+              <path d="M4 9.5v5a1 1 0 0 0 1 1h3l4 3.5V5L8 8.5H5a1 1 0 0 0-1 1z"></path>
+              <path d="M16.5 8.8a4.5 4.5 0 0 1 0 6.4M19.3 6a8.5 8.5 0 0 1 0 12"></path>
+            </svg>
+          </span>
+          <span class="t">The session</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ======================================================= CORE MESSAGE -->
+    <section class="wrap band">
+      <p class="core">
+        I bring the set.<br>
+        We record it at your place.<br>
+        <span class="dim">Your space becomes part of the session.</span>
+      </p>
+    </section>
+
+    <!-- =========================================================== SESSIONS -->
+    <section class="wrap band">
+      <h2>Agu Ocha sessions</h2>
+
+      <!--
+        Session videos come from AGU_SITE_CONFIG.djSetSessions, rendered by
+        assets/dj-set.js. That array is empty today, so this shows real
+        first-party performance stills and states plainly that sessions are
+        being filmed.
+
+        The captions describe what the images are — performance photography —
+        and deliberately do NOT present them as named venues or past client
+        work. No venue name, session count, audience figure or testimonial
+        appears anywhere on this page, because none is verified in this
+        repository.
+      -->
+      <ul class="sessions" data-djset-sessions>
+        <li>
+          <img src="/img/residencies.png" alt="A DJ booth and dance floor lit during a set."
+               width="1536" height="1024" loading="lazy" decoding="async">
+          <span class="cap">Room, lights, decks</span>
+        </li>
+        <li>
+          <img src="/img/festivals-tours.png" alt="The Agu Ocha leopard mask lit above a crowd during a performance."
+               width="1536" height="1024" loading="lazy" decoding="async">
+          <span class="cap">The Agu Ocha look</span>
+        </li>
+      </ul>
+      <p class="soon" data-djset-sessions-note>First location sessions are being filmed now.</p>
+    </section>
+
+    <!-- ============================================================= PAYOFF -->
+    <section class="wrap band">
+      <p class="payoff">Your space.<br>Your vibe.<br>On camera.</p>
+      <p class="payoff-sub">Music + atmosphere + content.</p>
+    </section>
+
+    <!-- =============================================================== FORM -->
+    <section class="wrap band" id="lets-record">
+      <h2>Let&rsquo;s record a set</h2>
+
+      <!-- GHL mount. assets/forms.js renders a form here once
+           AGU_SITE_CONFIG.djSetFormUrl is configured; until then it removes the
+           loading line and the static routes below remain the working path.
+           Same slot mechanism as the tour and media forms — no new
+           infrastructure, and no invented form id. -->
+      <div class="form-mount" data-ghl-form="djSet">
+        <p class="ghl-status" data-ghl-form-status role="status">Loading the form&hellip;</p>
+      </div>
+
+      <!-- Static route, OUTSIDE the mount so it survives the form failing, the
+           script being blocked, and JavaScript being off entirely. -->
+      <div class="fallback">
+        <p>Send a message and I&rsquo;ll come look at the space.</p>
+        <ul>
+          <li>Your name</li>
+          <li>The business, and the city it is in</li>
+          <li>Phone or Instagram</li>
+          <li>Anything about the space worth knowing</li>
+        </ul>
+        <div class="routes">
+          <a class="route" href="sms:+17622486242" data-djset-cta="sms">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 11.5a7.5 7.5 0 0 1-10.9 6.7L4 19.5l1.4-4.8A7.5 7.5 0 1 1 20 11.5z"></path></svg>
+            Text
+          </a>
+          <a class="route" href="tel:+17622486242" data-djset-cta="call">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6.6 3.5h3l1.5 3.7-2 1.3a11 11 0 0 0 5.4 5.4l1.3-2 3.7 1.5v3a1.8 1.8 0 0 1-2 1.8A15.5 15.5 0 0 1 4.8 5.5a1.8 1.8 0 0 1 1.8-2z"></path></svg>
+            Call
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap foot">
+    <a href="/" data-djset-internal>aguocha.com</a>
+    <span class="dot" aria-hidden="true">&middot;</span>
+    <a href="/music/" data-djset-internal>Music</a>
+    <span class="dot" aria-hidden="true">&middot;</span>
+    <a href="/privacy/" data-djset-internal>Privacy</a>
+  </footer>
+
+  <!-- Deferred, in document order: config, event layer, shared GHL form loader,
+       page behaviour. Each later file depends on the ones before it. -->
+  <script src="/assets/site-config.js" defer></script>
+  <script src="/assets/analytics.js" defer></script>
+  <script src="/assets/forms.js" defer></script>
+  <script src="/assets/dj-set.js" defer></script>
+</body>
+</html>

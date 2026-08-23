@@ -113,6 +113,16 @@
       title: CFG.mediaRequestFormTitle || "Media request form",
       name: CFG.mediaRequestFormName || "Media Request",
       minHeight: CFG.mediaRequestFormMinHeight || 900
+    },
+    /* /dj-set/ — venue session requests. djSetFormUrl is deliberately empty
+       until a matching GoHighLevel form exists, so this slot resolves to the
+       "not configured" path below and the page's static Text/Call panel stays
+       the working route. */
+    djSet: {
+      url: CFG.djSetFormUrl,
+      title: CFG.djSetFormTitle || "DJ set session request form",
+      name: CFG.djSetFormName || "DJ Set Session",
+      minHeight: CFG.djSetFormMinHeight || 700
     }
   };
 
