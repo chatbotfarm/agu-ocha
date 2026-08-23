@@ -46,6 +46,44 @@ window.AGU_SITE_CONFIG = {
   mediaRequestFormName: "Media Request",
   mediaRequestFormMinHeight: 900,
 
+  /* ---- DJ Set sessions (/dj-set/) --------------------------------------
+   * QR destination on the printed card handed to venue owners.
+   *
+   * djSetFormUrl is EMPTY on purpose. None of the forms already configured on
+   * this site is the right destination for these leads: Tour Updates is a
+   * mailing-list signup and Media Request is a press enquiry, so routing a
+   * venue collaboration into either would file it into the wrong GoHighLevel
+   * workflow and it would quietly go unanswered. No form id was invented to
+   * fill the gap.
+   *
+   * While it is empty, assets/forms.js removes the loading line and the static
+   * Text/Call panel on the page is the working route — the same behaviour every
+   * other unconfigured form on this site has. Set this to a real
+   *     https://api.leadconnectorhq.com/widget/form/<FORM_ID>
+   * once a "record a set at my place" form exists, and the page picks it up
+   * with no markup change. Suggested fields: name, business, city, phone or
+   * Instagram, optional message.
+   */
+  djSetFormUrl: "",
+  djSetFormTitle: "DJ Agu Ocha session request form",
+  djSetFormName: "DJ Set Session",
+  djSetFormMinHeight: 700,
+
+  /* Hero session video for /dj-set/. Empty until a session has been filmed.
+   * Accepts either a first-party path ("/media/session-01.mp4") or an https
+   * YouTube URL; assets/dj-set.js validates it and only then draws a play
+   * control. While empty the hero stays a still image and no dead play button
+   * is rendered. */
+  djSetHeroVideoUrl: "",
+
+  /* Past sessions for the /dj-set/ grid. Each entry needs all three fields:
+   *   { url: "<video url>", title: "Sunset rooftop set", poster: "/img/<file>.png" }
+   * poster must be a first-party /img/ path. Entries missing any field are
+   * skipped. While this is empty the page keeps its authored stills and the
+   * "first location sessions are being filmed now" line. Do not add an entry
+   * for a session that has not actually been recorded. */
+  djSetSessions: [],
+
   /* ---- Shared contact routes ------------------------------------------- */
   // These are the site's only verified contact channels and are the fallback
   // for every unconfigured form above.
