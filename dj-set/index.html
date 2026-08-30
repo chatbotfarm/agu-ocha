@@ -232,6 +232,22 @@
     .route:hover{background:rgba(255,255,255,.06);border-color:var(--leopard)}
     .route svg{width:18px;height:18px;flex:0 0 auto}
 
+    /* Secondary contact routes. Deliberately lighter than .route — no border,
+       smaller type — because Text and Call are how a venue owner actually
+       starts this conversation, and two more equal buttons would dilute them.
+       They exist because the checklist above names "Phone or Instagram" as
+       what to send, and that mention had nowhere to go. Still a full 44px
+       target. */
+    .socials{display:flex;flex-wrap:wrap;gap:.35rem;margin:.85rem 0 0}
+    .social{
+      display:inline-flex;align-items:center;gap:.5rem;
+      min-height:44px;padding:.5rem .7rem;border-radius:.7rem;
+      color:rgba(247,247,248,.72);text-decoration:none;font-size:.9375rem;
+      transition:background-color .18s ease,color .18s ease;
+    }
+    .social:hover{background:rgba(255,255,255,.06);color:var(--leopard)}
+    .social svg{width:17px;height:17px;flex:0 0 auto;opacity:.75}
+
     /* -------------------------------------------------------------- footer */
     .foot{
       margin-top:3.25rem;padding:1.35rem 0 2.5rem;
@@ -412,6 +428,23 @@
           <a class="route" href="tel:+17622486242" data-djset-cta="call">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6.6 3.5h3l1.5 3.7-2 1.3a11 11 0 0 0 5.4 5.4l1.3-2 3.7 1.5v3a1.8 1.8 0 0 1-2 1.8A15.5 15.5 0 0 1 4.8 5.5a1.8 1.8 0 0 1 1.8-2z"></path></svg>
             Call
+          </a>
+        </div>
+
+        <!-- The checklist above asks for "Phone or Instagram". These make that
+             actionable. data-djset-cta is all the tracking they need — the
+             delegated handler in assets/dj-set.js already reports any element
+             carrying it as dj_set_cta_click. -->
+        <div class="socials">
+          <a class="social" href="https://www.instagram.com/djaguocha/"
+             target="_blank" rel="noopener noreferrer" data-djset-cta="instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3.2" y="3.2" width="17.6" height="17.6" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.1" cy="6.9" r="1.05" fill="currentColor" stroke="none"></circle></svg>
+            Instagram
+          </a>
+          <a class="social" href="https://www.tiktok.com/@agu_ocha"
+             target="_blank" rel="noopener noreferrer" data-djset-cta="tiktok">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9.5 9.2v6.4a2.6 2.6 0 1 1-2.6-2.6"></path><path d="M9.5 9.2V3.6c.7 2.3 2.3 3.7 4.7 4"></path></svg>
+            TikTok
           </a>
         </div>
       </div>
