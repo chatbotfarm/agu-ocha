@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Agu Ocha//Boston Seaport Doubleheader//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:20261009-boston-seaport-doubleheader@aguocha.com
+DTSTAMP:20261009T030000Z
+DTSTART;TZID=America/New_York:20261009T180000
+DTEND;TZID=America/New_York:20261009T210000
+SUMMARY:Sun(DJ)Set + Pass the Mic featuring Suki Yaki
+LOCATION:Boston Seaport Marina Overlook, Boston, MA
+DESCRIPTION:DJ Agu Ocha presents Sun(DJ)Set and Pass the Mic featuring Suki Yaki. Afterparty details to be announced. Confirm attendance details before traveling: https://aguocha.com/tour/boston-seaport-doubleheader/
+URL:https://aguocha.com/tour/boston-seaport-doubleheader/
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR
