@@ -3,361 +3,57 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Agu Ocha — Music, Vibe Production and Live Experiences</title>
-  <meta name="description" content="Agu Ocha creates music, online performances and a home for AI-assisted and vibe-produced creators. Listen, submit music or explore booking.">
-  <!-- Canonical matches sitemap.xml, which lists the homepage as the bare root. -->
-  <link rel="canonical" href="https://aguocha.com/">
-  <link rel="icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" href="/img/agu-logo.png">
-  <meta property="og:title" content="Agu Ocha — Where Music Meets Vibe Production">
-  <meta property="og:description" content="New England based. Exploring the vibe.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://aguocha.com/">
-  <!-- Widest first-party asset that actually shows the persona. It is 1536x1024
-       (3:2), not 1200x630, so no og:image:width/height is declared rather than
-       declaring dimensions that would be false. A purpose-built 1200x630 crop is
-       recorded as an outstanding operator asset. -->
-  <meta property="og:image" content="https://aguocha.com/img/private-corporate.png">
-  <meta property="og:image:alt" content="Agu Ocha performing in the white leopard mask behind an Agu Ocha booth.">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://aguocha.com/img/private-corporate.png">
-  <link rel="stylesheet" href="/assets/site.css">
-  <style>
-    :root{--jet:#0B0B0C;--ink:#111114;--leopard:#F7F7F8;--steel:#B5B8BE;--brand:#D41414}
-    html{font-size:17px}
-    @media(min-width:1024px){html{font-size:18px}}
-    body{background:var(--jet);color:var(--leopard);line-height:1.65}
-    .btn{border:1px solid rgba(255,255,255,0.15);background:transparent;color:var(--leopard);transition:all .2s ease}
-    .btn:hover{background:var(--leopard);color:var(--jet)}
-    .btn-primary{background:var(--brand);color:var(--leopard);border-color:transparent}
-    .btn-primary:hover{background:var(--leopard);color:var(--jet)}
-    .card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08)}
-    .lead{font-size:1.125rem}
-    .section{padding-top:4rem;padding-bottom:4rem}
-    .container{max-width:72rem}
-    /* Reserve the injected header height so the fetch does not shift the page (CLS). */
-    #site-header{min-height:84px}
-    :focus-visible{outline:2px solid var(--leopard);outline-offset:3px}
-
-    /* ====================================================================
-       Homepage-scoped styles. Prefixed .hp- so nothing here can collide with
-       a Tailwind utility or with the shared classes above, and so this block
-       never reaches another page. Shared CSS is deliberately untouched.
-       ==================================================================== */
-
-    /* Comfortable tap target for every homepage action at 320px. */
-    .hp-cta{min-height:52px;display:inline-flex;align-items:center;justify-content:center}
-
-    /* Reserve the box before the image decodes, so nothing shifts. */
-    .hp-frame{position:relative;overflow:hidden;background:var(--ink)}
-    .hp-frame > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-    /* 5/4 on desktop rather than square: a square image runs ~120px taller than
-       the copy beside it, which left the left column floating in dead space. */
-    .hp-frame-hero{aspect-ratio:4/3}
-    @media(min-width:768px){.hp-frame-hero{aspect-ratio:5/4}}
-    /* Reserves the Spotify artist embed's height before the iframe loads, so a
-       lazy third-party frame cannot shift the page as it arrives. */
-    .hp-spotify{min-height:352px}
-
-    /* Crops. The subject in each source sits off-centre, so the focal point is
-       set explicitly rather than letting object-fit guess. */
-    .hp-crop-dj{object-position:63% 32%}
-    .hp-crop-stage{object-position:50% 42%}
-
-    /* Vibe-production band: the mask mark as a large graphic, bled off the edge
-       and held behind the type. Not a floating logo. */
-    .hp-vibe{position:relative;overflow:hidden;border-top:1px solid rgba(255,255,255,0.10);border-bottom:1px solid rgba(255,255,255,0.10)}
-    .hp-vibe-mark{
-      position:absolute;pointer-events:none;user-select:none;
-      width:34rem;max-width:120%;right:-9rem;top:50%;transform:translateY(-50%);
-      opacity:.16;filter:grayscale(1) contrast(1.15);
-    }
-    @media(max-width:767px){
-      .hp-vibe-mark{width:26rem;right:-8rem;top:auto;bottom:-4rem;transform:none;opacity:.12}
-    }
-    .hp-rule{width:4.5rem;height:3px;background:var(--brand);border-radius:2px}
-    .hp-movement{font-size:1.5rem;line-height:1.3;font-weight:800;letter-spacing:-.01em}
-    @media(min-width:768px){.hp-movement{font-size:2rem}}
-
-    /* Editorial full-bleed band for the booking feature. */
-    .hp-band{position:relative;overflow:hidden;min-height:26rem;display:flex;align-items:flex-end}
-    @media(min-width:768px){.hp-band{min-height:32rem}}
-    .hp-band > img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-    .hp-band-veil{
-      position:absolute;inset:0;
-      background:linear-gradient(180deg,rgba(11,11,12,.35) 0%,rgba(11,11,12,.78) 55%,rgba(11,11,12,.96) 100%);
-    }
-
-    @media(prefers-reduced-motion:reduce){
-      *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important}
-    }
-  </style>
-  <!-- Compiled Tailwind. Loaded LAST on purpose: the Play CDN this replaced
-       appended its generated stylesheet to the end of <head>, so utilities won
-       every specificity tie against the project classes above. That is also
-       Tailwind's intended cascade — `class="section pt-10"` is written
-       expecting pt-10 to win. Moving this link higher silently changes
-       line-height, section padding and card borders sitewide. -->
-  <link rel="stylesheet" href="/assets/tailwind.css">
+  <meta name="robots" content="index,follow">
+  <meta name="color-scheme" content="dark light">
+  <meta name="description" content="Good Vibes Only When I&#x27;m in Your Town. Get to know Pass the Mic and Bubble House, or get in touch about an event or collaboration.">
+  <title>DJ Agu Ocha</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Shared header include -->
-  <div id="site-header"></div>
+<a class="skip" href="#main">Skip to content</a>
 
-  <main>
-    <!-- ============================================================ 1. HERO
-         Static image, not a video. The previous hero auto-loaded a YouTube
-         iframe that rendered as an empty black rectangle before (and often
-         after) load; a first-party still of the persona is both more reliable
-         and a stronger opening image. -->
-    <section class="pt-10 pb-14 md:pt-14 md:pb-20">
-      <div class="mx-auto container px-4">
-        <div class="grid items-center gap-10 md:grid-cols-12 md:gap-12">
+<header class="site-header">
+  <a class="wordmark" href="#top" aria-current="page" aria-label="DJ Agu Ocha, back to top"><span class="dj">DJ</span> AGU OCHA</a>
+  <nav aria-label="Main navigation"><a href="#events">Events</a><a href="pass-the-mic.html">Pass the Mic</a><a href="bubble-house.html">Bubble House</a><a class="nav-primary" href="event-inquiry.html">Get in touch <span aria-hidden="true">↗</span></a></nav>
+</header>
+<main id="main">
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    
+    <h1 id="hero-title">Good Vibes Only <span class="tagline-tail">When I'm in Your Town</span></h1>
+    <div class="hero-actions"><a class="button" href="event-inquiry.html">Start an inquiry <span aria-hidden="true">↗</span></a><a class="text-link light" href="#events">Explore events <span aria-hidden="true">↓</span></a></div>
+  </div>
+  <div class="hero-art"><span class="art-frame" aria-hidden="true"></span><img src="assets/geometric-mask.png" width="1254" height="1254" alt="Agu Ocha’s white geometric feline mask" fetchpriority="high"></div>
+  <div class="hero-bottom"><span>A LITTLE INTRODUCTION. A GOOD PLACE TO START.</span><a href="#your-event" aria-label="Explore the page">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a></div>
+</section>
+<section class="planner section-light" id="your-event" aria-labelledby="planner-title">
+  <div class="section-heading"><span class="section-number">01 / YOUR IDEA</span><span class="section-caption">FROM HELLO TO THE DETAILS</span></div>
+  <div class="planner-grid">
+    <h2 id="planner-title">Something in mind?<br> <span class="red-text">Let’s talk.</span></h2>
+    <div class="planner-copy"><p>An event, a collaboration or an idea taking shape—start with what you know. No date yet? That’s fine.</p>
+      <details class="disclosure">
+        <summary>What to include <span class="toggle" aria-hidden="true"></span></summary>
+        <div class="disclosure-body"><ul><li>Your name, email and phone number</li><li>A little about your idea</li><li>Date, approximate times and location, if known</li></ul><p>Other details can follow in a conversation.</p></div>
+      </details>
+      <a class="button section-cta" href="event-inquiry.html">Start an inquiry <span aria-hidden="true">↗</span></a>
+    </div>
+  </div>
+</section>
+<section class="events" id="events" aria-labelledby="events-title"><div class="section-heading"><span class="section-number">02 / OUT &amp; ABOUT</span><span class="section-caption">FOR THE PEOPLE IN THE ROOM</span></div><div class="events-grid"><h2 id="events-title">See you<br> out there.</h2><div class="honest-status"><span class="eyebrow">FUTURE DATES</span><p>Future event dates are still undecided.</p></div></div></section>
+<section class="artists section-light" id="artists" aria-labelledby="artists-title">
+<div class="section-heading"><span class="section-number">03 / FOR THE ARTISTS</span><span class="section-caption">FIND YOUR EVENT</span></div>
+<h2 id="artists-title">Got something to share?</h2><p class="program-intro">Explore the event, then tell me about your act.</p>
+<div class="program-grid">
+<article class="program-panel"><h3>Pass<br> the Mic.</h3><p>An occasional live event. Explore taking part or share general interest.</p><a class="button section-cta" href="pass-the-mic.html">Explore Pass the Mic <span aria-hidden="true">↗</span></a></article>
+<article class="program-panel"><p class="eyebrow">HOUSE &amp; EDM</p><h3>Bubble<br> House.</h3><p>House &amp; EDM in a bubble-tent setting.</p><a class="button section-cta" href="bubble-house.html">Explore Bubble House <span aria-hidden="true">↗</span></a></article>
+</div><p class="participation-note">Sharing interest starts a conversation. Participation is agreed separately.</p></section>
+</main>
+<footer><div class="footer-main"><span class="footer-name">AGU OCHA</span><a href="#top">BACK TO TOP <span aria-hidden="true">↑</span></a></div><div class="footer-bottom"><a href="privacy.html">Privacy &amp; your information</a></div></footer>
 
-          <div class="md:col-span-7 lg:col-span-6">
-            <h1 class="font-extrabold tracking-tight text-5xl sm:text-6xl md:text-7xl">Agu Ocha</h1>
-            <p class="lead mt-5 text-white/85">New England based. Exploring the vibe.</p>
-
-            <div class="mt-8 flex flex-wrap gap-3">
-              <a href="/tour/boston-seaport-doubleheader/" class="hp-cta btn-primary rounded-xl px-7 font-semibold">Oct. 9: Boston Seaport</a>
-              <a href="/music/" class="hp-cta btn rounded-xl px-6 font-semibold border-white/40">Listen</a>
-              <a href="/booking/" class="hp-cta btn rounded-xl px-6 font-semibold">Book</a>
-            </div>
-          </div>
-
-          <div class="md:col-span-5 lg:col-span-6">
-            <div class="hp-frame hp-frame-hero rounded-2xl border border-white/10">
-              <img src="/img/private-corporate.png" width="1536" height="1024"
-                   class="hp-crop-dj"
-                   alt="Agu Ocha performing in the white leopard mask behind an Agu Ocha booth, with a crowd in front."
-                   loading="eager" fetchpriority="high" decoding="async">
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================================= UPCOMING EVENT -->
-    <section class="section border-t border-white/10">
-      <div class="mx-auto container px-4">
-        <div class="mb-7 flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <p class="text-sm font-bold uppercase tracking-[.18em] text-[#ffad2f]">Featured event</p>
-            <h2 class="mt-2 font-extrabold tracking-tight text-3xl md:text-5xl">Boston Seaport Doubleheader</h2>
-          </div>
-          <a href="/tour/" class="underline underline-offset-4 text-white/70 hover:text-white">View all events</a>
-        </div>
-
-        <article class="card grid overflow-hidden rounded-2xl md:grid-cols-2">
-          <a href="/tour/boston-seaport-doubleheader/" class="block min-h-[360px] bg-[#111114]" aria-label="View the Boston Seaport doubleheader">
-            <img src="/img/events/boston-seaport-doubleheader.webp"
-                 alt="Boston Seaport doubleheader poster with DJ Agu Ocha and Suki Yaki."
-                 width="1024" height="1536" class="h-full w-full object-cover object-[center_34%]"
-                 loading="eager" decoding="async">
-          </a>
-          <div class="flex flex-col justify-center p-6 md:p-10">
-            <p class="text-sm font-bold uppercase tracking-[.18em] text-[#ffad2f]">Friday, October 9 · 6–9 PM</p>
-            <h3 class="mt-3 font-extrabold text-2xl md:text-4xl">Sun(DJ)Set + Pass the Mic</h3>
-            <p class="lead mt-4 text-white/80">DJ Agu Ocha at Boston Seaport Marina Overlook, with Pass the Mic featuring Suki Yaki.</p>
-            <p class="mt-3 text-sm text-white/60">Afterparty location and additional details will be announced.</p>
-            <div class="mt-7 flex flex-wrap gap-3">
-              <a href="/tour/boston-seaport-doubleheader/" class="hp-cta btn-primary rounded-xl px-6 font-semibold">Event Details</a>
-              <a href="/tour/boston-seaport-doubleheader/event.ics" download class="hp-cta btn rounded-xl px-6 font-semibold">Add to Calendar</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- ====================================== 2. VIBE-PRODUCTION STATEMENT
-         A single composition, deliberately not a row of cards. The mask mark
-         is bled off the right edge behind the type so it reads as artwork
-         rather than as a logo dropped into a box. -->
-    <section class="hp-vibe section">
-      <img src="/img/agu-logo.png" width="1024" height="1024" class="hp-vibe-mark"
-           alt="" aria-hidden="true" loading="lazy" decoding="async">
-      <div class="relative mx-auto container px-4">
-        <div class="max-w-3xl">
-          <div class="hp-rule"></div>
-          <h2 class="mt-6 font-extrabold tracking-tight text-3xl md:text-5xl">Where music meets vibe production.</h2>
-          <p class="lead mt-6 text-white/85">
-            Coders vibe-code. Designers and filmmakers create with AI. Music creators deserve the
-            same freedom. Use the tools. Own your sound. Let the music speak.
-          </p>
-          <p class="hp-movement mt-8">Don&rsquo;t ban the tools. Judge the music.</p>
-          <p class="mt-6">
-            <a href="/submit-music/" class="underline underline-offset-4 text-white/70 hover:text-white">Submit your music</a>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================ 3. LATEST MUSIC ON SPOTIFY
-         The three-tile presentation this replaced could not name a release,
-         because the repository verifies no release title or cover artwork. The
-         Spotify artist embed sidesteps that entirely: it renders whatever is
-         actually current straight from Spotify, so the homepage no longer has
-         to describe releases it cannot verify.
-
-         The iframe is lazy-loaded and its height is reserved by .hp-spotify,
-         so it costs nothing above the fold and cannot shift the page in. -->
-    <section class="section">
-      <div class="mx-auto container px-4">
-        <h2 class="font-extrabold tracking-tight text-3xl md:text-4xl">Latest Music on Spotify</h2>
-
-        <div class="hp-spotify mt-8">
-          <iframe
-            data-testid="embed-iframe"
-            style="border-radius:12px"
-            src="https://open.spotify.com/embed/artist/5ymz8gAPHU5sgDUhdhVqzh?utm_source=generator&amp;si=370396ac9c84430c"
-            width="100%"
-            height="352"
-            frameborder="0"
-            allowfullscreen=""
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
-            referrerpolicy="strict-origin-when-cross-origin"
-            title="Agu Ocha on Spotify">
-          </iframe>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================== 4. SUNO VIBEZ
-         The playlist renders on arrival rather than behind a click-to-load
-         facade. The iframe is lazy, so it still costs nothing until it nears
-         the viewport, and .hp-spotify reserves its height so it cannot shift
-         the page in. If Spotify is blocked the frame simply stays blank — the
-         heading, copy and both actions beside it are unaffected. -->
-    <section class="section border-t border-white/10">
-      <div class="mx-auto container px-4">
-        <div class="grid gap-10 lg:grid-cols-12 lg:items-center">
-
-          <div class="lg:col-span-5">
-            <div class="hp-rule"></div>
-            <h2 class="mt-6 font-extrabold tracking-tight text-3xl md:text-4xl">Suno Vibez</h2>
-            <p class="lead mt-4 text-white/85">A home for AI-assisted and vibe-produced music.</p>
-            <p class="mt-3 text-white/60">Free to submit. Placement is not guaranteed.</p>
-
-            <div class="mt-7 flex flex-wrap gap-3">
-              <a href="https://open.spotify.com/playlist/5u17B3EXagZ5F2bm0mgCTq?si=f1371b6ab08b4b5f"
-                 target="_blank" rel="noopener noreferrer"
-                 class="hp-cta btn-primary rounded-xl px-6 font-semibold">Follow Playlist</a>
-              <a href="/submit-music/" class="hp-cta btn rounded-xl px-6 font-semibold border-white/40">Submit Music</a>
-            </div>
-          </div>
-
-          <div class="lg:col-span-7">
-            <div class="hp-spotify">
-              <iframe
-                data-testid="embed-iframe"
-                style="border-radius:12px"
-                src="https://open.spotify.com/embed/playlist/5u17B3EXagZ5F2bm0mgCTq?utm_source=generator"
-                width="100%"
-                height="352"
-                frameborder="0"
-                allowfullscreen=""
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
-                referrerpolicy="strict-origin-when-cross-origin"
-                title="Suno Vibez Spotify playlist">
-              </iframe>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ================================================== 5. BOOKING FEATURE
-         One editorial band. The individual enquiry types and their calendars
-         live on book.html and are deliberately not duplicated here. -->
-    <section class="hp-band border-y border-white/10">
-      <img src="/img/festivals-tours.png" width="1536" height="1024" class="hp-crop-stage"
-           alt="A festival crowd in front of a stage carrying the Agu Ocha leopard mask."
-           loading="lazy" decoding="async">
-      <div class="hp-band-veil"></div>
-      <div class="relative w-full">
-        <div class="mx-auto container px-4 pb-12 pt-24 md:pb-16 md:pt-32">
-          <div class="max-w-2xl">
-            <h2 class="font-extrabold tracking-tight text-3xl md:text-5xl">Book Agu Ocha</h2>
-            <p class="lead mt-4 text-white/85">Private events, festivals, residencies and collaborations.</p>
-            <a href="/booking/" class="hp-cta btn-primary mt-7 rounded-xl px-7 font-semibold">Explore Booking</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======================================== 6. MEDIA AND TOUR STRIP
-         Secondary by design: two routes, one line each, no imagery, so it
-         cannot compete with Music, Suno Vibez or Booking. -->
-    <section class="py-12 md:py-14">
-      <div class="mx-auto container px-4">
-        <h2 class="sr-only">Media and events</h2>
-        <div class="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2">
-
-          <a href="/media/" class="group flex items-center justify-between gap-4 bg-[#0B0B0C] p-6 hover:bg-white/5">
-            <span>
-              <span class="block font-bold text-lg">Media Requests</span>
-              <span class="mt-1 block text-sm text-white/60">Press enquiries and fast facts.</span>
-            </span>
-            <span aria-hidden="true" class="text-xl text-white/40 group-hover:text-white">&rarr;</span>
-          </a>
-
-          <a href="/tour/" class="group flex items-center justify-between gap-4 bg-[#0B0B0C] p-6 hover:bg-white/5">
-            <span>
-              <span class="block font-bold text-lg">Events &amp; Tour</span>
-              <span class="mt-1 block text-sm text-white/60">Hear when new dates are announced.</span>
-            </span>
-            <span aria-hidden="true" class="text-xl text-white/40 group-hover:text-white">&rarr;</span>
-          </a>
-
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Sitewide identity. Deliberately restrained: only facts this repository
-       actually verifies. Person rather than MusicGroup, because Agu Ocha is a
-       solo artist. sameAs carries the one profile URL verified in-repo — the
-       Spotify artist link already used on /music/ and in the curator config.
-       No genre, no founding date, no awards, no label, no location detail and
-       no follower counts, because none of those are verified here. -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebSite",
-        "@id": "https://aguocha.com/#website",
-        "url": "https://aguocha.com/",
-        "name": "Agu Ocha",
-        "description": "Agu Ocha creates music, online performances and a home for AI-assisted and vibe-produced creators.",
-        "publisher": {"@id": "https://aguocha.com/#person"},
-        "inLanguage": "en"
-      },
-      {
-        "@type": "Person",
-        "@id": "https://aguocha.com/#person",
-        "name": "Agu Ocha",
-        "alternateName": "DJ Agu Ocha",
-        "url": "https://aguocha.com/",
-        "image": "https://aguocha.com/img/private-corporate.png",
-        "description": "New England based. Exploring the vibe.",
-        "sameAs": ["https://open.spotify.com/artist/5ymz8gAPHU5sgDUhdhVqzh"]
-      }
-    ]
-  }
-  </script>
-
-  <!-- Shared footer include -->
-  <div id="site-footer"></div>
-
-  <!-- Shared header/footer loader + nav behavior. The homepage carries no
-       page-specific JavaScript: both Spotify embeds are plain lazy iframes, so
-       assets/home.js (which existed only to drive the click-to-load facade) was
-       removed rather than left as an empty file. -->
-  <script src="/assets/site.js" defer></script>
 </body>
 </html>
+
+
+
+
+
