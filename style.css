@@ -128,3 +128,6 @@ h1,h2,h3,.footer-name,.wordmark{overflow-wrap:anywhere}
 .artist-route-options h2{font:900 27px/1.2 var(--display);letter-spacing:-.035em;margin:0 0 22px}
 
 .intake-context{font-size:16px;line-height:1.6;max-width:65ch;margin:0 0 16px}
+
+/* V19 dedicated music section. No third-party player loads automatically. */
+.spotify-block{background:#000;color:#fff;padding:clamp(32px,6vw,96px);display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:center;scroll-margin-top:24px}.spotify-block h2{font-family:"Arial Black",Arial,sans-serif;font-size:clamp(2rem,5vw,4.5rem);line-height:1.08;margin:16px 0}.spotify-block p{max-width:40ch}.spotify-card{border:1px solid #777;border-top:5px solid #E52330;padding:clamp(24px,4vw,48px);min-width:0}.spotify-card h3{font-family:"Arial Black",Arial,sans-serif;font-size:clamp(1.6rem,3vw,2.5rem);line-height:1.15}.spotify-card .button{max-width:100%;white-space:normal;overflow-wrap:anywhere}.spotify-block a:focus-visible{outline:3px solid white;outline-offset:5px}@media(max-width:700px){.spotify-block{grid-template-columns:1fr}.spotify-block h2{font-size:clamp(2rem,9vw,3rem)}}
