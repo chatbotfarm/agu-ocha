@@ -447,7 +447,7 @@
     if (photo) {
       var img = document.createElement("img");
       img.setAttribute("src", photo);
-      img.setAttribute("alt", "Photograph of " + c.name);
+      img.setAttribute("alt", c.name + " logo");
       img.setAttribute("width", "96");
       img.setAttribute("height", "96");
       img.setAttribute("loading", "lazy");

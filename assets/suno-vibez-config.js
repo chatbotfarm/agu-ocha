@@ -128,7 +128,7 @@ window.SUNO_VIBEZ_CONFIG = {
     // Root-relative. Clean routes are directories, so a bare "img/..." here
     // would resolve to /submit-music/img/... and 404.
     photo: "/img/agu-logo.png",
-    bio: "Afrohouse DJ and producer, based in New England and performing worldwide. Every submission is reviewed personally for fit with an upcoming monthly set.",
+    bio: "DJ and producer. Every submission is reviewed personally by DJ Agu Ocha for the Suno Vibez playlist.",
     links: [
       { label: "Spotify", url: "https://open.spotify.com/artist/5ymz8gAPHU5sgDUhdhVqzh" }
       // OPERATOR: add { label: "Suno", url: "https://..." } and
@@ -175,7 +175,7 @@ window.SUNO_VIBEZ_CONFIG = {
   communityLabel: "Join the Suno Vibez community",
   shareUrl: "https://aguocha.com/submit",
   shareText:
-    "Suno Vibez is a free monthly playlist for music made with Suno. Submit one track — AI-assisted music is welcome, and submission is free.",
+    "Suno Vibez is a free playlist for music made with Suno. Submit one track — AI-assisted music is welcome, and submission is free.",
 
   /* ---- Contact fallbacks ------------------------------------------------ */
   phone: "+17622486242",

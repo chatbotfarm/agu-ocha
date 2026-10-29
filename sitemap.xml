@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Canonical clean URLs only. Deliberately excluded:
-       - legacy .html paths, which are now noindex,follow redirect documents
+       - legacy .html paths that are noindex,follow redirect documents
+         (the V35-family .html pages listed below are full pages, not redirects)
        - /thank-you/ and /404.html, which are noindex
        - /suno-vibez/ and /suno-vibez.html, redirect stubs
      Listing a noindex URL here would be a contradictory signal.
@@ -19,8 +20,15 @@
   <url><loc>https://aguocha.com/booking/brand-collaborations/</loc><priority>0.6</priority></url>
   <url><loc>https://aguocha.com/media/</loc><priority>0.6</priority></url>
   <url><loc>https://aguocha.com/tour/</loc><priority>0.6</priority></url>
-  <url><loc>https://aguocha.com/tour/boston-seaport-doubleheader/</loc><priority>0.8</priority></url>
+  <url><loc>https://aguocha.com/tour/boston-seaport-doubleheader/</loc><priority>0.3</priority></url>
   <url><loc>https://aguocha.com/store/</loc><priority>0.5</priority></url>
   <url><loc>https://aguocha.com/submission-terms/</loc><priority>0.3</priority></url>
   <url><loc>https://aguocha.com/privacy/</loc><priority>0.3</priority></url>
+  <url><loc>https://aguocha.com/event-inquiry.html</loc><priority>0.8</priority></url>
+  <url><loc>https://aguocha.com/pass-the-mic.html</loc><priority>0.6</priority></url>
+  <url><loc>https://aguocha.com/bubble-house.html</loc><priority>0.6</priority></url>
+  <url><loc>https://aguocha.com/artist-interest.html</loc><priority>0.5</priority></url>
+  <url><loc>https://aguocha.com/artist-interest-pass-the-mic.html</loc><priority>0.5</priority></url>
+  <url><loc>https://aguocha.com/artist-interest-bubble-house.html</loc><priority>0.5</priority></url>
+  <url><loc>https://aguocha.com/privacy.html</loc><priority>0.3</priority></url>
 </urlset>
