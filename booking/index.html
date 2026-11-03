@@ -1,37 +1,135 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="index,follow">
-<title>Event &amp; Booking Inquiries | DJ Agu Ocha</title>
-<meta name="description" content="An event, a recurring night or a collaboration in mind? Start an inquiry with DJ Agu Ocha. Share what you know; the details can follow.">
+<title>Book DJ Agu Ocha | DJ Services and Custom Events in New England</title>
+<meta name="description" content="DJ sets, custom events with original tracks and local artists, and Bubble House private parties across New England. Book a free call with DJ Agu Ocha.">
 <link rel="canonical" href="https://aguocha.com/booking/">
+<meta property="og:title" content="Your event, built around you | DJ Agu Ocha">
+<meta property="og:description" content="Book a free call. Holiday parties, weddings, residencies and private events across New England.">
+<meta property="og:image" content="https://aguocha.com/assets/agu-location-session.webp">
 <link rel="stylesheet" href="../qr.css">
-<style>.eyebrow{font-size:.85rem;letter-spacing:.12em;font-weight:700}h1{overflow-wrap:anywhere}.steps{padding-left:1.4em}.steps li{padding:8px 0}.note{color:#ddd;font-size:1rem}.back{display:inline-flex;min-height:44px;align-items:center}.context{border-top:1px solid #777;padding-top:28px}</style>
-</head><body>
+<style>
+.eyebrow{font-size:.85rem;letter-spacing:.12em;font-weight:700}
+h1{overflow-wrap:anywhere}
+.lead{font-size:1.2rem;color:#fff;max-width:40ch}
+.cta{display:grid;gap:12px;margin:24px 0 8px}
+.btn{display:flex;align-items:center;justify-content:center;min-height:56px;padding:14px 18px;font-weight:700;text-decoration:none;border:2px solid #fff;text-align:center}
+.btn-red{background:#E52330;border-color:#E52330;color:#000}
+.btn:hover,.btn:focus-visible{border-color:#E52330}
+.small{color:#ccc;font-size:.95rem}
+.context{border-top:1px solid #777;padding-top:28px}
+.services{display:grid;gap:12px;margin:18px 0}
+.service{border:1px solid #555;padding:18px}
+.service h3{font-family:"Arial Black",Arial,sans-serif;text-transform:uppercase;font-size:1.05rem;margin:0 0 6px}
+.service p{margin:0;color:#ddd}
+.steps{list-style:none;padding:0;margin:18px 0;display:grid;gap:12px;counter-reset:s}
+.steps li{counter-increment:s;padding:14px 16px 14px 56px;border:1px solid #555;position:relative}
+.steps li::before{content:counter(s);position:absolute;left:16px;top:12px;font:900 1.4rem "Arial Black",Arial,sans-serif;color:#E52330}
+.links{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+.links a{border:1px solid #777;padding:10px 14px;text-decoration:none}
+.links a:hover{border-color:#E52330}
+.cal{background:#fff;margin:16px 0 8px}
+.cal iframe{display:block;width:100%;min-height:640px;border:0}
+.faq details{border-top:1px solid #444;padding:14px 0}
+.faq summary{font-weight:700;cursor:pointer;min-height:auto;border:0;padding:0}
+.faq p{color:#ddd;margin:10px 0 0}
+.back{display:inline-flex;min-height:44px;align-items:center}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.write{border-top:1px solid #777;padding-top:20px;margin-top:28px}
+@media(min-width:760px){.cta{max-width:360px}.services{grid-template-columns:1fr 1fr}}
+</style>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Service",
+   "name": "DJ services and custom events",
+   "provider": {"@type": "Person", "name": "DJ Agu Ocha", "url": "https://aguocha.com/"},
+   "areaServed": "New England",
+   "serviceType": ["DJ set and performances", "Custom events with original tracks and local artists", "Bubble House private experience", "Club and venue residencies"],
+   "url": "https://aguocha.com/booking/"
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {"@type": "Question", "name": "How much does it cost?", "acceptedAnswer": {"@type": "Answer", "text": "Every event is custom. Pricing is shared after the free call, once the date, place and plans are known."}},
+    {"@type": "Question", "name": "Can I hear your original music first?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Ask on the call to hear tracks from DJ Agu Ocha's library that could suit your event."}}
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
 <a class="skip" href="#main">Skip to content</a>
 <div class="wrap">
-<header><a class="brand" href="../index.html">DJ AGU OCHA</a><img class="mask" src="../assets/geometric-mask.png" width="64" height="64" alt="Agu Ocha geometric mask"></header>
+<header>
+<a class="brand" href="../index.html">DJ AGU OCHA</a>
+<img class="mask" src="../assets/geometric-mask.png" width="64" height="64" alt="Agu Ocha geometric mask">
+</header>
 <main id="main">
-<p class="eyebrow">EVENTS &amp; COLLABORATIONS</p>
-<h1>Something in mind?<br>Let’s talk.</h1>
-<p class="intro">A celebration, a night at your venue or an idea taking shape—tell me what you’re thinking.</p>
-<div id="booking">
-<a class="card primary" href="../event-inquiry.html"><strong>Start an inquiry <span aria-hidden="true">↗</span></strong><span>No date yet? That’s fine.</span></a>
-<p class="note">We’ll review your request and be in touch to arrange a call. Sending an inquiry does not confirm availability or a booking.</p>
+<p class="eyebrow">DJ SERVICES &amp; CUSTOM EVENTS</p>
+<h1>Your event,<br>built around you.</h1>
+<p class="lead">Tell me about your event. I’ll build the night around it.</p>
+<div class="cta">
+<a class="btn btn-red" href="#book">Book a free call</a>
 </div>
-<section class="context" aria-labelledby="start-title">
-<h2 id="start-title">Start with what you know.</h2>
-<p>The form asks for your name, email and phone. Share a little about your event or idea, plus the date, approximate times and location if you know them.</p>
-<p>If the date is still open, choose “Event Date Undecided.” Other details can follow in a conversation.</p>
-<details><summary>What happens next?</summary>
-<ol class="steps"><li>Send your inquiry through the event/general form.</li><li>You’ll see a confirmation and receive an email receipt.</li><li>The Agu Ocha team reviews your request and contacts you to arrange a call. A time still needs to be agreed.</li></ol>
-</details>
+
+<section class="context" aria-labelledby="what-title">
+<h2 id="what-title">What I bring</h2>
+<div class="services">
+<article class="service"><h3>DJ set + performances</h3><p>Hours, music, announcements and lighting planned with you. Equipment and venue set-up can be added.</p></article>
+<article class="service"><h3>Custom events</h3><p>DJ, original tracks and local artists you choose, matched to your occasion.</p></article>
+<article class="service"><h3>Bubble House</h3><p>House and EDM in a bubble tent for 10–20 guests. Book it for a private party.</p></article>
+<article class="service"><h3>Residencies</h3><p>Recurring nights for clubs and venues.</p></article>
+</div>
+<div class="links" aria-label="More about">
+<a href="private-corporate/">Holiday &amp; corporate parties</a>
+<a href="residencies/">Residencies</a>
+<a href="brand-collaborations/">Brand collaborations</a>
+<a href="festivals-tours/">Festivals &amp; public events</a>
+</div>
 </section>
-<section class="context" aria-labelledby="artist-title"><h2 id="artist-title">Here to perform?</h2>
-<p>For Bubble House or Pass the Mic, use the artist-interest path so your act reaches the right review queue.</p>
-<a class="back" href="../artist-interest.html">Explore artist opportunities <span aria-hidden="true">&nbsp;↗</span></a>
+
+<section class="context" aria-labelledby="how-title">
+<h2 id="how-title">How it works</h2>
+<ol class="steps">
+<li><strong>We talk.</strong> Tell me the occasion, date, place and the feel you want.</li>
+<li><strong>Get a clear proposal.</strong> What’s included, the price and the details, built from our call.</li>
+<li><strong>Approve it to secure your date.</strong> Then we plan the night together.</li>
+</ol>
+<p class="small">Based in New England. No travel fee within 60 miles of Boston or Providence; longer trips are quoted in the proposal.</p>
 </section>
+
+<section class="context" id="book" aria-labelledby="book-title">
+<h2 id="book-title" class="sr-only">Pick a time for your call</h2>
+<div class="cal">
+<iframe src="https://api.leadconnectorhq.com/widget/booking/2LiRwtmWaNSAgMtD474k" allow="payment" style="width:100%;border:none;overflow:hidden" scrolling="no" id="2LiRwtmWaNSAgMtD474k_1793711761058" title="Book a free call with DJ Agu Ocha"></iframe>
+</div>
+</section>
+
+<section class="context faq" aria-labelledby="faq-title">
+<h2 id="faq-title">Questions</h2>
+<details><summary>How much does it cost?</summary><p>Every event is custom. Pricing is shared after our call, once I know your date, place and plans.</p></details>
+<details><summary>Can I hear your original music first?</summary><p>Yes. Ask on the call, and I’ll share tracks from my library that could suit your event.</p></details>
+</section>
+
+<section class="context" aria-labelledby="artist-title">
+<h2 id="artist-title">Here to perform?</h2>
+<p>Pass the Mic and Bubble House are free for artists, and you get the event videos.</p>
+<a class="back" href="../artist-interest.html">Share your act <span aria-hidden="true">&nbsp;↗</span></a>
+</section>
+<p class="small write">Prefer to write? <a href="../event-inquiry.html">Send your event details</a>.</p>
 </main>
-<footer><a href="../index.html">Explore Agu Ocha</a><a href="../privacy.html">Privacy &amp; your information</a></footer>
-</div></body></html>
+<footer>
+<a href="../index.html">Explore Agu Ocha</a>
+<a href="../privacy.html">Privacy &amp; your information</a>
+</footer>
+</div>
+<script src="https://link.msgsndr.com/js/form_embed.js" type="text/javascript"></script>
+</body>
+</html>
