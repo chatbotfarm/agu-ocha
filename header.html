@@ -24,68 +24,7 @@
     </a>
 
     <!-- DESKTOP NAV -->
-    <nav class="hidden items-center gap-6 font-medium lg:flex" aria-label="Primary">
-      <a href="/music/">Music</a>
-      <a href="/tour/">Events</a>
-
-      <!-- Book dropdown. A CSS disclosure, not a JS menu widget: it opens on
-           hover, on trigger focus (peer-focus) and on focus inside
-           (focus-within), so every destination is keyboard reachable.
-           Deliberately carries no aria-haspopup/aria-expanded/role="menuitem" —
-           nothing here updates aria-expanded, so declaring it would report a
-           permanently false state, and role="menuitem" is invalid without a
-           role="menu" parent. Plain links are correct and are announced
-           correctly. Every destination below is also listed in the mobile menu,
-           in the footer, and on book.html, so none is hover-only. -->
-      <div class="relative group">
-        <!-- focusable trigger -->
-        <a href="/booking/" class="peer inline-flex items-center gap-1">
-          Book <span aria-hidden="true">▾</span>
-        </a>
-
-        <!-- dropdown menu -->
-        <div
-          class="absolute right-0 top-full z-50 w-72 rounded-xl border border-white/10
-                 bg-black/70 backdrop-blur p-2
-                 opacity-0 scale-95 pointer-events-none
-                 transition duration-150 ease-out
-                 group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto
-                 peer-focus:opacity-100 peer-focus:scale-100 peer-focus:pointer-events-auto
-                 focus-within:opacity-100 focus-within:scale-100 focus-within:pointer-events-auto">
-          <a href="/booking/private-corporate/" class="block rounded-lg px-3 py-2 hover:bg-white/10">
-            Private &amp; Corporate
-          </a>
-          <a href="/booking/festivals-tours/" class="block rounded-lg px-3 py-2 hover:bg-white/10">
-            Festivals &amp; Tours
-          </a>
-          <a href="/booking/residencies/" class="block rounded-lg px-3 py-2 hover:bg-white/10">
-            Residencies
-          </a>
-          <a href="/booking/brand-collaborations/" class="block rounded-lg px-3 py-2 hover:bg-white/10">
-            Brand Activations
-          </a>
-          <a href="/collaborate/" class="block rounded-lg px-3 py-2 hover:bg-white/10">
-            Collaborations
-          </a>
-        </div>
-      </div>
-
-      <!-- Submit Music sits in the nav sequence but keeps the primary emphasis:
-           it is one of the site's four core journeys. -->
-      <a href="/submit-music/"
-         title="Submit Music for playlist consideration"
-         class="btn-primary whitespace-nowrap rounded-xl px-4 py-2 font-semibold">Submit Music</a>
-      <a href="/media/">Media</a>
-      <a href="https://store.aguocha.com" rel="noopener">Store</a>
-    </nav>
-
-    <!-- Right-side contact actions remain separate from the primary journeys. -->
-    <div class="hidden items-center gap-2 lg:flex">
-      <a href="tel:+17622486242" class="btn rounded-xl px-4 py-2 font-semibold">Call</a>
-      <a href="sms:+17622486242" class="btn rounded-xl px-4 py-2 font-semibold">Text</a>
-    </div>
-
-
+    <nav class="hidden items-center gap-6 font-medium lg:flex" aria-label="Primary"><a href="https://aguocha.com/#events">Events</a><a href="https://aguocha.com/pass-the-mic.html">Pass the Mic</a><a href="https://aguocha.com/bubble-house.html">Bubble House</a><a class="btn-primary whitespace-nowrap rounded-xl px-4 py-2 font-semibold" href="https://aguocha.com/booking/">Book a call <span aria-hidden="true">↗</span></a></nav>
     <!-- Mobile nav toggle -->
     <button type="button"
             class="inline-flex rounded-lg border border-white/15 px-3 py-2 lg:hidden"
@@ -99,29 +38,6 @@
 
   <!-- MOBILE NAV -->
   <div id="mobile-nav" class="hidden border-t border-white/10 bg-black/60 lg:hidden">
-    <nav class="mx-auto grid max-w-7xl gap-3 px-4 py-4 text-lg" aria-label="Primary (mobile)">
-      <a href="/music/" data-nav-close>Music</a>
-      <a href="/tour/" data-nav-close>Events</a>
-
-      <!-- Book submenu (mobile only). Same five destinations as desktop. -->
-      <a href="/booking/" data-nav-close>Book</a>
-      <div class="ml-4 grid gap-2 text-base text-white/90">
-        <a href="/booking/private-corporate/" data-nav-close>Private &amp; Corporate</a>
-        <a href="/booking/festivals-tours/" data-nav-close>Festivals &amp; Tours</a>
-        <a href="/booking/residencies/" data-nav-close>Residencies</a>
-        <a href="/booking/brand-collaborations/" data-nav-close>Brand Activations</a>
-        <a href="/collaborate/" data-nav-close>Collaborations</a>
-      </div>
-
-      <a href="/submit-music/" data-nav-close>Submit Music</a>
-      <a href="/media/" data-nav-close>Media</a>
-      <a href="https://store.aguocha.com" rel="noopener" data-nav-close>Store</a>
-
-      <!-- Contact Buttons -->
-      <div class="flex gap-2 pt-2">
-        <a href="tel:+17622486242" class="btn w-full rounded-xl px-4 py-2 text-center font-semibold" data-nav-close>Call</a>
-        <a href="sms:+17622486242" class="btn w-full rounded-xl px-4 py-2 text-center font-semibold" data-nav-close>Text</a>
-      </div>
-    </nav>
+    <nav class="mx-auto grid max-w-7xl gap-3 px-4 py-4 text-lg" aria-label="Primary (mobile)"><a data-nav-close href="https://aguocha.com/#events">Events</a><a data-nav-close href="https://aguocha.com/pass-the-mic.html">Pass the Mic</a><a data-nav-close href="https://aguocha.com/bubble-house.html">Bubble House</a><a data-nav-close class="btn-primary whitespace-nowrap rounded-xl px-4 py-2 font-semibold" href="https://aguocha.com/booking/">Book a call <span aria-hidden="true">↗</span></a></nav>
   </div>
 </header>

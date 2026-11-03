@@ -63,6 +63,14 @@ h1{overflow-wrap:anywhere}
  ]
 }
 </script>
+<style>
+header { flex-wrap: wrap; }
+header .flow-menu { flex: 1 1 100%; display: flex; align-items: center; gap: 6px 18px; flex-wrap: wrap; margin: 0; }
+header .flow-menu a { display: inline-flex; align-items: center; min-height: 44px; padding: 4px 0; font: 600 1rem/1.3 "Segoe UI", sans-serif; color: #fff; text-decoration: none; }
+header .flow-menu a:hover { text-decoration: underline; }
+header .flow-menu .nav-primary { padding: 8px 14px; background: #e52330; color: #000; gap: 6px; }
+header .flow-menu a:focus-visible { outline: 2px solid white; outline-offset: 2px; }
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -70,7 +78,7 @@ h1{overflow-wrap:anywhere}
 <header>
 <a class="brand" href="../index.html">DJ AGU OCHA</a>
 <img class="mask" src="../assets/geometric-mask.png" width="64" height="64" alt="Agu Ocha geometric mask">
-</header>
+<nav class="flow-menu" aria-label="Main navigation"><a href="https://aguocha.com/#events">Events</a><a href="https://aguocha.com/pass-the-mic.html">Pass the Mic</a><a href="https://aguocha.com/bubble-house.html">Bubble House</a><a class="nav-primary" href="https://aguocha.com/booking/">Book a call <span aria-hidden="true">↗</span></a></nav></header>
 <main id="main">
 <p class="eyebrow">DJ SERVICES &amp; CUSTOM EVENTS</p>
 <h1>Your event,<br>built around you.</h1>
@@ -87,12 +95,7 @@ h1{overflow-wrap:anywhere}
 <article class="service"><h3>Bubble House</h3><p>House and EDM in a bubble tent for 10–20 guests. Book it for a private party.</p></article>
 <article class="service"><h3>Residencies</h3><p>Recurring nights for clubs and venues.</p></article>
 </div>
-<div class="links" aria-label="More about">
-<a href="private-corporate/">Holiday &amp; corporate parties</a>
-<a href="residencies/">Residencies</a>
-<a href="brand-collaborations/">Brand collaborations</a>
-<a href="festivals-tours/">Festivals &amp; public events</a>
-</div>
+
 </section>
 
 <section class="context" aria-labelledby="how-title">
@@ -118,11 +121,7 @@ h1{overflow-wrap:anywhere}
 <details><summary>Can I hear your original music first?</summary><p>Yes. Ask on the call, and I’ll share tracks from my library that could suit your event.</p></details>
 </section>
 
-<section class="context" aria-labelledby="artist-title">
-<h2 id="artist-title">Here to perform?</h2>
-<p>Pass the Mic and Bubble House are free for artists, and you get the event videos.</p>
-<a class="back" href="../artist-interest.html">Share your act <span aria-hidden="true">&nbsp;↗</span></a>
-</section>
+
 <p class="small write">Prefer to write? <a href="../event-inquiry.html">Send your event details</a>.</p>
 </main>
 <footer>

@@ -35,6 +35,9 @@ h1 .name{white-space:nowrap;display:inline-block}
 .sign{font-family:"Arial Black",Arial,sans-serif;text-transform:uppercase;font-size:1.3rem;line-height:1.2;border-left:4px solid #E52330;padding-left:12px;margin:0 0 10px}
 @media(min-width:760px){.tiles{grid-template-columns:repeat(4,1fr)}}
 </style>
+<style>
+.tiles {grid-template-columns:repeat(2,minmax(0,1fr))} .socials {gap:4px;justify-content:center;flex-wrap:wrap} .socials a {display:grid;place-items:center;min-width:44px;min-height:44px} .socials svg {width:32px;height:32px} .listen-icons a {border:1px solid #fff;background:#000;border-radius:6px} @media (max-width:390px){.tile{padding-inline:4px}.tiles{gap:6px}.socials{gap:2px}} @media(min-width:760px){.tiles{grid-template-columns:repeat(4,minmax(0,1fr))}}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -52,20 +55,17 @@ h1 .name{white-space:nowrap;display:inline-block}
 <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="11" width="38" height="26" rx="8" fill="none" stroke="#ff3b30" stroke-width="3.5"/><path d="M21 18l10 6-10 6z" fill="#fff"/></svg>
 <b>Watch</b><span>YouTube</span>
 </a>
-<a class="tile" href="https://open.spotify.com/artist/5ymz8gAPHU5sgDUhdhVqzh">
-<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M9 30v-5a15 15 0 0 1 30 0v5" fill="none" stroke="#7cf02b" stroke-width="3.5" stroke-linecap="round"/><rect x="7" y="27" width="8" height="13" rx="3" fill="#7cf02b"/><rect x="33" y="27" width="8" height="13" rx="3" fill="#7cf02b"/></svg>
-<b>Listen</b><span>Spotify</span>
-</a>
+<div class="tile"><div class="socials listen-icons"><a href="https://open.spotify.com/artist/5ymz8gAPHU5sgDUhdhVqzh" aria-label="Spotify"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#fff"/><path d="M6.5 9.3c3.7-1.1 7.9-.8 11 1M7.2 12.4c3-.8 6.4-.5 9 1M7.9 15.3c2.4-.6 4.9-.4 7 .8" fill="none" stroke="#000" stroke-width="1.7" stroke-linecap="round"/></svg></a><a href="https://music.apple.com/us/artist/dj-agu-ocha/6785595320" aria-label="Apple Music"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="1" y="1" width="22" height="22" rx="6" fill="#fff"/><path d="M15.8 5.5v9.2a2.3 2.3 0 1 1-1.4-2.1V8.3L9.6 9.4v6.6a2.3 2.3 0 1 1-1.4-2.1V7.4z" fill="#000"/></svg></a></div><b>Listen</b></div>
 <div class="tile go">
 <div class="socials"><a href="https://www.instagram.com/djaguocha/" aria-label="Follow DJ Agu Ocha on Instagram"><svg viewBox="0 0 48 48" aria-hidden="true"><defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#feda75"/><stop offset=".35" stop-color="#fa7e1e"/><stop offset=".6" stop-color="#d62976"/><stop offset="1" stop-color="#962fbf"/></linearGradient></defs><rect x="6" y="6" width="36" height="36" rx="10" fill="none" stroke="url(#ig)" stroke-width="4"/><circle cx="24" cy="24" r="8" fill="none" stroke="url(#ig)" stroke-width="4"/><circle cx="34.5" cy="13.5" r="2.5" fill="#d62976"/></svg></a><a href="https://www.tiktok.com/@agu_ocha" aria-label="Follow DJ Agu Ocha on TikTok"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M27 6h6c.6 4.4 3.6 7.4 8 8v6c-3 0-5.8-.9-8-2.5V31a11 11 0 1 1-11-11v6.2a4.8 4.8 0 1 0 5 4.8z" transform="translate(-1.6 -1.2)" fill="#25f4ee"/><path d="M27 6h6c.6 4.4 3.6 7.4 8 8v6c-3 0-5.8-.9-8-2.5V31a11 11 0 1 1-11-11v6.2a4.8 4.8 0 1 0 5 4.8z" transform="translate(1.6 1.2)" fill="#fe2c55"/><path d="M27 6h6c.6 4.4 3.6 7.4 8 8v6c-3 0-5.8-.9-8-2.5V31a11 11 0 1 1-11-11v6.2a4.8 4.8 0 1 0 5 4.8z" fill="#fff"/></svg></a></div>
 <b>Follow</b><span>Next shows</span>
 </div>
-<a class="tile" href="../event-inquiry.html">
+<a class="tile" href="https://aguocha.com/booking/">
 <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="10" width="30" height="28" rx="5" fill="none" stroke="#ff5fd2" stroke-width="3.5"/><path d="M14 6v8M28 6v8M6 18h30" stroke="#ff5fd2" stroke-width="3.5" stroke-linecap="round"/><circle cx="36" cy="36" r="9" fill="#2f8cff"/><path d="M32 36l3 3 5-6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
 <b>Book</b><span>Your party</span>
 </a>
 </nav>
-<p class="also"><a href="https://open.spotify.com/playlist/5u17B3EXagZ5F2bm0mgCTq">Suno Vibez</a><a href="../artist-interest.html">Artists: perform with me</a></p>
+<p class="also"><a href="../artist-interest.html">Artists: perform with me</a></p>
 
 <img class="photo" src="../assets/agu-location-session.webp" alt="DJ Agu Ocha in the geometric mask behind the decks at a skate park, next to a Keep Vibing QR poster" width="1824" height="1368" loading="lazy">
 

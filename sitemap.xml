@@ -12,12 +12,7 @@
   <url><loc>https://aguocha.com/submit-music/</loc><priority>0.9</priority></url>
   <url><loc>https://aguocha.com/music/</loc><priority>0.8</priority></url>
   <url><loc>https://aguocha.com/booking/</loc><priority>0.8</priority></url>
-  <url><loc>https://aguocha.com/collaborate/</loc><priority>0.7</priority></url>
   <url><loc>https://aguocha.com/dj-set/</loc><priority>0.7</priority></url>
-  <url><loc>https://aguocha.com/booking/private-corporate/</loc><priority>0.6</priority></url>
-  <url><loc>https://aguocha.com/booking/festivals-tours/</loc><priority>0.6</priority></url>
-  <url><loc>https://aguocha.com/booking/residencies/</loc><priority>0.6</priority></url>
-  <url><loc>https://aguocha.com/booking/brand-collaborations/</loc><priority>0.6</priority></url>
   <url><loc>https://aguocha.com/media/</loc><priority>0.6</priority></url>
   <url><loc>https://aguocha.com/tour/</loc><priority>0.6</priority></url>
   <url><loc>https://aguocha.com/tour/boston-seaport-doubleheader/</loc><priority>0.3</priority></url>
@@ -28,7 +23,5 @@
   <url><loc>https://aguocha.com/pass-the-mic.html</loc><priority>0.6</priority></url>
   <url><loc>https://aguocha.com/bubble-house.html</loc><priority>0.6</priority></url>
   <url><loc>https://aguocha.com/artist-interest.html</loc><priority>0.5</priority></url>
-  <url><loc>https://aguocha.com/artist-interest-pass-the-mic.html</loc><priority>0.5</priority></url>
-  <url><loc>https://aguocha.com/artist-interest-bubble-house.html</loc><priority>0.5</priority></url>
   <url><loc>https://aguocha.com/privacy.html</loc><priority>0.3</priority></url>
 </urlset>
