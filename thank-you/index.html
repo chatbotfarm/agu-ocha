@@ -40,6 +40,8 @@
   <link rel="canonical" href="https://aguocha.com/thank-you/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://aguocha.com/img/submit-music-og.png">
+
+  <style>.footer-submit-cta{display:none}</style>
 </head>
 <body>
   <!-- Shared header include -->
@@ -60,20 +62,19 @@
              is verified to send one. The #reply-by element is deliberately
              absent, so setReplyDate() in assets/thank-you.js returns early. -->
         <p class="lead mt-4 text-white/85">
-          Your submission came through. Agu Ocha reviews tracks personally for upcoming playlists and
-          DJ sets. If your track is selected, Agu Ocha will contact you. No fixed response time is promised.
+          Your submission came through. I review tracks personally for upcoming playlists and
+          DJ sets. If your track is selected, I&rsquo;ll contact you. No fixed response time is promised.
         </p>
         <p class="mt-3 text-white/70">
-          We cannot reply to every playlist submission; silence does not confirm selection. Placement
+          I can&rsquo;t reply to every submission, and silence doesn&rsquo;t mean selected. Placement
           isn&rsquo;t guaranteed, and you&rsquo;re welcome to submit again next month.
         </p>
 
         <!-- 3. Secondary CTA: follow the playlist (highest-value next action) -->
         <div class="card mt-10 rounded-2xl p-6">
-          <h2 class="font-bold text-xl">Hear what you&rsquo;re submitting to</h2>
+          <h2 class="font-bold text-xl">Hear what gets picked</h2>
           <p class="mt-2 text-white/80">
-            The playlist is updated as selections are ready, without a fixed refresh date. Following it is the best way to
-            see what gets picked &mdash; and it helps every creator on it.
+            The playlist is updated as selections are ready. Following it helps every creator on it.
           </p>
           <a id="follow-playlist" href="#"
              class="btn-primary mt-4 inline-block rounded-xl px-5 py-3 font-semibold">
@@ -96,12 +97,7 @@
           </p>
           <p id="share-actions" class="mt-4"></p>
         </div>
-
-        <!-- 6. Set the return expectation -->
         <p class="mt-10 text-sm text-white/60">
-          Submissions are accepted on an ongoing basis. One track per creator per month &mdash; so send your best one.
-        </p>
-        <p class="mt-3 text-sm text-white/60">
           Need to change or withdraw your submission? Text
           <a class="underline underline-offset-4" href="sms:+17622486242">+1 (762) 248-6242</a>.
           The <a class="underline underline-offset-4" href="/submission-terms/">submission terms</a>
@@ -109,10 +105,9 @@
         </p>
 
         <!-- Static fallback navigation. The rest of this page's routes come from
-             the JS-injected footer, so these two remain reachable if that fetch
+             the JS-injected footer, so home remains reachable if that fetch
              fails. -->
         <p class="mt-8 flex flex-wrap gap-3">
-          <a href="/submit-music/" class="btn rounded-xl px-5 py-3 font-semibold">Back to Submit Music</a>
           <a href="/" class="btn rounded-xl px-5 py-3 font-semibold">Home</a>
         </p>
       </div>

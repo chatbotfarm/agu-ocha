@@ -81,6 +81,8 @@
        expecting pt-10 to win. Moving this link higher silently changes
        line-height, section padding and card borders sitewide. -->
   <link rel="stylesheet" href="/assets/tailwind.css">
+
+  <style>.footer-submit-cta{display:none}</style>
 </head>
 <body>
   <!-- Shared header include -->
@@ -116,15 +118,6 @@
       </div>
     </section>
 
-    <!-- ================================================= 2. TRUST POINTS -->
-    <section class="mx-auto container px-4">
-      <ul class="sv-accent card grid gap-3 rounded-2xl p-5 sm:grid-cols-3">
-        <li class="font-semibold">Free to submit</li>
-        <li class="font-semibold">AI-assisted music welcome</li>
-        <li class="font-semibold">You keep ownership</li>
-      </ul>
-    </section>
-
     <!-- ==================================================== 3. CURATOR ====
          Heading and copy are static so they survive assets/submit.js failing.
          #curator-block is the JS mount for the identity card (photo, name,
@@ -134,8 +127,8 @@
       <div class="mx-auto container px-4">
         <h2 class="font-extrabold text-2xl md:text-3xl">Reviewed by DJ Agu Ocha</h2>
         <p class="mt-3 max-w-3xl text-white/85">
-          Every submission is reviewed for fit with an upcoming set. There is no paid
-          placement and no automated acceptance.
+          I listen to every submission myself, for fit with an upcoming set. No paid
+          placement, no automated acceptance.
         </p>
         <div id="curator-block" class="mt-6"></div>
       </div>
@@ -199,7 +192,7 @@
           credited in related promotion.
         </p>
         <p class="mt-4 max-w-3xl text-white/75">
-          If your track is selected, Agu Ocha will contact you. No fixed response time is promised. Placement
+          If your track is selected, I&rsquo;ll contact you. No fixed response time is promised. Placement
           isn&rsquo;t guaranteed. Full detail is in the
           <a class="underline underline-offset-4" href="/submission-terms/">Submission Terms</a>.
         </p>
@@ -217,24 +210,13 @@
           </li>
           <li class="card flex gap-4 rounded-2xl p-5">
             <span class="sv-step-num" aria-hidden="true">2</span>
-            <div><h3 class="font-bold">Agu Ocha reviews it</h3></div>
+            <div><h3 class="font-bold">I review it</h3></div>
           </li>
           <li class="card flex gap-4 rounded-2xl p-5">
             <span class="sv-step-num" aria-hidden="true">3</span>
             <div><h3 class="font-bold">Selected creators are contacted</h3></div>
           </li>
         </ol>
-
-        <!-- Mid-page CTA. The visitor now knows what the playlist sounds like,
-             what selection means and how it works, so this is the first point
-             where the ask is fully informed. Same plain anchor as the hero. -->
-        <div class="mt-10 text-center">
-          <a href="#submit-form" data-submit-cta="mid_page"
-             class="sv-cta btn-primary rounded-xl px-7 font-semibold">
-            Submit Your Track
-          </a>
-          <p class="mt-3 text-sm text-white/60">Free to submit. Placement is not guaranteed.</p>
-        </div>
       </div>
     </section>
 
@@ -265,15 +247,6 @@
         <h2 class="font-extrabold text-2xl md:text-3xl">Questions</h2>
 
         <div class="mt-6">
-          <h3><button type="button" class="sv-faq-trigger" data-faq-trigger aria-controls="faq-1" aria-expanded="false">Can I submit AI-generated music?<span class="sv-faq-marker" aria-hidden="true">+</span></button></h3>
-          <div id="faq-1" data-faq-panel class="py-4 text-white/85" hidden>
-            <p>Yes. Music made with Suno or any other AI tool is welcome, and you don&rsquo;t need to play down how you made it. Tracks are judged on how they sound and whether they fit a set.</p>
-          </div>
-
-          <h3><button type="button" class="sv-faq-trigger" data-faq-trigger aria-controls="faq-2" aria-expanded="false">Does submission guarantee placement?<span class="sv-faq-marker" aria-hidden="true">+</span></button></h3>
-          <div id="faq-2" data-faq-panel class="py-4 text-white/85" hidden>
-            <p>Placement isn&rsquo;t guaranteed. Selection is at Agu Ocha&rsquo;s discretion. We don&rsquo;t charge for submission or placement, and placement can&rsquo;t be bought.</p>
-          </div>
 
           <h3><button type="button" class="sv-faq-trigger" data-faq-trigger aria-controls="faq-3" aria-expanded="false">Do I keep ownership of my music?<span class="sv-faq-marker" aria-hidden="true">+</span></button></h3>
           <div id="faq-3" data-faq-panel class="py-4 text-white/85" hidden>
@@ -298,8 +271,7 @@
     <section id="submit-form" class="section border-t border-white/10">
       <div class="mx-auto max-w-2xl px-4">
         <h2 class="font-extrabold text-2xl md:text-3xl">Submit Your Track</h2>
-        <p class="lead mt-3 text-white/85">Send one track for consideration.</p>
-        <p class="mt-2 text-sm text-white/60">
+                <p class="mt-3 text-sm text-white/60">
           One track per creator per month. Submission and placement are free.
         </p>
 
@@ -322,28 +294,9 @@
           </div>
           <p class="mt-4 text-sm text-white/60">
             What happens to your details is covered in the
-            <a class="underline underline-offset-4" href="/privacy/">Privacy Notice</a>.
+            <a class="underline underline-offset-4" href="/privacy.html">Privacy Notice</a>.
           </p>
         </div>
-      </div>
-    </section>
-
-    <!-- ========================================== 10. FINAL SUPPORTING NOTE
-         Deliberately a note, not a button. The form is directly above it, so a
-         third prominent Submit CTA here would only point back up the page. -->
-    <section class="section border-t border-white/10">
-      <div class="mx-auto max-w-2xl px-4 text-center">
-        <!-- Deliberately does not restate the seven-day contact policy: "What
-             selection may include" already says it, and repeating it here reads
-             as filler rather than reassurance. -->
-        <p class="text-white/75">
-          One track. One link. Reviewed personally for fit with an upcoming set.
-        </p>
-        <p class="mt-3 text-sm text-white/55">
-          Full detail is in the
-          <a class="underline underline-offset-4" href="/submission-terms/">Submission Terms</a>
-          and the <a class="underline underline-offset-4" href="/privacy/">Privacy Notice</a>.
-        </p>
       </div>
     </section>
   </main>
@@ -356,15 +309,13 @@
        anchors — hero and mid-page — and a third floating one would have been
        both redundant and a permanent overlay on small screens. -->
 
-  <!-- Structured data mirrors the five visible questions exactly. Keep the two
+  <!-- Structured data mirrors the visible question exactly. Keep the two
        in sync: search engines are shown the same answers as visitors. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
-      {"@type":"Question","name":"Can I submit AI-generated music?","acceptedAnswer":{"@type":"Answer","text":"Yes. Music made with Suno or any other AI tool is welcome, and you don’t need to play down how you made it. Tracks are judged on how they sound and whether they fit a set."}},
-      {"@type":"Question","name":"Does submission guarantee placement?","acceptedAnswer":{"@type":"Answer","text":"Placement isn’t guaranteed. Selection is at Agu Ocha’s discretion. We don’t charge for submission or placement, and placement can’t be bought."}},
       {"@type":"Question","name":"Do I keep ownership of my music?","acceptedAnswer":{"@type":"Answer","text":"Yes. You keep all ownership, and nothing transfers your copyright, master, or publishing rights. Submitting grants a limited, revocable licence to listen to your track and — only if it’s selected — to feature it. The Submission Terms set out exactly what that covers."}}
     ]
   }

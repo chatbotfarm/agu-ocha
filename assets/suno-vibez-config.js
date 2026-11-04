@@ -128,7 +128,7 @@ window.SUNO_VIBEZ_CONFIG = {
     // Root-relative. Clean routes are directories, so a bare "img/..." here
     // would resolve to /submit-music/img/... and 404.
     photo: "/img/agu-logo.png",
-    bio: "DJ and producer. Every submission is reviewed personally by DJ Agu Ocha for the Suno Vibez playlist.",
+    bio: "DJ and producer.",
     links: [
       { label: "Spotify", url: "https://open.spotify.com/artist/5ymz8gAPHU5sgDUhdhVqzh" }
       // OPERATOR: add { label: "Suno", url: "https://..." } and
@@ -173,7 +173,7 @@ window.SUNO_VIBEZ_CONFIG = {
   // tertiary CTA is omitted rather than shown pointing nowhere.
   communityUrl: "",
   communityLabel: "Join the Suno Vibez community",
-  shareUrl: "https://aguocha.com/submit",
+  shareUrl: "https://aguocha.com/submit-music/",
   shareText:
     "Suno Vibez is a free playlist for music made with Suno. Submit one track — AI-assisted music is welcome, and submission is free.",
 
