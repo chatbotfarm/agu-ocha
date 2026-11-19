@@ -6,42 +6,37 @@
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://aguocha.com/listening-party/">
 <title>Releasing a SONG? Consider a listening party | DJ Agu Ocha</title>
-<meta name="description" content="Your song, your vision, your night. You run the room and the performance; DJ Agu Ocha sets the mood, captures the night and hands you shareable moments.">
+<meta name="description" content="You concentrate on the performance. I handle the flyer, the setup, the filming and the edit for your listening party.">
 <link rel="stylesheet" href="../qr.css">
 <style>
-.ask { font-family: "Arial Black", Arial, sans-serif; font-size: clamp(1.25rem, 5.5vw, 1.8rem); line-height: 1.2; margin: 20px 0 0; }
-.ask .q { color: #E52330; }
-.ask .c { color: #fff; }
-.hero-title { border-left: 6px solid #E52330; padding: 6px 0 6px 16px; margin: 22px 0 18px; }
-.hero-title h1 { margin: 0; }
+.chat { display: grid; gap: 8px; margin: 20px 0 0; max-width: 420px; }
+.msg { max-width: 82%; padding: 10px 14px; border-radius: 14px; font-size: 1.15rem; line-height: 1.3; margin: 0; }
+.msg.ask { justify-self: start; border: 1px solid #fff; border-bottom-left-radius: 4px; }
+.msg.ask strong { font-family: "Arial Black", Arial, sans-serif; font-weight: 900; }
+.msg.reply { justify-self: end; background: #E52330; color: #fff; font-weight: 700; border-bottom-right-radius: 4px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.brand, footer a { display: inline-flex; align-items: center; min-height: 44px; }
+.caps { border-left: 6px solid #E52330; padding: 6px 0 6px 16px; margin: 22px 0 18px; }
+.caps h1 { margin: 0; font-size: clamp(2rem, 9vw, 2.8rem); }
+.caps h1 span { display: block; }
+.caps h1 .night { color: #E52330; }
 .roles { margin: 0 0 20px; }
-.roles p { margin: 0 0 10px; font-size: 1.15rem; }
+.roles p { margin: 0 0 10px; font-size: 1.1rem; }
 .you-line { color: #fff; font-weight: 700; }
 .me-line { color: #ddd; }
 .primary, .primary span { color: #fff; }
 .dm { margin: 14px 0 0; color: #ddd; }
 .dm a { display: inline-block; padding: 11px 2px; }
-.split { display: grid; gap: 18px; }
-.split h3 { font-family: "Arial Black", Arial, sans-serif; text-transform: uppercase; font-size: 1rem; margin: 0 0 10px; }
-.split .me h3 { color: #E52330; }
-.split ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.split li { border-left: 4px solid #777; padding-left: 12px; }
-.split .me li { border-color: #E52330; }
-.yours { margin-top: 16px; font-weight: 700; }
-@media (min-width: 640px) { .split { grid-template-columns: 1fr 1fr; } }
+.timeline { list-style: none; margin: 0; padding: 0 0 0 22px; border-left: 3px solid #E52330; display: grid; gap: 22px; }
+.timeline li { position: relative; }
+.timeline li::before { content: attr(data-n) / ""; position: absolute; left: -38px; top: 0; width: 28px; height: 28px; border-radius: 50%; background: #fff; color: #000; font-family: "Arial Black", Arial, sans-serif; font-size: .9rem; display: flex; align-items: center; justify-content: center; }
+.timeline h3 { font-family: "Arial Black", Arial, sans-serif; text-transform: uppercase; font-size: 1rem; margin: 2px 0 6px; color: #E52330; }
+.timeline p { margin: 0 0 8px; }
+.yours { font-weight: 700; margin-top: 8px !important; }
+.room { margin: 22px 0 0; }
+.room svg { width: 100%; height: auto; display: block; border: 1px solid #777; background: #000; }
+.room figcaption { font-size: .9rem; color: #aaa; margin-top: 6px; }
 .who { color: #ddd; }
-.plan { border: 1px solid #777; margin-top: 18px; }
-.plan summary { cursor: pointer; padding: 14px 18px; min-height: 48px; color: #ddd; }
-.plan[open] summary { border-bottom: 1px solid #777; }
-.plan summary .opt-tag { color: #aaa; }
-.plan .calc { padding: 16px 18px; display: grid; gap: 12px; }
-.row { display: grid; grid-template-columns: 1fr 7.5em; gap: 10px; align-items: center; }
-.money { display: flex; align-items: center; border: 1px solid #777; min-height: 44px; }
-.money span { padding: 0 6px 0 10px; color: #aaa; }
-.money input { width: 100%; min-height: 42px; background: #000; color: #fff; border: 0; font: inherit; font-size: 16px; padding: 0 8px 0 0; }
-.money input:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
-.total strong { font-family: "Arial Black", Arial, sans-serif; font-size: 1.4rem; margin-left: 6px; }
-.fine { font-size: .85rem; color: #aaa; margin: 0; }
 .close .card { margin-top: 22px; }
 </style>
 </head>
@@ -50,55 +45,68 @@
 <div class="wrap">
 <header>
 <a class="brand" href="../index.html">DJ AGU OCHA</a>
-<img class="mask" src="../assets/geometric-mask.png" alt="Agu Ocha geometric mask" width="64" height="64">
+<img class="mask" src="../assets/geometric-mask.png" alt="" width="64" height="64">
 </header>
 <main id="main">
-<p class="ask"><span class="q">Releasing a SONG?</span> <span class="c">Consider a listening party.</span></p>
-<div class="hero-title"><h1>Your song. Your vision. Your night.</h1></div>
+<div class="chat" role="group" aria-label="Conversation">
+<p class="msg ask"><span class="sr">Question: </span><strong>Releasing a SONG?</strong></p>
+<p class="msg reply"><span class="sr">Answer: </span>Consider a listening party.</p>
+</div>
+<div class="caps"><h1><span>Your song.</span> <span>Your vision.</span> <span class="night">Your night.</span></h1></div>
 <div class="roles">
-<p class="you-line">You concentrate on the performance.</p>
+<p class="you-line">You concentrate on the performance. You decide the song, the guests, the date and the venue.</p>
 <p class="me-line">I set the mood, capture the night and hand you shareable moments to tell your song’s story.</p>
 </div>
 <a class="card primary" href="https://aguocha.com/booking/#book"><strong>Let’s talk about your song <span aria-hidden="true">↗</span></strong></a>
 <p class="dm">Prefer to message? DM me on <a href="https://www.instagram.com/djaguocha/">Instagram</a> or <a href="https://www.tiktok.com/@agu_ocha">TikTok</a>.</p>
 
-<section aria-labelledby="h-split">
-<h2 id="h-split">How it works.</h2>
-<div class="split">
-<div class="you"><h3>What you decide</h3>
-<ul>
-<li>Your song and your performance</li>
-<li>Your guests, your date, your place or venue</li>
-</ul></div>
-<div class="me"><h3>What I bring</h3>
-<ul>
-<li>Your logo, projected on the wall</li>
-<li>Lighting and a DJ rig</li>
-<li>Filming, by my videographer or yours</li>
-<li>An edit ready before release day</li>
-</ul></div>
-</div>
-<p class="yours">The footage is yours.</p>
-</section>
-
-<section aria-labelledby="h-share">
-<h2 id="h-share">I share it too.</h2>
-<p>With your OK, I post highlights from the night to my followers and platforms, and feature your release in my outreach campaigns.</p>
+<section aria-labelledby="h-how">
+<h2 id="h-how">How the night works.</h2>
+<ol class="timeline" role="list">
+<li data-n="1"><h3>Before</h3><p>I make the flyer and a video invite, so your guests know it’s your night.</p><p>No logo or merch art yet? I can design it as an add-on.</p></li>
+<li data-n="2"><h3>The night</h3><p>I put your logos and merch art up on the projectors and the venue’s screens, set out your merch table, and set up the lights and DJ rig.</p><p>My hypeman warms up the crowd between sets, never over your song. I film your performance and, at the afterparty, your fans’ reactions, with guests who are happy to be filmed.</p></li>
+<li data-n="3"><h3>After</h3><p>I edit the footage, then post it across my channels on a schedule we agree, with your OK on every post.</p><p class="yours">The footage is yours, and you keep your rights and your merch income.</p></li>
+</ol>
+<figure class="room">
+<svg viewBox="0 0 360 300" role="img" aria-labelledby="room-t" aria-describedby="room-d" xmlns="http://www.w3.org/2000/svg">
+<title id="room-t">Illustrated room layout</title>
+<desc id="room-d">A side view of a small room: your logos and merch art on the projector wall and screens, a merch table, the DJ booth with lights above, the hypeman to one side, you in the performance spot, a camera filming you, and your guests in front.</desc>
+<g fill="none" stroke="#fff" stroke-width="2">
+<rect x="14" y="14" width="332" height="150"/>
+<path d="M108 14 l-12 26 h24 z M180 14 l-12 26 h24 z M252 14 l-12 26 h24 z" stroke-width="1.5"/>
+<rect x="24" y="44" width="26" height="92"/><rect x="310" y="44" width="26" height="92"/>
+<rect x="148" y="196" width="64" height="34"/><circle cx="166" cy="213" r="8"/><circle cx="194" cy="213" r="8"/>
+<rect x="24" y="214" width="74" height="16"/>
+<line x1="186" y1="196" x2="146" y2="104" stroke-dasharray="4 4" stroke-width="1"/><line x1="186" y1="196" x2="220" y2="104" stroke-dasharray="4 4" stroke-width="1"/>
+<circle cx="122" cy="186" r="7"/><path d="M122 193 v22 M122 215 l-7 14 M122 215 l7 14 M122 200 l10 -6 M132 194 l3 -2"/>
+<path d="M318 196 h14 v10 h-14 z M325 206 v12 M325 218 l-8 12 M325 218 l8 12 M325 218 v12"/>
+</g>
+<rect x="128" y="58" width="108" height="46" fill="#E52330"/>
+<text x="182" y="86" fill="#fff" font-family="Arial Black, Arial, sans-serif" font-size="13" text-anchor="middle">YOUR LOGO</text>
+<g fill="#E52330"><rect x="27" y="60" width="20" height="8"/><rect x="27" y="80" width="20" height="8"/><rect x="313" y="60" width="20" height="8"/><rect x="313" y="80" width="20" height="8"/>
+<rect x="32" y="206" width="12" height="8"/><rect x="50" y="206" width="12" height="8"/><rect x="68" y="206" width="12" height="8"/></g>
+<ellipse cx="262" cy="230" rx="22" ry="5" fill="none" stroke="#E52330" stroke-width="2"/>
+<circle cx="262" cy="186" r="7" fill="#E52330"/><path d="M262 193 v22 M262 215 l-7 14 M262 215 l7 14 M262 200 l-9 6 M262 200 l9 -8" stroke="#E52330" stroke-width="2" fill="none"/>
+<line x1="318" y1="200" x2="272" y2="190" stroke="#fff" stroke-width="1" stroke-dasharray="2 4"/>
+<g fill="#fff"><circle cx="60" cy="262" r="6"/><circle cx="96" cy="266" r="6"/><circle cx="132" cy="262" r="6"/><circle cx="168" cy="266" r="6"/><circle cx="204" cy="262" r="6"/><circle cx="240" cy="266" r="6"/><circle cx="276" cy="262" r="6"/><circle cx="312" cy="266" r="6"/></g>
+<g fill="#ddd" font-family="Segoe UI, Arial, sans-serif" font-size="17">
+<text x="180" y="54" text-anchor="middle">LIGHTS</text>
+<text x="56" y="130" text-anchor="start">SCREENS</text>
+<text x="20" y="248" text-anchor="start">MERCH</text>
+<text x="180" y="248" text-anchor="middle">DJ BOOTH</text>
+<text x="112" y="174" text-anchor="middle">HYPEMAN</text>
+<text x="350" y="248" text-anchor="end">CAMERA</text>
+<text x="180" y="294" text-anchor="middle">YOUR GUESTS</text>
+</g>
+<text x="262" y="170" fill="#E52330" font-family="Arial Black, Arial, sans-serif" font-size="17" text-anchor="middle">YOU</text>
+</svg>
+<figcaption>How the room could look. Illustration, not a photo.</figcaption>
+</figure>
 </section>
 
 <section class="close">
-<p class="who">I’m DJ Agu Ocha, a DJ and producer. You’ll talk with me directly.</p>
-<p>Pricing depends on your space and plan, so I’ll go through it with you on the call.</p>
-<details class="plan">
-<summary>Budget calculator <span class="opt-tag">(optional)</span></summary>
-<form class="calc" id="calc" onsubmit="return false">
-<div class="row"><label for="c-venue">Venue or room</label><div class="money"><span>$</span><input id="c-venue" type="number" inputmode="decimal" min="0" step="10" placeholder="0"></div></div>
-<div class="row"><label for="c-food">Food and drinks</label><div class="money"><span>$</span><input id="c-food" type="number" inputmode="decimal" min="0" step="10" placeholder="0"></div></div>
-<div class="row"><label for="c-other">Anything else</label><div class="money"><span>$</span><input id="c-other" type="number" inputmode="decimal" min="0" step="10" placeholder="0"></div></div>
-<p class="total" aria-live="polite">Your costs: <strong id="c-total">$0</strong></p>
-<p class="fine">Just for you. Nothing is sent or saved.</p>
-</form>
-</details>
+<p class="who">I’m a DJ and producer, and I’ve run a listening party for another artist. You’ll talk with me directly.</p>
+<p>The call is free, takes about an hour, and there’s no commitment. We’ll go through pricing and any add-ons there; just bring your release date and a rough guest count.</p>
 <a class="card primary" href="https://aguocha.com/booking/#book"><strong>Let’s talk about your song <span aria-hidden="true">↗</span></strong></a>
 </section>
 </main>
@@ -107,16 +115,5 @@
 <a href="../privacy.html">Privacy &amp; your information</a>
 </footer>
 </div>
-<script>
-(function () {
-  var ids = ['c-venue', 'c-food', 'c-other'];
-  var out = document.getElementById('c-total');
-  var fmt = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
-  function val(id) { var n = parseFloat(document.getElementById(id).value); return isFinite(n) && n > 0 ? n : 0; }
-  document.getElementById('calc').addEventListener('input', function () {
-    out.textContent = fmt.format(Math.round(ids.reduce(function (s, id) { return s + val(id); }, 0)));
-  });
-})();
-</script>
 </body>
 </html>
